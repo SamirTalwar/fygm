@@ -1,0 +1,30 @@
+#!/bin/bash
+
+if [ ! $1 ]
+then
+	echo "Usage: $0 <file>" >&2
+	exit 1
+fi
+
+file=$1
+
+read -s -p 'Enter passphrase: ' passphrase
+
+tmp_file="/tmp/`date +%s`-`basename $file .gpg`"
+gpg2 --batch --passphrase "$passphrase" -o "$tmp_file" "$file"
+RESULT=$?
+if [ $RESULT -gt 0 ]
+then
+	exit $RESULT
+fi
+
+vim $tmp_file
+rm $file
+gpg2 -c --batch --passphrase "$passphrase" -o "$file" "$tmp_file"
+RESULT=$?
+if [ $RESULT -gt 0 ]
+then
+	exit $RESULT
+fi
+
+rm $tmp_file
