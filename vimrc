@@ -18,10 +18,21 @@ set softtabstop=4
 
 set mouse=a
 
-syntax on
-filetype plugin indent on
-
 command W w
 command Q q
 command Wq wq
 command WQ wq
+
+syntax on
+
+call pathogen#helptags()
+call pathogen#runtime_append_all_bundles()
+
+filetype off
+filetype plugin indent on
+
+au BufNewFile,BufRead *.ru set filetype=ruby
+autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
+
+au BufNewFile,BufRead *.stylus set filetype=sass
+autocmd Filetype sass setlocal ts=4 sts=4 sw=4
