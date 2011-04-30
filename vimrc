@@ -7,14 +7,14 @@ set showcmd
 set backspace=indent,eol,start
 
 set smarttab
-set noexpandtab
+set expandtab
 set autoindent
 set cindent
 set copyindent
 set preserveindent
 set shiftwidth=4
 set tabstop=4
-set softtabstop=0
+set softtabstop=4
 
 set mouse=a
 
