@@ -9,9 +9,6 @@ set backspace=indent,eol,start
 set smarttab
 set expandtab
 set autoindent
-set cindent
-set copyindent
-set preserveindent
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
