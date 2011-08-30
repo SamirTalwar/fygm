@@ -35,3 +35,5 @@ autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 
 au BufNewFile,BufRead *.stylus set filetype=sass
 autocmd Filetype sass setlocal ts=4 sts=4 sw=4
+
+au BufNewFile,BufRead *.gradle set filetype=groovy
