@@ -22,6 +22,10 @@ vim-haml:
 vim-less:
     vcs: git
     url: git://github.com/lunaru/vim-less.git
+vimclojure:
+    vcs: hg
+    url: https://bitbucket.org/kotarak/vimclojure
+    subdir: vim
 fsharp-vim:
     vcs: git
     url: git://github.com/DrTom/fsharp-vim.git

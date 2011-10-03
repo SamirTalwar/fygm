@@ -16,7 +16,9 @@ end
 
 def synchronize (create_command, update_command, name, options)
   repo_dir = File.join BUNDLE_REPO_DIR, name
-  bundle_dir = File.join BUNDLE_DIR, name
+  bundle_dir = (options.has_key? 'subdir') ? File.join(repo_dir, options['subdir']) : repo_dir
+  expected_location = File.join BUNDLE_DIR, name
+
   url = options['url']
   unless Dir.exists? repo_dir
     puts "  Unpacking #{url} into #{name}"
@@ -27,7 +29,7 @@ def synchronize (create_command, update_command, name, options)
   puts "  Updating #{name}"
   `(cd #{repo_dir} && #{update_command})`
 
-  FileUtils.ln_s repo_dir, bundle_dir
+  FileUtils.ln_s bundle_dir, expected_location
 end
 
 synchronizers = {
