@@ -1,26 +1,26 @@
 #!/usr/bin/env ruby
 
 require 'fileutils'
+require 'yaml'
 
-git_bundles = IO.readlines(File.join(File.dirname(__FILE__), 'git-bundles')).collect { |url|
-  [url.strip.split('/').last.sub(/\.git$/, ''), url.strip]
-}
 bundles_dir = File.join ENV['HOME'], '.vim', 'bundle'
+git_bundles = YAML::load File.open('git-bundles.yml')
 
 FileUtils.cd bundles_dir
 
-git_bundles.each do |dir, url|
-  unless Dir.exists? dir
-    puts "  Unpacking #{url} into #{dir}"
-    `git clone #{url} #{dir}`
+git_bundles.each do |name, options|
+  url = options['url']
+  unless Dir.exists? name
+    puts "  Unpacking #{url} into #{name}"
+    `git clone #{url} #{name}`
     next
   end
 
-  puts "  Updating #{dir}"
-  `(cd #{dir} && git pull)`
+  puts "  Updating #{name}"
+  `(cd #{name} && git pull)`
 end
 
-removed_bundles = Dir.glob('*').reject { |dir| git_bundles.find { |bundle_dir, url| bundle_dir == dir } }
+removed_bundles = Dir.glob('*').reject { |dir| git_bundles.find { |name, options| name == dir } }
 removed_bundles.each do |dir|
   puts "  Removing #{dir}"
   FileUtils.rm_rf dir
