@@ -3,21 +3,31 @@
 require 'fileutils'
 require 'yaml'
 
-bundles_dir = File.join ENV['HOME'], '.vim', 'bundle'
-bundles = YAML::load File.open('bundles.yml')
+VIM_DIR = File.join ENV['HOME'], '.vim'
+BUNDLE_DIR = File.join VIM_DIR, 'bundle'
+BUNDLE_REPO_DIR = File.join VIM_DIR, 'bundle-repos'
+FileUtils.rm_rf BUNDLE_DIR
+FileUtils.mkdir_p [BUNDLE_DIR, BUNDLE_REPO_DIR]
 
-FileUtils.cd bundles_dir
+bundles = nil
+File.open('bundles.yml') do |bundles_file|
+  bundles = YAML::load bundles_file
+end
 
 def synchronize (create_command, update_command, name, options)
+  repo_dir = File.join BUNDLE_REPO_DIR, name
+  bundle_dir = File.join BUNDLE_DIR, name
   url = options['url']
-  unless Dir.exists? name
+  unless Dir.exists? repo_dir
     puts "  Unpacking #{url} into #{name}"
-    `#{create_command} #{url} #{name}`
+    `#{create_command} #{url} #{repo_dir}`
     return
   end
 
   puts "  Updating #{name}"
-  `(cd #{name} && #{update_command})`
+  `(cd #{repo_dir} && #{update_command})`
+
+  FileUtils.ln_s repo_dir, bundle_dir
 end
 
 synchronizers = {
@@ -40,7 +50,8 @@ bundles.each do |name, options|
   synchronizers[vcs].call name, options
 end
 
-removed_bundles = Dir.glob('*').reject { |dir| bundles.find { |name, options| name == dir } }
+removed_bundles = Dir.glob(File.join(BUNDLE_REPO_DIR, '*')) \
+                  - bundles.map { |name, options| File.join BUNDLE_REPO_DIR, name }
 removed_bundles.each do |dir|
   puts "  Removing #{dir}"
   FileUtils.rm_rf dir
