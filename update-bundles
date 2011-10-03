@@ -8,17 +8,24 @@ bundles = YAML::load File.open('bundles.yml')
 
 FileUtils.cd bundles_dir
 
+def synchronize (create_command, update_command, name, options)
+  url = options['url']
+  unless Dir.exists? name
+    puts "  Unpacking #{url} into #{name}"
+    `#{create_command} #{url} #{name}`
+    return
+  end
+
+  puts "  Updating #{name}"
+  `(cd #{name} && #{update_command})`
+end
+
 synchronizers = {
   'git' => lambda do |name, options|
-    url = options['url']
-    unless Dir.exists? name
-      puts "  Unpacking #{url} into #{name}"
-      `git clone #{url} #{name}`
-      next
-    end
-
-    puts "  Updating #{name}"
-    `(cd #{name} && git pull)`
+    synchronize 'git clone', 'git pull', name, options
+  end,
+  'hg' => lambda do |name, options|
+    synchronize 'hg clone', 'hg pull', name, options
   end,
   '' => lambda do |name, options|
     vcs = options['vcs']
