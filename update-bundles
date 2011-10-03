@@ -4,23 +4,36 @@ require 'fileutils'
 require 'yaml'
 
 bundles_dir = File.join ENV['HOME'], '.vim', 'bundle'
-git_bundles = YAML::load File.open('git-bundles.yml')
+bundles = YAML::load File.open('bundles.yml')
 
 FileUtils.cd bundles_dir
 
-git_bundles.each do |name, options|
-  url = options['url']
-  unless Dir.exists? name
-    puts "  Unpacking #{url} into #{name}"
-    `git clone #{url} #{name}`
-    next
-  end
+synchronizers = {
+  'git' => lambda do |name, options|
+    url = options['url']
+    unless Dir.exists? name
+      puts "  Unpacking #{url} into #{name}"
+      `git clone #{url} #{name}`
+      next
+    end
 
-  puts "  Updating #{name}"
-  `(cd #{name} && git pull)`
+    puts "  Updating #{name}"
+    `(cd #{name} && git pull)`
+  end,
+  '' => lambda do |name, options|
+    vcs = options['vcs']
+    next STDERR.puts "  No VCS specified for #{name}" if not vcs or vcs == ''
+    next STDERR.puts "  #{name} has an unknown VCS: #{vcs}"
+  end
+}
+
+bundles.each do |name, options|
+  vcs = options['vcs']
+  vcs = '' unless synchronizers.has_key? vcs
+  synchronizers[vcs].call name, options
 end
 
-removed_bundles = Dir.glob('*').reject { |dir| git_bundles.find { |name, options| name == dir } }
+removed_bundles = Dir.glob('*').reject { |dir| bundles.find { |name, options| name == dir } }
 removed_bundles.each do |dir|
   puts "  Removing #{dir}"
   FileUtils.rm_rf dir
