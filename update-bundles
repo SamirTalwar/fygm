@@ -28,11 +28,10 @@ def synchronize (create_command, update_command, name, options)
   unless Dir.exists? repo_dir
     puts "  Unpacking #{url} into #{name}"
     `#{create_command} #{url} #{repo_dir}`
-    return
+  else
+    puts "  Updating #{name}"
+    `(cd #{repo_dir} && #{update_command})`
   end
-
-  puts "  Updating #{name}"
-  `(cd #{repo_dir} && #{update_command})`
 
   FileUtils.ln_s bundle_dir, expected_location
 end
