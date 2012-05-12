@@ -1,5 +1,6 @@
 set nocompatible
 set nobackup
+filetype off
 
 set ruler
 set showcmd
@@ -20,14 +21,23 @@ command Q q
 command Wq wq
 command WQ wq
 
-syntax on
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 
-call pathogen#helptags()
-call pathogen#runtime_append_all_bundles()
+Bundle 'gmarik/vundle'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-commentary'
+Bundle 'scrooloose/nerdtree'
+Bundle 'tpope/vim-markdown'
+Bundle 'pangloss/vim-javascript'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'tpope/vim-haml'
+Bundle 'lunaru/vim-less'
+Bundle 'VimClojure'
+Bundle 'DrTom/fsharp-vim'
 
 map <Tab> :NERDTreeToggle<CR>
 
-filetype off
 filetype plugin indent on
 
 au BufNewFile,BufRead *.ru set filetype=ruby

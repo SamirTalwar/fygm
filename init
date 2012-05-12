@@ -1,0 +1,5 @@
+#!/bin/bash
+
+ln -s $(dirname $(readlink -f $0))/vimrc ~/.vimrc
+git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+vim +BundleInstall +qall
