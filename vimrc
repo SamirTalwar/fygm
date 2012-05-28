@@ -1,5 +1,6 @@
 set nocompatible
 set nobackup
+filetype on
 filetype off
 
 set ruler
