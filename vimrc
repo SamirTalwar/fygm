@@ -1,8 +1,10 @@
 set nocompatible
 set nobackup
+
 filetype on
 filetype off
 
+set number
 set ruler
 set showcmd
 
@@ -15,8 +17,7 @@ set shiftwidth=4
 set tabstop=4
 set softtabstop=4
 
-set mouse=a
-
+set mouse=a 
 command W w
 command Q q
 command Wq wq
@@ -26,6 +27,7 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
+Bundle 'altercation/vim-colors-solarized'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-commentary'
 Bundle 'scrooloose/nerdtree'
@@ -38,10 +40,16 @@ Bundle 'tpope/vim-haml'
 Bundle 'lunaru/vim-less'
 Bundle 'VimClojure'
 Bundle 'DrTom/fsharp-vim'
+Bundle 'skammer/vim-css-color'
 
-map <Tab> :NERDTreeToggle<CR>
+map <Tab> :FufFile **/<CR>
+map <S-Tab> :NERDTreeToggle<CR>
 
 filetype plugin indent on
+syntax enable
+
+set background=dark
+colorscheme solarized
 
 au BufNewFile,BufRead *.ru set filetype=ruby
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
