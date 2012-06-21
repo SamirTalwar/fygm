@@ -1,6 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env ruby
 
-cwd=$(cd $(dirname $BASH_SOURCE) && pwd)
-ln -sf "$cwd/vimrc" ~/.vimrc
-[[ ! -e ~/.vim/bundle/vundle ]] && git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-vim +BundleInstall +qall
+cwd = File.absolute_path File.dirname __FILE__
+home = ENV['HOME']
+`ln -sf "#{cwd}/vimrc" #{home}/.vimrc`
+if Dir.exists? "#{home}/.vim/bundle/vundle"
+  `cd ~/.vim/bundle/vundle && git pull`
+else
+  `git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle`
+end
+`vim +BundleInstall +qall`
