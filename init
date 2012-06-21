@@ -1,8 +1,13 @@
 #!/usr/bin/env ruby
 
 cwd = File.absolute_path File.dirname __FILE__
+exclude = ["#{cwd}/init", "#{cwd}/README.md"]
 home = ENV['HOME']
-`ln -sf "#{cwd}/vimrc" #{home}/.vimrc`
+(Dir["#{cwd}/*"] - exclude).each do |dotfile|
+  name = File.basename dotfile
+  `ln -sf "#{dotfile}" "#{home}/.#{name}"`
+end
+
 if Dir.exists? "#{home}/.vim/bundle/vundle"
   `cd ~/.vim/bundle/vundle && git pull`
 else

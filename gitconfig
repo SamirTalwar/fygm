@@ -1,0 +1,8 @@
+[user]
+	name = Samir Talwar
+	email = samir.talwar@timgroup.com
+[core]
+	editor = vim
+	excludesfile = /home/stalwar/.gitignore
+[color]
+	ui = true
