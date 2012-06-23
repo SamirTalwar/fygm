@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-cwd = File.absolute_path File.dirname __FILE__
+cwd = File.expand_path File.dirname __FILE__
 exclude = ["#{cwd}/init", "#{cwd}/README.md"]
 home = ENV['HOME']
 (Dir["#{cwd}/*"] - exclude).each do |dotfile|
@@ -8,7 +8,7 @@ home = ENV['HOME']
   `ln -sf "#{dotfile}" "#{home}/.#{name}"`
 end
 
-if Dir.exists? "#{home}/.vim/bundle/vundle"
+if File.exist? "#{home}/.vim/bundle/vundle"
   `cd ~/.vim/bundle/vundle && git pull`
 else
   `git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle`
