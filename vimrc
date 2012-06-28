@@ -51,6 +51,7 @@ syntax enable
 
 set background=dark
 colorscheme solarized
+set guifont=Consolas:h12
 
 au BufNewFile,BufRead *.ru set filetype=ruby
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
