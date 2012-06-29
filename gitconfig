@@ -3,6 +3,6 @@
 	email = samir@noodlesandwich.com
 [core]
 	editor = vim
-	excludesfile = /home/stalwar/.gitignore
+	excludesfile = ~/.gitignore
 [color]
 	ui = true
