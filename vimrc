@@ -56,6 +56,8 @@ set background=dark
 colorscheme solarized
 set guifont=Consolas:h12
 
+map <F5> :FufRenewCache<CR>:! ctags -R .<CR><CR>
+
 au BufNewFile,BufRead *.ru set filetype=ruby
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 
