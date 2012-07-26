@@ -59,10 +59,10 @@ set guifont=Consolas:h12
 map <F5> :FufRenewCache<CR>:! ctags -R .<CR><CR>
 
 au BufNewFile,BufRead *.ru set filetype=ruby
-autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
+au BufNewFile,BufRead *.gradle set filetype=groovy
+au BufNewFile,BufRead *.stylus set filetype=sass
 
+autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype clojure setlocal ts=2 sts=2 sw=2
 
-au BufNewFile,BufRead *.gradle set filetype=groovy
-
-au BufNewFile,BufRead *.stylus set filetype=sass
+autocmd BufWritePre * :%s/\s\+$//e
