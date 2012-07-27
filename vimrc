@@ -17,7 +17,7 @@ set shiftwidth=4
 set tabstop=4
 set softtabstop=4
 
-set mouse=a 
+set mouse=a
 command W w
 command Q q
 command Wq wq
@@ -64,5 +64,6 @@ au BufNewFile,BufRead *.stylus set filetype=sass
 
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype clojure setlocal ts=2 sts=2 sw=2
+autocmd Filetype coffee setlocal ts=2 sts=2 sw=2
 
 autocmd BufWritePre * :%s/\s\+$//e
