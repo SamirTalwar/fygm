@@ -19,7 +19,7 @@ set softtabstop=4
 
 set linebreak
 
-set mouse=a 
+set mouse=a
 
 command W w
 command Q q
@@ -57,7 +57,12 @@ set t_Co=16
 let g:solarized_termcolors=16
 set background=dark
 colorscheme solarized
-set guifont=Consolas:h12
+
+if has("unix")
+    set guifont=Inconsolata\ 12
+elseif has("win32")
+    set guifont=Consolas:h12
+endif
 
 map <F5> :FufRenewCache<CR>:! ctags -R .<CR><CR>
 
