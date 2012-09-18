@@ -47,6 +47,11 @@ Bundle 'VimClojure'
 Bundle 'DrTom/fsharp-vim'
 Bundle 'skammer/vim-css-color'
 
+autocmd BufWritePre * :%s/\s\+$//e
+
+set list!
+set listchars=tab:->,trail:·,extends:>
+
 map <Tab> :FufFile **/<CR>
 map <S-Tab> :NERDTreeToggle<CR>
 
@@ -73,5 +78,3 @@ au BufNewFile,BufRead *.stylus set filetype=sass
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype clojure setlocal ts=2 sts=2 sw=2
 autocmd Filetype coffee setlocal ts=2 sts=2 sw=2
-
-autocmd BufWritePre * :%s/\s\+$//e
