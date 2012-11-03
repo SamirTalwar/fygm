@@ -44,6 +44,7 @@ Bundle 'tpope/vim-haml'
 Bundle 'bbommarito/vim-slim.git'
 Bundle 'lunaru/vim-less'
 Bundle 'VimClojure'
+Bundle 'paredit.vim'
 Bundle 'DrTom/fsharp-vim'
 Bundle 'skammer/vim-css-color'
 
