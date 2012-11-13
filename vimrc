@@ -64,7 +64,9 @@ let g:solarized_termcolors=16
 set background=dark
 colorscheme solarized
 
-if has("unix")
+if has("mac")
+    set guifont=Menlo:h12
+elseif has("unix")
     set guifont=Inconsolata\ 12
 elseif has("win32")
     set guifont=Consolas:h12
