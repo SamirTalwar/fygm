@@ -15,8 +15,10 @@ function git_PS1 {
     if [[ $in_git -eq 0 ]]
     then
         changes=$(git status | grep '^nothing to commit, working directory clean$' >/dev/null 2>&1 ; echo $?)
+        unpushed=$(git status | grep '^# Your branch is ahead ' >/dev/null 2>&1; echo $?)
         color=$([[ $changes -eq 0 ]] && echo "$GREEN" || echo "$RED")
-        printf " $color$(git branch | grep '^\*' | cut -d' ' -f2)$END"
+        marker=$([[ $unpushed -eq 0 ]] && echo '*' || echo '')
+        printf " $color$(git branch | grep '^\*' | cut -d' ' -f2)$marker$END"
     else
         echo ''
     fi
