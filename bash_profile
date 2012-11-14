@@ -15,15 +15,16 @@ function git_PS1 {
     in_git=$([[ -d .git ]] || git rev-parse --git-dir >/dev/null 2>&1 ; echo $?)
     if [[ $in_git -eq 0 ]]
     then
-        changes=$(git status | grep '^nothing to commit, working directory clean$' >/dev/null 2>&1 ; echo $?)
-        unpushed=$(git status | grep '^# Your branch is ahead ' >/dev/null 2>&1; echo $?)
+        changes=$([[ -z "$(git status -s)" ]]; echo $?)
+        branch=$(git rev-parse --abbrev-ref HEAD)
+        pushed=$([[ -z "$(git log origin/$branch..)" ]]; echo $?)
         if [[ $changes -eq 0 ]]
         then
-            color=$([[ $unpushed -eq 0 ]] && echo $YELLOW || echo $GREEN)
+            color=$([[ $pushed -eq 0 ]] && echo $GREEN || echo $YELLOW)
         else
             color=$RED
         fi
-        printf " $color$(git branch | grep '^\*' | cut -d' ' -f2)$END"
+        printf " $color$branch$END"
     else
         echo ''
     fi
