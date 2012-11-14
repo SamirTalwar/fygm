@@ -8,6 +8,7 @@ function make_PS1 {
 
 function git_PS1 {
     GREEN='\e[32m'
+    YELLOW='\e[33m'
     RED='\e[31m'
     END='\e[0m'
 
@@ -16,9 +17,13 @@ function git_PS1 {
     then
         changes=$(git status | grep '^nothing to commit, working directory clean$' >/dev/null 2>&1 ; echo $?)
         unpushed=$(git status | grep '^# Your branch is ahead ' >/dev/null 2>&1; echo $?)
-        color=$([[ $changes -eq 0 ]] && echo "$GREEN" || echo "$RED")
-        marker=$([[ $unpushed -eq 0 ]] && echo '*' || echo '')
-        printf " $color$(git branch | grep '^\*' | cut -d' ' -f2)$marker$END"
+        if [[ $changes -eq 0 ]]
+        then
+            color=$([[ $unpushed -eq 0 ]] && echo $YELLOW || echo $GREEN)
+        else
+            color=$RED
+        fi
+        printf " $color$(git branch | grep '^\*' | cut -d' ' -f2)$END"
     else
         echo ''
     fi
