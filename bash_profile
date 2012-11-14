@@ -31,8 +31,4 @@ else
     alias ls='ls --color'
 fi
 
-export PATH=~/bin:/usr/local/bin:/usr/local/sbin:$PATH
-
-export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home
-
-export GIT_AUTHOR_EMAIL='stalwar@palantir.com'
+[[ -e ~/.bash_profile.local ]] && source ~/.bash_profile.local
