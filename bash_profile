@@ -1,0 +1,38 @@
+function make_PS1 {
+    BLUE='\e[34m'
+    GREEN='\e[32m'
+    END='\e[0m'
+
+    printf "\[$BLUE\]\u\[$END\]@\[$GREEN\]\h\[$END\] \W\$(git_PS1)\\$ "
+}
+
+function git_PS1 {
+    GREEN='\e[32m'
+    RED='\e[31m'
+    END='\e[0m'
+
+    in_git=$([[ -d .git ]] || git rev-parse --git-dir >/dev/null 2>&1 ; echo $?)
+    if [[ $in_git -eq 0 ]]
+    then
+        changes=$(git status | grep '^nothing to commit, working directory clean$' >/dev/null 2>&1 ; echo $?)
+        color=$([[ $changes -eq 0 ]] && echo "$GREEN" || echo "$RED")
+        printf " $color$(git branch | grep '^\*' | cut -d' ' -f2)$END"
+    else
+        echo ''
+    fi
+}
+
+export PS1=$(make_PS1)
+
+if [[ $(uname) == 'Darwin' ]]
+then
+    alias ls='ls -G'
+else
+    alias ls='ls --color'
+fi
+
+export PATH=~/bin:/usr/local/bin:/usr/local/sbin:$PATH
+
+export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home
+
+export GIT_AUTHOR_EMAIL='stalwar@palantir.com'
