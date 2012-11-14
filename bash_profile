@@ -3,7 +3,7 @@ function make_PS1 {
     GREEN='\e[32m'
     END='\e[0m'
 
-h   printf "\[$BLUE\]\u\[$END\]@\[$GREEN\]\H\[$END\] \W\$(git_PS1)\\$ "
+    printf "\[$BLUE\]\u\[$END\]@\[$GREEN\]\H\[$END\] \W\$(git_PS1)\\$ "
 }
 
 function git_PS1 {
