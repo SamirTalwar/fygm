@@ -16,7 +16,9 @@ function git_PS1 {
     if [[ $in_git -eq 0 ]]
     then
         changes=$([[ -z "$(git status -s)" ]]; echo $?)
-        branch=$(git rev-parse --abbrev-ref HEAD)
+        branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+        [[ "$branch" == 'HEAD' ]] && return
+
         pushed=$([[ -z "$(git log origin/$branch..)" ]]; echo $?)
         if [[ $changes -eq 0 ]]
         then
@@ -25,8 +27,6 @@ function git_PS1 {
             color=$RED
         fi
         printf " $color$branch$END"
-    else
-        echo ''
     fi
 }
 
