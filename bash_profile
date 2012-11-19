@@ -15,7 +15,7 @@ function git_PS1 {
     in_git=$([[ -d .git ]] || git rev-parse --git-dir >/dev/null 2>&1 ; echo $?)
     if [[ $in_git -eq 0 ]]
     then
-        changes=$([[ -z "$(git status -s)" ]]; echo $?)
+        changes=$([[ -z "$(git diff ; git diff --cached)" ]]; echo $?)
         branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
         [[ "$branch" == 'HEAD' ]] && return
 
