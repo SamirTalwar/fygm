@@ -1,9 +1,9 @@
 function make_PS1 {
-    RED="\033[31m"
-    GREEN="\033[32m"
-    YELLOW="\033[33m"
-    BLUE="\033[34m"
-    END="\033[0m"
+    RED="\[\033[31m\]"
+    GREEN="\[\033[32m\]"
+    YELLOW="\[\033[33m\]"
+    BLUE="\[\033[34m\]"
+    END="\[\033[0m\]"
 
     in_git=$([[ -d .git ]] || git rev-parse --git-dir >/dev/null 2>&1 ; echo $?)
     if [[ $in_git -eq 0 ]]
@@ -19,9 +19,9 @@ function make_PS1 {
         else
             color=$RED
         fi
-        git=" \[$color\]$branch\[$END\]"
+        git=" $color$branch$END"
     fi
-    echo "\[$BLUE\]\u\[$END\]@\[$GREEN\]\H\[$END\] \W$git\\$ "
+    echo "$BLUE\u$END@$GREEN\H$END \W$git\\$ "
 }
 
 PROMPT_COMMAND='PS1="$(make_PS1)"; '$PROMPT_COMMAND
