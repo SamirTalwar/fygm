@@ -1,16 +1,9 @@
 function make_PS1 {
-    BLUE='\e[34m'
-    GREEN='\e[32m'
-    END='\e[0m'
-
-    printf "\[$BLUE\]\u\[$END\]@\[$GREEN\]\H\[$END\] \W\$(git_PS1)\\$ "
-}
-
-function git_PS1 {
-    GREEN='\e[32m'
-    YELLOW='\e[33m'
-    RED='\e[31m'
-    END='\e[0m'
+    RED="\033[31m"
+    GREEN="\033[32m"
+    YELLOW="\033[33m"
+    BLUE="\033[34m"
+    END="\033[0m"
 
     in_git=$([[ -d .git ]] || git rev-parse --git-dir >/dev/null 2>&1 ; echo $?)
     if [[ $in_git -eq 0 ]]
@@ -22,15 +15,16 @@ function git_PS1 {
         pushed=$([[ -z "$(git branch -r | grep origin/$branch)" || -z "$(git log origin/$branch..)" ]]; echo $?)
         if [[ $changes -eq 0 ]]
         then
-            color=$([[ $pushed -eq 0 ]] && echo $GREEN || echo $YELLOW)
+            [[ $pushed -eq 0 ]] && color=$GREEN || color=$YELLOW
         else
             color=$RED
         fi
-        printf " $color$branch$END"
+        git=" \[$color\]$branch\[$END\]"
     fi
+    echo "\[$BLUE\]\u\[$END\]@\[$GREEN\]\H\[$END\] \W$git\\$ "
 }
 
-export PS1=$(make_PS1)
+PROMPT_COMMAND='PS1="$(make_PS1)"; '$PROMPT_COMMAND
 
 if [[ $(uname) == 'Darwin' ]]
 then
