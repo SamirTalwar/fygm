@@ -7,6 +7,7 @@ filetype off
 set number
 set ruler
 set showcmd
+set colorcolumn=121
 
 set backspace=indent,eol,start
 
