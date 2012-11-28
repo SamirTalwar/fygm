@@ -1,8 +1,11 @@
 function make_PS1 {
+    exit_status=$?
+
     RED="\[\033[31m\]"
     GREEN="\[\033[32m\]"
     YELLOW="\[\033[33m\]"
     BLUE="\[\033[34m\]"
+    ORANGE="\[\033[1;31m\]"
     END="\[\033[0m\]"
 
     in_git=$([[ -d .git ]] || git rev-parse --git-dir >/dev/null 2>&1 ; echo $?)
@@ -21,7 +24,12 @@ function make_PS1 {
         fi
         git=" $color$branch$END"
     fi
-    echo "$BLUE\u$END@$GREEN\H$END \W$git\\$ "
+
+    if [[ $exit_status -ne 0 ]]
+    then
+        last_status="$ORANGE >> $exit_status << $END"
+    fi
+    echo "$BLUE\u$END@$GREEN\H$END \W$git$last_status$ "
 }
 
 PROMPT_COMMAND='PS1="$(make_PS1)"; '$PROMPT_COMMAND
