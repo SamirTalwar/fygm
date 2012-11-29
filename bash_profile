@@ -13,16 +13,19 @@ function make_PS1 {
     then
         changes=$([[ -z "$(git diff ; git diff --cached)" ]]; echo $?)
         branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
-        [[ "$branch" == 'HEAD' ]] && return
-
-        pushed=$([[ -z "$(git branch -r | grep origin/$branch)" || -z "$(git log origin/$branch..)" ]]; echo $?)
-        if [[ $changes -eq 0 ]]
+        if [[ "$branch" == 'HEAD' ]]
         then
-            [[ $pushed -eq 0 ]] && color=$GREEN || color=$YELLOW
+            git=" $RED<no branch>$END"
         else
-            color=$RED
+            pushed=$([[ -z "$(git branch -r | grep origin/$branch)" || -z "$(git log origin/$branch..)" ]]; echo $?)
+            if [[ $changes -eq 0 ]]
+            then
+                [[ $pushed -eq 0 ]] && color=$GREEN || color=$YELLOW
+            else
+                color=$RED
+            fi
+            git=" $color$branch$END"
         fi
-        git=" $color$branch$END"
     fi
 
     if [[ $exit_status -ne 0 ]]
