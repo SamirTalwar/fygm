@@ -36,8 +36,7 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdtree'
-Bundle 'L9'
-Bundle 'FuzzyFinder'
+Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-markdown'
 Bundle 'pangloss/vim-javascript'
 Bundle 'kchmck/vim-coffee-script'
@@ -54,8 +53,8 @@ autocmd BufWritePre * :%s/\s\+$//e
 set list!
 set listchars=tab:->,trail:·,extends:>
 
-map <Tab> :FufFile **/<CR>
-map <S-Tab> :NERDTreeToggle<CR>
+map <Tab> :NERDTreeToggle<CR>
+map <F5> :CtrlPClearCache<CR>:! ctags -R .<CR><CR>
 
 filetype plugin indent on
 syntax enable
@@ -72,8 +71,6 @@ elseif has("unix")
 elseif has("win32")
     set guifont=Consolas:h12
 endif
-
-map <F5> :FufRenewCache<CR>:! ctags -R .<CR><CR>
 
 au BufNewFile,BufRead *.ru set filetype=ruby
 au BufNewFile,BufRead *.gradle set filetype=groovy
