@@ -52,6 +52,9 @@ autocmd BufWritePre * :%s/\s\+$//e
 
 set list!
 set listchars=tab:->,trail:·,extends:>
+autocmd Filetype text setlocal nolist
+autocmd Filetype markdown setlocal nolist
+autocmd Filetype markdown setlocal colorcolumn=0
 
 map <Tab> :NERDTreeToggle<CR>
 map <F5> :CtrlPClearCache<CR>:! ctags -R .<CR><CR>
