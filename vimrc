@@ -60,6 +60,8 @@ autocmd Filetype markdown setlocal colorcolumn=0
 map <Tab> :NERDTreeToggle<CR>
 map <F5> :CtrlPClearCache<CR>:! ctags -R .<CR><CR>
 
+set wildignore+=*.class
+
 filetype plugin indent on
 syntax enable
 
