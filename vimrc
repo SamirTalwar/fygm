@@ -26,6 +26,7 @@ command W w
 command Q q
 command Wq wq
 command WQ wq
+let mapleader=','
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
