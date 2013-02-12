@@ -1,3 +1,7 @@
+function is {
+    return $1
+}
+
 function make_PS1 {
     exit_status=$?
 
@@ -9,23 +13,28 @@ function make_PS1 {
     END="\[\033[0m\]"
 
     in_git=$([[ -d .git ]] || git rev-parse --git-dir >/dev/null 2>&1 ; echo $?)
-    if [[ $in_git -eq 0 ]]
+    if is $in_git
     then
-        changes=$([[ -z "$(git diff ; git diff --cached)" ]]; echo $?)
-        branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
-        if [[ "$branch" == 'HEAD' ]]
-        then
-            git=" $RED<no branch>$END"
+        changed=$([[ "$(git status -s | egrep '^( M|\?\?) ')" ]]; echo $?)
+        branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
+        remote="$(git config --get branch.$branch.remote)"
+        if [[ "$branch" == 'HEAD' ]]; then
+            color=$RED
+            branch='<no branch>'
+        elif is $changed; then
+            color=$RED
+        elif [[ -z "$remote" ]]; then
+            color=$BLUE
         else
-            pushed=$([[ -z "$(git branch -r | grep origin/$branch)" || -z "$(git log origin/$branch..)" ]]; echo $?)
-            if [[ $changes -eq 0 ]]
-            then
-                [[ $pushed -eq 0 ]] && color=$GREEN || color=$YELLOW
+            pushed=$([[ -z "$(git log --oneline $remote/$branch..)" ]]; echo $?)
+            pulled=$([[ -z "$(git log --oneline ..$remote/$branch)" ]]; echo $?)
+            if is $pushed && is $pulled; then
+                color=$GREEN
             else
-                color=$RED
+                color=$YELLOW
             fi
-            git=" $color$branch$END"
         fi
+        git=" $color$branch$END"
     fi
 
     if [[ $exit_status -ne 0 ]]
