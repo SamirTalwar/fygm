@@ -15,7 +15,7 @@ function make_PS1 {
     in_git=$([[ -d .git ]] || git rev-parse --git-dir >/dev/null 2>&1 ; echo $?)
     if is $in_git
     then
-        changed=$([[ "$(git status -s | egrep '^( M|\?\?) ')" ]]; echo $?)
+        changed=$([[ ! -z "$(git status -s)" ]]; echo $?)
         branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
         remote="$(git config --get branch.$branch.remote)"
         if [[ "$branch" == 'HEAD' ]]; then
