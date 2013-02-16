@@ -16,3 +16,8 @@ else
   `git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle`
 end
 `vim +BundleInstall +qall`
+
+Dir["#{home}/.vim/bundle/*"].each do |vim_plugin_dir|
+  puts "Upgrading #{File.basename(vim_plugin_dir)}"
+  `cd #{vim_plugin_dir} && git pull`
+end
