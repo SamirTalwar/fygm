@@ -1,23 +1,30 @@
 #!/usr/bin/env ruby
 
+def run command
+  unless system command
+    $stderr.puts "FAIL: #{command}"
+    exit 1
+  end
+end
+
 puts "Symlinking configuration files"
 cwd = File.expand_path File.dirname __FILE__
 exclude = ["#{cwd}/init", "#{cwd}/README.md"]
 home = ENV['HOME']
 (Dir["#{cwd}/*"] - exclude).each do |dotfile|
   name = File.basename dotfile
-  `ln -sf "#{dotfile}" "#{home}/.#{name}"`
+  run "ln -sf '#{dotfile}' '#{home}/.#{name}'"
 end
 
 puts "Installing vim plugins"
 if File.exist? "#{home}/.vim/bundle/vundle"
-  `cd ~/.vim/bundle/vundle && git pull`
+  run "cd ~/.vim/bundle/vundle && git pull"
 else
-  `git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle`
+  run "git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle"
 end
-`vim +BundleInstall +qall`
+run "vim +BundleInstall +qall"
 
 Dir["#{home}/.vim/bundle/*"].each do |vim_plugin_dir|
   puts "Upgrading #{File.basename(vim_plugin_dir)}"
-  `cd #{vim_plugin_dir} && git pull`
+  run "cd #{vim_plugin_dir} && git pull"
 end
