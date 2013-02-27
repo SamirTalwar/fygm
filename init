@@ -17,9 +17,7 @@ home = ENV['HOME']
 end
 
 puts "Installing vim plugins"
-if File.exist? "#{home}/.vim/bundle/vundle"
-  run "cd ~/.vim/bundle/vundle && git pull"
-else
+unless File.exist? "#{home}/.vim/bundle/vundle"
   run "git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle"
 end
 run "vim +BundleInstall +BundleUpdate +qall"
