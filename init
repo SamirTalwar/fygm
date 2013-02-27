@@ -22,9 +22,4 @@ if File.exist? "#{home}/.vim/bundle/vundle"
 else
   run "git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle"
 end
-run "vim +BundleInstall +qall"
-
-Dir["#{home}/.vim/bundle/*"].each do |vim_plugin_dir|
-  puts "Upgrading #{File.basename(vim_plugin_dir)}"
-  run "cd #{vim_plugin_dir} && git pull"
-end
+run "vim +BundleInstall +BundleUpdate +qall"
