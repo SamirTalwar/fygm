@@ -4,8 +4,11 @@ set nobackup
 filetype on
 filetype off
 
+set encoding=utf-8
+
 set number
 set ruler
+set laststatus=2
 set showcmd
 set colorcolumn=121
 
@@ -32,16 +35,25 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
+
+Bundle 'tpope/vim-fugitive'
+
 Bundle 'altercation/vim-colors-solarized'
+
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'kien/ctrlp.vim'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
+
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-fugitive'
-Bundle 'scrooloose/nerdtree'
-Bundle 'kien/ctrlp.vim'
+Bundle 'dahu/vim-fanfingtastic'
+
 Bundle 'tpope/vim-markdown'
 Bundle 'pangloss/vim-javascript'
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'closetag.vim'
 Bundle 'tpope/vim-haml'
 Bundle 'slim-template/vim-slim'
 Bundle 'lunaru/vim-less'
@@ -66,8 +78,9 @@ set wildignore+=*.class,bin,target
 filetype plugin indent on
 syntax enable
 
-set t_Co=16
+set t_Co=256
 let g:solarized_termcolors=16
+let g:Powerline_theme = 'solarized16'
 set background=dark
 colorscheme solarized
 
