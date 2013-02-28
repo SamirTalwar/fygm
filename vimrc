@@ -23,12 +23,20 @@ set softtabstop=4
 
 set linebreak
 
+set incsearch
+set ignorecase
+set smartcase
+set hlsearch
+nnoremap ,c :let @/=""<CR>
+
 set mouse=a
 
 command W w
 command Q q
 command Wq wq
 command WQ wq
+nnoremap j gj
+nnoremap k gk
 let mapleader=','
 
 set rtp+=~/.vim/bundle/vundle/
