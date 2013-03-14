@@ -12,7 +12,7 @@ function make_PS1 {
     ORANGE="\[\033[1;31m\]"
     END="\[\033[0m\]"
 
-    in_git=$([[ -d .git ]] || git rev-parse --git-dir >/dev/null 2>&1 ; echo $?)
+    in_git=$([[ -d .git ]] || git rev-parse --git-dir >/dev/null 2>&1; echo $?)
     if is $in_git
     then
         changed=$([[ ! -z "$(git status -s)" ]]; echo $?)
@@ -26,8 +26,9 @@ function make_PS1 {
         elif [[ -z "$remote" ]]; then
             color=$BLUE
         else
-            pushed=$([[ -z "$(git log --oneline $remote/$branch..)" ]]; echo $?)
-            pulled=$([[ -z "$(git log --oneline ..$remote/$branch)" ]]; echo $?)
+            remote_exists=$(git branch -a | egrep "\b$remote/$branch\b" >/dev/null 2>&1; echo $?)
+            pushed=$(is $remote_exists && [[ -z "$(git log --oneline $remote/$branch..)" ]]; echo $?)
+            pulled=$(is $remote_exists && [[ -z "$(git log --oneline ..$remote/$branch)" ]]; echo $?)
             if is $pushed && is $pulled; then
                 color=$GREEN
             else
