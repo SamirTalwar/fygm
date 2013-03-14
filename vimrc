@@ -83,6 +83,8 @@ map <F5> :CtrlPClearCache<CR>:! ctags -R .<CR><CR>
 
 set wildignore+=*.class,bin,target
 
+let g:syntastic_check_on_open=1
+
 filetype plugin indent on
 syntax enable
 
