@@ -10,3 +10,4 @@
 	default = simple
 [alias]
 	submit = "! branch=\"$(git rev-parse --abbrev-ref HEAD)\"; git push origin $branch:refs/for/$branch"
+	amend = commit --amend --no-edit
