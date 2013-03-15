@@ -1,3 +1,5 @@
+set -o vi
+
 function is {
     return $1
 }
