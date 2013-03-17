@@ -1,10 +1,11 @@
 set -o vi
 
-function _update_ps1() {
-    export PS1="$(~/dotfiles/powerline-shell/powerline-shell.py $?) "
-}
-
-export PROMPT_COMMAND="_update_ps1"
+if $(which node >/dev/null 2>&1); then
+    function _update_ps1() {
+        export PS1="$(~/dotfiles/powerline-js/powerline.js $? --shell bash --cwd-only)"
+    }
+    export PROMPT_COMMAND="_update_ps1"
+fi
 
 if [[ $(uname) == 'Darwin' ]]
 then
