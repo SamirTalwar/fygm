@@ -2,7 +2,7 @@ set -o vi
 
 if $(which node >/dev/null 2>&1); then
     function _update_ps1() {
-        export PS1="$(~/dotfiles/powerline-js/powerline.js $? --shell bash --cwd-only)"
+        export PS1="$(~/dotfiles/powerline-js/powerline.js $? --shell bash --depth 1)"
     }
     export PROMPT_COMMAND="_update_ps1"
 fi
