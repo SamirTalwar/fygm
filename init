@@ -7,11 +7,20 @@ def run command
   end
 end
 
-puts "Symlinking configuration files"
-cwd = File.expand_path File.dirname __FILE__
-exclude = ["#{cwd}/init", "#{cwd}/README.md"]
+dotfiles = File.expand_path File.dirname __FILE__
 home = ENV['HOME']
-(Dir["#{cwd}/*"] - exclude).each do |dotfile|
+
+puts "Setting up Prezto"
+Dir["#{dotfiles}/zprezto/runcoms/z*"]
+  .reject { |file| File.exists? "#{dotfiles}/#{File.basename(file)}" }
+  .each do |file|
+    name = File.basename file
+    run "ln -sf '#{file}' '#{home}/.#{name}'"
+  end
+
+puts "Symlinking configuration files"
+exclude = %w{init README.md}.collect { |file| "#{dotfiles}/#{file}" }
+(Dir["#{dotfiles}/*"] - exclude).each do |dotfile|
   name = File.basename dotfile
   run "ln -sf '#{dotfile}' '#{home}/.#{name}'"
 end
