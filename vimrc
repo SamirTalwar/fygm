@@ -51,7 +51,6 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/syntastic'
 
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
@@ -95,9 +94,16 @@ set background=dark
 colorscheme solarized
 
 if has("mac")
-    set guifont=Menlo:h12
+    try
+        set guifont=Source\ Code\ Pro\ Light:h14
+    catch
+        set guifont=Menlo:h14
+    endtry
 elseif has("unix")
-    set guifont=Inconsolata\ 12
+    try
+        set guifont=Inconsolata\ 12
+    catch
+    endtry
 elseif has("win32")
     set guifont=Consolas:h12
 endif
