@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require 'pathname'
+
 def run command
   unless system command
     $stderr.puts "FAIL: #{command}"
@@ -7,26 +9,26 @@ def run command
   end
 end
 
-dotfiles = File.expand_path File.dirname __FILE__
-home = ENV['HOME']
+dotfiles = Pathname.new(File.dirname(__FILE__)).realpath
+home = Pathname.new(ENV['HOME']).realpath
 
-puts "Setting up Prezto"
-Dir["#{dotfiles}/zprezto/runcoms/z*"]
-  .reject { |file| File.exists? "#{dotfiles}/#{File.basename(file)}" }
+puts 'Setting up Prezto'
+Pathname.glob(dotfiles + 'zprezto/runcoms/z*')
+  .reject { |file| (dotfiles + file.basename).exist? }
   .each do |file|
-    name = File.basename file
+    name = file.basename
     run "ln -sf '#{file}' '#{home}/.#{name}'"
   end
 
-puts "Symlinking configuration files"
-exclude = %w{init README.md}.collect { |file| "#{dotfiles}/#{file}" }
-(Dir["#{dotfiles}/*"] - exclude).each do |dotfile|
+puts 'Symlinking configuration files'
+exclude = %w{init README.md}.collect { |file| dotfiles + file }
+(Pathname.glob(dotfiles + '*') - exclude).each do |dotfile|
   name = File.basename dotfile
   run "ln -sf '#{dotfile}' '#{home}/.#{name}'"
 end
 
-puts "Installing vim plugins"
-unless File.exist? "#{home}/.vim/bundle/vundle"
-  run "git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle"
+puts 'Installing vim plugins'
+unless (home + '.vim/bundle/vundle').exist?
+  run 'git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle'
 end
-run "vim +BundleInstall +BundleUpdate +qall"
+run 'vim +BundleInstall +BundleUpdate +qall'
