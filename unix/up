@@ -1,0 +1,32 @@
+#!/usr/bin/env zsh
+
+set -e
+
+function exists {
+    which $1 >/dev/null
+    return $?
+}
+
+function if-exists {
+    if exists $1; then
+        "$@"
+    fi
+}
+
+if exists brew; then
+    brew update
+    brew upgrade
+    brew cleanup
+fi
+
+if exists apt-get; then
+    apt-get update
+    apt-get upgrade
+fi
+
+if-exists rvm get stable
+if-exists lein upgrade
+
+if-exists gem update
+if-exists npm update
+if-exists cabal update

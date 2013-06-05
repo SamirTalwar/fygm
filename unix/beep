@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+def beep
+  print "\a"
+end
+
+if __FILE__ == $0
+  non_beep = ARGV.find { |arg| arg != 'beep' }
+  if non_beep
+    $stderr.puts "I don't know how to \"#{non_beep}\"."
+    exit 1
+  end
+
+  (ARGV.length + 1).times do
+    beep
+  end
+end

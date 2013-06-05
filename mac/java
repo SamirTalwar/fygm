@@ -1,0 +1,16 @@
+#!/usr/bin/env zsh
+
+search=$1
+if [[ -z $search ]]; then
+    echo "Usage: source $0 <Java directory regex>" >&2
+    echo
+    echo "The Java directory should be under /Library/Java/JavaVirtualMachines."
+    return 1
+fi
+
+java_dir=$(ls /Library/Java/JavaVirtualMachines | egrep $search | sort -r | head -n1)
+JAVA_HOME="/Library/Java/JavaVirtualMachines/$java_dir"
+if [[ -e $JAVA_HOME/Contents/Home ]]; then
+    JAVA_HOME=$JAVA_HOME/Contents/Home
+fi
+path=($JAVA_HOME/bin $path)

@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+# Deletes .DS_Store files.
+
+find . -name .DS_Store -delete

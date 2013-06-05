@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+# Sets the title of the current Terminal tab/window.
+
+title=$@
+echo -n -e "\033]0;$title\007"
