@@ -1,17 +1,19 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env zsh
 
-def beep
-  print "\a"
-end
+function beep {
+    print -n "\a"
+}
 
-if __FILE__ == $0
-  non_beep = ARGV.find { |arg| arg != 'beep' }
-  if non_beep
-    $stderr.puts "I don't know how to \"#{non_beep}\"."
-    exit 1
-  end
+if [[ $_ != $0 ]]; then
+    for arg in "$@"; do
+        if [[ $arg != 'beep' ]]; then
+            echo "I don't know how to \"$arg\"." >&2
+            exit 1
+        fi
+    done
 
-  (ARGV.length + 1).times do
     beep
-  end
-end
+    for arg in "$@"; do
+        beep
+    done
+fi
