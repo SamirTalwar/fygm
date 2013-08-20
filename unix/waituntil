@@ -1,10 +1,13 @@
 #!/usr/bin/env zsh
 
-wait_length=0
+start_time="$(date '+%s')"
+last_reported=$start_time
 while not "$@"; do
+    now="$(date '+%s')"
+    if [[ $((now - last_reported)) -ge 10 ]]; then
+        echo "Waited for $((now - start_time)) seconds..." >&2
+        last_reported=$now
+    fi
     sleep 1
     wait_length=$((wait_length + 1))
-    if [[ $(($wait_length % 10)) -eq 0 ]]; then
-        echo "Waited for $wait_length seconds..." >&2
-    fi
 done
