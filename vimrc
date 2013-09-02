@@ -62,6 +62,7 @@ Bundle 'pangloss/vim-javascript'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'closetag.vim'
 Bundle 'tpope/vim-haml'
+Bundle 'digitaltoad/vim-jade'
 Bundle 'slim-template/vim-slim'
 Bundle 'lunaru/vim-less'
 Bundle 'VimClojure'
@@ -112,6 +113,10 @@ au BufNewFile,BufRead *.ru set filetype=ruby
 au BufNewFile,BufRead *.gradle set filetype=groovy
 au BufNewFile,BufRead *.stylus set filetype=sass
 
-autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype clojure setlocal ts=2 sts=2 sw=2
 autocmd Filetype coffee setlocal ts=2 sts=2 sw=2
+autocmd Filetype jade setlocal ts=2 sts=2 sw=2
+autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
+autocmd Filetype slim setlocal ts=2 sts=2 sw=2
+
+let g:vimclojure#ParenRainbow=1
