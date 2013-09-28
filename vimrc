@@ -81,7 +81,8 @@ autocmd Filetype markdown setlocal colorcolumn=0
 map <Tab> :NERDTreeToggle<CR>
 map <F5> :CtrlPClearCache<CR>:! ctags -R .<CR><CR>
 
-set wildignore+=*.class,bin,target
+set wildignore+=*.class,build,target " Java output
+set wildignore+=node_modules " local node.js dependencies
 
 let g:syntastic_check_on_open=1
 
