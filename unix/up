@@ -3,8 +3,7 @@
 set -e
 
 function exists {
-    which $1 >/dev/null
-    return $?
+    (( $+commands[$1] ))
 }
 
 function if-exists {
