@@ -12,3 +12,6 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 setopt CLOBBER
+
+bindkey -v
+export KEYTIMEOUT=1
