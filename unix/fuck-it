@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+set -e
+
+git reset --hard
+git clean -fd
