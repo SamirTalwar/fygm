@@ -2,7 +2,7 @@
 
 start_time="$(date '+%s')"
 last_reported=$start_time
-while not "$@"; do
+while ! "$@"; do
     now="$(date '+%s')"
     if [[ $((now - last_reported)) -ge 10 ]]; then
         echo "Waited for $((now - start_time)) seconds..." >&2
