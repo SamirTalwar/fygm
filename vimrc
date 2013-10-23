@@ -65,8 +65,10 @@ Bundle 'tpope/vim-haml'
 Bundle 'digitaltoad/vim-jade'
 Bundle 'slim-template/vim-slim'
 Bundle 'lunaru/vim-less'
-Bundle 'VimClojure'
-Bundle 'paredit.vim'
+Bundle 'tpope/vim-classpath'
+Bundle 'tpope/vim-fireplace'
+Bundle 'guns/vim-sexp'
+Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'DrTom/fsharp-vim'
 Bundle 'skammer/vim-css-color'
 
@@ -120,4 +122,4 @@ autocmd Filetype jade setlocal ts=2 sts=2 sw=2
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype slim setlocal ts=2 sts=2 sw=2
 
-let g:vimclojure#ParenRainbow=1
+autocmd Filetype clojure RainbowParenthesesToggle
