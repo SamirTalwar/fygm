@@ -17,7 +17,18 @@ function java_home {
     /usr/libexec/java_home $@ 2> /dev/null
 }
 
-export JAVA_HOME="$( (java_home -v $version || java_home -v 1.$version) | tail -n 1 )"
+function fail {
+    echo "The version should match a Java VM in /Library/Java/JavaVirtualMachines." >&2
+}
+
+if JAVA_HOME=$(java_home -v $version); then
+elif JAVA_HOME=$(java_home -v 1.$version); then
+else
+    echo "The version should match a Java VM in /Library/Java/JavaVirtualMachines." >&2
+    return 2
+fi
+export JAVA_HOME
+
 path=($JAVA_HOME/bin $path)
 export PATH
 
