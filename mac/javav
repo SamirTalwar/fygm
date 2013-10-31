@@ -1,0 +1,26 @@
+#!/usr/bin/env zsh
+
+if [[ $# -eq 0 ]]; then
+    echo "Usage:" >&2
+    echo "    source $0 <version>" >&2
+    echo "    $0 <version> <command>" >&2
+    echo >&2
+    echo "The version should match a Java VM in /Library/Java/JavaVirtualMachines." >&2
+    return 1
+fi
+
+version=$1
+shift
+cmd=($@)
+
+function java_home {
+    /usr/libexec/java_home $@ 2> /dev/null
+}
+
+export JAVA_HOME="$( (java_home -v $version || java_home -v 1.$version) | tail -n 1 )"
+path=($JAVA_HOME/bin $path)
+export PATH
+
+if [[ $#cmd -gt 0 ]]; then
+    $cmd
+fi
