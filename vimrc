@@ -58,6 +58,7 @@ Bundle 'tpope/vim-commentary'
 Bundle 'dahu/vim-fanfingtastic'
 
 Bundle 'tpope/vim-markdown'
+Bundle 'derekwyatt/vim-scala'
 Bundle 'pangloss/vim-javascript'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'sukima/xmledit'
