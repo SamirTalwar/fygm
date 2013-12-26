@@ -60,7 +60,7 @@ Bundle 'dahu/vim-fanfingtastic'
 Bundle 'tpope/vim-markdown'
 Bundle 'pangloss/vim-javascript'
 Bundle 'kchmck/vim-coffee-script'
-Bundle 'closetag.vim'
+Bundle 'sukima/xmledit'
 Bundle 'tpope/vim-haml'
 Bundle 'digitaltoad/vim-jade'
 Bundle 'slim-template/vim-slim'
@@ -111,6 +111,10 @@ elseif has("unix")
 elseif has("win32")
     set guifont=Consolas:h12
 endif
+
+let g:xmledit_enable_html=1
+function! HtmlAttribCallback(xml_tag)
+endfunction
 
 au BufNewFile,BufRead *.ru set filetype=ruby
 au BufNewFile,BufRead *.gradle set filetype=groovy
