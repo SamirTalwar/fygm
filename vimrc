@@ -93,7 +93,7 @@ syntax enable
 
 set t_Co=256
 let g:solarized_termcolors=16
-let g:Powerline_theme = 'solarized16'
+let g:Powerline_theme='solarized16'
 set background=dark
 colorscheme solarized
 
