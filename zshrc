@@ -11,6 +11,8 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+RPROMPT="$RPROMPT %{%F{yellow}%}[%D{%H:%M}]%{%f%}"
+
 setopt CLOBBER
 
 bindkey -v
