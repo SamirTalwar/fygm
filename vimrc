@@ -52,7 +52,7 @@ Bundle 'altercation/vim-colors-solarized'
 " Git support
 Bundle 'tpope/vim-fugitive'
 " Extra functionality in the status bar
-Bundle 'Lokaltog/vim-powerline'
+Bundle 'bling/vim-airline'
 " Search files using Ctrl+P
 Bundle 'kien/ctrlp.vim'
 " File/directory management
