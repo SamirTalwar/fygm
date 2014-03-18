@@ -108,9 +108,6 @@ map <F5> :CtrlPClearCache<CR>
 set wildignore+=*.class,build,target " Ignore Java output
 set wildignore+=node_modules " Ignore local node.js dependencies
 
-filetype plugin indent on " Re-enable filetype detection with plugins and indentation
-syntax enable " Enable syntax highlighting
-
 " Set up Solarized Dark
 set t_Co=256
 let g:solarized_termcolors=16
@@ -141,9 +138,9 @@ endif
 " Enable HTML editing with XMLEdit
 let g:xmledit_enable_html=1
 
-au BufNewFile,BufRead *.ru set filetype=ruby
-au BufNewFile,BufRead *.gradle set filetype=groovy
-au BufNewFile,BufRead *.stylus set filetype=sass
+autocmd BufNewFile,BufRead *.ru set filetype=ruby
+autocmd BufNewFile,BufRead *.gradle set filetype=groovy
+autocmd BufNewFile,BufRead *.stylus set filetype=sass
 
 autocmd Filetype clojure setlocal sw=2 ts=2 sts=2
 autocmd Filetype coffee setlocal sw=2 ts=2 sts=2
@@ -151,4 +148,11 @@ autocmd Filetype jade setlocal sw=2 ts=2 sts=2
 autocmd Filetype ruby setlocal sw=2 ts=2 sts=2
 autocmd Filetype slim setlocal sw=2 ts=2 sts=2
 
-autocmd Filetype clojure RainbowParenthesesToggle
+autocmd BufNewFile,BufRead *.clj set macmeta
+autocmd VimEnter *.clj RainbowParenthesesToggle
+autocmd Syntax *.clj RainbowParenthesesLoadRound
+autocmd Syntax *.clj RainbowParenthesesLoadSquare
+autocmd Syntax *.clj RainbowParenthesesLoadBraces
+
+filetype plugin indent on " Re-enable filetype detection with plugins and indentation
+syntax enable " Enable syntax highlighting
