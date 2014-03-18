@@ -2,6 +2,9 @@
 
 require 'pathname'
 
+@dotfiles = Pathname.new(File.dirname(__FILE__)).realpath
+@home = Pathname.new(ENV['HOME']).realpath
+
 def run command
   unless system command
     $stderr.puts "FAIL: #{command}"
@@ -9,26 +12,27 @@ def run command
   end
 end
 
-dotfiles = Pathname.new(File.dirname(__FILE__)).realpath
-home = Pathname.new(ENV['HOME']).realpath
+def link source
+  destination = Pathname.new("#{@home}/.#{source.basename}")
+  destination.unlink if destination.exist?
+  File.symlink source, destination
+end
 
 puts 'Setting up Prezto'
-Pathname.glob(dotfiles + 'zprezto/runcoms/z*') \
-  .reject { |file| (dotfiles + file.basename).exist? } \
-  .each do |file|
-    name = file.basename
-    run "ln -sf '#{file}' '#{home}/.#{name}'"
+Pathname.glob(@dotfiles + 'zprezto/runcoms/z*') \
+  .reject { |file| (@dotfiles + file.basename).exist? } \
+  .each do |dotfile|
+    link dotfile
   end
 
 puts 'Symlinking configuration files'
-exclude = %w{init README.md}.collect { |file| dotfiles + file }
-(Pathname.glob(dotfiles + '*') - exclude).each do |dotfile|
-  name = File.basename dotfile
-  run "ln -sf '#{dotfile}' '#{home}/.#{name}'"
+exclude = %w{init README.md}.collect { |file| @dotfiles + file }
+(Pathname.glob(@dotfiles + '*') - exclude).each do |dotfile|
+  link dotfile
 end
 
 puts 'Installing vim plugins'
-unless (home + '.vim/bundle/vundle').exist?
+unless (@home + '.vim/bundle/vundle').exist?
   run 'git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle'
 end
 run 'vim +BundleInstall +BundleUpdate +qall'
