@@ -13,8 +13,8 @@ dotfiles = Pathname.new(File.dirname(__FILE__)).realpath
 home = Pathname.new(ENV['HOME']).realpath
 
 puts 'Setting up Prezto'
-Pathname.glob(dotfiles + 'zprezto/runcoms/z*')
-  .reject { |file| (dotfiles + file.basename).exist? }
+Pathname.glob(dotfiles + 'zprezto/runcoms/z*') \
+  .reject { |file| (dotfiles + file.basename).exist? } \
   .each do |file|
     name = file.basename
     run "ln -sf '#{file}' '#{home}/.#{name}'"
