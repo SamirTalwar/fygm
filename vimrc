@@ -82,6 +82,7 @@ Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'DrTom/fsharp-vim'
 " Colour text denoting a CSS colour as itself
 Bundle 'skammer/vim-css-color'
+Bundle 'jamessan/vim-gnupg'
 
 " Search across the JVM classpath
 Bundle 'tpope/vim-classpath'
@@ -153,6 +154,8 @@ autocmd VimEnter *.clj RainbowParenthesesToggle
 autocmd Syntax *.clj RainbowParenthesesLoadRound
 autocmd Syntax *.clj RainbowParenthesesLoadSquare
 autocmd Syntax *.clj RainbowParenthesesLoadBraces
+
+let g:GPGPreferSymmetric=1 " Use symmetric GPG encryption with new files
 
 filetype plugin indent on " Re-enable filetype detection with plugins and indentation
 syntax enable " Enable syntax highlighting
