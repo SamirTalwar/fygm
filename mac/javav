@@ -1,11 +1,15 @@
 #!/usr/bin/env zsh
 
+function fail {
+    echo "The version should match an installed Java VM." >&2
+}
+
 if [[ $# -eq 0 ]]; then
     echo "Usage:" >&2
     echo "    source $0 <version>" >&2
     echo "    $0 <version> <command>" >&2
     echo >&2
-    echo "The version should match a Java VM in /Library/Java/JavaVirtualMachines." >&2
+    fail
     return 1
 fi
 
@@ -17,14 +21,10 @@ function java_home {
     /usr/libexec/java_home $@ 2> /dev/null
 }
 
-function fail {
-    echo "The version should match a Java VM in /Library/Java/JavaVirtualMachines." >&2
-}
-
 if JAVA_HOME=$(java_home -v $version); then
 elif JAVA_HOME=$(java_home -v 1.$version); then
 else
-    echo "The version should match a Java VM in /Library/Java/JavaVirtualMachines." >&2
+    fail
     return 2
 fi
 export JAVA_HOME
