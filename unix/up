@@ -29,7 +29,11 @@ if-exists rvm get stable
 
 if-exists gem update --system
 if-exists gem update
+if-exists gem cleanup
+
 if-exists pip install --upgrade setuptools
 if-exists pip install --upgrade pip
+
 if-exists npm update
+
 if-exists cabal update
