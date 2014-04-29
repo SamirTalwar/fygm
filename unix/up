@@ -26,7 +26,6 @@ if exists apt-get; then
 fi
 
 if-exists rvm get stable
-yes | if-exists lein upgrade || :
 
 if-exists gem update --system
 if-exists gem update
