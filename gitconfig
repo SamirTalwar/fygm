@@ -11,5 +11,6 @@
 [push]
 	default = simple
 [alias]
+	a = add -A
 	amend = commit --amend --no-edit
-	branch-name = rev-parse --abbrev-ref HEAD
+	name = rev-parse --abbrev-ref HEAD
