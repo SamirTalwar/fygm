@@ -66,6 +66,8 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-commentary'
 " 'f' and 't' across lines
 Bundle 'dahu/vim-fanfingtastic'
+" Move about with ','
+Bundle 'Lokaltog/vim-easymotion'
 
 Bundle 'tpope/vim-markdown'
 Bundle 'derekwyatt/vim-scala'
@@ -90,6 +92,10 @@ Bundle 'tpope/vim-classpath'
 Bundle 'tpope/vim-fireplace'
 " Precision editing for S-expressions
 Bundle 'guns/vim-sexp'
+
+" Search for two characters with the ' key.
+nmap ' <Plug>(easymotion-s2)
+vmap ' <Plug>(easymotion-s2)
 
 autocmd BufWritePre * :%s/\s\+$//e " Delete trailing spaces
 
