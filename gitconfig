@@ -14,3 +14,4 @@
 	a = add -A
 	amend = commit --amend --no-edit
 	name = rev-parse --abbrev-ref HEAD
+	up = ! git checkout master && git pull -p && git branch --merged | egrep -v '^\\*' | xargs git branch -d
