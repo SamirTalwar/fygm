@@ -71,6 +71,8 @@ Bundle 'Lokaltog/vim-easymotion'
 
 Bundle 'tpope/vim-markdown'
 Bundle 'derekwyatt/vim-scala'
+Bundle 'guns/vim-clojure-static'
+Bundle 'DrTom/fsharp-vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'sukima/xmledit'
@@ -78,13 +80,11 @@ Bundle 'tpope/vim-haml'
 Bundle 'digitaltoad/vim-jade'
 Bundle 'slim-template/vim-slim'
 Bundle 'lunaru/vim-less'
-Bundle 'guns/vim-clojure-static'
+
 " Colour parentheses according to depth
 Bundle 'kien/rainbow_parentheses.vim'
-Bundle 'DrTom/fsharp-vim'
 " Colour text denoting a CSS colour as itself
 Bundle 'skammer/vim-css-color'
-Bundle 'jamessan/vim-gnupg'
 
 " Search across the JVM classpath
 Bundle 'tpope/vim-classpath'
@@ -92,6 +92,9 @@ Bundle 'tpope/vim-classpath'
 Bundle 'tpope/vim-fireplace'
 " Precision editing for S-expressions
 Bundle 'guns/vim-sexp'
+
+" Edit encrypted files
+Bundle 'jamessan/vim-gnupg'
 
 " Search for two characters with the ' key.
 nmap ' <Plug>(easymotion-s2)
