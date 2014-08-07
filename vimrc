@@ -116,6 +116,8 @@ map <Tab> :NERDTreeToggle<CR>
 map <F5> :CtrlPClearCache<CR>
 
 set wildignore+=*.class,build,target " Ignore Java output
+set wildignore+=_site " Ignore Jekyll output
+set wildignore+=dist " Ignore Haskell output
 set wildignore+=node_modules " Ignore local node.js dependencies
 
 " Set up Solarized Dark
