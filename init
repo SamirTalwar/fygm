@@ -2,6 +2,8 @@
 
 require 'pathname'
 
+LINKS = %w{ghc/ghci.conf gitconfig gitignore i3 vimrc zlogin zlogout zprezto zpreztorc zprofile zshenv zshrc}
+
 @dotfiles = Pathname.new(File.dirname(__FILE__)).realpath
 @home = Pathname.new(ENV['HOME']).realpath
 
@@ -12,23 +14,14 @@ def run command
   end
 end
 
-def link source
-  destination = Pathname.new("#{@home}/.#{source.basename}")
+def link source, destination
   destination.unlink if destination.exist?
   File.symlink source, destination
 end
 
-puts 'Setting up Prezto'
-Pathname.glob(@dotfiles + 'zprezto/runcoms/z*') \
-  .reject { |file| (@dotfiles + file.basename).exist? } \
-  .each do |dotfile|
-    link dotfile
-  end
-
 puts 'Symlinking configuration files'
-exclude = %w{init README.md}.collect { |file| @dotfiles + file }
-(Pathname.glob(@dotfiles + '*') - exclude).each do |dotfile|
-  link dotfile
+LINKS.each do |file|
+  link (@dotfiles + file), (@home + ".#{file}")
 end
 
 puts 'Installing vim plugins'
