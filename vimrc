@@ -73,6 +73,9 @@ Bundle 'tpope/vim-markdown'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'guns/vim-clojure-static'
 Bundle 'DrTom/fsharp-vim'
+Bundle 'dag/vim2hs'
+Bundle 'eagletmt/ghcmod-vim'
+Bundle 'bitc/vim-hdevtools'
 Bundle 'pangloss/vim-javascript'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'sukima/xmledit'
@@ -86,6 +89,10 @@ Bundle 'kien/rainbow_parentheses.vim'
 " Colour text denoting a CSS colour as itself
 Bundle 'skammer/vim-css-color'
 
+" Interactive command execution
+Bundle 'Shougo/vimproc.vim'
+" Highlight errors
+Bundle 'scrooloose/syntastic'
 " Search across the JVM classpath
 Bundle 'tpope/vim-classpath'
 " Clojure REPL
@@ -149,6 +156,15 @@ endif
 
 " Enable HTML editing with XMLEdit
 let g:xmledit_enable_html=1
+
+function CheckForErrors()
+    SyntasticCheck
+    Errors
+endfunction
+
+noremap <Leader>e :call CheckForErrors()<CR>
+
+noremap <Leader>l :lclose<CR>
 
 autocmd BufNewFile,BufRead *.ru set filetype=ruby
 autocmd BufNewFile,BufRead *.gradle set filetype=groovy
