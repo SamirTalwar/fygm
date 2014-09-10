@@ -5,6 +5,8 @@ else
     alias ls='ls --color'
 fi
 
+alias fuck='sudo $(fc -ln -1)'
+
 if [[ -s ${ZDOTDIR:-$HOME}/.zprezto/init.zsh ]]; then
   source ${ZDOTDIR:-$HOME}/.zprezto/init.zsh
 fi
