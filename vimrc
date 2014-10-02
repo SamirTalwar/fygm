@@ -83,6 +83,7 @@ Bundle 'tpope/vim-haml'
 Bundle 'digitaltoad/vim-jade'
 Bundle 'slim-template/vim-slim'
 Bundle 'lunaru/vim-less'
+Bundle 'tpope/vim-liquid.git'
 
 " Colour parentheses according to depth
 Bundle 'kien/rainbow_parentheses.vim'
