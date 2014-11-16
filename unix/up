@@ -25,7 +25,11 @@ if exists apt-get; then
     apt-get upgrade
 fi
 
-if-exists rvm get stable
+if exists rvm; then
+    rvm get stable
+    rvm cleanup all
+    rvm reload
+fi
 
 if-exists gem update --system
 if-exists gem update
