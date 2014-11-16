@@ -18,6 +18,7 @@ if exists brew; then
     brew update
     brew upgrade
     brew cleanup
+    brew linkapps
 fi
 
 if exists apt-get; then
