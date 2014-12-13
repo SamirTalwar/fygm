@@ -14,6 +14,10 @@ function if-exists {
     fi
 }
 
+function update-gems {
+    gem update --system && gem update && gem cleanup
+}
+
 if exists brew; then
     brew update
     brew upgrade
@@ -33,9 +37,11 @@ if exists rvm; then
 fi
 
 if exists gem; then
-    gem update --system
-    gem update
-    gem cleanup
+    if exists rvm; then
+        (rvm use ruby@global && update-gems)
+    fi
+
+    update-gems
 fi
 
 if exists pip; then
