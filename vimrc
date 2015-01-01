@@ -78,7 +78,6 @@ Bundle 'eagletmt/ghcmod-vim'
 Bundle 'bitc/vim-hdevtools'
 Bundle 'pangloss/vim-javascript'
 Bundle 'kchmck/vim-coffee-script'
-Bundle 'sukima/xmledit'
 Bundle 'tpope/vim-haml'
 Bundle 'digitaltoad/vim-jade'
 Bundle 'slim-template/vim-slim'
@@ -154,9 +153,6 @@ elseif has("unix")
 elseif has("win32")
     set guifont=Consolas:h12
 endif
-
-" Enable HTML editing with XMLEdit
-let g:xmledit_enable_html=1
 
 function CheckForErrors()
     SyntasticCheck
