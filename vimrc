@@ -163,7 +163,7 @@ noremap <Leader>e :call CheckForErrors()<CR>
 
 noremap <Leader>l :lclose<CR>
 
-autocmd FocusLost * w " Autosave whenever leaving a file, for any reason.
+autocmd FocusLost * update " Autosave whenever leaving a modified file, for any reason.
 
 autocmd BufNewFile,BufRead *.ru set filetype=ruby
 autocmd BufNewFile,BufRead *.gradle set filetype=groovy
