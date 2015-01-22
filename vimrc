@@ -78,6 +78,7 @@ Bundle 'eagletmt/ghcmod-vim'
 Bundle 'bitc/vim-hdevtools'
 Bundle 'pangloss/vim-javascript'
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'noc7c9/vim-iced-coffee-script'
 Bundle 'tpope/vim-haml'
 Bundle 'digitaltoad/vim-jade'
 Bundle 'slim-template/vim-slim'
@@ -171,6 +172,7 @@ autocmd BufNewFile,BufRead *.stylus set filetype=sass
 
 autocmd Filetype clojure setlocal sw=2 ts=2 sts=2
 autocmd Filetype coffee setlocal sw=2 ts=2 sts=2
+autocmd Filetype coffee.iced-coffee setlocal sw=2 ts=2 sts=2
 autocmd Filetype jade setlocal sw=2 ts=2 sts=2
 autocmd Filetype ruby setlocal sw=2 ts=2 sts=2
 autocmd Filetype scala setlocal sw=2 ts=2 sts=2
