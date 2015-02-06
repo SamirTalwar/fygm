@@ -88,7 +88,7 @@ Bundle 'tpope/vim-liquid.git'
 " Colour parentheses according to depth
 Bundle 'kien/rainbow_parentheses.vim'
 " Colour text denoting a CSS colour as itself
-Bundle 'skammer/vim-css-color'
+Bundle 'ap/vim-css-color'
 
 " Interactive command execution
 Bundle 'Shougo/vimproc.vim'
