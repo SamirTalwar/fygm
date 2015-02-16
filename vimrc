@@ -177,6 +177,7 @@ autocmd Filetype jade setlocal sw=2 ts=2 sts=2
 autocmd Filetype ruby setlocal sw=2 ts=2 sts=2
 autocmd Filetype scala setlocal sw=2 ts=2 sts=2
 autocmd Filetype slim setlocal sw=2 ts=2 sts=2
+autocmd Filetype yaml setlocal sw=2 ts=2 sts=2
 
 autocmd BufNewFile,BufRead *.clj set macmeta
 autocmd VimEnter *.clj RainbowParenthesesToggle
