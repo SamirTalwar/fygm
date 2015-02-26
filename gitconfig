@@ -16,9 +16,25 @@
 	s = status
 	a = add -A
 	amend = commit --amend --no-edit
-	delete-old-branches = ! git branch --merged | egrep -v '^\\*' | egrep -v 'master' | xargs -r git branch -d
-	m = ! ([[ $(git name) == 'master' ]] || git checkout master) && git pull --ff-only -p && git delete-old-branches
-	up = ! [[ $(git name) == 'master' ]] && git m || (echo $(git name) > .branch && git m && (! git show-ref --quiet refs/heads/$(cat .branch) || git checkout $(cat .branch)) && rm .branch)
+	delete-old-branches = !"\
+		set -e; \
+		branches=$((git branch --merged | egrep -v '^\\*' | egrep -v 'master') || :); \
+		[[ -z "$branches" ]] || git branch -d $branches"
+	m = !"\
+		set -e; \
+		([[ $(git name) == 'master' ]] || git checkout master); \
+		git pull --ff-only -p; \
+		git delete-old-branches"
+	up = !"\
+		set -e; \
+		if [[ $(git name) == 'master' ]]; then \
+			git m; \
+		else \
+			echo $(git name) > .branch; \
+			git m; \
+			(! git show-ref --quiet refs/heads/$(cat .branch) || git checkout $(cat .branch)); \
+			rm .branch; \
+		fi"
 	upm = ! git up && git merge master
 	upr = ! git up && git rebase master
 	first-push = ! git push -u origin $(git name)
