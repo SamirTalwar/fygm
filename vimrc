@@ -57,6 +57,8 @@ Bundle 'bling/vim-airline'
 Bundle 'kien/ctrlp.vim'
 " File/directory management
 Bundle 'scrooloose/nerdtree'
+" EditorConfig support
+Bundle 'editorconfig/editorconfig-vim'
 
 " Better repeat support with '.'
 Bundle 'tpope/vim-repeat'
