@@ -18,7 +18,7 @@
 	amend = commit --amend --no-edit
 	delete-old-branches = !"\
 		set -e; \
-		branches=$((git branch --merged | egrep -v '^\\*' | egrep -v 'master') || :); \
+		branches=$((git branch --merged | egrep -v '^\\*' | egrep -v '^\\* master$') || :); \
 		[[ -z "$branches" ]] || git branch -d $branches"
 	m = !"\
 		set -e; \
