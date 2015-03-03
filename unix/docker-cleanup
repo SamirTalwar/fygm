@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+#
+#set -e
+
+docker ps --filter=status=exited -q | xargs docker rm
+docker images | grep '^<none>' | awk '{print $3}' | xargs docker rmi
