@@ -1,6 +1,9 @@
 #!/usr/bin/env zsh
 
 # Sets the title of the current Terminal tab/window.
+# Defaults to the directory name if no title is passed in.
 
 title=$@
+[[ -z $title ]] && title=$(basename $PWD)
+
 echo -n -e "\033]0;$title\007"
