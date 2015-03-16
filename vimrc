@@ -41,6 +41,8 @@ command WQ wq " Bind ':WQ' to ':wq'
 nnoremap j gj
 nnoremap k gk
 let mapleader=',' " The <Leader> in map operations is the ','
+let maplocalleader=';' " The <LocalLeader> in map operations is the ';'
+set pastetoggle=<F2> " F2 toggles paste mode
 
 " Set up Vundle
 set rtp+=~/.vim/bundle/vundle/
@@ -105,6 +107,16 @@ Bundle 'guns/vim-sexp'
 
 " Edit encrypted files
 Bundle 'jamessan/vim-gnupg'
+
+" Map Ctrl+{h,j,k,l} to the equivalent Alt+{} because Alt doesn't work in Mac terminals.
+nmap <C-h> <M-h>
+nmap <C-j> <M-j>
+nmap <C-k> <M-k>
+nmap <C-l> <M-l>
+nmap <C-S-h> <M-S-h>
+nmap <C-S-j> <M-S-j>
+nmap <C-S-k> <M-S-k>
+nmap <C-S-l> <M-S-l>
 
 " Search for two characters with the ' key.
 nmap ' <Plug>(easymotion-s2)
@@ -181,7 +193,6 @@ autocmd Filetype scala setlocal sw=2 ts=2 sts=2
 autocmd Filetype slim setlocal sw=2 ts=2 sts=2
 autocmd Filetype yaml setlocal sw=2 ts=2 sts=2
 
-autocmd BufNewFile,BufRead *.clj set macmeta
 autocmd VimEnter *.clj RainbowParenthesesToggle
 autocmd Syntax *.clj RainbowParenthesesLoadRound
 autocmd Syntax *.clj RainbowParenthesesLoadSquare
