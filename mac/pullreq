@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+git first-push
+
 url=$(git config --get remote.origin.url)
 repo=$(gsed -r 's/^git@github.com:|\.git$//g' <<< $url)
 
