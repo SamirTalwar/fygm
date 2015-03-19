@@ -1,5 +1,10 @@
 #!/usr/bin/env zsh
 
+if [[ $(git name) == 'master' ]]; then
+    echo >&2 'Do not work on the master branch.'
+    exit 1
+fi
+
 git first-push
 
 url=$(git config --get remote.origin.url)
