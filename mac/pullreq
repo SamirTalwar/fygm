@@ -1,5 +1,24 @@
 #!/usr/bin/env ruby
 
+Host = Struct.new(:name, :username, :hostname, :pull_request_url)
+
+hosts = [
+  Host.new(
+    'GitHub',
+    'git',
+    'github.com',
+    ->(repo, branch) {
+      "https://github.com/#{repo}/compare/#{branch}?expand=1"
+    }),
+  Host.new(
+    'BitBucket',
+    'git',
+    'bitbucket.org',
+    ->(repo, branch) {
+      "https://bitbucket.org/#{repo}/pull-request/new?source=#{repo}%3A%3A#{branch}%3A%3Amaster"
+    })
+]
+
 branch = `git name`.strip
 if branch == 'master'
     $stderr.puts 'Do not work on the master branch.'
@@ -8,6 +27,12 @@ end
 
 system('git', 'first-push')
 
-url = `git config --get remote.origin.url`.strip
-repo = url.gsub(/^git@github.com:|\.git$/, '')
-system('open', "https://github.com/#{repo}/compare/#{branch}?expand=1")
+url = `git config --get remote.origin.url`.strip.sub(/\.git$/, '')
+host = hosts.find { |h| url.start_with?("#{h.username}@#{h.hostname}:") }
+unless host
+  $stderr.puts "I don't know how to push #{url}."
+  exit 1
+end
+
+repo = url.sub(/^#{host.username}@#{host.hostname}:/, '')
+system('open', host.pull_request_url.call(repo, branch))
