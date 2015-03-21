@@ -1,13 +1,13 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env ruby
 
-if [[ $(git name) == 'master' ]]; then
-    echo >&2 'Do not work on the master branch.'
+branch = `git name`.strip
+if branch == 'master'
+    $stderr.puts 'Do not work on the master branch.'
     exit 1
-fi
+end
 
-git first-push
+system('git', 'first-push')
 
-url=$(git config --get remote.origin.url)
-repo=$(gsed -r 's/^git@github.com:|\.git$//g' <<< $url)
-
-open "https://github.com/$repo/compare/$(git name)?expand=1"
+url = `git config --get remote.origin.url`.strip
+repo = url.gsub(/^git@github.com:|\.git$/, '')
+system('open', "https://github.com/#{repo}/compare/#{branch}?expand=1")
