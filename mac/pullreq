@@ -19,13 +19,13 @@ hosts = [
     })
 ]
 
-branch = `git name`.strip
+branch = `git symbolic-ref --short HEAD`.strip
 if branch == 'master'
     $stderr.puts 'Do not work on the master branch.'
     exit 1
 end
 
-system('git', 'first-push')
+system('git', 'push', '-u', 'origin', branch)
 
 url = `git config --get remote.origin.url`.strip.sub(/\.git$/, '')
 host = hosts.find { |h| url.start_with?("#{h.username}@#{h.hostname}:") }
