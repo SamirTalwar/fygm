@@ -39,12 +39,12 @@
 		fi"
 	upm = ! git up && git merge master
 	upr = ! git up && git rebase master
-    up-all = !"\
-        set -e; \
-        find . -maxdepth 1 -type d | while read dir; do \
-            if [[ -e $dir/.git ]]; then \
-                echo \"Updating $(basename $dir)...\"; \
-                (cd $dir && git up); \
-                echo; \
-            fi; \
-        done"
+	up-all = !"\
+		set -e; \
+		find . -maxdepth 1 -type d | while read dir; do \
+			if [[ -e $dir/.git ]]; then \
+				echo \"Updating $(basename $dir)...\"; \
+				(cd $dir && git up); \
+				echo; \
+			fi; \
+		done"
