@@ -20,6 +20,8 @@
 		set -e; \
 		branches=$((git branch --merged | egrep -v '^\\*' | egrep -v '^\\* master$') || :); \
 		[[ -z \"$branches\" ]] || git branch -d $branches"
+	first-push = ! git push -u origin $(git name)
+	delete-remote = ! git push origin :$(git name) && git branch --unset-upstream
 	m = !"\
 		set -e; \
 		([[ $(git name) == 'master' ]] || git checkout master); \
@@ -46,5 +48,3 @@
                 echo; \
             fi; \
         done"
-	first-push = ! git push -u origin $(git name)
-	delete-remote = ! git push origin :$(git name) && git branch --unset-upstream
