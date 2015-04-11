@@ -52,3 +52,8 @@ fi
 if-exists npm update
 
 if-exists cabal update
+
+if exists docker && (! exists boot2docker || [[ $(boot2docker status) == 'running' ]]); then
+    docker images | awk '$2 == "latest" { print $1 }' | grep -v _ | xargs -n1 docker pull
+    docker-cleanup
+fi
