@@ -2,7 +2,7 @@
 
 require 'pathname'
 
-LINKS = %w{ghc/ghci.conf gitconfig gitignore i3 vimrc zlogin zlogout zprezto zpreztorc zprofile zshenv zshrc}
+LINKS = %w{ghc/ghci.conf gitconfig gitignore i3 nvim nvimrc vimrc zlogin zlogout zprezto zpreztorc zprofile zshenv zshrc}
 
 @dotfiles = Pathname.new(File.dirname(__FILE__)).realpath
 @home = Pathname.new(ENV['HOME']).realpath
