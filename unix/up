@@ -20,7 +20,7 @@ function update-gems {
 
 if exists brew; then
     brew update
-    brew upgrade
+    brew upgrade --all
     brew cleanup
     brew linkapps
 fi
