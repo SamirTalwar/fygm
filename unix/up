@@ -49,7 +49,10 @@ if exists pip; then
     pip install --upgrade pip
 fi
 
-if-exists npm update
+if exists npm; then
+    npm update -g
+    npm upgrade -g
+fi
 
 if-exists cabal update
 
