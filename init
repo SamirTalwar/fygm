@@ -15,7 +15,7 @@ def run command
 end
 
 def link source, destination
-  destination.unlink if destination.exist?
+  destination.unlink if destination.symlink?
   File.symlink source, destination
 end
 
