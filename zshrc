@@ -16,6 +16,10 @@ setopt CLOBBER
 export KEYTIMEOUT=1
 bindkey '^R' history-incremental-search-backward
 
-[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
+if (( $+commands[brew] )) && [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]]; then
+    source $(brew --prefix)/etc/profile.d/autojump.sh
+fi
 
-[[ -e ~/.zshrc.local ]] && source ~/.zshrc.local
+if [[ -e ~/.zshrc.local ]]; then
+    source ~/.zshrc.local
+fi

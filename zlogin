@@ -4,4 +4,6 @@ fi
 
 source ${ZDOTDIR:-$HOME}/.zprezto/runcoms/zlogin
 
-[[ -e ~/.zlogin.local ]] && source ~/.zlogin.local
+if [[ -e ~/.zlogin.local ]]; then
+    source ~/.zlogin.local
+fi

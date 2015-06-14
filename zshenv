@@ -12,4 +12,6 @@ if (( $+commands[boot2docker] )) && [[ $(boot2docker status) == 'running' ]]; th
     export DOCKER_TLS_VERIFY=1
 fi
 
-[[ -e ~/.zshenv.local ]] && source ~/.zshenv.local
+if [[ -e ~/.zshenv.local ]]; then
+    source ~/.zshenv.local
+fi

@@ -1,1 +1,3 @@
-[[ -e ~/.zprofile.local ]] && source ~/.zprofile.local
+if [[ -e ~/.zprofile.local ]]; then
+    source ~/.zprofile.local
+fi
