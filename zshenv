@@ -12,6 +12,8 @@ if (( $+commands[boot2docker] )) && [[ $(boot2docker status) == 'running' ]]; th
     export DOCKER_TLS_VERIFY=1
 fi
 
+export GRADLE_OPTS="$GRADLE_OPTS -Dorg.gradle.daemon=true"
+
 if [[ -e ~/.zshenv.local ]]; then
     source ~/.zshenv.local
 fi
