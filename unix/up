@@ -31,7 +31,7 @@ if exists apt-get; then
 fi
 
 if exists rvm; then
-    rvm get stable
+    rvm get head
     rvm cleanup all
     rvm reload
 fi
