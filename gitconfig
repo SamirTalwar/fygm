@@ -16,6 +16,7 @@
 	s = status
 	a = add -A
 	amend = commit --amend --no-edit
+	praise = blame
 	delete-old-branches = !"\
 		set -e; \
 		branches=$((git branch --merged | egrep -v '^\\*' | egrep -v '^\\* master$') || :); \
