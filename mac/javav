@@ -5,9 +5,9 @@ function fail {
 }
 
 if [[ $# -eq 0 ]]; then
-    echo "Usage:" >&2
-    echo "    source $0 <version>" >&2
-    echo "    $0 <version> <command>" >&2
+    echo >&2 "Usage:"
+    echo >&2 "    source $0 <version>"
+    echo >&2 "    $0 <version> <command>"
     echo >&2
     fail
     return 1
