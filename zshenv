@@ -6,9 +6,10 @@ export EDITOR='vim'
 export VISUAL='vim'
 export PAGER='less'
 
-export DOCKER_HOST="tcp://192.168.59.103:2376"
-export DOCKER_CERT_PATH="$HOME/.boot2docker/certs/boot2docker-vm"
-export DOCKER_TLS_VERIFY=1
+if (( $+commands[docker-machine] )) &&
+  [[ $($(which gtimeout || which timeout) 3 docker-machine status docker >/dev/null 2>&1) == 'Running' ]]; then
+    eval "$(docker-machine env docker)"
+fi
 
 export GRADLE_OPTS="$GRADLE_OPTS -Dorg.gradle.daemon=true"
 
