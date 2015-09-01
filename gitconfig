@@ -15,6 +15,7 @@
 	name = symbolic-ref --short HEAD
 	s = status
 	a = add -A
+	p = pull --ff-only --recurse-submodules --prune
 	amend = commit --amend --no-edit
 	praise = blame
 	delete-old-branches = !"\
@@ -31,7 +32,7 @@
 	m = !"\
 		set -e; \
 		([[ $(git name) == 'master' ]] || git checkout master); \
-		git pull --ff-only --recurse-submodules -p; \
+		git p; \
 		git delete-old-branches"
 	up = !"\
 		set -e; \
