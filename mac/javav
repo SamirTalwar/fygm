@@ -1,15 +1,20 @@
 #!/usr/bin/env zsh
 
-function version_should_match {
-    echo >&2 'The version should match an installed Java VM.'
-}
-
-if [[ $# -eq 0 ]]; then
-    echo >&2 "Usage:"
+function usage {
+    echo >&2 'Usage:'
     echo >&2 "    eval \$($0 <version>)"
     echo >&2 "    $0 <version> <command>"
     echo >&2
-    version_should_match
+    echo >&2 'The version should match an installed Java VM,'
+    echo >&2 'and be a number of the form "9" or "1.9".'
+}
+
+function java_home {
+    /usr/libexec/java_home $@ 2>/dev/null
+}
+
+if [[ $# -eq 0 ]]; then
+    usage
     return 1
 fi
 
@@ -18,19 +23,15 @@ version=$1
 shift
 cmd=($@)
 
-function java_home {
-    /usr/libexec/java_home $@ 2>/dev/null
-}
-
 if [[ ! $version =~ ^[0-9\.]+$ ]]; then
-    echo >&2 'The version must be a number of the form "9" or "1.9".'
+    usage
     return 2
 fi
 
 if JAVA_HOME=$(java_home -F -v $version); then
 elif JAVA_HOME=$(java_home -F -v 1.$version); then
 else
-    version_should_match
+    usage
     return 3
 fi
 export JAVA_HOME
