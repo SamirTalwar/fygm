@@ -6,13 +6,14 @@ function version_should_match {
 
 if [[ $# -eq 0 ]]; then
     echo >&2 "Usage:"
-    echo >&2 "    source $0 <version>"
+    echo >&2 "    eval \$($0 <version>)"
     echo >&2 "    $0 <version> <command>"
     echo >&2
     version_should_match
     return 1
 fi
 
+args=$@
 version=$1
 shift
 cmd=($@)
@@ -37,6 +38,13 @@ export JAVA_HOME
 path=($JAVA_HOME/bin $path)
 export PATH
 
-if [[ $#cmd -gt 0 ]]; then
+if [[ $#cmd -eq 0 ]]; then
+    echo "export JAVA_HOME=$JAVA_HOME"
+    echo 'path=($JAVA_HOME/bin $path)'
+    echo 'export path'
+
+    echo '# Run this command to configure your shell:'
+    echo "# eval \"\$($0 $args)\""
+else
     $cmd
 fi
