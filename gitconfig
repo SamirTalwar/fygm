@@ -45,13 +45,14 @@
 		fi"
 	upm = ! git up && git merge master
 	upr = ! git up && git rebase master
-	up-all = !"\
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	dirs = !"\
 		set -e; \
 		find . -maxdepth 1 -type d | while read dir; do \
 			if [[ -e $dir/.git ]]; then \
-				echo \"Updating $(basename $dir)...\"; \
-				(cd $dir && git up); \
+				echo \"In $(basename $dir): git $@\"; \
+				(cd $dir && git $@); \
 				echo; \
 			fi; \
-		done"
-    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+		done; \
+		true"
