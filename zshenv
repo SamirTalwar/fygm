@@ -7,7 +7,7 @@ export VISUAL='vim'
 export PAGER='less'
 
 if (( $+commands[docker-machine] )) &&
-  [[ $($(which gtimeout || which timeout) 3 docker-machine status docker >/dev/null 2>&1) == 'Running' ]]; then
+  [[ $($(which gtimeout || which timeout) 3 docker-machine status docker 2>/dev/null) == 'Running' ]]; then
     eval "$(docker-machine env docker)"
 fi
 
