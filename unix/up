@@ -14,50 +14,81 @@ function if-exists {
     fi
 }
 
-function update-gems {
-    gem update --system && gem update && gem cleanup
+function update-brew {
+    if exists brew; then
+        brew update
+        brew upgrade --all
+        brew cleanup
+        brew cask cleanup
+        brew linkapps
+    fi
 }
 
-if exists brew; then
-    brew update
-    brew upgrade --all
-    brew cleanup
-    brew cask cleanup
-    brew linkapps
-fi
-
-if exists apt-get; then
-    apt-get update
-    apt-get upgrade
-fi
-
-if exists rvm; then
-    rvm get head
-    rvm cleanup all
-    rvm reload
-fi
-
-if exists gem; then
-    if exists rvm; then
-        (rvm use ruby@global && update-gems)
+function update-apt {
+    if exists apt-get; then
+        apt-get update
+        apt-get upgrade
     fi
+}
 
-    update-gems
-fi
+function update-rvm {
+    if exists rvm; then
+        rvm get head
+        rvm cleanup all
+        rvm reload
+    fi
+}
 
-if exists pip; then
-    pip install --upgrade setuptools
-    pip install --upgrade pip
-fi
+function update-gem {
+    if exists gem; then
+        if exists rvm; then
+            (rvm use ruby@global && update-all-gems)
+        fi
 
-if exists npm; then
-    npm update -g
-    npm upgrade -g
-fi
+        update-gems
+    fi
+}
 
-if-exists cabal update
+function update-all-gems {
+    gem update --system
+    gem update
+    gem cleanup
+}
 
-if exists docker && (! exists boot2docker || [[ $(boot2docker status) == 'running' ]]); then
-    docker images | awk '$2 == "latest" { print $1 }' | grep -v _ | xargs -n1 docker pull
-    docker-cleanup
-fi
+function update-pip {
+    if exists pip; then
+        pip install --upgrade setuptools
+        pip install --upgrade pip
+    fi
+}
+
+function update-npm {
+    if exists npm; then
+        npm update -g
+        npm upgrade -g
+    fi
+}
+
+function update-cabal {
+    if-exists cabal update
+}
+
+function update-docker {
+    if exists docker && (! exists boot2docker || [[ $(boot2docker status) == 'running' ]]); then
+        docker images | awk '$2 == "latest" { print $1 }' | grep -v _ | xargs -n1 docker pull
+        docker-cleanup
+    fi
+}
+
+function update-all {
+    update-brew
+    update-apt
+    update-rvm
+    update-gem
+    update-pip
+    update-npm
+    update-cabal
+    update-docker
+}
+
+update-all
