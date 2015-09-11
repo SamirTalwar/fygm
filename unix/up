@@ -91,10 +91,22 @@ function update-docker {
     fi
 }
 
-function update-all {
-    for update in $UPDATE_FUNCTIONS; do
-        $update
+if [[ $# -eq 0 ]]; then
+    UPDATES=($UPDATE_FUNCTIONS)
+else
+    typeset -a UPDATES
+    i=0
+    for arg in $@; do
+        ARG_FUNCTION=update-$arg
+        i=$((i + 1))
+        if [[ ${+UPDATE_FUNCTIONS[(r)$ARG_FUNCTION]} -eq 0 ]]; then
+            echo >&2 "Cannot update \"$arg\"."
+            exit 1
+        fi
+        UPDATES[$i]=$ARG_FUNCTION
     done
-}
+fi
 
-update-all
+for update in $UPDATES; do
+    $update
+done
