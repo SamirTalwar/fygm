@@ -4,6 +4,17 @@
 
 set -e
 
+UPDATE_FUNCTIONS=(
+    update-brew
+    update-apt
+    update-rvm
+    update-gem
+    update-pip
+    update-npm
+    update-cabal
+    update-docker
+)
+
 function exists {
     (( $+commands[$1] ))
 }
@@ -81,14 +92,9 @@ function update-docker {
 }
 
 function update-all {
-    update-brew
-    update-apt
-    update-rvm
-    update-gem
-    update-pip
-    update-npm
-    update-cabal
-    update-docker
+    for update in $UPDATE_FUNCTIONS; do
+        $update
+    done
 }
 
 update-all
