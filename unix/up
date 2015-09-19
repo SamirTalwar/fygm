@@ -56,7 +56,7 @@ function update-gem {
             (rvm use ruby@global && update-all-gems)
         fi
 
-        update-gems
+        update-all-gems
     fi
 }
 
