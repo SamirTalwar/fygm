@@ -19,12 +19,6 @@ function exists {
     (( $+commands[$1] ))
 }
 
-function if-exists {
-    if exists $1; then
-        "$@"
-    fi
-}
-
 function update-brew {
     if exists brew; then
         brew update
@@ -81,7 +75,9 @@ function update-npm {
 }
 
 function update-cabal {
-    if-exists cabal update
+    if exists cabal; then
+        cabal update
+    fi
 }
 
 function update-docker {
