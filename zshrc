@@ -20,6 +20,10 @@ if (( $+commands[brew] )) && [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]]
     source $(brew --prefix)/etc/profile.d/autojump.sh
 fi
 
+if (( $+commands[thefuck] )); then
+    eval "$(thefuck --alias)"
+fi
+
 if [[ -e ~/.zshrc.local ]]; then
     source ~/.zshrc.local
 fi
