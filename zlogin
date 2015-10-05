@@ -4,7 +4,7 @@ fi
 
 source ${ZDOTDIR:-$HOME}/.zprezto/runcoms/zlogin
 
-eval "$(ssh-agent)" >/dev/null && ssh-add ~/.ssh/*.pem 2>/dev/null
+ssh-add ~/.ssh/*.pem 2>/dev/null
 
 if [[ -e ~/.zlogin.local ]]; then
     source ~/.zlogin.local
