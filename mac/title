@@ -1,9 +1,17 @@
 #!/usr/bin/env zsh
 
+set -e
+
 # Sets the title of the current Terminal tab/window.
 # Defaults to the directory name if no title is passed in.
 
 title=$@
-[[ -z $title ]] && title=$(basename $PWD)
+if [[ -z $title ]]; then
+  if git_directory=$(git rev-parse --show-toplevel 2>/dev/null); then
+    title=${PWD#$(dirname $git_directory)/}
+  else
+    title=$(basename $PWD)
+  fi
+fi
 
 echo -n -e "\033]0;$title\007"
