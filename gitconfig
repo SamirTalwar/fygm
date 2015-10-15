@@ -34,6 +34,7 @@
 		set -e; \
 		([[ $(git name) == $(git main-branch) ]] || git checkout $(git main-branch)); \
 		git p; \
+		git submodule update; \
 		git delete-old-branches"
 	up = !"\
 		set -e; \
@@ -42,7 +43,8 @@
 			git m; \
 		else \
 			git m; \
-			(! git show-ref --quiet refs/heads/$current_branch || git checkout $current_branch); \
+			(! git show-ref --quiet refs/heads/$current_branch || \
+				(git checkout $current_branch && git submodule update)); \
 		fi"
 	upm = ! git up && git merge $(git main-branch)
 	upr = ! git up && git rebase $(git main-branch)
