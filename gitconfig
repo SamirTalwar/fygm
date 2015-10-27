@@ -12,6 +12,7 @@
 	default = simple
 [alias]
 	git = ! git
+	exec = "! bash -c \"$*\" #"
 	name = symbolic-ref --short HEAD
 	s = status
 	a = add -A
