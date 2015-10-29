@@ -82,6 +82,7 @@ function update-cabal {
 
 function update-docker {
     if exists docker && (! exists boot2docker || [[ $(boot2docker status) == 'running' ]]); then
+        docker-cleanup
         docker images | tail -n+2 | awk '{ print $1 ":" $2 }' | xargs -n1 docker pull
         docker-cleanup
     fi
