@@ -1,1 +1,1 @@
-sudo discoveryutil udnsflushcaches
+sudo killall -HUP mDNSResponder
