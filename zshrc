@@ -1,5 +1,4 @@
-if [[ $(uname) == 'Darwin' ]]
-then
+if [[ "$OSTYPE" == darwin* ]]; then
     alias ls='ls -G'
 else
     alias ls='ls --color'
