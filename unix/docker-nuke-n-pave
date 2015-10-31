@@ -2,7 +2,7 @@
 
 set -e
 
-docker ps -aq | xargs docker stop | xargs docker rm
+docker ps -aq | xargs docker stop | xargs docker rm -v
 docker-cleanup
 
 [[ -n $DOCKER_MACHINE_NAME ]] && docker-machine restart $DOCKER_MACHINE_NAME
