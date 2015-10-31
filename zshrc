@@ -23,6 +23,9 @@ if (( $+commands[thefuck] )); then
     eval "$(thefuck --alias)"
 fi
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
 if [[ -e ~/.zshrc.local ]]; then
     source ~/.zshrc.local
 fi
