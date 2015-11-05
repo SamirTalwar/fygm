@@ -57,6 +57,8 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'bling/vim-airline'
 " Search files using Ctrl+P
 Bundle 'kien/ctrlp.vim'
+" Search everything with :Ag
+Bundle 'rking/ag.vim'
 " File/directory management
 Bundle 'scrooloose/nerdtree'
 " EditorConfig support
@@ -72,6 +74,8 @@ Bundle 'tpope/vim-commentary'
 Bundle 'dahu/vim-fanfingtastic'
 " Move about with ','
 Bundle 'Lokaltog/vim-easymotion'
+" Precision editing for S-expressions
+Bundle 'guns/vim-sexp'
 
 Bundle 'tpope/vim-markdown'
 Bundle 'derekwyatt/vim-scala'
@@ -89,6 +93,7 @@ Bundle 'slim-template/vim-slim'
 Bundle 'lunaru/vim-less'
 Bundle 'tpope/vim-liquid'
 Bundle 'mxw/vim-jsx'
+Bundle 'gkz/vim-ls'
 
 " Colour parentheses according to depth
 Bundle 'kien/rainbow_parentheses.vim'
@@ -103,8 +108,6 @@ Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-classpath'
 " Clojure REPL
 Bundle 'tpope/vim-fireplace'
-" Precision editing for S-expressions
-Bundle 'guns/vim-sexp'
 
 " Edit encrypted files
 Bundle 'jamessan/vim-gnupg'
