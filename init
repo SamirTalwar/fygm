@@ -25,6 +25,12 @@ LINKS.each do |file|
   link (@dotfiles + file), (@home + ".#{file}")
 end
 
+unless (@dotfiles + 'first_time_run').exist?
+  puts 'Running first-time setup'
+  run (@dotfiles + 'first_time.sh').to_s
+  File.write '', (@dotfiles + 'first_time_run')
+end
+
 puts 'Installing vim plugins'
 unless (@home + '.vim/bundle/vundle').exist?
   run 'git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle'
