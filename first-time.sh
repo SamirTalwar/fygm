@@ -57,7 +57,7 @@ brew install \
     sqlite
 brew cask install \
     haskell-platform
-\curl -sSL https://get.rvm.io | bash -s stable --ruby
+\curl -sSL https://get.rvm.io | bash -s head --ruby
 
 # Containerisation
 brew cask install \
