@@ -25,10 +25,10 @@ LINKS.each do |file|
   link (@dotfiles + file), (@home + ".#{file}")
 end
 
-unless (@dotfiles + 'first_time_run').exist?
+unless (@dotfiles + 'first-time-run').exist?
   puts 'Running first-time setup'
-  run (@dotfiles + 'first_time.sh').to_s
-  File.write '', (@dotfiles + 'first_time_run')
+  run (@dotfiles + 'first-time.sh').to_s
+  (@dotfiles + 'first-time-run').write ''
 end
 
 puts 'Installing vim plugins'
