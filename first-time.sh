@@ -49,6 +49,7 @@ brew install \
 # Development
 brew install \
     carthage \
+    git \
     heroku-toolbelt \
     leiningen \
     maven \
