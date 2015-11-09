@@ -4,7 +4,7 @@ fi
 
 source ${ZDOTDIR:-$HOME}/.zprezto/runcoms/zlogin
 
-ssh-add ~/.ssh/*.pem 2>/dev/null
+[[ -e ~/.ssh/*.pem ]] && ssh-add ~/.ssh/*.pem 2>/dev/null
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
