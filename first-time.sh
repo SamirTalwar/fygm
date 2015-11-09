@@ -3,8 +3,10 @@
 set -e
 set -x
 
+which brew 2>/dev/null || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
 # Meta
-brew install brew-cask
+brew install caskroom/cask/brew-cask
 
 # Shell
 brew install \
