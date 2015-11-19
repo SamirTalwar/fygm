@@ -4,15 +4,15 @@
 
 set -e
 
-UPDATE_FUNCTIONS=(
-    update-brew
-    update-apt
-    update-rvm
-    update-gem
-    update-pip
-    update-npm
-    update-cabal
-    update-docker
+ALL_PACKAGE_MANAGERS=(
+    brew
+    apt
+    rvm
+    gem
+    pip
+    npm
+    cabal
+    docker
 )
 
 function exists {
@@ -89,21 +89,20 @@ function update-docker {
 }
 
 if [[ $# -eq 0 ]]; then
-    UPDATES=($UPDATE_FUNCTIONS)
+    package_managers=($ALL_PACKAGE_MANAGERS)
 else
-    typeset -a UPDATES
+    typeset -a package_managers
     i=0
-    for arg in $@; do
-        ARG_FUNCTION=update-$arg
+    for package_manager in $@; do
         i=$((i + 1))
-        if [[ ${+UPDATE_FUNCTIONS[(r)$ARG_FUNCTION]} -eq 0 ]]; then
-            echo >&2 "Cannot update \"$arg\"."
+        if [[ ${+ALL_PACKAGE_MANAGERS[(r)$package_manager]} -eq 0 ]]; then
+            echo >&2 "Cannot update \"$package_manager\"."
             exit 1
         fi
-        UPDATES[$i]=$ARG_FUNCTION
+        package_managers[$i]=$package_manager
     done
 fi
 
-for update in $UPDATES; do
-    $update
+for package_manager in $package_managers; do
+    update-$package_manager
 done
