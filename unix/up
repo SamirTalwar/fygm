@@ -104,5 +104,8 @@ else
 fi
 
 for package_manager in $package_managers; do
+    echo "Updating $package_manager..."
+    echo "Updating $package_manager..." | sed 's/./=/g' # Underline the previous statement.
     update-$package_manager
+    echo
 done
