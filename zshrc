@@ -28,6 +28,16 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
+function dm {
+    local command=$1
+    shift
+    if [[ $command == 'help' ]]; then
+        docker-machine help
+    else
+        docker-machine $command $DOCKER_MACHINE_NAME $@
+    fi
+}
+
 if [[ -e ~/.zshrc.local ]]; then
     source ~/.zshrc.local
 fi
