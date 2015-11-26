@@ -51,8 +51,6 @@ Bundle 'gmarik/vundle'
 
 Bundle 'altercation/vim-colors-solarized'
 
-" Git support
-Bundle 'tpope/vim-fugitive'
 " Extra functionality in the status bar
 Bundle 'bling/vim-airline'
 " Search files using Ctrl+P
@@ -76,6 +74,8 @@ Bundle 'dahu/vim-fanfingtastic'
 Bundle 'Lokaltog/vim-easymotion'
 " Precision editing for S-expressions
 Bundle 'guns/vim-sexp'
+" Autocompletion
+Bundle 'Valloric/YouCompleteMe'
 
 Bundle 'tpope/vim-markdown'
 Bundle 'derekwyatt/vim-scala'
@@ -100,6 +100,8 @@ Bundle 'kien/rainbow_parentheses.vim'
 " Colour text denoting a CSS colour as itself
 Bundle 'ap/vim-css-color'
 
+" Git support
+Bundle 'tpope/vim-fugitive'
 " Interactive command execution
 Bundle 'Shougo/vimproc.vim'
 " Highlight errors
@@ -137,7 +139,7 @@ autocmd Filetype markdown setlocal nolist
 autocmd Filetype markdown setlocal colorcolumn=0
 
 " Show/hide NERDTree with <Tab>
-map <Tab> :NERDTreeToggle<CR>
+map § :NERDTreeToggle<CR>
 " Refresh the CtrlP cache with <F5>
 map <F5> :CtrlPClearCache<CR>
 
