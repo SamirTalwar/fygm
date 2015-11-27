@@ -25,7 +25,6 @@ brew install \
     coreutils \
     curl \
     dos2unix \
-    fswatch \
     gnu-sed \
     gnupg \
     htop-osx \
@@ -34,6 +33,12 @@ brew install \
     moreutils \
     unrar \
     wget
+
+# Terminal Fu
+brew install \
+    entr \
+    fswatch \
+    terminal-notifier
 
 # Text Editing
 brew install \
