@@ -37,7 +37,8 @@ brew install \
 
 # Text Editing
 brew install \
-    macvim
+    macvim \
+    vim
 brew install --HEAD \
     neovim/neovim/neovim
 
