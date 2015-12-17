@@ -68,8 +68,6 @@ Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 " Comment with '\'
 Bundle 'tpope/vim-commentary'
-" 'f' and 't' across lines
-Bundle 'dahu/vim-fanfingtastic'
 " Move about with ','
 Bundle 'Lokaltog/vim-easymotion'
 " Precision editing for S-expressions
