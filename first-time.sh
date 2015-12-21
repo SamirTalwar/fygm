@@ -65,6 +65,7 @@ brew install \
     sbt \
     sqlite
 brew cask install \
+    elm-platform \
     haskell-platform
 \curl -sSL https://get.rvm.io | bash -s head --ruby
 
