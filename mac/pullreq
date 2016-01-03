@@ -1,38 +1,52 @@
 #!/usr/bin/env ruby
 
-Host = Struct.new(:name, :username, :hostname, :pull_request_url)
+Host = Struct.new(:name, :prefix, :pull_request_url) do
+  def matches url
+    url.start_with? "#{prefix}:"
+  end
+
+  def extract_repo url
+    url.sub(/^#{prefix}:/, '').sub(/\.git$/, '')
+  end
+end
 
 hosts = [
   Host.new(
     'GitHub',
-    'git',
-    'github.com',
-    ->(repo, branch) {
-      "https://github.com/#{repo}/compare/#{branch}?expand=1"
+    'git@github.com',
+    ->(upstream_repo, repo, branch) {
+      if upstream_repo
+        owner = repo.split('/')[0]
+        "https://github.com/#{upstream_repo}/compare/master...#{owner}:#{branch}?expand=1"
+      else
+        "https://github.com/#{repo}/compare/#{branch}?expand=1"
+      end
     }),
   Host.new(
     'BitBucket',
-    'git',
-    'bitbucket.org',
-    ->(repo, branch) {
-      "https://bitbucket.org/#{repo}/pull-request/new?source=#{repo}%3A%3A#{branch}%3A%3Amaster"
+    'git@bitbucket.org',
+    ->(upstream_repo, repo, branch) {
+      "https://bitbucket.org/#{upstream_repo || repo}/pull-request/new?source=#{repo}%3A%3A#{branch}%3A%3Amaster"
     })
 ]
 
-branch = `git symbolic-ref --short HEAD`.strip
-if branch == 'master'
-    $stderr.puts 'Do not work on the master branch.'
-    exit 1
-end
-
-system('git', 'push', '-u', 'origin', branch)
-
-url = `git config --get remote.origin.url`.strip.sub(/\.git$/, '')
-host = hosts.find { |h| url.start_with?("#{h.username}@#{h.hostname}:") }
+url = `git config --get remote.origin.url`.strip
+host = hosts.find { |h| h.matches url }
 unless host
   $stderr.puts "I don't know how to push #{url}."
   exit 1
 end
 
-repo = url.sub(/^#{host.username}@#{host.hostname}:/, '')
-system('open', host.pull_request_url.call(repo, branch))
+upstream_url = `git config --get remote.upstream.url`.strip
+upstream_repo = upstream_url.empty? ? nil : host.extract_repo(upstream_url)
+
+branch = `git symbolic-ref --short HEAD`.strip
+if branch == 'master' and upstream_repo.nil?
+    $stderr.puts 'Do not work on the master branch.'
+    exit 1
+end
+
+system 'git', 'push', '-u', 'origin', branch
+
+repo = host.extract_repo url
+system 'open', host.pull_request_url.call(upstream_repo, repo, branch)
