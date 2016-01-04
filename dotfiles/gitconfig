@@ -1,0 +1,62 @@
+[user]
+	name = Samir Talwar
+	email = samir@noodlesandwich.com
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore
+	autocrlf = input
+	ignorecase = false
+[color]
+	ui = true
+[push]
+	default = simple
+[alias]
+	git = ! git
+	exec = "! bash -c \"$*\" #"
+	name = symbolic-ref --short HEAD
+	s = status
+	a = add -A
+	p = pull --ff-only --recurse-submodules --prune
+	amend = commit --amend --no-edit
+	praise = blame
+	delete-old-branches = !"\
+		set -e; \
+		branches=$((git branch --merged | egrep -v \"^\\*| $(git main-branch)$| master$\") || :); \
+		[[ -z \"$branches\" ]] || git branch -d $branches"
+	first-push = ! git push -u origin $(git name)
+	delete-remote = ! git push origin :$(git name) && git branch --unset-upstream
+	switch-to = !"\
+		set -e; \
+		git branch $1; \
+		git reset --hard origin/$(git name); \
+		git checkout"
+	main-branch = ! git config branch.main || echo 'master'
+	m = !"\
+		set -e; \
+		([[ $(git name) == $(git main-branch) ]] || git checkout $(git main-branch)); \
+		git p; \
+		git submodule update; \
+		git delete-old-branches"
+	up = !"\
+		set -e; \
+		current_branch=$(git name); \
+		if [[ $(git name) == $(git main-branch) ]]; then \
+			git m; \
+		else \
+			git m; \
+			(! git show-ref --quiet refs/heads/$current_branch || \
+				(git checkout $current_branch && git submodule update)); \
+		fi"
+	upm = ! git up && git merge $(git main-branch)
+	upr = ! git up && git rebase $(git main-branch)
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	dirs = !"\
+		set -e; \
+		find . -maxdepth 1 -type d | while read dir; do \
+			if [[ -e $dir/.git ]]; then \
+				echo \"In $(basename $dir): git $@\"; \
+				(cd $dir && git $@); \
+				echo; \
+			fi; \
+		done; \
+		true"

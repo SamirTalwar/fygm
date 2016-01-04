@@ -1,0 +1,38 @@
+#!/usr/bin/env ruby
+
+require 'pathname'
+
+LINKS = %w{ghc/ghci.conf gitconfig gitignore i3 nvim nvimrc vimrc zlogin zlogout zprezto zpreztorc zprofile zshenv zshrc}
+
+@dotfiles = Pathname.new(File.dirname(__FILE__)).realpath
+@home = Pathname.new(ENV['HOME']).realpath
+
+def run command
+  unless system command
+    $stderr.puts "FAIL: #{command}"
+    exit 1
+  end
+end
+
+def link source, destination
+  destination.dirname.mkpath()
+  destination.unlink() if destination.symlink?
+  File.symlink source, destination
+end
+
+puts 'Symlinking configuration files'
+LINKS.each do |file|
+  link (@dotfiles + file), (@home + ".#{file}")
+end
+
+unless (@dotfiles + 'first-time-run').exist?
+  puts 'Running first-time setup'
+  run (@dotfiles + 'first-time.sh').to_s
+  (@dotfiles + 'first-time-run').write ''
+end
+
+puts 'Installing vim plugins'
+unless (@home + '.vim/bundle/vundle').exist?
+  run 'git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle'
+end
+run 'vim +BundleInstall +BundleUpdate +qall'
