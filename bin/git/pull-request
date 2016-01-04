@@ -31,6 +31,11 @@ hosts = [
 ]
 
 url = `git config --get remote.origin.url`.strip
+if url.empty?
+  $stderr.puts "There's nowhere to raise the pull request. Consider hosting this somewhere."
+  exit 1
+end
+
 host = hosts.find { |h| h.matches url }
 unless host
   $stderr.puts "I don't know how to push #{url}."
