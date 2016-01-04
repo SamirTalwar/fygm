@@ -26,6 +26,7 @@
 	delete-remote = ! ~/bin/git/delete-remote
 	dirs = ! ~/bin/git/dirs
 	first-push = ! ~/bin/git/first-push
+	pull-request = ! ~/bin/git/pull-request
 	switch-to = ! ~/bin/git/switch-to
 	update-current = ! ~/bin/git/update-current
 	update-master = ! ~/bin/git/update-master
@@ -34,6 +35,7 @@
 	lg = ! git log-tree
 	m = ! git update-master
 	p = ! git pull-everything
+	pr = ! git pull-request
 	s = ! git status
 	up = ! git update-current
 	upm = ! git update-current && git merge $(git main-branch)
