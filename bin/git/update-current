@@ -3,7 +3,16 @@
 set -e
 
 current_branch=$(git name)
+main_branch=$(git main-branch)
+upstream=$(git config --get remote.upstream.url || :)
 git m
-if [[ $current_branch != $(git main-branch) ]] && git show-ref --quiet refs/heads/$current_branch; then
-    git checkout $current_branch && git submodule update
+
+if [[ $upstream ]]; then
+    git pull-everything upstream $main_branch
+    git push origin $main_branch
+fi
+
+if [[ $current_branch != $main_branch ]] && git show-ref --quiet refs/heads/$current_branch; then
+    git checkout $current_branch
+    git submodule update
 fi
