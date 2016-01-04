@@ -4,5 +4,5 @@ set -e
 
 [[ $(git name) == $(git main-branch) ]] || git checkout $(git main-branch)
 git pull-everything
-git submodule update
+git submodule update --init --recursive
 git delete-old-branches

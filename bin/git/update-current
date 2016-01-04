@@ -14,5 +14,5 @@ fi
 
 if [[ $current_branch != $main_branch ]] && git show-ref --quiet refs/heads/$current_branch; then
     git checkout $current_branch
-    git submodule update
+    git submodule update --init --recursive
 fi
