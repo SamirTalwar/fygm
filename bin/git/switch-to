@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -e
+
+git branch $1
+git reset --hard origin/$(git name)
+git checkout $1

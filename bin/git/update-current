@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+
+current_branch=$(git name)
+git m
+if [[ $current_branch != $(git main-branch) ]] && git show-ref --quiet refs/heads/$current_branch; then
+    git checkout $current_branch && git submodule update
+fi

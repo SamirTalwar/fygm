@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -e
+
+branches=$((git branch --merged | egrep -v "^\*| $(git main-branch)$| master$") || :)
+[[ -z "$branches" ]] || git branch -d $branches

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -e
+
+[[ $(git name) == $(git main-branch) ]] || git checkout $(git main-branch)
+git pull-everything
+git submodule update
+git delete-old-branches

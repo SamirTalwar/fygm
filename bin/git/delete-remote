@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -e
+
+git push origin :$(git name)
+git branch --unset-upstream
