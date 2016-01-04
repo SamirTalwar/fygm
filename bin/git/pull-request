@@ -40,13 +40,14 @@ end
 upstream_url = `git config --get remote.upstream.url`.strip
 upstream_repo = upstream_url.empty? ? nil : host.extract_repo(upstream_url)
 
-branch = `git symbolic-ref --short HEAD`.strip
-if branch == 'master' and upstream_repo.nil?
-    $stderr.puts 'Do not work on the master branch.'
+branch = `git name`.strip
+main_branch = `git main-branch`.strip
+if branch == main_branch and upstream_repo.nil?
+    $stderr.puts "Do not work on the \"#{main_branch}\" branch."
     exit 1
 end
 
-system 'git', 'push', '-u', 'origin', branch
+system 'git', 'first-push'
 
 repo = host.extract_repo url
 system 'open', host.pull_request_url.call(upstream_repo, repo, branch)
