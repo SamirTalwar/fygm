@@ -92,6 +92,7 @@ Bundle 'lunaru/vim-less'
 Bundle 'tpope/vim-liquid'
 Bundle 'mxw/vim-jsx'
 Bundle 'gkz/vim-ls'
+Bundle 'lambdatoast/elm.vim'
 
 " Colour parentheses according to depth
 Bundle 'kien/rainbow_parentheses.vim'
