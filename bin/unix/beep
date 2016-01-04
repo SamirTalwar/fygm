@@ -1,0 +1,19 @@
+#!/usr/bin/env zsh
+
+function beep {
+    print -n "\a"
+}
+
+if [[ $_ != $0 ]]; then
+    for arg in "$@"; do
+        if [[ $arg != 'beep' ]]; then
+            echo "I don't know how to \"$arg\"." >&2
+            exit 1
+        fi
+    done
+
+    beep
+    for arg in "$@"; do
+        beep
+    done
+fi

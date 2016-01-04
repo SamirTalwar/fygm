@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+set -e
+
+docker-rm-all
+docker-cleanup
+
+[[ -n $DOCKER_MACHINE_NAME ]] && docker-machine restart $DOCKER_MACHINE_NAME

@@ -1,0 +1,56 @@
+#!/usr/bin/env zsh
+
+function usage {
+    echo >&2 'Usage:'
+    echo >&2 "    eval \$($0 <version>)"
+    echo >&2 "    $0 <version> <command>"
+    echo >&2
+    echo >&2 'The version should match an installed Java VM,'
+    echo >&2 'and be a number of the form "9" or "1.9".'
+}
+
+function java_home {
+    /usr/libexec/java_home $@ 2>/dev/null
+}
+
+if [[ $# -eq 0 ]]; then
+    usage
+    return 1
+fi
+
+if [[ $1 == '-h' || $1 == '--help' ]]; then
+    usage
+    return 0
+fi
+
+args=$@
+version=$1
+shift
+cmd=($@)
+
+if [[ ! $version =~ ^[0-9\.]+$ ]]; then
+    usage
+    return 2
+fi
+
+if JAVA_HOME=$(java_home -F -v $version); then
+elif JAVA_HOME=$(java_home -F -v 1.$version); then
+else
+    usage
+    return 3
+fi
+export JAVA_HOME
+
+path=($JAVA_HOME/bin $path)
+export PATH
+
+if [[ $#cmd -eq 0 ]]; then
+    echo "export JAVA_HOME=$JAVA_HOME"
+    echo 'path=($JAVA_HOME/bin $path)'
+    echo 'export path'
+
+    echo '# Run this command to configure your shell:'
+    echo "# eval \"\$($0 $args)\""
+else
+    $cmd
+fi
