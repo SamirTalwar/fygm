@@ -27,6 +27,7 @@
 	delete-remote = ! ~/bin/git/delete-remote
 	dirs = ! ~/bin/git/dirs
 	first-push = ! ~/bin/git/first-push
+	fuck-it = ! ~/bin/git/fuck-it
 	pull-request = ! ~/bin/git/pull-request
 	switch-to = ! ~/bin/git/switch-to
 	update-master = ! ~/bin/git/update-master
