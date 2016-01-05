@@ -13,7 +13,7 @@
 [alias]
 	git = ! git
 
-	add-all = add -A
+	add-all = add --all
 	amend = commit --amend --no-edit
 	exec = "! bash -c \"$*\" #"
 	log-tree = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
