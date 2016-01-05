@@ -20,7 +20,7 @@
 	main-branch = ! git config branch.main || echo 'master'
 	name = symbolic-ref --short HEAD
 	praise = blame
-	pull-everything = pull --ff-only --recurse-submodules --prune
+	pull-everything = ! git pull --ff-only --prune && git submodule update --init --recursive
 
 	checkout-master-and-update = ! ~/bin/git/checkout-master-and-update
 	delete-old-branches = ! ~/bin/git/delete-old-branches
