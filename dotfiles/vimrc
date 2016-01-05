@@ -134,8 +134,7 @@ autocmd BufWritePre * :%s/\s\+$//e " Delete trailing spaces
 set list!
 set listchars=tab:->,trail:·,extends:>
 autocmd Filetype text setlocal nolist
-autocmd Filetype markdown setlocal nolist
-autocmd Filetype markdown setlocal colorcolumn=0
+autocmd Filetype markdown setlocal nolist colorcolumn=0
 
 " Show/hide NERDTree with <Tab>
 map § :NERDTreeToggle<CR>
