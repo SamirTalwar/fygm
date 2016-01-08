@@ -20,7 +20,6 @@
 	main-branch = ! git config branch.main || echo 'master'
 	name = symbolic-ref --short HEAD
 	praise = blame
-	pull-everything = ! git pull --ff-only --prune && git submodule update --init --recursive
 
 	checkout-master-and-update = ! ~/bin/git/checkout-master-and-update
 	delete-old-branches = ! ~/bin/git/delete-old-branches
@@ -28,6 +27,7 @@
 	dirs = ! ~/bin/git/dirs
 	first-push = ! ~/bin/git/first-push
 	fuck-it = ! ~/bin/git/fuck-it
+	pull-everything = ! ~/bin/git/pull-everything
 	pull-request = ! ~/bin/git/pull-request
 	switch-to = ! ~/bin/git/switch-to
 	update-master = ! ~/bin/git/update-master
