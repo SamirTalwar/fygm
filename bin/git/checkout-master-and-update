@@ -2,7 +2,18 @@
 
 set -e
 
-[[ $(git name) == $(git main-branch) ]] || git checkout $(git main-branch)
+current_branch=$(git name)
+main_branch=$(git main-branch)
+upstream=$(git config --get remote.upstream.url || :)
+
+[[ $current_branch == $main_branch ]] || git checkout $main_branch
+
 git pull-everything
+
+if [[ $upstream ]]; then
+    git pull-everything upstream $main_branch
+    git push origin $main_branch
+fi
+
 git submodule update --init --recursive
 git delete-old-branches
