@@ -10,6 +10,9 @@
 	ui = true
 [push]
 	default = simple
+[transfer]
+	fsckObjects = true
+
 [alias]
 	git = ! git
 
