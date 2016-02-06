@@ -74,6 +74,7 @@ brew install \
     mercurial \
     python \
     python3 \
+    racket \
     sqlite
 brew cask install \
     elm-platform \
@@ -81,6 +82,7 @@ brew cask install \
 run sdk install scala
 run sdk install sbt
 run sdk install groovy
+raco pkg install --auto xrepl
 
 # Containerisation
 brew cask install \

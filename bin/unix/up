@@ -12,6 +12,7 @@ ALL_PACKAGE_MANAGERS=(
     pip
     npm
     cabal
+    raco
     docker
 )
 
@@ -77,6 +78,12 @@ function update-npm {
 function update-cabal {
     if exists cabal; then
         cabal update
+    fi
+}
+
+function update-raco {
+    if exists raco; then
+        raco pkg update --all --auto
     fi
 }
 
