@@ -97,4 +97,6 @@ brew install \
 nvm_version="$(http https://api.github.com/repos/creationix/nvm/tags | jq -r '.[0].name')"
 curl -fsSL "https://raw.githubusercontent.com/creationix/nvm/$nvm_version/install.sh" | bash
 
+docker-machine create --driver=virtualbox --virtualbox-memory=4096 default
+
 sudo bash -c "cat /usr/local/bin/zsh > /etc/shells && chsh -s /usr/local/bin/zsh $USER"
