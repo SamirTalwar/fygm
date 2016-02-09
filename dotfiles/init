@@ -10,6 +10,7 @@ LINKS = %w{
   nvim
   nvimrc
   racketrc
+  tmux.conf
   vimrc
   zlogin
   zlogout
