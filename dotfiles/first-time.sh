@@ -72,6 +72,7 @@ brew install \
     carthage \
     git \
     heroku-toolbelt \
+    kubernetes-cli \
     leiningen \
     maven \
     mercurial \
