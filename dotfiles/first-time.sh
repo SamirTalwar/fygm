@@ -39,6 +39,7 @@ brew install \
     coreutils \
     curl \
     dos2unix \
+    gawk \
     gnu-sed \
     gnupg \
     htop-osx \
