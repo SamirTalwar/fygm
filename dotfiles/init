@@ -10,6 +10,7 @@ LINKS = %w{
   nvim
   nvimrc
   racketrc
+  tmux
   tmux.conf
   vimrc
   zlogin
