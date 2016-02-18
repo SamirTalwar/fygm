@@ -1,12 +1,29 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env python3
 
-start_time="$(date '+%s')"
-last_reported=$start_time
-while ! "$@"; do
-    now="$(date '+%s')"
-    if [[ $(($now - $last_reported)) -ge 10 ]]; then
-        echo "Waited for $((now - start_time)) seconds..." >&2
-        last_reported=$now
-    fi
-    sleep 1
-done
+import argparse
+import subprocess
+import sys
+import time
+
+REPORT_DELAY = 10
+
+parser = argparse.ArgumentParser(description='Repeatedly tries the provided command until it succeeds.')
+parser.add_argument('-d', '--delay', type=int, default=1)
+parser.add_argument('-t', '--timeout', type=int)
+parser.add_argument('-r', '--report', action='store_true')
+parser.add_argument('command', nargs='+')
+args = parser.parse_args()
+
+start_time = time.time()
+last_reported = start_time
+while subprocess.run(args.command).returncode != 0:
+    now = time.time()
+    if args.timeout and now - start_time > args.timeout:
+        print('Timed out waiting for the command to succeed.', file=sys.stderr)
+        sys.exit(1)
+
+    if args.report and now - last_reported > REPORT_DELAY:
+        print('Waited for %d seconds...' % (now - start_time), file=sys.stderr)
+        last_reported = now
+
+    time.sleep(args.delay)
