@@ -2,13 +2,17 @@
 
 export PATH="/usr/local/bin:$PATH"
 
-[[ -d "$HOME/.rvm" ]] && export PATH="$PATH:$HOME/.rvm/bin"
-[[ -s "$HOME/.nvm/nvm.sh" ]] && source "$HOME/.nvm/nvm.sh"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && \
+    source "$HOME/.rvm/scripts/rvm"
+[[ -s "$HOME/.nvm/nvm.sh" ]] && \
+    source "$HOME/.nvm/nvm.sh"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && \
+    export SDKMAN_DIR="$HOME/.sdkman" && \
+    source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-which brew 2>/dev/null || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-which sdk 2>/dev/null || curl -fs http://get.sdkman.io | bash
-which rvm 2>/dev/null || curl -sSL https://get.rvm.io | bash -s head --ruby
+command -v brew >/dev/null 2>&1 || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+command -v sdk >/dev/null 2>&1 || curl -fs http://get.sdkman.io | bash
+command -v rvm >/dev/null 2>&1 || curl -fsSL https://get.rvm.io | bash -s head --ruby
 
 set -e
 set -x

@@ -22,7 +22,7 @@ ALL_PACKAGE_MANAGERS=(
 )
 
 function exists {
-    (( $+commands[$1] )) || which $1 >/dev/null
+    (( $+commands[$1] )) || command -v $1 >/dev/null
 }
 
 function update-brew {
