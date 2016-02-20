@@ -77,7 +77,7 @@ Bundle 'guns/vim-sexp'
 " Autocompletion
 Bundle 'Valloric/YouCompleteMe'
 
-Bundle 'tpope/vim-markdown'
+Bundle 'plasticboy/vim-markdown'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'guns/vim-clojure-static'
 Bundle 'DrTom/fsharp-vim'
@@ -186,6 +186,8 @@ noremap <Leader>e :call CheckForErrors()<CR>
 noremap <Leader>l :lclose<CR>
 
 autocmd BufLeave,FocusLost * nested silent! update " Autosave whenever leaving a modified file, for any reason.
+
+let g:vim_markdown_folding_disabled = 1
 
 autocmd BufNewFile,BufRead *.ru set filetype=ruby
 autocmd BufNewFile,BufRead *.gradle set filetype=groovy
