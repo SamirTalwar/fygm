@@ -13,7 +13,7 @@ which rvm 2>/dev/null || curl -sSL https://get.rvm.io | bash -s head --ruby
 set -e
 set -x
 
-function run {
+function quietly {
     set +x
     "$@"
     set -x
@@ -83,9 +83,9 @@ brew install \
 brew cask install \
     elm-platform \
     haskell-platform
-run sdk install scala
-run sdk install sbt
-run sdk install groovy
+quietly sdk install scala
+quietly sdk install sbt
+quietly sdk install groovy
 raco pkg install --auto --skip-installed xrepl
 
 nvm_version="$(http https://api.github.com/repos/creationix/nvm/tags | jq -r '.[0].name')"
