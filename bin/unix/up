@@ -1,12 +1,17 @@
 #!/usr/bin/env zsh
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && \
+    source "$HOME/.rvm/scripts/rvm"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && \
+    export SDKMAN_DIR="$HOME/.sdkman" && \
+    source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 set -e
 
 ALL_PACKAGE_MANAGERS=(
     brew
     apt
+    sdk
     rvm
     gem
     pip
@@ -17,7 +22,7 @@ ALL_PACKAGE_MANAGERS=(
 )
 
 function exists {
-    (( $+commands[$1] ))
+    (( $+commands[$1] )) || which $1 >/dev/null
 }
 
 function update-brew {
@@ -34,6 +39,12 @@ function update-apt {
     if exists apt-get; then
         apt-get update
         apt-get upgrade
+    fi
+}
+
+function update-sdk {
+    if exists sdk; then
+        sdk selfupdate
     fi
 }
 
