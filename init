@@ -22,7 +22,8 @@ LINKS = %w{
   zshrc
 }
 
-@dotfiles = Pathname.new(File.dirname(__FILE__)).realpath
+@dir = Pathname.new(File.dirname(__FILE__)).realpath
+@dotfiles = @dir + 'dotfiles'
 @home = Pathname.new(ENV['HOME']).realpath
 
 def run command
@@ -43,10 +44,10 @@ LINKS.each do |file|
   link (@dotfiles + file), (@home + ".#{file}")
 end
 
-unless (@dotfiles + 'first-time-run').exist?
+unless (@dir + 'first-time-run').exist?
   puts 'Running first-time setup'
-  run (@dotfiles + 'first-time.sh').to_s
-  (@dotfiles + 'first-time-run').open 'w' do |f|
+  run (@dir + 'first-time.sh').to_s
+  (@dir + 'first-time-run').open 'w' do |f|
     f.write ''
   end
 end
