@@ -101,4 +101,6 @@ brew install \
 
 docker-machine create --driver=virtualbox --virtualbox-memory=4096 default
 
-sudo bash -c "cat /usr/local/bin/zsh > /etc/shells && chsh -s /usr/local/bin/zsh $USER"
+if ! fgrep /usr/local/bin/zsh /etc/shells; then
+    sudo bash -c "cat /usr/local/bin/zsh > /etc/shells && chsh -s /usr/local/bin/zsh $USER"
+fi
