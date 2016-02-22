@@ -43,6 +43,7 @@ brew install \
     coreutils \
     curl \
     dos2unix \
+    findutils \
     gawk \
     gnu-sed \
     gnupg \
