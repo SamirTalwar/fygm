@@ -8,6 +8,9 @@
 
 set -e
 
+SELF=$(realpath $0)
+ROOT=$(realpath $(dirname $SELF)/../..)
+
 ALL_PACKAGE_MANAGERS=(
     brew
     apt
@@ -24,6 +27,23 @@ ALL_PACKAGE_MANAGERS=(
 
 function exists {
     (( $+commands[$1] )) || command -v $1 >/dev/null
+}
+
+function self-update {
+    local output exit_code
+    output=$(cd $ROOT && git pull-everything 2>&1)
+    exit_code=$?
+    if [[ $exit_code -ne 0 ]]; then
+        echo "$output"
+        echo "Updating $ROOT failed with status code $exit_code."
+        exit $exit_code
+    fi
+
+    if [[ $output != 'Already up-to-date.' ]]; then
+        echo "$output"
+    else
+        return 1
+    fi
 }
 
 function update-brew {
@@ -119,6 +139,11 @@ function update-docker {
         docker-cleanup
     fi
 }
+
+if self-update; then
+    echo "Updated $ROOT. Restarting..."
+    exec $SELF "$@"
+fi
 
 if [[ $# -eq 0 ]]; then
     package_managers=($ALL_PACKAGE_MANAGERS)
