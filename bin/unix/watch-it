@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+FILE=/tmp/watching-it
+
+rm -f $FILE
+mkfifo $FILE
+
+while true; do
+    zsh -c "clear; $(cat $FILE)"
+done

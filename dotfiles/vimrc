@@ -207,6 +207,22 @@ autocmd Syntax *.clj RainbowParenthesesLoadRound
 autocmd Syntax *.clj RainbowParenthesesLoadSquare
 autocmd Syntax *.clj RainbowParenthesesLoadBraces
 
+" Set up shortcuts for running tests.
+" This depends on the user running the `watch-it` script in another window.
+function! RunTest()
+    if file_readable('Setup.hs')
+        let commands = ['cabal build', 'cabal test']
+    endif
+    if exists('commands')
+        write
+        call writefile(['set -e'] + commands, '/tmp/watching-it')
+    else
+        echoerr("I don't know how to run the tests for this repository.")
+    endif
+endfunction
+
+noremap <Leader>t :call RunTest()<CR>
+
 let g:GPGPreferSymmetric=1 " Use symmetric GPG encryption with new files
 
 filetype plugin indent on " Re-enable filetype detection with plugins and indentation
