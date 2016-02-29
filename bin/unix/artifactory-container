@@ -1,0 +1,26 @@
+#!/usr/bin/env zsh
+
+set -e
+
+docker-machine ssh $DOCKER_MACHINE_NAME sh <<< '
+    set -e
+    if [ ! -e /artifactory ]; then
+        export oneoff="docker run --rm jfrog-docker-reg2.bintray.io/jfrog/artifactory-oss"
+        export dir=/etc/opt/jfrog/artifactory
+        mkdir -p /artifactory/etc
+        cd /artifactory/etc
+        $oneoff ls $dir | while read file; do $oneoff cat $dir/$file > $file; done
+    fi
+'
+
+docker run \
+    -d \
+    --name=artifactory \
+    --user=root \
+    -p 8081:8081 \
+    -e ARTIFACTORY_HOME=/var/opt/jfrog/artifactory \
+    -v /artifactory/data:/var/opt/jfrog/artifactory/data \
+    -v /artifactory/logs:/var/opt/jfrog/artifactory/logs \
+    -v /artifactory/backup:/var/opt/jfrog/artifactory/backup \
+    -v /artifactory/etc:/var/opt/jfrog/artifactory/etc \
+    jfrog-docker-reg2.bintray.io/jfrog/artifactory-oss
