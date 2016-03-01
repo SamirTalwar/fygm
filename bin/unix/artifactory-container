@@ -2,10 +2,13 @@
 
 set -e
 
-docker-machine ssh $DOCKER_MACHINE_NAME sh <<< '
+IMAGE='jfrog-docker-reg2.bintray.io/jfrog/artifactory-oss'
+
+docker-machine ssh $DOCKER_MACHINE_NAME sudo sh <<< '
     set -e
     if [ ! -e /artifactory ]; then
-        export oneoff="docker run --rm jfrog-docker-reg2.bintray.io/jfrog/artifactory-oss"
+        docker pull '$IMAGE'
+        export oneoff="docker run --rm '$IMAGE'"
         export dir=/etc/opt/jfrog/artifactory
         mkdir -p /artifactory/etc
         cd /artifactory/etc
@@ -23,4 +26,4 @@ docker run \
     -v /artifactory/logs:/var/opt/jfrog/artifactory/logs \
     -v /artifactory/backup:/var/opt/jfrog/artifactory/backup \
     -v /artifactory/etc:/var/opt/jfrog/artifactory/etc \
-    jfrog-docker-reg2.bintray.io/jfrog/artifactory-oss
+    $IMAGE
