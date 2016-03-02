@@ -13,8 +13,8 @@ docker-machine ssh $DOCKER_MACHINE_NAME sudo sh <<< '
         mkdir -p /artifactory/etc
         cd /artifactory/etc
         $oneoff ls $dir | while read file; do $oneoff cat $dir/$file > $file; done
-        chown -R 500:499 /artifactory
     fi
+    chown -R 500:499 /artifactory
 '
 
 docker run \
