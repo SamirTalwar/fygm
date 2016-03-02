@@ -104,7 +104,9 @@ brew install \
     docker-compose \
     docker-machine
 
-docker-machine create --driver=virtualbox --virtualbox-memory=4096 default
+if ! docker-machine ls -q | egrep '^default$' >/dev/null; then
+    docker-machine create --driver=virtualbox --virtualbox-memory=4096 default
+fi
 
 if ! fgrep /usr/local/bin/zsh /etc/shells; then
     sudo bash -c "cat /usr/local/bin/zsh > /etc/shells && chsh -s /usr/local/bin/zsh $USER"
