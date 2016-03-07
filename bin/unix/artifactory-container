@@ -4,17 +4,16 @@ set -e
 
 IMAGE='jfrog-docker-reg2.bintray.io/jfrog/artifactory-oss'
 
-docker-machine ssh $DOCKER_MACHINE_NAME sudo sh <<< '
+docker volume create --name=artifactory-backup
+docker volume create --name=artifactory-data
+docker volume create --name=artifactory-etc
+docker volume create --name=artifactory-logs
+docker run --rm -v artifactory-etc:/artifactory/etc $IMAGE sh <<< '
     set -e
-    if [ ! -e /artifactory ]; then
-        docker pull '$IMAGE'
-        export oneoff="docker run --rm '$IMAGE'"
-        export dir=/etc/opt/jfrog/artifactory
-        mkdir -p /artifactory/etc
-        cd /artifactory/etc
-        $oneoff ls $dir | while read file; do $oneoff cat $dir/$file > $file; done
+    if [ ! -e /artifactory/etc ]; then
+        cp -R /etc/opt/jfrog/artifactory/* /artifactory/etc
     fi
-    chown -R 500:499 /artifactory
+    chown -R artifactory:artifactory /artifactory
 '
 
 docker run \
@@ -22,8 +21,8 @@ docker run \
     --name=artifactory \
     -p 8081:8081 \
     -e ARTIFACTORY_HOME=/var/opt/jfrog/artifactory \
-    -v /artifactory/data:/var/opt/jfrog/artifactory/data \
-    -v /artifactory/logs:/var/opt/jfrog/artifactory/logs \
-    -v /artifactory/backup:/var/opt/jfrog/artifactory/backup \
-    -v /artifactory/etc:/var/opt/jfrog/artifactory/etc \
+    -v artifactory-etc:/etc/opt/jfrog/artifactory \
+    -v artifactory-backup:/var/opt/jfrog/artifactory/backup \
+    -v artifactory-data:/var/opt/jfrog/artifactory/data \
+    -v artifactory-logs:/var/opt/jfrog/artifactory/logs \
     $IMAGE
