@@ -16,6 +16,7 @@ docker run --rm -v artifactory-etc:/artifactory/etc $IMAGE sh <<< '
     chown -R artifactory:artifactory /artifactory
 '
 
+docker ps --filter=name=artifactory --filter=status=exited -aq | xargs docker rm
 docker run \
     -d \
     --name=artifactory \
