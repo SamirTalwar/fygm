@@ -2,5 +2,13 @@
 
 set -e
 
-docker ps --filter=status=exited -q | xargs docker rm
-docker images | awk '/^<none>/ {print $3}' | xargs docker rmi
+echo 'Removing exited processes...'
+docker ps --filter=status=exited --quiet | xargs docker rm
+
+echo 'Removing dangling images...'
+docker images --filter=dangling=true --quiet | xargs docker rmi
+
+echo 'Removing dangling, unnamed volumes...'
+docker volume ls --filter=dangling=true --quiet | awk '$0 ~ "^[0-9a-f]{64}$"' | xargs docker volume rm
+
+echo 'Your Docker is now sparkling.'
