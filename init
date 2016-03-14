@@ -57,6 +57,5 @@ unless (@home + '.vim/bundle/vundle').exist?
   run 'git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle'
 end
 
-run 'vim +BundleInstall +BundleUpdate +qall'
-run 'vim +VimProcInstall +qall'
+run 'vim +BundleInstall +BundleUpdate +"silent VimProcInstall" +qall'
 run (@home + '.vim/bundle/YouCompleteMe/install.py').to_s
