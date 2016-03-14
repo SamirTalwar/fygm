@@ -1,9 +1,5 @@
 #!/usr/bin/env zsh
 
-function beep {
-    print -n "\a"
-}
-
 if [[ $_ != $0 ]]; then
     for arg in "$@"; do
         if [[ $arg != 'beep' ]]; then
@@ -12,8 +8,10 @@ if [[ $_ != $0 ]]; then
         fi
     done
 
-    beep
+    print -n "\a"
+    sleep 0.5
     for arg in "$@"; do
-        beep
+        print -n "\a"
+        sleep 0.5
     done
 fi
