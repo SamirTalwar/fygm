@@ -88,6 +88,7 @@ brew install \
 brew cask install \
     elm-platform \
     haskell-platform
+brew install haskell-stack
 quietly sdk install scala
 quietly sdk install sbt
 quietly sdk install groovy
