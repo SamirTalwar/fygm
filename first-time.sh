@@ -23,9 +23,6 @@ function quietly {
     set -x
 }
 
-# Meta
-brew install caskroom/cask/brew-cask
-
 # Shell
 brew install \
     autojump \
