@@ -105,5 +105,6 @@ if ! docker-machine ls -q | egrep '^default$' >/dev/null; then
 fi
 
 if ! fgrep /usr/local/bin/zsh /etc/shells; then
-    sudo bash -c "cat /usr/local/bin/zsh > /etc/shells && chsh -s /usr/local/bin/zsh $USER"
+    sudo bash -c "echo /usr/local/bin/zsh >> /etc/shells"
 fi
+sudo chsh -s /usr/local/bin/zsh $USER
