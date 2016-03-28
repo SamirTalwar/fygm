@@ -2,6 +2,11 @@
 
 export PATH="/usr/local/bin:$PATH"
 
+java_present=false
+if /usr/libexec/java_home -F >/dev/null 2>&1; then
+    java_present=true
+fi
+
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && \
     source "$HOME/.rvm/scripts/rvm"
 [[ -s "$HOME/.nvm/nvm.sh" ]] && \
@@ -11,7 +16,9 @@ export PATH="/usr/local/bin:$PATH"
     source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 command -v brew >/dev/null 2>&1 || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-command -v sdk >/dev/null 2>&1 || curl -fs http://get.sdkman.io | bash
+if $java_present; then
+    command -v sdk >/dev/null 2>&1 || curl -fs http://get.sdkman.io | bash
+fi
 command -v rvm >/dev/null 2>&1 || curl -fsSL https://get.rvm.io | bash -s head --ruby
 
 set -e
@@ -73,8 +80,6 @@ brew install \
     git \
     heroku-toolbelt \
     kubernetes-cli \
-    leiningen \
-    maven \
     mercurial \
     python \
     python3 \
@@ -84,13 +89,22 @@ brew cask install \
     elm-platform \
     haskell-platform
 brew install haskell-stack
-quietly sdk install scala
-quietly sdk install sbt
-quietly sdk install groovy
 raco pkg install --auto --skip-installed xrepl
 
-nvm_version="$(http https://api.github.com/repos/creationix/nvm/tags | jq -r '.[0].name')"
-curl -fsSL "https://raw.githubusercontent.com/creationix/nvm/$nvm_version/install.sh" | bash
+if ! command -v nvm >/dev/null; then
+    nvm_version="$(http https://api.github.com/repos/creationix/nvm/tags | jq -r '.[0].name')"
+    curl -fsSL "https://raw.githubusercontent.com/creationix/nvm/$nvm_version/install.sh" | bash
+fi
+
+# Java Development
+if $java_present; then
+    brew install \
+        leiningen \
+        maven
+    quietly sdk install scala
+    quietly sdk install sbt
+    quietly sdk install groovy
+fi
 
 # Containerisation
 brew cask install \
