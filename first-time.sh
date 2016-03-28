@@ -72,6 +72,7 @@ brew install \
 # Development
 brew install \
     carthage \
+    cmake \
     git \
     heroku-toolbelt \
     kubernetes-cli \
