@@ -58,11 +58,8 @@ brew install \
     terminal-notifier
 
 # Text Editing
-brew install \
-    macvim \
-    vim
-brew install --HEAD \
-    neovim/neovim/neovim
+brew install vim
+brew install --HEAD neovim/neovim/neovim
 
 # Image Manipulation
 brew install \
