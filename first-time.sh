@@ -79,7 +79,6 @@ brew install \
     cmake \
     git \
     heroku-toolbelt \
-    kubernetes-cli \
     mercurial \
     python \
     python3 \
