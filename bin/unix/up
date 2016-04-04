@@ -21,6 +21,7 @@ ALL_PACKAGE_MANAGERS=(
     npm
     cabal
     raco
+    gcloud
     docker-machine
     docker
 )
@@ -116,6 +117,12 @@ function update-cabal {
 function update-raco {
     if exists raco; then
         raco pkg update --all --auto
+    fi
+}
+
+function update-gcloud {
+    if exists gcloud; then
+        gcloud components update
     fi
 }
 

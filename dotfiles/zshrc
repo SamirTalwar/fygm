@@ -29,6 +29,11 @@ export NVM_DIR="$HOME/.nvm"
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
+if [[ -d '/usr/local/opt/google-cloud-sdk' ]]; then
+    source '/usr/local/opt/google-cloud-sdk/path.zsh.inc'
+    source '/usr/local/opt/google-cloud-sdk/completion.zsh.inc'
+fi
+
 alias dm=docker-machine
 
 if [[ -e ~/.zshrc.local ]]; then
