@@ -61,8 +61,8 @@ Bundle 'rking/ag.vim'
 Bundle 'scrooloose/nerdtree'
 " EditorConfig support
 Bundle 'editorconfig/editorconfig-vim'
-" Make focus events work with tmux
-Bundle 'tmux-plugins/vim-tmux-focus-events'
+" Connect up tmux
+Bundle 'christoomey/vim-tmux-navigator'
 
 " Better repeat support with '.'
 Bundle 'tpope/vim-repeat'
