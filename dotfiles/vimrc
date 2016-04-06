@@ -189,6 +189,7 @@ noremap <Leader>e :call CheckForErrors()<CR>
 noremap <Leader>l :lclose<CR>
 
 autocmd BufLeave,FocusLost * nested silent! update " Autosave whenever leaving a modified file, for any reason.
+let g:tmux_navigator_save_on_switch = 1
 
 let g:vim_markdown_folding_disabled = 1
 
