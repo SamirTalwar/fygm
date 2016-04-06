@@ -54,8 +54,8 @@ end
 
 puts 'Installing vim plugins'
 unless (@home + '.vim/bundle/vundle').exist?
-  run 'git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle'
+  run 'git clone git@github.com:VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim'
 end
 
-run 'vim +BundleInstall +BundleUpdate +"silent VimProcInstall" +qall'
+run 'vim +PluginInstall +PluginUpdate +PluginClean! +"silent VimProcInstall" +qall'
 run (@home + '.vim/bundle/YouCompleteMe/install.py').to_s

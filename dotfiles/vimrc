@@ -45,77 +45,79 @@ let maplocalleader=';' " The <LocalLeader> in map operations is the ';'
 set pastetoggle=<F2> " F2 toggles paste mode
 
 " Set up Vundle
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Bundle 'gmarik/vundle'
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
 
-Bundle 'altercation/vim-colors-solarized'
+Plugin 'altercation/vim-colors-solarized'
 
 " Extra functionality in the status bar
-Bundle 'bling/vim-airline'
+Plugin 'bling/vim-airline'
 " Search files using Ctrl+P
-Bundle 'kien/ctrlp.vim'
+Plugin 'kien/ctrlp.vim'
 " Search everything with :Ag
-Bundle 'rking/ag.vim'
+Plugin 'rking/ag.vim'
 " File/directory management
-Bundle 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'
 " EditorConfig support
-Bundle 'editorconfig/editorconfig-vim'
+Plugin 'editorconfig/editorconfig-vim'
 " Connect up tmux
-Bundle 'christoomey/vim-tmux-navigator'
+Plugin 'christoomey/vim-tmux-navigator'
 
 " Better repeat support with '.'
-Bundle 'tpope/vim-repeat'
+Plugin 'tpope/vim-repeat'
 " Insert, delete and change surrounding elements ('(', '[', '<', etc.)
-Bundle 'tpope/vim-surround'
+Plugin 'tpope/vim-surround'
 " Comment with '\'
-Bundle 'tpope/vim-commentary'
+Plugin 'tpope/vim-commentary'
 " Move about with ','
-Bundle 'Lokaltog/vim-easymotion'
+Plugin 'Lokaltog/vim-easymotion'
 " Precision editing for S-expressions
-Bundle 'guns/vim-sexp'
+Plugin 'guns/vim-sexp'
 " Autocompletion
-Bundle 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 
-Bundle 'plasticboy/vim-markdown'
-Bundle 'derekwyatt/vim-scala'
-Bundle 'guns/vim-clojure-static'
-Bundle 'DrTom/fsharp-vim'
-Bundle 'dag/vim2hs'
-Bundle 'eagletmt/ghcmod-vim'
-Bundle 'bitc/vim-hdevtools'
-Bundle 'pangloss/vim-javascript'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'jwhitley/vim-literate-coffeescript'
-Bundle 'noc7c9/vim-iced-coffee-script'
-Bundle 'tpope/vim-haml'
-Bundle 'digitaltoad/vim-jade'
-Bundle 'slim-template/vim-slim'
-Bundle 'lunaru/vim-less'
-Bundle 'tpope/vim-liquid'
-Bundle 'mxw/vim-jsx'
-Bundle 'gkz/vim-ls'
-Bundle 'lambdatoast/elm.vim'
-Bundle 'docker/docker', {'rtp': '/contrib/syntax/vim/'}
+Plugin 'plasticboy/vim-markdown'
+Plugin 'derekwyatt/vim-scala'
+Plugin 'guns/vim-clojure-static'
+Plugin 'DrTom/fsharp-vim'
+Plugin 'dag/vim2hs'
+Plugin 'eagletmt/ghcmod-vim'
+Plugin 'bitc/vim-hdevtools'
+Plugin 'pangloss/vim-javascript'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'jwhitley/vim-literate-coffeescript'
+Plugin 'noc7c9/vim-iced-coffee-script'
+Plugin 'tpope/vim-haml'
+Plugin 'digitaltoad/vim-jade'
+Plugin 'slim-template/vim-slim'
+Plugin 'lunaru/vim-less'
+Plugin 'tpope/vim-liquid'
+Plugin 'mxw/vim-jsx'
+Plugin 'gkz/vim-ls'
+Plugin 'lambdatoast/elm.vim'
+Plugin 'docker/docker', {'rtp': '/contrib/syntax/vim/'}
 
 " Colour parentheses according to depth
-Bundle 'kien/rainbow_parentheses.vim'
+Plugin 'kien/rainbow_parentheses.vim'
 " Colour text denoting a CSS colour as itself
-Bundle 'ap/vim-css-color'
+Plugin 'ap/vim-css-color'
 
 " Git support
-Bundle 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive'
 " Interactive command execution
-Bundle 'Shougo/vimproc.vim'
+Plugin 'Shougo/vimproc.vim'
 " Highlight errors
-Bundle 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
 " Search across the JVM classpath
-Bundle 'tpope/vim-classpath'
+Plugin 'tpope/vim-classpath'
 " Clojure REPL
-Bundle 'tpope/vim-fireplace'
+Plugin 'tpope/vim-fireplace'
 
 " Edit encrypted files
-Bundle 'jamessan/vim-gnupg'
+Plugin 'jamessan/vim-gnupg'
+
+call vundle#end()
 
 " Map Ctrl+{h,j,k,l} to the equivalent Alt+{} because Alt doesn't work in Mac terminals.
 nmap <C-h> <M-h>
