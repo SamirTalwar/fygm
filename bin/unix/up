@@ -122,7 +122,7 @@ function update-raco {
 
 function update-gcloud {
     if exists gcloud; then
-        gcloud components update
+        yes | gcloud components update
     fi
 }
 
