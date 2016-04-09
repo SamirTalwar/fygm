@@ -214,7 +214,9 @@ autocmd Syntax *.clj RainbowParenthesesLoadBraces
 " Set up shortcuts for running tests.
 " This depends on the user running the `watch-it` script in another window.
 function! RunTest()
-    if file_readable('Setup.hs')
+    if file_readable('stack.yaml')
+        let commands = ['stack test']
+    elseif file_readable('Setup.hs')
         let commands = ['cabal build', 'cabal test']
     endif
     if exists('commands')
