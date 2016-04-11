@@ -142,8 +142,9 @@ set listchars=tab:->,trail:·,extends:>
 autocmd Filetype text setlocal nolist
 autocmd Filetype markdown setlocal nolist colorcolumn=0
 
-" Show/hide NERDTree with <Tab>
+" Show/hide NERDTree with <§>, and find the current file with <±>
 map § :NERDTreeToggle<CR>
+map ± :NERDTreeFind<CR>
 " Refresh the CtrlP cache with <F5>
 map <F5> :CtrlPClearCache<CR>
 
