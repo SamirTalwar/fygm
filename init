@@ -53,7 +53,7 @@ unless (@dir + 'first-time-run').exist?
 end
 
 puts 'Installing vim plugins'
-unless (@home + '.vim/bundle/vundle').exist?
+unless (@home + '.vim/bundle/Vundle.vim').exist?
   run 'git clone git@github.com:VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim'
 end
 
