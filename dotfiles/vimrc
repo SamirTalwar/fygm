@@ -219,6 +219,8 @@ function! RunTest()
         let commands = ['stack test']
     elseif file_readable('Setup.hs')
         let commands = ['cabal build', 'cabal test']
+    elseif file_readable('Gemfile')
+        let commands = ['rspec --color']
     endif
     if exists('commands')
         write
