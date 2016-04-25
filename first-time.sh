@@ -72,6 +72,7 @@ brew install --HEAD neovim/neovim/neovim
 brew install \
     imagemagick \
     pngcrush
+brew cask install gimp
 
 # Development
 brew install \
