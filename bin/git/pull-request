@@ -48,11 +48,15 @@ upstream_repo = upstream_url.empty? ? nil : host.extract_repo(upstream_url)
 branch = `git name`.strip
 main_branch = `git main-branch`.strip
 if branch == main_branch and upstream_repo.nil?
-    $stderr.puts "Do not work on the \"#{main_branch}\" branch."
-    exit 1
+  $stderr.puts "Do not work on the \"#{main_branch}\" branch."
+  exit 1
 end
 
-system 'git', 'first-push'
+unless system 'git', 'first-push'
+  exit $?.exitstatus
+end
 
 repo = host.extract_repo url
-system 'open', host.pull_request_url.call(upstream_repo, repo, branch)
+unless system 'open', host.pull_request_url.call(upstream_repo, repo, branch)
+  exit $?.exitstatus
+end
