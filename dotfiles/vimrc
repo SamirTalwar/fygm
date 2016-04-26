@@ -89,14 +89,14 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'jwhitley/vim-literate-coffeescript'
 Plugin 'noc7c9/vim-iced-coffee-script'
+Plugin 'mxw/vim-jsx'
+Plugin 'gkz/vim-ls'
+Plugin 'lambdatoast/elm.vim'
 Plugin 'tpope/vim-haml'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'slim-template/vim-slim'
 Plugin 'lunaru/vim-less'
 Plugin 'tpope/vim-liquid'
-Plugin 'mxw/vim-jsx'
-Plugin 'gkz/vim-ls'
-Plugin 'lambdatoast/elm.vim'
 Plugin 'docker/docker', {'rtp': '/contrib/syntax/vim/'}
 
 " Colour parentheses according to depth
