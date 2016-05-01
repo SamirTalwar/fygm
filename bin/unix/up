@@ -137,6 +137,7 @@ function update-docker-machine {
 }
 
 function update-docker {
+    local image
     if exists docker && (! exists docker-machine || [[ -n $DOCKER_MACHINE_NAME && $(docker-machine status $DOCKER_MACHINE_NAME) == 'Running' ]]); then
         docker-cleanup
         docker images | tail -n+2 | awk '{ print $1 ":" $2 }' | while read image; do
