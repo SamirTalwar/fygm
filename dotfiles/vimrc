@@ -223,6 +223,8 @@ function! RunTest()
         let commands = ['cabal build', 'cabal test']
     elseif file_readable('Gemfile')
         let commands = ['rspec --color']
+    elseif file_readable('package.json')
+        let commands = ['npm test']
     endif
     if exists('commands')
         write
