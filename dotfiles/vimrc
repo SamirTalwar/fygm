@@ -78,6 +78,7 @@ Plugin 'guns/vim-sexp'
 Plugin 'Valloric/YouCompleteMe'
 
 Plugin 'plasticboy/vim-markdown'
+Plugin 'ensime/ensime-vim'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'guns/vim-clojure-static'
 Plugin 'DrTom/fsharp-vim'
