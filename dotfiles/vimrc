@@ -216,8 +216,20 @@ autocmd Syntax *.clj RainbowParenthesesLoadRound
 autocmd Syntax *.clj RainbowParenthesesLoadSquare
 autocmd Syntax *.clj RainbowParenthesesLoadBraces
 
-" Set up shortcuts for running tests.
+" Set up shortcuts for running the build and tests.
 " This depends on the user running the `watch-it` script in another window.
+function! Build()
+    if exists('g:build_commands')
+        let commands = g:build_commands
+    endif
+    if exists('commands')
+        write
+        call writefile(['set -e'] + commands, '/tmp/watching-it')
+    else
+        echoerr("I don't know how to build this repository.")
+    endif
+endfunction
+
 function! RunTest()
     if exists('g:test_commands')
         let commands = g:test_commands
@@ -238,6 +250,7 @@ function! RunTest()
     endif
 endfunction
 
+noremap <Leader>b :call Build()<CR>
 noremap <Leader>t :call RunTest()<CR>
 
 let g:GPGPreferSymmetric=1 " Use symmetric GPG encryption with new files
