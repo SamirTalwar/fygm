@@ -196,6 +196,7 @@ autocmd BufLeave,FocusLost * nested silent! update " Autosave whenever leaving a
 let g:tmux_navigator_save_on_switch = 1
 
 let g:vim_markdown_folding_disabled = 1
+let g:elm_setup_keybindings = 0
 
 autocmd BufNewFile,BufRead *.ru set filetype=ruby
 autocmd BufNewFile,BufRead *.gradle set filetype=groovy
