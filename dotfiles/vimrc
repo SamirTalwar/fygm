@@ -221,6 +221,8 @@ autocmd Syntax *.clj RainbowParenthesesLoadBraces
 function! Build()
     if exists('g:build_commands')
         let commands = g:build_commands
+    elseif file_readable('Makefile')
+        let commands = ['make']
     endif
     if exists('commands')
         write
