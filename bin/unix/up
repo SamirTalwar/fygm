@@ -68,6 +68,7 @@ function update-apt {
 function update-sdk {
     if exists sdk; then
         sdk selfupdate
+        source "$HOME/.sdkman/bin/sdkman-init.sh"
         sdk outdated | tail +2 | awk '{ print $1 }' | while read candidate; do
             yes | sdk install $candidate
         done
