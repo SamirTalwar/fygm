@@ -2,29 +2,29 @@
 
 require 'pathname'
 
-LINKS = %w{
-  ghc/ghci.conf
-  gitconfig
-  gitignore
-  i3
-  nvim
-  nvimrc
-  racketrc
-  tmux
-  tmux.conf
-  vimrc
-  zlogin
-  zlogout
-  zprezto
-  zpreztorc
-  zprofile
-  zshenv
-  zshrc
-}
-
 @dir = Pathname.new(File.dirname(__FILE__)).realpath
 @dotfiles = @dir + 'dotfiles'
 @home = Pathname.new(ENV['HOME']).realpath
+
+@links = {
+  @home + '.ghc/ghci.conf' => @dotfiles + 'ghc/ghci.conf',
+  @home + '.gitconfig' => @dotfiles + 'gitconfig',
+  @home + '.gitignore' => @dotfiles + 'gitignore',
+  @home + '.i3' => @dotfiles + 'i3',
+  @home + '.nvim' => @home + '.vim',
+  @home + '.nvimrc' => @dotfiles + 'vimrc',
+  @home + '.racketrc' => @dotfiles + 'racketrc',
+  @home + '.tmux' => @dotfiles + 'tmux',
+  @home + '.tmux.conf' => @dotfiles + 'tmux.conf',
+  @home + '.vimrc' => @dotfiles + 'vimrc',
+  @home + '.zlogin' => @dotfiles + 'zlogin',
+  @home + '.zlogout' => @dotfiles + 'zlogout',
+  @home + '.zprezto' => @dotfiles + 'zprezto',
+  @home + '.zpreztorc' => @dotfiles + 'zpreztorc',
+  @home + '.zprofile' => @dotfiles + 'zprofile',
+  @home + '.zshenv' => @dotfiles + 'zshenv',
+  @home + '.zshrc' => @dotfiles + 'zshrc',
+}
 
 def run command
   unless system command
@@ -40,8 +40,8 @@ def link source, destination
 end
 
 puts 'Symlinking configuration files'
-LINKS.each do |file|
-  link (@dotfiles + file), (@home + ".#{file}")
+@links.each do |destination, source|
+  link source, destination
 end
 
 unless (@dir + 'first-time-run').exist?
