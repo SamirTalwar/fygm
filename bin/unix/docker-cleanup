@@ -2,13 +2,19 @@
 
 set -e
 
+xargs=$(whence gxargs || whence xargs)
+
 echo 'Removing exited processes...'
-docker ps --filter=status=exited --quiet | xargs docker rm
+docker ps --filter=status=exited --quiet \
+    | $xargs --no-run-if-empty docker rm
 
 echo 'Removing dangling images...'
-docker images --filter=dangling=true --quiet | xargs docker rmi
+docker images --filter=dangling=true --quiet \
+    | $xargs --no-run-if-empty docker rmi
 
 echo 'Removing dangling, unnamed volumes...'
-docker volume ls --filter=dangling=true --quiet | awk '$0 ~ "^[0-9a-f]{64}$"' | xargs docker volume rm
+docker volume ls --filter=dangling=true --quiet \
+    | awk '$0 ~ "^[0-9a-f]{64}$"' \
+    | $xargs --no-run-if-empty docker volume rm
 
 echo 'Your Docker is now sparkling.'
