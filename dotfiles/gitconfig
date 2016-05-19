@@ -8,6 +8,8 @@
 	ignorecase = false
 [color]
 	ui = true
+[commit]
+	gpgsign = true
 [push]
 	default = simple
 [transfer]
