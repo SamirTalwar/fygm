@@ -195,6 +195,7 @@ let g:tmux_navigator_save_on_switch = 1
 let g:vim_markdown_folding_disabled = 1
 let g:elm_setup_keybindings = 0
 
+autocmd BufNewFile,BufRead Guardfile,*.Guardfile set filetype=ruby
 autocmd BufNewFile,BufRead *.ru set filetype=ruby
 autocmd BufNewFile,BufRead *.gradle set filetype=groovy
 autocmd BufNewFile,BufRead *.stylus set filetype=sass
