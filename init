@@ -10,6 +10,7 @@ require 'pathname'
   @home + '.ghc/ghci.conf' => @dotfiles + 'ghc/ghci.conf',
   @home + '.gitconfig' => @dotfiles + 'gitconfig',
   @home + '.gitignore' => @dotfiles + 'gitignore',
+  @home + '.gnupg/gpg.conf' => @dotfiles + 'gnupg/gpg.conf',
   @home + '.i3' => @dotfiles + 'i3',
   @home + '.nvim' => @home + '.vim',
   @home + '.nvimrc' => @dotfiles + 'vimrc',
