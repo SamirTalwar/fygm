@@ -11,6 +11,7 @@ require 'pathname'
   @home + '.gitconfig' => @dotfiles + 'gitconfig',
   @home + '.gitignore' => @dotfiles + 'gitignore',
   @home + '.gnupg/gpg.conf' => @dotfiles + 'gnupg/gpg.conf',
+  @home + '.gnupg/gpg-agent.conf' => @dotfiles + 'gnupg/gpg-agent.conf',
   @home + '.i3' => @dotfiles + 'i3',
   @home + '.nvim' => @home + '.vim',
   @home + '.nvimrc' => @dotfiles + 'vimrc',
