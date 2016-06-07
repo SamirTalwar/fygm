@@ -2,11 +2,6 @@
 
 export PATH="/usr/local/bin:$PATH"
 
-java_present=false
-if /usr/libexec/java_home -F >/dev/null 2>&1; then
-    java_present=true
-fi
-
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && \
     source "$HOME/.rvm/scripts/rvm"
 [[ -s "$HOME/.nvm/nvm.sh" ]] && \
@@ -16,9 +11,6 @@ fi
     source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 command -v brew >/dev/null 2>&1 || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-if $java_present; then
-    command -v sdk >/dev/null 2>&1 || curl -fs http://get.sdkman.io | bash
-fi
 command -v rvm >/dev/null 2>&1 || curl -fsSL https://get.rvm.io | bash -s head --ruby
 
 set -e
@@ -97,14 +89,14 @@ nvm_version="$(http https://api.github.com/repos/creationix/nvm/tags | jq -r '.[
 curl -fsSL "https://raw.githubusercontent.com/creationix/nvm/$nvm_version/install.sh" | bash
 
 # Java Development
-if $java_present; then
-    brew install \
-        leiningen \
-        maven
-    quietly sdk install scala
-    quietly sdk install sbt
-    quietly sdk install groovy
-fi
+brew cask install java
+brew install \
+    leiningen \
+    maven
+command -v sdk >/dev/null 2>&1 || curl -fs http://get.sdkman.io | bash
+quietly sdk install scala
+quietly sdk install sbt
+quietly sdk install groovy
 
 # Containerisation
 brew cask install \
