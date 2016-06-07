@@ -93,10 +93,8 @@ brew cask install \
 brew install haskell-stack
 raco pkg install --auto --skip-installed xrepl
 
-if ! command -v nvm >/dev/null; then
-    nvm_version="$(http https://api.github.com/repos/creationix/nvm/tags | jq -r '.[0].name')"
-    curl -fsSL "https://raw.githubusercontent.com/creationix/nvm/$nvm_version/install.sh" | bash
-fi
+nvm_version="$(http https://api.github.com/repos/creationix/nvm/tags | jq -r '.[0].name')"
+curl -fsSL "https://raw.githubusercontent.com/creationix/nvm/$nvm_version/install.sh" | bash
 
 # Java Development
 if $java_present; then
