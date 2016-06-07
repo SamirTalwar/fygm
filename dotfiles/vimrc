@@ -242,6 +242,8 @@ function! RunTest()
         let commands = ['rspec --color']
     elseif file_readable('package.json')
         let commands = ['npm test']
+    elseif file_readable('Makefile')
+        let commands = ['make test']
     endif
     if exists('commands')
         write
