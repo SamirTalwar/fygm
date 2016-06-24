@@ -238,6 +238,8 @@ function! RunTest()
         let commands = ['stack test']
     elseif file_readable('Setup.hs')
         let commands = ['cabal build', 'cabal test']
+    elseif file_readable('Rakefile')
+        let commands = ['rake']
     elseif file_readable('Gemfile')
         let commands = ['rspec --color']
     elseif file_readable('package.json')
