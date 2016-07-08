@@ -101,10 +101,12 @@ function update-all-gems {
 }
 
 function update-pip {
-    if exists pip; then
-        pip install --upgrade setuptools
-        pip install --upgrade pip
-    fi
+    for pip in pip pip3; do
+        echo "Using $pip..."
+        if exists $pip; then
+            $pip list --outdated | field 1 | gxargs --no-run-if-empty $pip install --upgrade
+        fi
+    done
 }
 
 function update-nvm {
