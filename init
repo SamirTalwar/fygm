@@ -13,8 +13,7 @@ require 'pathname'
   @home + '.gnupg/gpg.conf' => @dotfiles + 'gnupg/gpg.conf',
   @home + '.gnupg/gpg-agent.conf' => @dotfiles + 'gnupg/gpg-agent.conf',
   @home + '.i3' => @dotfiles + 'i3',
-  @home + '.nvim' => @home + '.vim',
-  @home + '.nvimrc' => @dotfiles + 'vimrc',
+  @home + '.config/nvim/init.vim' => @dotfiles + 'vimrc',
   @home + '.racketrc' => @dotfiles + 'racketrc',
   @home + '.tmux' => @dotfiles + 'tmux',
   @home + '.tmux.conf' => @dotfiles + 'tmux.conf',
@@ -38,7 +37,7 @@ end
 def link source, destination
   destination.dirname.mkpath()
   destination.unlink() if destination.symlink?
-  File.symlink source, destination
+  destination.make_symlink(source)
 end
 
 puts 'Symlinking configuration files'

@@ -119,15 +119,8 @@ Plugin 'jamessan/vim-gnupg'
 
 call vundle#end()
 
-" Map Ctrl+{h,j,k,l} to the equivalent Alt+{} because Alt doesn't work in Mac terminals.
-nmap <C-h> <M-h>
-nmap <C-j> <M-j>
-nmap <C-k> <M-k>
-nmap <C-l> <M-l>
-nmap <C-S-h> <M-S-h>
-nmap <C-S-j> <M-S-j>
-nmap <C-S-k> <M-S-k>
-nmap <C-S-l> <M-S-l>
+" In Neovim, <C-h> generates a backspace. We want it to do the right thing.
+nmap <BS> <C-h>
 
 " Search for two characters with the ' key.
 nmap ' <Plug>(easymotion-s2)

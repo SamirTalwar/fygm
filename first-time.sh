@@ -58,10 +58,6 @@ brew install \
     fswatch \
     terminal-notifier
 
-# Text Editing
-brew install vim
-brew install --HEAD neovim/neovim/neovim
-
 # Image Manipulation
 brew install \
     imagemagick \
@@ -87,6 +83,11 @@ raco pkg install --auto --skip-installed xrepl
 
 nvm_version="$(http https://api.github.com/repos/creationix/nvm/tags | jq -r '.[0].name')"
 curl -fsSL "https://raw.githubusercontent.com/creationix/nvm/$nvm_version/install.sh" | bash
+
+# Text Editing
+brew install vim
+brew install --HEAD neovim/neovim/neovim
+pip3 install neovim
 
 # Java Development
 brew cask install java

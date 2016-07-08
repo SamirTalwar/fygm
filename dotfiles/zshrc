@@ -13,6 +13,13 @@ else
     alias ls='ls --color'
 fi
 
+if [[ -n "$(command -v nvim)" ]]; then
+    alias vim='nvim'
+    alias view='nvim -R'
+fi
+
+alias dm=docker-machine
+
 if (( $+commands[brew] )) && [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]]; then
     source $(brew --prefix)/etc/profile.d/autojump.sh
 fi
@@ -33,8 +40,6 @@ if [[ -d '/usr/local/opt/google-cloud-sdk' ]]; then
     source '/usr/local/opt/google-cloud-sdk/path.zsh.inc'
     source '/usr/local/opt/google-cloud-sdk/completion.zsh.inc'
 fi
-
-alias dm=docker-machine
 
 if [[ -e ~/.zshrc.local ]]; then
     source ~/.zshrc.local
