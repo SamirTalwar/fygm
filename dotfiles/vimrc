@@ -189,7 +189,8 @@ noremap <Leader>e :call CheckForErrors()<CR>
 
 noremap <Leader>l :lclose<CR>
 
-autocmd BufLeave,FocusLost * nested silent! update " Autosave whenever leaving a modified file, for any reason.
+set autoread
+autocmd BufLeave,FocusLost * nested silent! update " Autosave the file when losing focus or leaving the buffer.
 let g:tmux_navigator_save_on_switch = 1
 
 let g:jsx_ext_required = 0
