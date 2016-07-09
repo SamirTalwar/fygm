@@ -75,13 +75,11 @@ brew install \
     mercurial \
     python \
     python3 \
-    racket \
     sqlite
 brew cask install \
     elm-platform \
     haskell-platform
 brew install haskell-stack
-raco pkg install --auto --skip-installed xrepl
 
 nvm_version="$(http https://api.github.com/repos/creationix/nvm/tags | jq -r '.[0].name')"
 curl -fsSL "https://raw.githubusercontent.com/creationix/nvm/$nvm_version/install.sh" | bash
