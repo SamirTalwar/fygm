@@ -22,6 +22,8 @@ function quietly {
     set -x
 }
 
+brew update
+
 # Shell
 brew install \
     autojump \
