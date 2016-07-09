@@ -45,12 +45,9 @@ puts 'Symlinking configuration files'
   link source, destination
 end
 
-unless (@dir + 'first-time-run').exist?
-  puts 'Running first-time setup'
-  run (@dir + 'first-time.sh').to_s
-  (@dir + 'first-time-run').open 'w' do |f|
-    f.write ''
-  end
+if RbConfig::CONFIG['host_os'] =~ /^darwin/
+  puts 'Installing useful software'
+  run (@dir + 'install-apps.mac.sh').to_s
 end
 
 puts 'Installing vim plugins'
