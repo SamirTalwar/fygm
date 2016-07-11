@@ -49,8 +49,6 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'altercation/vim-colors-solarized'
-
 " Extra functionality in the status bar
 Plugin 'bling/vim-airline'
 " Search files using Ctrl+P
@@ -145,13 +143,6 @@ set wildignore+=*.class,build,target " Ignore Java output
 set wildignore+=_site " Ignore Jekyll output
 set wildignore+=dist " Ignore Haskell output
 set wildignore+=node_modules " Ignore local node.js dependencies
-
-" Set up Solarized Dark
-set t_Co=256
-let g:solarized_termcolors=16
-let g:Powerline_theme='solarized16'
-set background=dark
-colorscheme solarized
 
 " Set the font
 if has("mac")
