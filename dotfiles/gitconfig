@@ -2,7 +2,7 @@
 	name = Samir Talwar
 	email = samir@noodlesandwich.com
 [core]
-	editor = vim
+	editor = nvim
 	excludesfile = ~/.gitignore
 	autocrlf = input
 	ignorecase = false
