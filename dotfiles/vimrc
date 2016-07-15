@@ -97,6 +97,7 @@ Plugin 'lunaru/vim-less'
 Plugin 'tpope/vim-liquid'
 Plugin 'docker/docker', {'rtp': '/contrib/syntax/vim/'}
 Plugin 'rodjek/vim-puppet'
+Plugin 'tpope/vim-cucumber'
 
 " Colour parentheses according to depth
 Plugin 'kien/rainbow_parentheses.vim'
