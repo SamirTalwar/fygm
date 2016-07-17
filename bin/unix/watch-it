@@ -1,10 +1,15 @@
 #!/usr/bin/env zsh
 
-FILE=/tmp/watching-it
+set -e
 
-rm -f $FILE
-mkfifo $FILE
+file="/tmp/watching-it-$(tmux display-message -p '#{session_id}-#{window_index}')"
+
+if [[ -e $file ]]; then
+    cat $file >/dev/null
+    rm -f $file
+fi
+mkfifo $file
 
 while true; do
-    zsh -c "clear; $(cat $FILE)"
+    zsh -c "clear; $(cat $file)" || :
 done

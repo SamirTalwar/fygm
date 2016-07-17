@@ -203,6 +203,12 @@ autocmd Syntax *.clj RainbowParenthesesLoadRound
 autocmd Syntax *.clj RainbowParenthesesLoadSquare
 autocmd Syntax *.clj RainbowParenthesesLoadBraces
 
+function! WriteToWatchFile(commands)
+    let file = substitute(system("tmux display-message -p '/tmp/watching-it-#{session_id}-#{window_index}'"), '[[:cntrl:]]', '', 'g')
+    write
+    call writefile(['set -e'] + a:commands, file)
+endfunction
+
 " Set up shortcuts for running the build and tests.
 " This depends on the user running the `watch-it` script in another window.
 function! Build()
@@ -212,8 +218,7 @@ function! Build()
         let commands = ['make']
     endif
     if exists('commands')
-        write
-        call writefile(['set -e'] + commands, '/tmp/watching-it')
+        call WriteToWatchFile(commands)
     else
         echoerr("I don't know how to build this repository.")
     endif
@@ -236,8 +241,7 @@ function! RunTest()
         let commands = ['make test']
     endif
     if exists('commands')
-        write
-        call writefile(['set -e'] + commands, '/tmp/watching-it')
+        call WriteToWatchFile(commands)
     else
         echoerr("I don't know how to run the tests for this repository.")
     endif
