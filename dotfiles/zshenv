@@ -1,5 +1,6 @@
 path=(
     ~/bin/unix
+    ~/.local/bin
     ~/.rvm/bin
     ./node_modules/.bin
     $path

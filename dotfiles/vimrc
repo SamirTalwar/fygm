@@ -5,6 +5,9 @@ set nobackup " Disable the backup file (ends in '~')
 filetype on
 filetype off
 
+let mapleader=',' " The <Leader> in map operations is the ','
+let maplocalleader=';' " The <LocalLeader> in map operations is the ';'
+
 set encoding=utf-8 " Assume UTF-8
 
 set number " Show line numbers
@@ -29,7 +32,7 @@ set ignorecase " Ignore case when searching
 set smartcase " Search case-insensitively until a capital letter is typed
 set hlsearch " Highlight search results in the document
 " Type ',c' to clear search results
-nnoremap ,c :let @/=""<CR>
+nnoremap <leader>c :let @/=""<CR>:GhcModTypeClear<CR>
 
 set mouse=a " Let the user use the mouse
 
@@ -40,8 +43,6 @@ command WQ wq " Bind ':WQ' to ':wq'
 " Move up and down according to the printed lines, including wrapping, not physical lines
 nnoremap j gj
 nnoremap k gk
-let mapleader=',' " The <Leader> in map operations is the ','
-let maplocalleader=';' " The <LocalLeader> in map operations is the ';'
 set pastetoggle=<F2> " F2 toggles paste mode
 
 " Set up Vundle
@@ -63,6 +64,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'editorconfig/editorconfig-vim'
 " Connect up tmux
 Plugin 'christoomey/vim-tmux-navigator'
+" Interactive command execution
+Plugin 'Shougo/vimproc.vim'
 
 " Better repeat support with '.'
 Plugin 'tpope/vim-repeat'
@@ -83,6 +86,7 @@ Plugin 'derekwyatt/vim-scala'
 Plugin 'guns/vim-clojure-static'
 Plugin 'DrTom/fsharp-vim'
 Plugin 'elixir-lang/vim-elixir'
+Plugin 'eagletmt/ghcmod-vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'jwhitley/vim-literate-coffeescript'
@@ -105,8 +109,6 @@ Plugin 'ap/vim-css-color'
 
 " Git support
 Plugin 'tpope/vim-fugitive'
-" Interactive command execution
-Plugin 'Shougo/vimproc.vim'
 " Highlight errors
 Plugin 'scrooloose/syntastic'
 " Search across the JVM classpath
@@ -172,15 +174,6 @@ elseif has("unix")
 elseif has("win32")
     set guifont=Consolas:h12
 endif
-
-function CheckForErrors()
-    SyntasticCheck
-    Errors
-endfunction
-
-noremap <Leader>e :call CheckForErrors()<CR>
-
-noremap <Leader>l :lclose<CR>
 
 set autoread
 autocmd BufLeave,FocusLost * nested silent! update " Autosave the file when losing focus or leaving the buffer.
@@ -250,8 +243,21 @@ function! RunTest()
     endif
 endfunction
 
+function! CheckForErrors()
+    write
+    if &ft == 'haskell'
+        GhcModCheck
+    else
+        SyntasticCheck
+        Errors
+    endif
+endfunction
+
 noremap <Leader>b :call Build()<CR>
 noremap <Leader>t :call RunTest()<CR>
+noremap <Leader>p :GhcModType<CR>
+noremap <Leader>e :call CheckForErrors()<CR>
+noremap <Leader>l :lclose<CR>
 
 let g:GPGPreferSymmetric=1 " Use symmetric GPG encryption with new files
 
