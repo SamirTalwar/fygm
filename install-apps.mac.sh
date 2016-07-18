@@ -51,6 +51,8 @@ brew install \
     httpie \
     jq \
     moreutils \
+    pinentry \
+    pinentry-mac \
     unrar \
     wget
 
