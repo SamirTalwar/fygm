@@ -9,5 +9,6 @@ git checkout-master-and-update
 
 if [[ $current_branch != $main_branch ]] && git show-ref --quiet refs/heads/$current_branch; then
     git checkout $current_branch
+    git submodule sync --recursive
     git submodule update --init --recursive
 fi
