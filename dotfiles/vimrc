@@ -31,8 +31,6 @@ set incsearch " Search as you type
 set ignorecase " Ignore case when searching
 set smartcase " Search case-insensitively until a capital letter is typed
 set hlsearch " Highlight search results in the document
-" Type ',c' to clear search results
-nnoremap <leader>c :let @/=""<CR>:GhcModTypeClear<CR>
 
 set mouse=a " Let the user use the mouse
 
@@ -204,14 +202,21 @@ autocmd Syntax *.clj RainbowParenthesesLoadRound
 autocmd Syntax *.clj RainbowParenthesesLoadSquare
 autocmd Syntax *.clj RainbowParenthesesLoadBraces
 
+function! ClearHighlights()
+    let @/=""
+    if &ft == 'haskell'
+        GhcModTypeClear
+    endif
+endfunction
+
+" Set up shortcuts for running the build and tests.
+" This depends on the user running the `watch-it` script in another window.
 function! WriteToWatchFile(commands)
     let file = substitute(system("tmux display-message -p '/tmp/watching-it-#{session_id}-#{window_index}'"), '[[:cntrl:]]', '', 'g')
     write
     call writefile(['set -e'] + a:commands, file)
 endfunction
 
-" Set up shortcuts for running the build and tests.
-" This depends on the user running the `watch-it` script in another window.
 function! Build()
     if exists('g:build_commands')
         let commands = g:build_commands
@@ -258,6 +263,7 @@ function! CheckForErrors()
     endif
 endfunction
 
+noremap <leader>c :call ClearHighlights()<CR>
 noremap <Leader>b :call Build()<CR>
 noremap <Leader>t :call RunTest()<CR>
 noremap <Leader>p :GhcModType<CR>
