@@ -89,6 +89,7 @@ curl -fsSL "https://raw.githubusercontent.com/creationix/nvm/$nvm_version/instal
 # Text Editing
 brew install vim
 brew install --HEAD neovim/neovim/neovim
+pip2 install neovim
 pip3 install neovim
 
 # Java Development
