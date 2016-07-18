@@ -117,3 +117,6 @@ if ! fgrep /usr/local/bin/zsh /etc/shells; then
     sudo bash -c "echo /usr/local/bin/zsh >> /etc/shells"
 fi
 sudo chsh -s /usr/local/bin/zsh $USER
+
+brew linkapps
+brew cleanup
