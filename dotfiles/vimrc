@@ -73,7 +73,7 @@ Plug 'Lokaltog/vim-easymotion'
 " Precision editing for S-expressions
 Plug 'guns/vim-sexp'
 " Autocompletion
-Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 Plug 'plasticboy/vim-markdown'
 Plug 'ensime/ensime-vim'
@@ -144,6 +144,10 @@ set wildignore+=*.class,build,target " Ignore Java output
 set wildignore+=_site " Ignore Jekyll output
 set wildignore+=dist " Ignore Haskell output
 set wildignore+=node_modules " Ignore local node.js dependencies
+
+" Set up Deoplete with Tab-completion
+let g:deoplete#enable_at_startup = 1
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " Set up Solarized Dark
 set t_Co=256
