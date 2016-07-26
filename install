@@ -1,30 +1,31 @@
 #!/usr/bin/env ruby
 
+require 'open-uri'
 require 'pathname'
 
 @dir = Pathname.new(File.dirname(__FILE__)).realpath
-@dotfiles = @dir + 'dotfiles'
+@dotfiles = @dir / 'dotfiles'
 @home = Pathname.new(ENV['HOME']).realpath
 
 @links = {
-  @home + '.ghc/ghci.conf' => @dotfiles + 'ghc/ghci.conf',
-  @home + '.gitconfig' => @dotfiles + 'gitconfig',
-  @home + '.gitignore' => @dotfiles + 'gitignore',
-  @home + '.gnupg/gpg.conf' => @dotfiles + 'gnupg/gpg.conf',
-  @home + '.gnupg/gpg-agent.conf' => @dotfiles + 'gnupg/gpg-agent.conf',
-  @home + '.i3' => @dotfiles + 'i3',
-  @home + '.config/nvim/init.vim' => @dotfiles + 'vimrc',
-  @home + '.racketrc' => @dotfiles + 'racketrc',
-  @home + '.tmux' => @dotfiles + 'tmux',
-  @home + '.tmux.conf' => @dotfiles + 'tmux.conf',
-  @home + '.vimrc' => @dotfiles + 'vimrc',
-  @home + '.zlogin' => @dotfiles + 'zlogin',
-  @home + '.zlogout' => @dotfiles + 'zlogout',
-  @home + '.zprezto' => @dotfiles + 'zprezto',
-  @home + '.zpreztorc' => @dotfiles + 'zpreztorc',
-  @home + '.zprofile' => @dotfiles + 'zprofile',
-  @home + '.zshenv' => @dotfiles + 'zshenv',
-  @home + '.zshrc' => @dotfiles + 'zshrc',
+  @home / '.ghc/ghci.conf' => @dotfiles / 'ghc/ghci.conf',
+  @home / '.gitconfig' => @dotfiles / 'gitconfig',
+  @home / '.gitignore' => @dotfiles / 'gitignore',
+  @home / '.gnupg/gpg.conf' => @dotfiles / 'gnupg/gpg.conf',
+  @home / '.gnupg/gpg-agent.conf' => @dotfiles / 'gnupg/gpg-agent.conf',
+  @home / '.i3' => @dotfiles / 'i3',
+  @home / '.config/nvim/init.vim' => @dotfiles / 'vimrc',
+  @home / '.racketrc' => @dotfiles / 'racketrc',
+  @home / '.tmux' => @dotfiles / 'tmux',
+  @home / '.tmux.conf' => @dotfiles / 'tmux.conf',
+  @home / '.vimrc' => @dotfiles / 'vimrc',
+  @home / '.zlogin' => @dotfiles / 'zlogin',
+  @home / '.zlogout' => @dotfiles / 'zlogout',
+  @home / '.zprezto' => @dotfiles / 'zprezto',
+  @home / '.zpreztorc' => @dotfiles / 'zpreztorc',
+  @home / '.zprofile' => @dotfiles / 'zprofile',
+  @home / '.zshenv' => @dotfiles / 'zshenv',
+  @home / '.zshrc' => @dotfiles / 'zshrc',
 }
 
 def run command
@@ -47,13 +48,13 @@ end
 
 if RbConfig::CONFIG['host_os'] =~ /^darwin/
   puts 'Installing useful software'
-  run (@dir + 'install-apps.mac.sh').to_s
+  run (@dir / 'install-apps.mac.sh').to_s
 end
 
 puts 'Installing vim plugins'
-unless (@home + '.vim/bundle/Vundle.vim').exist?
+unless (@home / '.vim/bundle/Vundle.vim').exist?
   run 'git clone git@github.com:VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim'
 end
 
 run 'vim +PluginInstall +PluginUpdate +PluginClean! +"silent VimProcInstall" +qall'
-run (@home + '.vim/bundle/YouCompleteMe/install.py').to_s
+run (@home / '.vim/bundle/YouCompleteMe/install.py').to_s
