@@ -133,7 +133,7 @@ autocmd BufWritePre * :%s/\s\+$//e " Delete trailing spaces
 " Show tabs, trailing spaces and lines that extend past the right of the screen
 " Disable for text and Markdown files
 set list!
-set listchars=tab:->,trail:·,extends:>
+set listchars=tab:\ \ ,trail:·,extends:>
 autocmd Filetype text setlocal nolist
 autocmd Filetype markdown setlocal nolist colorcolumn=0
 
