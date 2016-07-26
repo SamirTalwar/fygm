@@ -43,83 +43,80 @@ nnoremap j gj
 nnoremap k gk
 set pastetoggle=<F2> " F2 toggles paste mode
 
-" Set up Vundle
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'altercation/vim-colors-solarized'
+" Set up plugins
+call plug#begin()
+Plug 'altercation/vim-colors-solarized'
 
 " Extra functionality in the status bar
-Plugin 'bling/vim-airline'
+Plug 'bling/vim-airline'
 " Search files using Ctrl+P
-Plugin 'kien/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
 " Search everything with :Ag
-Plugin 'rking/ag.vim'
+Plug 'rking/ag.vim'
 " File/directory management
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 " EditorConfig support
-Plugin 'editorconfig/editorconfig-vim'
+Plug 'editorconfig/editorconfig-vim'
 " Connect up tmux
-Plugin 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-navigator'
 " Interactive command execution
-Plugin 'Shougo/vimproc.vim'
+Plug 'Shougo/vimproc.vim', {'do': ':VimProcInstall'}
 
 " Better repeat support with '.'
-Plugin 'tpope/vim-repeat'
+Plug 'tpope/vim-repeat'
 " Insert, delete and change surrounding elements ('(', '[', '<', etc.)
-Plugin 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 " Comment with '\'
-Plugin 'tpope/vim-commentary'
+Plug 'tpope/vim-commentary'
 " Move about with ','
-Plugin 'Lokaltog/vim-easymotion'
+Plug 'Lokaltog/vim-easymotion'
 " Precision editing for S-expressions
-Plugin 'guns/vim-sexp'
+Plug 'guns/vim-sexp'
 " Autocompletion
-Plugin 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
 
-Plugin 'plasticboy/vim-markdown'
-Plugin 'ensime/ensime-vim'
-Plugin 'derekwyatt/vim-scala'
-Plugin 'guns/vim-clojure-static'
-Plugin 'DrTom/fsharp-vim'
-Plugin 'elixir-lang/vim-elixir'
-Plugin 'fatih/vim-go'
-Plugin 'eagletmt/ghcmod-vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'jwhitley/vim-literate-coffeescript'
-Plugin 'noc7c9/vim-iced-coffee-script'
-Plugin 'mxw/vim-jsx'
-Plugin 'gkz/vim-ls'
-Plugin 'elmcast/elm-vim'
-Plugin 'tpope/vim-haml'
-Plugin 'digitaltoad/vim-jade'
-Plugin 'slim-template/vim-slim'
-Plugin 'lunaru/vim-less'
-Plugin 'tpope/vim-liquid'
-Plugin 'docker/docker', {'rtp': '/contrib/syntax/vim/'}
-Plugin 'rodjek/vim-puppet'
-Plugin 'tpope/vim-cucumber'
+Plug 'plasticboy/vim-markdown'
+Plug 'ensime/ensime-vim'
+Plug 'derekwyatt/vim-scala'
+Plug 'guns/vim-clojure-static'
+Plug 'DrTom/fsharp-vim'
+Plug 'elixir-lang/vim-elixir'
+Plug 'fatih/vim-go'
+Plug 'eagletmt/ghcmod-vim'
+Plug 'pangloss/vim-javascript'
+Plug 'kchmck/vim-coffee-script'
+Plug 'jwhitley/vim-literate-coffeescript'
+Plug 'noc7c9/vim-iced-coffee-script'
+Plug 'mxw/vim-jsx'
+Plug 'gkz/vim-ls'
+Plug 'elmcast/elm-vim'
+Plug 'tpope/vim-haml'
+Plug 'digitaltoad/vim-jade'
+Plug 'slim-template/vim-slim'
+Plug 'lunaru/vim-less'
+Plug 'tpope/vim-liquid'
+Plug 'docker/docker', {'rtp': '/contrib/syntax/vim/'}
+Plug 'rodjek/vim-puppet'
+Plug 'tpope/vim-cucumber'
 
 " Colour parentheses according to depth
-Plugin 'kien/rainbow_parentheses.vim'
+Plug 'kien/rainbow_parentheses.vim'
 " Colour text denoting a CSS colour as itself
-Plugin 'ap/vim-css-color'
+Plug 'ap/vim-css-color'
 
 " Git support
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 " Highlight errors
-Plugin 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 " Search across the JVM classpath
-Plugin 'tpope/vim-classpath'
+Plug 'tpope/vim-classpath'
 " Clojure REPL
-Plugin 'tpope/vim-fireplace'
+Plug 'tpope/vim-fireplace'
 
 " Edit encrypted files
-Plugin 'jamessan/vim-gnupg'
+Plug 'jamessan/vim-gnupg'
 
-call vundle#end()
+call plug#end()
 
 " In Neovim, <C-h> generates a backspace. We want it to do the right thing.
 nmap <BS> <C-h>

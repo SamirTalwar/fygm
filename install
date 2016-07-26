@@ -52,9 +52,10 @@ if RbConfig::CONFIG['host_os'] =~ /^darwin/
 end
 
 puts 'Installing vim plugins'
-unless (@home / '.vim/bundle/Vundle.vim').exist?
-  run 'git clone git@github.com:VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim'
+autoload = @home / '.config/nvim/autoload'
+autoload.mkpath()
+open('https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim') do |plug|
+  (autoload / 'plug.vim').write(plug.read)
 end
 
-run 'vim +PluginInstall +PluginUpdate +PluginClean! +"silent VimProcInstall" +qall'
-run (@home / '.vim/bundle/YouCompleteMe/install.py').to_s
+run 'nvim +PlugInstall +PlugUpdate +PlugClean! +qall'
