@@ -183,6 +183,13 @@ let g:jsx_ext_required = 0
 let g:vim_markdown_folding_disabled = 1
 let g:elm_setup_keybindings = 0
 
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
 autocmd BufNewFile,BufRead Guardfile,*.Guardfile set filetype=ruby
 autocmd BufNewFile,BufRead *.ru set filetype=ruby
 autocmd BufNewFile,BufRead *.gradle set filetype=groovy
@@ -202,6 +209,8 @@ autocmd VimEnter *.clj RainbowParenthesesToggle
 autocmd Syntax *.clj RainbowParenthesesLoadRound
 autocmd Syntax *.clj RainbowParenthesesLoadSquare
 autocmd Syntax *.clj RainbowParenthesesLoadBraces
+
+autocmd FileWritePre,BufWritePre *.go GoImports
 
 function! ClearHighlights()
     let @/=""
