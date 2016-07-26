@@ -1,10 +1,6 @@
 set nocompatible " Disable vi support
 set nobackup " Disable the backup file (ends in '~')
 
-" Seems to fix a bunch of problems with filetype plugins
-filetype on
-filetype off
-
 let mapleader=',' " The <Leader> in map operations is the ','
 let maplocalleader=';' " The <LocalLeader> in map operations is the ';'
 
@@ -12,22 +8,16 @@ set encoding=utf-8 " Assume UTF-8
 
 set number " Show line numbers
 set colorcolumn=121 " Show the margin
-set ruler " Show the cursor position
 set showcmd " Show the command at the bottom
 set laststatus=2 " Always show the status bar at the bottom
 
-set backspace=indent,eol,start " Allow backspace/delete past the beginning or end of the line
-
-set smarttab " 'Shift' when at the beginning of the line; 'tab' otherwise
 set expandtab " Spaces, not tabs
-set autoindent " Indent according to the previous line
 set smartindent " Indent or dedent automatically when opening and closing blocks
 set shiftwidth=4 " Indent and dedent
 set tabstop=4 " The distance travelled by the Tab key after characters
 
 set linebreak " Wrap at a word boundary (doesn't work in list mode)
 
-set incsearch " Search as you type
 set ignorecase " Ignore case when searching
 set smartcase " Search case-insensitively until a capital letter is typed
 set hlsearch " Highlight search results in the document
@@ -45,6 +35,11 @@ set pastetoggle=<F2> " F2 toggles paste mode
 
 " Set up plugins
 call plug#begin()
+
+" Sensible defaults
+Plug 'tpope/vim-sensible'
+
+" Solarized colour scheme
 Plug 'altercation/vim-colors-solarized'
 
 " Extra functionality in the status bar
@@ -73,7 +68,7 @@ Plug 'Lokaltog/vim-easymotion'
 " Precision editing for S-expressions
 Plug 'guns/vim-sexp'
 " Autocompletion
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
 
 Plug 'plasticboy/vim-markdown'
 Plug 'ensime/ensime-vim'
@@ -150,9 +145,6 @@ let g:deoplete#enable_at_startup = 1
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " Set up Solarized Dark
-set t_Co=256
-let g:solarized_termcolors=16
-let g:Powerline_theme='solarized16'
 set background=dark
 colorscheme solarized
 
@@ -176,7 +168,6 @@ elseif has("win32")
     set guifont=Consolas:h12
 endif
 
-set autoread
 autocmd BufLeave,FocusLost * nested silent! update " Autosave the file when losing focus or leaving the buffer.
 let g:tmux_navigator_save_on_switch = 1
 
@@ -282,6 +273,3 @@ noremap <Leader>e :call CheckForErrors()<CR>
 noremap <Leader>l :lclose<CR>
 
 let g:GPGPreferSymmetric=1 " Use symmetric GPG encryption with new files
-
-filetype plugin indent on " Re-enable filetype detection with plugins and indentation
-syntax enable " Enable syntax highlighting
