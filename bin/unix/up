@@ -23,7 +23,8 @@ ALL_PACKAGE_MANAGERS=(
     cabal
     raco
     gcloud
-    vim-plugins
+    vim-plug
+    nvim-plug
     docker-machine
     docker
 )
@@ -139,15 +140,15 @@ function update-gcloud {
     fi
 }
 
-function update-vim-plugins {
-    if [[ -d "$HOME/.vim/bundle/Vundle.vim" ]]; then
-        vim +PluginInstall +PluginUpdate +PluginClean! +qall
+function update-vim-plug {
+    if [[ -e "$HOME/.vim/autoload/plug.vim" ]]; then
+        vim +PlugInstall +PlugUpdate +PlugClean! +qall
     fi
-    if [[ -d "$HOME/.vim/bundle/vimproc.vim" ]]; then
-        vim +'silent VimProcInstall' +qall
-    fi
-    if [[ -d "$HOME/.vim/bundle/YouCompleteMe" ]]; then
-        "$HOME/.vim/bundle/YouCompleteMe/install.py"
+}
+
+function update-nvim-plug {
+    if [[ -e "$HOME/.config/nvim/autoload/plug.vim" ]]; then
+        nvim +PlugInstall +PlugUpdate +PlugClean! +qall
     fi
 }
 
