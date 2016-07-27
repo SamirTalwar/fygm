@@ -58,4 +58,4 @@ open('https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim') do |
   (autoload / 'plug.vim').write(plug.read)
 end
 
-run 'nvim +PlugInstall +PlugUpdate +PlugClean! +qall'
+run 'nvim +PlugInstall +PlugClean! +qall'
