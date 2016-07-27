@@ -205,7 +205,6 @@ autocmd Syntax *.clj RainbowParenthesesLoadBraces
 autocmd FileWritePre,BufWritePre *.go GoImports
 
 function! ClearHighlights()
-    let @/=""
     if &ft == 'haskell'
         GhcModTypeClear
     endif
@@ -265,7 +264,7 @@ function! CheckForErrors()
     endif
 endfunction
 
-noremap <leader>c :call ClearHighlights()<CR>
+noremap <leader>c :nohlsearch<CR>:call ClearHighlights()<CR>
 noremap <Leader>b :call Build()<CR>
 noremap <Leader>t :call RunTest()<CR>
 noremap <Leader>p :GhcModType<CR>
