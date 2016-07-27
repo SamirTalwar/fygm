@@ -116,6 +116,9 @@ call plug#end()
 " In Neovim, <C-h> generates a backspace. We want it to do the right thing.
 nmap <BS> <C-h>
 
+" Yank, without jank.
+vnoremap <expr>y "my\"" . v:register . "y`y"
+
 " Search for two characters with the ' key.
 nmap ' <Plug>(easymotion-s2)
 vmap ' <Plug>(easymotion-s2)
