@@ -206,6 +206,7 @@ autocmd Syntax *.clj RainbowParenthesesLoadSquare
 autocmd Syntax *.clj RainbowParenthesesLoadBraces
 
 autocmd FileWritePre,BufWritePre *.go GoImports
+autocmd FileWritePre,BufWritePre * call CheckForErrors()
 
 function! ClearHighlights()
     if &ft == 'haskell'
@@ -258,7 +259,6 @@ function! RunTest()
 endfunction
 
 function! CheckForErrors()
-    write
     if &ft == 'haskell'
         GhcModCheck
     else
@@ -271,7 +271,7 @@ noremap <leader>c :nohlsearch<CR>:call ClearHighlights()<CR>
 noremap <Leader>b :call Build()<CR>
 noremap <Leader>t :call RunTest()<CR>
 noremap <Leader>p :GhcModType<CR>
-noremap <Leader>e :call CheckForErrors()<CR>
+noremap <Leader>e :write<CR>:call CheckForErrors()<CR>
 noremap <Leader>l :lclose<CR>
 
 let g:GPGPreferSymmetric=1 " Use symmetric GPG encryption with new files
