@@ -83,6 +83,7 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'jwhitley/vim-literate-coffeescript'
 Plug 'noc7c9/vim-iced-coffee-script'
 Plug 'mxw/vim-jsx'
+Plug 'flowtype/vim-flow'
 Plug 'gkz/vim-ls'
 Plug 'elmcast/elm-vim'
 Plug 'tpope/vim-haml'
@@ -174,8 +175,9 @@ endif
 autocmd BufLeave,FocusLost * nested silent! update " Autosave the file when losing focus or leaving the buffer.
 let g:tmux_navigator_save_on_switch = 1
 
-let g:jsx_ext_required = 0
 let g:vim_markdown_folding_disabled = 1
+let g:jsx_ext_required = 0
+let g:flow#autoclose = 1
 let g:elm_setup_keybindings = 0
 
 let g:go_highlight_functions = 1
