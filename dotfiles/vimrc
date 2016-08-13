@@ -46,8 +46,8 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'bling/vim-airline'
 " Search files using Ctrl+P
 Plug 'kien/ctrlp.vim'
-" Search everything with :Ag
-Plug 'rking/ag.vim'
+" Search everything with :Ack
+Plug 'mileszs/ack.vim'
 " File/directory management
 Plug 'scrooloose/nerdtree'
 " EditorConfig support
@@ -147,6 +147,15 @@ set wildignore+=node_modules " Ignore local node.js dependencies
 " Set up Deoplete with Tab-completion
 let g:deoplete#enable_at_startup = 1
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+if executable('ag')
+    " Use ag for :grep and :Ack.
+    set grepprg=ag\ --nogroup\ --nocolor
+    let g:ackprg = 'ag --vimgrep'
+
+    " Alias :Ag as :Ack.
+    command -nargs=* Ag Ack <args>
+endif
 
 " Set up Solarized Dark
 set background=dark
