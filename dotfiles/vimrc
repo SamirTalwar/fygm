@@ -136,13 +136,6 @@ autocmd Filetype markdown setlocal nolist colorcolumn=0
 " Show/hide NERDTree with <§>, and find the current file with <±>
 map § :NERDTreeToggle<CR>
 map ± :NERDTreeFind<CR>
-" Refresh the CtrlP cache with <F5>
-map <F5> :CtrlPClearCache<CR>
-
-set wildignore+=*.class,build,target " Ignore Java output
-set wildignore+=_site " Ignore Jekyll output
-set wildignore+=dist " Ignore Haskell output
-set wildignore+=node_modules " Ignore local node.js dependencies
 
 " Set up Deoplete with Tab-completion
 let g:deoplete#enable_at_startup = 1
@@ -155,6 +148,10 @@ if executable('ag')
 
     " Alias :Ag as :Ack.
     command -nargs=* Ag Ack <args>
+
+    " Use ag in CtrlP for listing files.
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+    let g:ctrlp_use_caching = 0 " ag is fast enough that CtrlP doesn't need to cache.
 endif
 
 " Set up Solarized Dark
