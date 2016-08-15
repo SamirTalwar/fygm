@@ -125,6 +125,7 @@ nmap ' <Plug>(easymotion-s2)
 vmap ' <Plug>(easymotion-s2)
 
 autocmd BufWritePre * :%s/\s\+$//e " Delete trailing spaces
+autocmd FileWritePre,BufWritePre *.go GoImports
 
 " Show tabs, trailing spaces and lines that extend past the right of the screen
 " Disable for text and Markdown files
@@ -216,8 +217,7 @@ autocmd Syntax *.clj RainbowParenthesesLoadRound
 autocmd Syntax *.clj RainbowParenthesesLoadSquare
 autocmd Syntax *.clj RainbowParenthesesLoadBraces
 
-autocmd FileWritePre,BufWritePre *.go GoImports
-autocmd FileWritePre,BufWritePre * call CheckForErrors()
+autocmd FileWritePost,BufWritePost * call CheckForErrors()
 
 function! ClearHighlights()
     if &ft == 'haskell'
