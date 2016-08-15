@@ -270,12 +270,8 @@ function! RunTest()
 endfunction
 
 function! CheckForErrors()
-    if &ft == 'haskell'
-        GhcModCheck
-    else
-        SyntasticCheck
-        Errors
-    endif
+    SyntasticCheck
+    Errors
 endfunction
 
 noremap <leader>c :nohlsearch<CR>:call ClearHighlights()<CR>
