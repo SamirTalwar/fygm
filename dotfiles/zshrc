@@ -4,6 +4,7 @@ fi
 
 setopt clobber
 unsetopt correct
+setopt interactivecomments
 
 export KEYTIMEOUT=1
 bindkey '^R' history-incremental-search-backward
