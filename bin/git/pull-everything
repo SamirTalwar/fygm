@@ -2,5 +2,5 @@
 
 set -e
 
-git pull --ff-only --prune "$@"
+git pull --ff-only "$@"
 git submodule update --init --recursive

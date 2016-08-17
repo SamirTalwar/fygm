@@ -10,6 +10,8 @@
 	ui = true
 [commit]
 	gpgsign = true
+[fetch]
+	prune = true
 [push]
 	default = simple
 [transfer]
