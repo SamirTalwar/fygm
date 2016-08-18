@@ -217,6 +217,7 @@ autocmd Syntax *.clj RainbowParenthesesLoadRound
 autocmd Syntax *.clj RainbowParenthesesLoadSquare
 autocmd Syntax *.clj RainbowParenthesesLoadBraces
 
+autocmd FileWritePost,BufWritePost * call Autoformat()
 autocmd FileWritePost,BufWritePost * call CheckForErrors()
 
 function! ClearHighlights()
@@ -272,6 +273,12 @@ endfunction
 function! CheckForErrors()
     SyntasticCheck
     Errors
+endfunction
+
+function! Autoformat()
+    if &ft == 'javascript' && executable('standard')
+        silent ! standard --fix %<
+    endif
 endfunction
 
 noremap <leader>c :nohlsearch<CR>:call ClearHighlights()<CR>
