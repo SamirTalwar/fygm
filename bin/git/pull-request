@@ -14,7 +14,7 @@ hosts = [
   Host.new(
     'GitHub',
     'git@github.com',
-    ->(upstream_repo, repo, branch) {
+    lambda { |upstream_repo, repo, branch|
       if upstream_repo
         owner = repo.split('/')[0]
         "https://github.com/#{upstream_repo}/compare/master...#{owner}:#{branch}?expand=1"
@@ -25,7 +25,7 @@ hosts = [
   Host.new(
     'BitBucket',
     'git@bitbucket.org',
-    ->(upstream_repo, repo, branch) {
+    lambda { |upstream_repo, repo, branch|
       "https://bitbucket.org/#{upstream_repo || repo}/pull-request/new?source=#{repo}%3A%3A#{branch}%3A%3Amaster"
     })
 ]
