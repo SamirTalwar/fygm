@@ -230,7 +230,7 @@ endfunction
 " This depends on the user running the `watch-it` script in another window.
 function! WriteToWatchFile(commands)
     let file = substitute(system("tmux display-message -p '/tmp/watching-it-#{session_id}-#{window_index}'"), '[[:cntrl:]]', '', 'g')
-    write
+    update
     call writefile(['set -e'] + a:commands, file)
 endfunction
 
@@ -285,7 +285,7 @@ noremap <leader>c :nohlsearch<CR>:call ClearHighlights()<CR>
 noremap <Leader>b :call Build()<CR>
 noremap <Leader>t :call RunTest()<CR>
 noremap <Leader>p :GhcModType<CR>
-noremap <Leader>e :write<CR>:call CheckForErrors()<CR>
+noremap <Leader>e :update<CR>:call CheckForErrors()<CR>
 noremap <Leader>l :lclose<CR>
 
 let g:GPGPreferSymmetric=1 " Use symmetric GPG encryption with new files
