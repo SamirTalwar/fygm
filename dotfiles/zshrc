@@ -9,6 +9,23 @@ setopt interactivecomments
 export KEYTIMEOUT=1
 bindkey '^R' history-incremental-search-backward
 
+path=(
+    ~/bin/unix
+    ~/.local/bin
+    ~/.rvm/bin
+    ./node_modules/.bin
+    $path
+)
+
+if [[ "$OSTYPE" == darwin* ]]; then
+    export BROWSER='open'
+    path=(
+        ~/bin/mac
+        ~/Library/Haskell/bin
+        $path
+    )
+fi
+
 if [[ "$OSTYPE" == darwin* ]]; then
     alias ls='ls -G'
 else

@@ -1,20 +1,3 @@
-path=(
-    ~/bin/unix
-    ~/.local/bin
-    ~/.rvm/bin
-    ./node_modules/.bin
-    $path
-)
-
-if [[ "$OSTYPE" == darwin* ]]; then
-    export BROWSER='open'
-    path=(
-        ~/bin/mac
-        ~/Library/Haskell/bin
-        $path
-    )
-fi
-
 export EDITOR='nvim'
 export VISUAL='nvim'
 export PAGER='less'
