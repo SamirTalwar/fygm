@@ -160,11 +160,16 @@ function update-docker-machine {
 }
 
 function update-docker {
-    local image
+    local image filter
     if exists docker && (! exists docker-machine || [[ -n $DOCKER_MACHINE_NAME && $(docker-machine status $DOCKER_MACHINE_NAME) == 'Running' ]]); then
         docker-cleanup
+        if [[ -e ~/.up-docker-filter ]]; then
+            filter=$(cat ~/.up-docker-filter)
+        fi
         docker images | tail -n+2 | awk '{ print $1 ":" $2 }' | while read image; do
-            if [[ $image =~ '^([a-z]+\.)?gcr\.io' ]]; then
+            if [[ -n $filter && $image =~ $filter ]]; then
+                echo "Skipping $image."
+            elif [[ $image =~ '^([a-z]+\.)?gcr\.io' ]]; then
                 gcloud docker pull $image || :
             else
                 docker pull $image || :
@@ -197,6 +202,6 @@ fi
 for package_manager in $package_managers; do
     echo "Updating $package_manager..."
     echo "Updating $package_manager..." | sed 's/./=/g' # Underline the previous statement.
-    update-$package_manager
+    update-$package_manager || echo >&2 'Update failed.'
     echo
 done
