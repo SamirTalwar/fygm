@@ -114,6 +114,10 @@ Plug 'jamessan/vim-gnupg'
 
 call plug#end()
 
+" Wait 25ms for follow-up TTY input before processing; the default provided by
+" sensible.vim is 100ms, which is too slow when hitting <Esc><ch> quickly.
+set ttimeoutlen=25
+
 " In Neovim, <C-h> generates a backspace. We want it to do the right thing.
 nmap <BS> <C-h>
 
