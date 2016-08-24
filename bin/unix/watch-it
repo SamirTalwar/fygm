@@ -2,10 +2,16 @@
 
 set -e
 
+TIMEOUT=$(command -v gtimeout || command -v timeout || :)
+
 file="/tmp/watching-it-$(tmux display-message -p '#{session_id}-#{window_index}')"
 
 if [[ -e $file ]]; then
-    cat $file >/dev/null
+    if [[ -n $TIMEOUT ]]; then
+        $TIMEOUT 1 cat $file >/dev/null || :
+    else
+        cat $file >/dev/null
+    fi
     rm -f $file
 fi
 mkfifo $file
