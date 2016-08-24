@@ -13,8 +13,9 @@ set laststatus=2 " Always show the status bar at the bottom
 
 set expandtab " Spaces, not tabs
 set smartindent " Indent or dedent automatically when opening and closing blocks
-set shiftwidth=4 " Indent and dedent
-set tabstop=4 " The distance travelled by the Tab key after characters
+set shiftwidth=2 " Indent and dedent
+set tabstop=2 " Number of spaces that a <Tab> counts for
+set softtabstop=2 " The distance travelled by the Tab key after characters
 
 set linebreak " Wrap at a word boundary (doesn't work in list mode)
 
