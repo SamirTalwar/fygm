@@ -15,6 +15,4 @@ if [[ $upstream ]]; then
     git push origin $main_branch
 fi
 
-git submodule sync --recursive
-git submodule update --init --recursive
 git delete-old-branches
