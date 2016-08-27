@@ -12,6 +12,7 @@ SELF=$(realpath $0)
 ROOT=$(realpath $(dirname $SELF)/../..)
 
 ALL_PACKAGE_MANAGERS=(
+    nix
     brew
     apt
     sdk
@@ -48,6 +49,11 @@ function self-update {
     else
         return 1
     fi
+}
+
+function update-nix {
+    nix-channel --update
+    nix-env --upgrade
 }
 
 function update-brew {
