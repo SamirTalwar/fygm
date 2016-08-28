@@ -51,6 +51,7 @@ Plug 'kien/ctrlp.vim'
 Plug 'mileszs/ack.vim'
 " File/directory management
 Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 " EditorConfig support
 Plug 'editorconfig/editorconfig-vim'
 " Connect up tmux
