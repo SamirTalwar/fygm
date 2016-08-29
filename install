@@ -4,28 +4,28 @@ require 'open-uri'
 require 'pathname'
 
 @dir = Pathname.new(File.dirname(__FILE__)).realpath
-@dotfiles = @dir / 'dotfiles'
+@dotfiles = @dir + 'dotfiles'
 @home = Pathname.new(ENV['HOME']).realpath
 
 @links = {
-  @home / '.ghc/ghci.conf' => @dotfiles / 'ghc/ghci.conf',
-  @home / '.gitconfig' => @dotfiles / 'gitconfig',
-  @home / '.gitignore' => @dotfiles / 'gitignore',
-  @home / '.gnupg/gpg.conf' => @dotfiles / 'gnupg/gpg.conf',
-  @home / '.gnupg/gpg-agent.conf' => @dotfiles / 'gnupg/gpg-agent.conf',
-  @home / '.i3' => @dotfiles / 'i3',
-  @home / '.config/nvim/init.vim' => @dotfiles / 'vimrc',
-  @home / '.racketrc' => @dotfiles / 'racketrc',
-  @home / '.tmux' => @dotfiles / 'tmux',
-  @home / '.tmux.conf' => @dotfiles / 'tmux.conf',
-  @home / '.vimrc' => @dotfiles / 'vimrc',
-  @home / '.zlogin' => @dotfiles / 'zlogin',
-  @home / '.zlogout' => @dotfiles / 'zlogout',
-  @home / '.zprezto' => @dotfiles / 'zprezto',
-  @home / '.zpreztorc' => @dotfiles / 'zpreztorc',
-  @home / '.zprofile' => @dotfiles / 'zprofile',
-  @home / '.zshenv' => @dotfiles / 'zshenv',
-  @home / '.zshrc' => @dotfiles / 'zshrc',
+  @home + '.ghc+ghci.conf' => @dotfiles + 'ghc+ghci.conf',
+  @home + '.gitconfig' => @dotfiles + 'gitconfig',
+  @home + '.gitignore' => @dotfiles + 'gitignore',
+  @home + '.gnupg/gpg.conf' => @dotfiles + 'gnupg/gpg.conf',
+  @home + '.gnupg/gpg-agent.conf' => @dotfiles + 'gnupg/gpg-agent.conf',
+  @home + '.i3' => @dotfiles + 'i3',
+  @home + '.config/nvim/init.vim' => @dotfiles + 'vimrc',
+  @home + '.racketrc' => @dotfiles + 'racketrc',
+  @home + '.tmux' => @dotfiles + 'tmux',
+  @home + '.tmux.conf' => @dotfiles + 'tmux.conf',
+  @home + '.vimrc' => @dotfiles + 'vimrc',
+  @home + '.zlogin' => @dotfiles + 'zlogin',
+  @home + '.zlogout' => @dotfiles + 'zlogout',
+  @home + '.zprezto' => @dotfiles + 'zprezto',
+  @home + '.zpreztorc' => @dotfiles + 'zpreztorc',
+  @home + '.zprofile' => @dotfiles + 'zprofile',
+  @home + '.zshenv' => @dotfiles + 'zshenv',
+  @home + '.zshrc' => @dotfiles + 'zshrc',
 }
 
 def run command
@@ -48,14 +48,16 @@ end
 
 if RbConfig::CONFIG['host_os'] =~ /^darwin/
   puts 'Installing useful software'
-  run (@dir / 'install-apps.mac.sh').to_s
+  run (@dir + 'install-apps.mac.sh').to_s
 end
 
 puts 'Installing vim plugins'
-autoload = @home / '.config/nvim/autoload'
+autoload = @home + '.config/nvim/autoload'
 autoload.mkpath()
 open('https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim') do |plug|
-  (autoload / 'plug.vim').write(plug.read)
+  (autoload + 'plug.vim').open 'w' do |f|
+    f.write plug.read
+  end
 end
 
 run 'nvim +PlugInstall +PlugClean! +qall'
