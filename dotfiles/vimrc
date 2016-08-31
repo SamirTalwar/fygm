@@ -143,6 +143,9 @@ autocmd Filetype markdown setlocal nolist colorcolumn=0
 map § :NERDTreeToggle<CR>
 map ± :NERDTreeFind<CR>
 
+" Show hidden files in NERDTree.
+let NERDTreeShowHidden=1
+
 " Set up Deoplete with Tab-completion
 let g:deoplete#enable_at_startup = 1
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
