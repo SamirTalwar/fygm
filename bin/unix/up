@@ -52,8 +52,10 @@ function self-update {
 }
 
 function update-nix {
-    nix-channel --update
-    nix-env --upgrade
+    if exists nix-env; then
+        nix-channel --update
+        nix-env --upgrade
+    fi
 }
 
 function update-brew {
