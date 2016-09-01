@@ -18,7 +18,8 @@ ALL_PACKAGE_MANAGERS=(
     sdk
     rvm
     gem
-    pip
+    pip2
+    pip3
     nvm
     npm
     cabal
@@ -109,13 +110,19 @@ function update-all-gems {
     gem cleanup
 }
 
-function update-pip {
-    for pip in pip pip3; do
-        echo "Using $pip..."
-        if exists $pip; then
-            $pip list --outdated | field 1 | gxargs --no-run-if-empty $pip install --upgrade
-        fi
-    done
+function update-pip2 {
+    update-pip-version 2
+}
+
+function update-pip3 {
+    update-pip-version 3
+}
+
+function update-pip-version {
+    local pip="pip$1"
+    if exists $pip; then
+        $pip list --outdated | field 1 | gxargs --no-run-if-empty $pip install --upgrade
+    fi
 }
 
 function update-nvm {
