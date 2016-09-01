@@ -198,10 +198,15 @@ fi
 export NIX_SSL_CERT_FILE=$SSL_CERT_FILE
 unset SSL_CERT_FILE
 
+typeset -a package_managers
 if [[ $# -eq 0 ]]; then
     package_managers=($ALL_PACKAGE_MANAGERS)
+elif [[ $1 == '--except' ]]; then
+    package_managers=($ALL_PACKAGE_MANAGERS)
+    for package_manager in $@; do
+        package_managers[$package_managers[(i)$package_manager]]=()
+    done
 else
-    typeset -a package_managers
     i=0
     for package_manager in $@; do
         i=$((i + 1))
