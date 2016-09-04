@@ -226,7 +226,6 @@ autocmd Syntax *.clj RainbowParenthesesLoadRound
 autocmd Syntax *.clj RainbowParenthesesLoadSquare
 autocmd Syntax *.clj RainbowParenthesesLoadBraces
 
-autocmd FileWritePost,BufWritePost * call Autoformat()
 autocmd FileWritePost,BufWritePost * call CheckForErrors()
 
 function! ClearHighlights()
@@ -293,6 +292,7 @@ endfunction
 noremap <leader>c :nohlsearch<CR>:call ClearHighlights()<CR>
 noremap <Leader>b :call Build()<CR>
 noremap <Leader>t :call RunTest()<CR>
+noremap <Leader>a :call Autoformat()<CR>
 noremap <Leader>p :GhcModType<CR>
 noremap <Leader>e :update<CR>:call CheckForErrors()<CR>
 noremap <Leader>l :lclose<CR>
