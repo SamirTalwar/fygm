@@ -169,8 +169,8 @@ function update-nvim-plug {
 }
 
 function update-docker-machine {
-    if exists docker-machine; then
-        docker-machine upgrade
+    if exists docker-machine && [[ -n $DOCKER_MACHINE_NAME ]]; then
+        docker-machine upgrade $DOCKER_MACHINE_NAME
         waituntil --timeout=30 docker ps >/dev/null
     fi
 }
