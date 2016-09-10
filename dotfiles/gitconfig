@@ -29,6 +29,7 @@
 	pick-axe = log -p -S
 	praise = blame
 
+	checkout-and-pull = ! ~/bin/git/checkout-and-pull
 	checkout-master-and-update = ! ~/bin/git/checkout-master-and-update
 	delete-old-branches = ! ~/bin/git/delete-old-branches
 	delete-remote = ! ~/bin/git/delete-remote
@@ -41,6 +42,7 @@
 	update-master = ! ~/bin/git/update-master
 
 	a = ! git add-all
+	co = ! git checkout-and-pull
 	lg = ! git log-tree
 	m = ! git checkout-master-and-update
 	p = ! git pull-everything

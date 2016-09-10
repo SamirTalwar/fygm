@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -e
+
+git checkout "$@"
+git pull-everything
