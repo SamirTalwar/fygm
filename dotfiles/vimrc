@@ -40,9 +40,6 @@ call plug#begin()
 " Sensible defaults
 Plug 'tpope/vim-sensible'
 
-" Solarized colour scheme
-Plug 'altercation/vim-colors-solarized'
-
 " Extra functionality in the status bar
 Plug 'bling/vim-airline'
 " Search files using Ctrl+P
@@ -163,10 +160,6 @@ if executable('ag')
     let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
     let g:ctrlp_use_caching = 0 " ag is fast enough that CtrlP doesn't need to cache.
 endif
-
-" Set up Solarized Dark
-set background=dark
-colorscheme solarized
 
 " Set the font
 if has("mac")
