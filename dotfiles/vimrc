@@ -37,6 +37,9 @@ set pastetoggle=<F2> " F2 toggles paste mode
 " Set up plugins
 call plug#begin()
 
+" Colors
+Plug 'altercation/solarized', {'rtp': '/vim-colors-solarized'}
+
 " Sensible defaults
 Plug 'tpope/vim-sensible'
 
@@ -96,8 +99,6 @@ Plug 'tpope/vim-cucumber'
 
 " Colour parentheses according to depth
 Plug 'kien/rainbow_parentheses.vim'
-" Colour text denoting a CSS colour as itself
-Plug 'ap/vim-css-color'
 
 " Git support
 Plug 'tpope/vim-fugitive'
@@ -112,6 +113,11 @@ Plug 'tpope/vim-fireplace'
 Plug 'jamessan/vim-gnupg'
 
 call plug#end()
+
+" Make things pretty with Solarized
+syntax enable
+set background=dark
+colorscheme solarized
 
 " Wait 25ms for follow-up TTY input before processing; the default provided by
 " sensible.vim is 100ms, which is too slow when hitting <Esc><ch> quickly.
