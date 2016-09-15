@@ -104,7 +104,8 @@ quietly sdk install groovy
 
 # Containerisation
 brew cask install \
-    virtualbox
+    virtualbox \
+    virtualbox-extension-pack
 brew install \
     docker \
     docker-compose \
