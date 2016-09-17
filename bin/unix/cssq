@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'nokogiri'
+
+Nokogiri::HTML($stdin).css(ARGV[0]).each(&method(:puts))
