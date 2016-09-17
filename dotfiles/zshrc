@@ -22,6 +22,7 @@ if [[ "$OSTYPE" == darwin* ]]; then
     path=(
         ~/bin/mac
         ~/Library/Haskell/bin
+        /Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin
         $path
     )
 fi

@@ -92,6 +92,9 @@ brew install --HEAD neovim/neovim/neovim
 pip2 install neovim
 pip3 install neovim
 
+brew install pandoc
+brew cask install mactex
+
 # Java Development
 brew cask install java
 brew install \
