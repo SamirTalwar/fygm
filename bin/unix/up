@@ -78,9 +78,9 @@ function update-apt {
 
 function update-sdk {
     if exists sdk; then
-        sdk broadcast >/dev/null # to prevent it from popping up during `sdk outdated`
         sdk selfupdate
         source "$HOME/.sdkman/bin/sdkman-init.sh"
+        sdk broadcast # to prevent it from popping up during `sdk outdated`
         sdk outdated | tail +2 | awk '{ print $1 }' | while read candidate; do
             yes | sdk install $candidate
         done
