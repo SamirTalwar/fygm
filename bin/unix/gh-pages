@@ -9,35 +9,35 @@ gemfile_contents="source 'https://rubygems.org'
 gem 'github-pages'"
 
 function usage {
-    echo >&2 "$name init         Sets up the repository and installs the gems."
-    echo >&2 "$name update       Updates Ruby and the gems."
-    echo >&2 "$name serve        Starts the Jekyll server."
+  echo >&2 "$name init      Sets up the repository and installs the gems."
+  echo >&2 "$name update    Updates Ruby and the gems."
+  echo >&2 "$name serve     Starts the Jekyll server."
 }
 
 if [[ $# -ne 1 ]]; then
-    usage
-    exit 2
+  usage
+  exit 2
 fi
 
 case $1 in
-    init)
-        rvm use --create --ruby-version ruby@github-pages
-        <<< $gemfile_contents > Gemfile
-        gem install bundler
-        bundle install
-        ;;
-    update)
-        rvm use --create --ruby-version ruby@github-pages
-        (ls .ruby-{gemset,version}.* 2>/dev/null || :) | xargs rm -f
-        gem install bundler
-        bundle update
-        gem cleanup
-        ;;
-    serve)
-        bundle exec jekyll serve --watch
-        ;;
-    *)
-        usage
-        exit 1
-        ;;
+  init)
+    rvm use --create --ruby-version ruby@github-pages
+    <<< $gemfile_contents > Gemfile
+    gem install bundler
+    bundle install
+    ;;
+  update)
+    rvm use --create --ruby-version ruby@github-pages
+    (ls .ruby-{gemset,version}.* 2>/dev/null || :) | xargs rm -f
+    gem install bundler
+    bundle update
+    gem cleanup
+    ;;
+  serve)
+    bundle exec jekyll serve --watch
+    ;;
+  *)
+    usage
+    exit 1
+    ;;
 esac

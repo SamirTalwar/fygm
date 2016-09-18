@@ -3,7 +3,7 @@
 command=$1
 shift
 if [[ $command == 'help' ]]; then
-    docker-machine help
+  docker-machine help
 else
-    docker-machine $command $DOCKER_MACHINE_NAME $@
+  docker-machine $command $DOCKER_MACHINE_NAME $@
 fi

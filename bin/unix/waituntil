@@ -17,13 +17,13 @@ args = parser.parse_args()
 start_time = time.time()
 last_reported = start_time
 while subprocess.run(args.command).returncode != 0:
-    now = time.time()
-    if args.timeout and now - start_time > args.timeout:
-        print('Timed out waiting for the command to succeed.', file=sys.stderr)
-        sys.exit(1)
+  now = time.time()
+  if args.timeout and now - start_time > args.timeout:
+    print('Timed out waiting for the command to succeed.', file=sys.stderr)
+    sys.exit(1)
 
-    if args.report and now - last_reported > REPORT_DELAY:
-        print('Waited for %d seconds...' % (now - start_time), file=sys.stderr)
-        last_reported = now
+  if args.report and now - last_reported > REPORT_DELAY:
+    print('Waited for %d seconds...' % (now - start_time), file=sys.stderr)
+    last_reported = now
 
-    time.sleep(args.delay)
+  time.sleep(args.delay)

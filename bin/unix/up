@@ -1,10 +1,10 @@
 #!/usr/bin/env zsh
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && \
-    source "$HOME/.rvm/scripts/rvm"
+  source "$HOME/.rvm/scripts/rvm"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && \
-    export SDKMAN_DIR="$HOME/.sdkman" && \
-    source "$HOME/.sdkman/bin/sdkman-init.sh"
+  export SDKMAN_DIR="$HOME/.sdkman" && \
+  source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 set -e
 
@@ -12,192 +12,192 @@ SELF=$(realpath $0)
 ROOT=$(realpath $(dirname $SELF)/../..)
 
 ALL_PACKAGE_MANAGERS=(
-    nix
-    brew
-    apt
-    sdk
-    rvm
-    gem
-    pip2
-    pip3
-    nvm
-    npm
-    cabal
-    raco
-    gcloud
-    vim-plug
-    nvim-plug
-    docker-machine
-    docker
+  nix
+  brew
+  apt
+  sdk
+  rvm
+  gem
+  pip2
+  pip3
+  nvm
+  npm
+  cabal
+  raco
+  gcloud
+  vim-plug
+  nvim-plug
+  docker-machine
+  docker
 )
 
 function exists {
-    (( $+commands[$1] )) || command -v $1 >/dev/null
+  (( $+commands[$1] )) || command -v $1 >/dev/null
 }
 
 function self-update {
-    local output exit_code
-    output=$(cd $ROOT && git pull --ff-only 2>&1)
-    exit_code=$?
-    if [[ $exit_code -ne 0 ]]; then
-        echo "$output"
-        echo "Updating $ROOT failed with status code $exit_code."
-        exit $exit_code
-    fi
+  local output exit_code
+  output=$(cd $ROOT && git pull --ff-only 2>&1)
+  exit_code=$?
+  if [[ $exit_code -ne 0 ]]; then
+    echo "$output"
+    echo "Updating $ROOT failed with status code $exit_code."
+    exit $exit_code
+  fi
 
-    if [[ $output != 'Already up-to-date.' ]]; then
-        echo "$output"
-    else
-        return 1
-    fi
+  if [[ $output != 'Already up-to-date.' ]]; then
+    echo "$output"
+  else
+    return 1
+  fi
 }
 
 function update-nix {
-    if exists nix-env; then
-        SSL_CERT_FILE=$NIX_SSL_CERT_FILE nix-channel --update
-        SSL_CERT_FILE=$NIX_SSL_CERT_FILE nix-env --upgrade
-    fi
+  if exists nix-env; then
+    SSL_CERT_FILE=$NIX_SSL_CERT_FILE nix-channel --update
+    SSL_CERT_FILE=$NIX_SSL_CERT_FILE nix-env --upgrade
+  fi
 }
 
 function update-brew {
-    if exists brew; then
-        brew update
-        brew upgrade --all
-        brew cleanup
-        brew cask cleanup
-        brew linkapps
-    fi
+  if exists brew; then
+    brew update
+    brew upgrade --all
+    brew cleanup
+    brew cask cleanup
+    brew linkapps
+  fi
 }
 
 function update-apt {
-    if exists apt-get; then
-        apt-get update
-        apt-get upgrade
-    fi
+  if exists apt-get; then
+    apt-get update
+    apt-get upgrade
+  fi
 }
 
 function update-sdk {
-    if exists sdk; then
-        sdk selfupdate
-        source "$HOME/.sdkman/bin/sdkman-init.sh"
-        sdk broadcast # to prevent it from popping up during `sdk outdated`
-        sdk outdated | tail +2 | awk '{ print $1 }' | while read candidate; do
-            yes | sdk install $candidate
-        done
-    fi
+  if exists sdk; then
+    sdk selfupdate
+    source "$HOME/.sdkman/bin/sdkman-init.sh"
+    sdk broadcast # to prevent it from popping up during `sdk outdated`
+    sdk outdated | tail +2 | awk '{ print $1 }' | while read candidate; do
+      yes | sdk install $candidate
+    done
+  fi
 }
 
 function update-rvm {
-    if exists rvm; then
-        rvm get head
-        rvm cleanup all
-        rvm reload
-    fi
+  if exists rvm; then
+    rvm get head
+    rvm cleanup all
+    rvm reload
+  fi
 }
 
 function update-gem {
-    if exists gem; then
-        if exists rvm; then
-            (rvm use ruby@global && update-all-gems)
-        fi
-
-        update-all-gems
+  if exists gem; then
+    if exists rvm; then
+      (rvm use ruby@global && update-all-gems)
     fi
+
+    update-all-gems
+  fi
 }
 
 function update-all-gems {
-    gem update --system
-    gem update
-    gem cleanup
+  gem update --system
+  gem update
+  gem cleanup
 }
 
 function update-pip2 {
-    update-pip-version 2
+  update-pip-version 2
 }
 
 function update-pip3 {
-    update-pip-version 3
+  update-pip-version 3
 }
 
 function update-pip-version {
-    local pip="pip$1"
-    if exists $pip; then
-        $pip list --outdated | field 1 | gxargs --no-run-if-empty $pip install --upgrade
-    fi
+  local pip="pip$1"
+  if exists $pip; then
+    $pip list --outdated | field 1 | gxargs --no-run-if-empty $pip install --upgrade
+  fi
 }
 
 function update-nvm {
-    nvm_version="$(http https://api.github.com/repos/creationix/nvm/tags | jq -r '.[0].name')"
-    curl -fsSL "https://raw.githubusercontent.com/creationix/nvm/$nvm_version/install.sh" | bash
+  nvm_version="$(http https://api.github.com/repos/creationix/nvm/tags | jq -r '.[0].name')"
+  curl -fsSL "https://raw.githubusercontent.com/creationix/nvm/$nvm_version/install.sh" | bash
 }
 
 function update-npm {
-    if exists npm; then
-        npm update -g
-        npm upgrade -g
-    fi
+  if exists npm; then
+    npm update -g
+    npm upgrade -g
+  fi
 }
 
 function update-cabal {
-    if exists cabal; then
-        cabal update
-    fi
+  if exists cabal; then
+    cabal update
+  fi
 }
 
 function update-raco {
-    if exists raco; then
-        raco pkg update --all --auto
-    fi
+  if exists raco; then
+    raco pkg update --all --auto
+  fi
 }
 
 function update-gcloud {
-    if exists gcloud; then
-        yes | gcloud components update
-    fi
+  if exists gcloud; then
+    yes | gcloud components update
+  fi
 }
 
 function update-vim-plug {
-    if [[ -e "$HOME/.vim/autoload/plug.vim" ]]; then
-        vim +PlugInstall +PlugUpdate +PlugClean! +qall
-    fi
+  if [[ -e "$HOME/.vim/autoload/plug.vim" ]]; then
+    vim +PlugInstall +PlugUpdate +PlugClean! +qall
+  fi
 }
 
 function update-nvim-plug {
-    if [[ -e "$HOME/.config/nvim/autoload/plug.vim" ]]; then
-        nvim +PlugInstall +PlugUpdate +PlugClean! +qall
-    fi
+  if [[ -e "$HOME/.config/nvim/autoload/plug.vim" ]]; then
+    nvim +PlugInstall +PlugUpdate +PlugClean! +qall
+  fi
 }
 
 function update-docker-machine {
-    if exists docker-machine && [[ -n $DOCKER_MACHINE_NAME ]]; then
-        docker-machine upgrade $DOCKER_MACHINE_NAME
-        waituntil --timeout=30 docker ps >/dev/null
-    fi
+  if exists docker-machine && [[ -n $DOCKER_MACHINE_NAME ]]; then
+    docker-machine upgrade $DOCKER_MACHINE_NAME
+    waituntil --timeout=30 docker ps >/dev/null
+  fi
 }
 
 function update-docker {
-    local image filter
-    if exists docker && (! exists docker-machine || [[ -n $DOCKER_MACHINE_NAME && $(docker-machine status $DOCKER_MACHINE_NAME) == 'Running' ]]); then
-        docker-cleanup
-        if [[ -e ~/.up-docker-filter ]]; then
-            filter=$(cat ~/.up-docker-filter)
-        fi
-        docker images | tail -n+2 | awk '{ print $1 ":" $2 }' | while read image; do
-            if [[ -n $filter && $image =~ $filter ]]; then
-                echo "Skipping $image."
-            elif [[ $image =~ '^([a-z]+\.)?gcr\.io' ]]; then
-                gcloud docker pull $image || :
-            else
-                docker pull $image || :
-            fi
-        done
-        docker-cleanup
+  local image filter
+  if exists docker && (! exists docker-machine || [[ -n $DOCKER_MACHINE_NAME && $(docker-machine status $DOCKER_MACHINE_NAME) == 'Running' ]]); then
+    docker-cleanup
+    if [[ -e ~/.up-docker-filter ]]; then
+      filter=$(cat ~/.up-docker-filter)
     fi
+    docker images | tail -n+2 | awk '{ print $1 ":" $2 }' | while read image; do
+      if [[ -n $filter && $image =~ $filter ]]; then
+        echo "Skipping $image."
+      elif [[ $image =~ '^([a-z]+\.)?gcr\.io' ]]; then
+        gcloud docker pull $image || :
+      else
+        docker pull $image || :
+      fi
+    done
+    docker-cleanup
+  fi
 }
 
 if self-update; then
-    echo "Updated $ROOT. Restarting..."
-    exec $SELF "$@"
+  echo "Updated $ROOT. Restarting..."
+  exec $SELF "$@"
 fi
 
 # Workaround: Nix overrides the SSL/TLS certificate file, and the default
@@ -208,27 +208,27 @@ unset SSL_CERT_FILE
 
 typeset -a package_managers
 if [[ $# -eq 0 ]]; then
-    package_managers=($ALL_PACKAGE_MANAGERS)
+  package_managers=($ALL_PACKAGE_MANAGERS)
 elif [[ $1 == '--except' ]]; then
-    package_managers=($ALL_PACKAGE_MANAGERS)
-    for package_manager in $@; do
-        package_managers[$package_managers[(i)$package_manager]]=()
-    done
+  package_managers=($ALL_PACKAGE_MANAGERS)
+  for package_manager in $@; do
+    package_managers[$package_managers[(i)$package_manager]]=()
+  done
 else
-    i=0
-    for package_manager in $@; do
-        i=$((i + 1))
-        if [[ ${+ALL_PACKAGE_MANAGERS[(r)$package_manager]} -eq 0 ]]; then
-            echo >&2 "Cannot update \"$package_manager\"."
-            exit 1
-        fi
-        package_managers[$i]=$package_manager
-    done
+  i=0
+  for package_manager in $@; do
+    i=$((i + 1))
+    if [[ ${+ALL_PACKAGE_MANAGERS[(r)$package_manager]} -eq 0 ]]; then
+      echo >&2 "Cannot update \"$package_manager\"."
+      exit 1
+    fi
+    package_managers[$i]=$package_manager
+  done
 fi
 
 for package_manager in $package_managers; do
-    echo "Updating $package_manager..."
-    echo "Updating $package_manager..." | sed 's/./=/g' # Underline the previous statement.
-    update-$package_manager || echo >&2 'Update failed.'
-    echo
+  echo "Updating $package_manager..."
+  echo "Updating $package_manager..." | sed 's/./=/g' # Underline the previous statement.
+  update-$package_manager || echo >&2 'Update failed.'
+  echo
 done

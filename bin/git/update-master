@@ -8,6 +8,6 @@ main_branch=$(git main-branch)
 git checkout-master-and-update
 
 if [[ $current_branch != $main_branch ]] && git show-ref --quiet refs/heads/$current_branch; then
-    git checkout $current_branch
-    git pull-everything
+  git checkout $current_branch
+  git pull-everything
 fi

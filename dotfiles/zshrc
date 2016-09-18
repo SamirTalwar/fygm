@@ -10,42 +10,42 @@ export KEYTIMEOUT=1
 bindkey '^R' history-incremental-search-backward
 
 path=(
-    ~/bin/unix
-    ~/.local/bin
-    ~/.rvm/bin
-    ./node_modules/.bin
-    $path
+  ~/bin/unix
+  ~/.local/bin
+  ~/.rvm/bin
+  ./node_modules/.bin
+  $path
 )
 
 if [[ "$OSTYPE" == darwin* ]]; then
-    export BROWSER='open'
-    path=(
-        ~/bin/mac
-        ~/Library/Haskell/bin
-        /Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin
-        $path
-    )
+  export BROWSER='open'
+  path=(
+    ~/bin/mac
+    ~/Library/Haskell/bin
+    /Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin
+    $path
+  )
 fi
 
 if [[ "$OSTYPE" == darwin* ]]; then
-    alias ls='ls -G'
+  alias ls='ls -G'
 else
-    alias ls='ls --color'
+  alias ls='ls --color'
 fi
 
 if [[ -n "$(command -v nvim)" ]]; then
-    alias vim='nvim'
-    alias view='nvim -R'
+  alias vim='nvim'
+  alias view='nvim -R'
 fi
 
 alias dm=docker-machine
 
 if (( $+commands[brew] )) && [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]]; then
-    source $(brew --prefix)/etc/profile.d/autojump.sh
+  source $(brew --prefix)/etc/profile.d/autojump.sh
 fi
 
 if (( $+commands[thefuck] )); then
-    eval "$(thefuck --alias)"
+  eval "$(thefuck --alias)"
 fi
 
 if [[ -e /Users/samir/.nix-profile/etc/profile.d/nix.sh ]]; then
@@ -61,10 +61,10 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 if [[ -d '/usr/local/opt/google-cloud-sdk' ]]; then
-    source '/usr/local/opt/google-cloud-sdk/path.zsh.inc'
-    source '/usr/local/opt/google-cloud-sdk/completion.zsh.inc'
+  source '/usr/local/opt/google-cloud-sdk/path.zsh.inc'
+  source '/usr/local/opt/google-cloud-sdk/completion.zsh.inc'
 fi
 
 if [[ -e ~/.zshrc.local ]]; then
-    source ~/.zshrc.local
+  source ~/.zshrc.local
 fi

@@ -5,5 +5,5 @@ export PAGER='less'
 export GRADLE_OPTS="$GRADLE_OPTS -Dorg.gradle.daemon=true"
 
 if [[ -e ~/.zshenv.local ]]; then
-    source ~/.zshenv.local
+  source ~/.zshenv.local
 fi

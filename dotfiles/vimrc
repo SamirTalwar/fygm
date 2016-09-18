@@ -155,36 +155,36 @@ let g:deoplete#enable_at_startup = 1
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 if executable('ag')
-    " Use ag for :grep and :Ack.
-    set grepprg=ag\ --nogroup\ --nocolor
-    let g:ackprg = 'ag --vimgrep'
+  " Use ag for :grep and :Ack.
+  set grepprg=ag\ --nogroup\ --nocolor
+  let g:ackprg = 'ag --vimgrep'
 
-    " Alias :Ag as :Ack.
-    command -nargs=* Ag Ack <args>
+  " Alias :Ag as :Ack.
+  command -nargs=* Ag Ack <args>
 
-    " Use ag in CtrlP for listing files.
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-    let g:ctrlp_use_caching = 0 " ag is fast enough that CtrlP doesn't need to cache.
+  " Use ag in CtrlP for listing files.
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_use_caching = 0 " ag is fast enough that CtrlP doesn't need to cache.
 endif
 
 " Set the font
 if has("mac")
-    try
-        set guifont=Source\ Code\ Pro\ Light:h14
-    catch
-        set guifont=Menlo:h14
-    endtry
+  try
+    set guifont=Source\ Code\ Pro\ Light:h14
+  catch
+    set guifont=Menlo:h14
+  endtry
 elseif has("unix")
+  try
+    set guifont=Source\ Code\ Pro\ Light:h14
+  catch
     try
-        set guifont=Source\ Code\ Pro\ Light:h14
+      set guifont=Inconsolata\ 12
     catch
-        try
-            set guifont=Inconsolata\ 12
-        catch
-        endtry
     endtry
+  endtry
 elseif has("win32")
-    set guifont=Consolas:h12
+  set guifont=Consolas:h12
 endif
 
 autocmd BufLeave,FocusLost * nested silent! update " Autosave the file when losing focus or leaving the buffer.
@@ -230,70 +230,70 @@ autocmd Syntax *.clj RainbowParenthesesLoadBraces
 autocmd FileWritePost,BufWritePost * call CheckForErrors()
 
 function! ClearHighlights()
-    if &ft == 'haskell'
-        GhcModTypeClear
-    endif
+  if &ft == 'haskell'
+    GhcModTypeClear
+  endif
 endfunction
 
 " Set up shortcuts for running the build and tests.
 " This depends on the user running the `watch-it` script in another window.
 function! WriteToWatchFile(commands)
-    let file = substitute(system("tmux display-message -p '/tmp/watching-it-#{session_id}-#{window_index}'"), '[[:cntrl:]]', '', 'g')
-    update
-    call writefile(['set -e'] + a:commands, file)
+  let file = substitute(system("tmux display-message -p '/tmp/watching-it-#{session_id}-#{window_index}'"), '[[:cntrl:]]', '', 'g')
+  update
+  call writefile(['set -e'] + a:commands, file)
 endfunction
 
 function! Build()
-    if exists('g:build_commands')
-        let commands = g:build_commands
-    elseif file_readable('Makefile')
-        let commands = ['make']
-    endif
-    if exists('commands')
-        call WriteToWatchFile(commands)
-    else
-        echoerr("I don't know how to build this repository.")
-    endif
+  if exists('g:build_commands')
+    let commands = g:build_commands
+  elseif file_readable('Makefile')
+    let commands = ['make']
+  endif
+  if exists('commands')
+    call WriteToWatchFile(commands)
+  else
+    echoerr("I don't know how to build this repository.")
+  endif
 endfunction
 
 function! RunTest()
-    if exists('g:test_commands')
-        let commands = g:test_commands
-    elseif file_readable('stack.yaml')
-        let commands = ['stack test']
-    elseif file_readable('Setup.hs')
-        let commands = ['cabal build', 'cabal test']
-    elseif file_readable('Rakefile')
-        let commands = ['rake']
-    elseif file_readable('Gemfile')
-        let commands = ['rspec --color']
-    elseif file_readable('package.json')
-        let commands = ['npm test']
-    elseif file_readable('Makefile')
-        let commands = ['if [[ $(set +e; make -q check; echo $?) -ne 2 ]]', 'then', 'make check', 'else', 'make test', 'fi']
-    endif
-    if exists('commands')
-        call WriteToWatchFile(commands)
-    else
-        echoerr("I don't know how to run the tests for this repository.")
-    endif
+  if exists('g:test_commands')
+    let commands = g:test_commands
+  elseif file_readable('stack.yaml')
+    let commands = ['stack test']
+  elseif file_readable('Setup.hs')
+    let commands = ['cabal build', 'cabal test']
+  elseif file_readable('Rakefile')
+    let commands = ['rake']
+  elseif file_readable('Gemfile')
+    let commands = ['rspec --color']
+  elseif file_readable('package.json')
+    let commands = ['npm test']
+  elseif file_readable('Makefile')
+    let commands = ['if [[ $(set +e; make -q check; echo $?) -ne 2 ]]', 'then', 'make check', 'else', 'make test', 'fi']
+  endif
+  if exists('commands')
+    call WriteToWatchFile(commands)
+  else
+    echoerr("I don't know how to run the tests for this repository.")
+  endif
 endfunction
 
 function! CheckForErrors()
-    SyntasticCheck
-    Errors
+  SyntasticCheck
+  Errors
 endfunction
 
 function! Autoformat()
-    if &ft == 'javascript' || &ft == 'javascript.jsx'
-        if executable('standard')
-            silent ! standard --fix %
-            call CheckForErrors()
-        elseif executable('eslint')
-            silent ! eslint --fix %
-            call CheckForErrors()
-        endif
+  if &ft == 'javascript' || &ft == 'javascript.jsx'
+    if executable('standard')
+      silent ! standard --fix %
+      call CheckForErrors()
+    elseif executable('eslint')
+      silent ! eslint --fix %
+      call CheckForErrors()
     endif
+  endif
 endfunction
 
 noremap <leader>c :nohlsearch<CR>:call ClearHighlights()<CR>

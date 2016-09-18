@@ -1,5 +1,5 @@
 if [[ -d /usr/local/share/zsh/site-functions ]]; then
-    fpath=(/usr/local/share/zsh/site-functions $fpath)
+  fpath=(/usr/local/share/zsh/site-functions $fpath)
 fi
 
 source ${ZDOTDIR:-$HOME}/.zprezto/runcoms/zlogin
@@ -11,11 +11,11 @@ source ${ZDOTDIR:-$HOME}/.zprezto/runcoms/zlogin
 export GPG_TTY=$(tty)
 [[ -f ~/.gpg-agent-info ]] && source ~/.gpg-agent-info
 if [[ -S "${GPG_AGENT_INFO%%:*}" ]]; then
-    export GPG_AGENT_INFO
+  export GPG_AGENT_INFO
 else
-    eval $(gpg-agent --daemon --write-env-file ~/.gpg-agent-info)
+  eval $(gpg-agent --daemon --write-env-file ~/.gpg-agent-info)
 fi
 
 if [[ -e ~/.zlogin.local ]]; then
-    source ~/.zlogin.local
+  source ~/.zlogin.local
 fi

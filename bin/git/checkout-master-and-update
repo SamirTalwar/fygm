@@ -11,8 +11,8 @@ upstream=$(git config --get remote.upstream.url || :)
 git pull-everything
 
 if [[ $upstream ]]; then
-    git pull-everything upstream $main_branch
-    git push origin $main_branch
+  git pull-everything upstream $main_branch
+  git push origin $main_branch
 fi
 
 git delete-old-branches

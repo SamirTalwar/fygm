@@ -6,13 +6,13 @@ IMAGE='jenkinsci/jenkins'
 
 docker volume create --name=jenkins-data
 docker run --rm --volume=jenkins-data:/var/jenkins_home $IMAGE sh <<< '
-    chown -R jenkins: /var/jenkins_home
+  chown -R jenkins: /var/jenkins_home
 '
 
 docker ps --filter=name=jenkins --filter=status=exited --all --quiet | xargs docker rm
 docker run \
-    --detach \
-    --name=jenkins \
-    --publish=8082:8080 \
-    --volume=jenkins-data:/var/jenkins_home \
-    $IMAGE
+  --detach \
+  --name=jenkins \
+  --publish=8082:8080 \
+  --volume=jenkins-data:/var/jenkins_home \
+  $IMAGE

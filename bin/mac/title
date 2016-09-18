@@ -8,9 +8,9 @@ set -e
 title=$@
 if [[ -z $title ]]; then
   if git_directory=$(git rev-parse --show-toplevel 2>/dev/null); then
-    title=${PWD#$(dirname $git_directory)/}
+  title=${PWD#$(dirname $git_directory)/}
   else
-    title=$(basename $PWD)
+  title=$(basename $PWD)
   fi
 fi
 
