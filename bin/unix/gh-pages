@@ -34,7 +34,7 @@ case $1 in
     gem cleanup
     ;;
   serve)
-    bundle exec jekyll serve --watch
+    bundle exec jekyll serve --watch --incremental
     ;;
   *)
     usage
