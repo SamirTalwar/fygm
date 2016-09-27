@@ -2,6 +2,11 @@
 
 set -e
 
-git pull --ff-only "$@"
+if git rev-parse --abbrev-ref --symbolic-full-name @{u} &>/dev/null; then
+  git pull --ff-only "$@"
+else
+  echo "Not pulling: no upstream branch configured for $(git name)."
+fi
+
 git submodule sync --recursive
 git submodule update --init --recursive
