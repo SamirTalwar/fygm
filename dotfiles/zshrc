@@ -38,8 +38,6 @@ if [[ -n "$(command -v nvim)" ]]; then
   alias view='nvim -R'
 fi
 
-alias dm=docker-machine
-
 if (( $+commands[brew] )) && [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]]; then
   source $(brew --prefix)/etc/profile.d/autojump.sh
 fi

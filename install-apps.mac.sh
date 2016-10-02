@@ -109,14 +109,7 @@ quietly sdk install groovy
 brew cask install \
   virtualbox \
   virtualbox-extension-pack
-brew install \
-  docker \
-  docker-compose \
-  docker-machine
-
-if ! docker-machine ls -q | egrep '^default$' >/dev/null; then
-  docker-machine create --driver=virtualbox --virtualbox-memory=4096 default
-fi
+brew cask install docker
 
 if ! fgrep /usr/local/bin/zsh /etc/shells; then
   sudo bash -c "echo /usr/local/bin/zsh >> /etc/shells"
