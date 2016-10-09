@@ -11,9 +11,9 @@ docker ps --filter=status=exited --quiet \
 echo 'Removing dangling images...'
 # First, remove dangling images that have been somehow tagged with a repository but no name.
 # We do this by re-tagging them and then removing them.
-docker images --filter=dangling=true \
+docker images \
   | tail +2 \
-  | awk '$1 != "<none>" { print $1 " " $3 }' \
+  | awk '$1 != "<none>" && $2 == "<none>" { print $1 " " $3 }' \
   | while read repository id; do
     docker tag $id "${repository}:${id}"
     docker rmi "${repository}:${id}"
