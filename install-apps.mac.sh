@@ -2,16 +2,7 @@
 
 export PATH="/usr/local/bin:$PATH"
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && \
-  source "$HOME/.rvm/scripts/rvm"
-[[ -s "$HOME/.nvm/nvm.sh" ]] && \
-  source "$HOME/.nvm/nvm.sh"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && \
-  export SDKMAN_DIR="$HOME/.sdkman" && \
-  source "$HOME/.sdkman/bin/sdkman-init.sh"
-
 command -v brew >/dev/null 2>&1 || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-command -v rvm >/dev/null 2>&1 || curl -fsSL https://get.rvm.io | bash -s head --ruby
 
 set -e
 set -x
@@ -30,7 +21,6 @@ brew install \
   bash \
   mobile-shell \
   the_silver_searcher \
-  thefuck \
   tmux \
   tree \
   watch \
@@ -75,16 +65,25 @@ brew install \
   git \
   heroku-toolbelt \
   mercurial \
+  node \
   python \
   python3 \
+  ruby \
   sqlite
 brew cask install \
   elm-platform \
   haskell-platform
 brew install haskell-stack
 
-nvm_version="$(http https://api.github.com/repos/creationix/nvm/tags | jq -r '.[0].name')"
-curl -fsSL "https://raw.githubusercontent.com/creationix/nvm/$nvm_version/install.sh" | bash
+# Java Development
+brew cask install java
+brew install \
+  groovy \
+  gradle \
+  leiningen \
+  maven \
+  scala \
+  sbt
 
 # Text Editing
 brew install vim
@@ -94,16 +93,6 @@ pip3 install neovim
 
 brew install pandoc
 brew cask install mactex
-
-# Java Development
-brew cask install java
-brew install \
-  leiningen \
-  maven
-command -v sdk >/dev/null 2>&1 || curl -fs http://get.sdkman.io | bash
-quietly sdk install scala
-quietly sdk install sbt
-quietly sdk install groovy
 
 # Containerisation
 brew cask install \

@@ -12,7 +12,6 @@ bindkey '^R' history-incremental-search-backward
 path=(
   ~/bin/unix
   ~/.local/bin
-  ~/.rvm/bin
   ./node_modules/.bin
   $path
 )
@@ -42,25 +41,8 @@ if (( $+commands[brew] )) && [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]]
   source $(brew --prefix)/etc/profile.d/autojump.sh
 fi
 
-if (( $+commands[thefuck] )); then
-  eval "$(thefuck --alias)"
-fi
-
 if [[ -e /Users/samir/.nix-profile/etc/profile.d/nix.sh ]]; then
   source /Users/samir/.nix-profile/etc/profile.d/nix.sh
-fi
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-if [[ -d '/usr/local/opt/google-cloud-sdk' ]]; then
-  source '/usr/local/opt/google-cloud-sdk/path.zsh.inc'
-  source '/usr/local/opt/google-cloud-sdk/completion.zsh.inc'
 fi
 
 if [[ -e ~/.zshrc.local ]]; then
