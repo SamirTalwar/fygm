@@ -87,7 +87,7 @@ brew install \
 
 # Text Editing
 brew install vim
-brew install --HEAD neovim/neovim/neovim
+brew install neovim/neovim/neovim
 pip2 install neovim
 pip3 install neovim
 
