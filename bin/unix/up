@@ -179,7 +179,7 @@ function update-docker-machine {
 
 function update-docker {
   local image filter
-  if exists docker && (! exists docker-machine || [[ -n $DOCKER_MACHINE_NAME && $(docker-machine status $DOCKER_MACHINE_NAME) == 'Running' ]]); then
+  if exists docker && (! exists docker-machine || [[ -z $DOCKER_MACHINE_NAME ]] || $(docker-machine status $DOCKER_MACHINE_NAME) == 'Running' ]]); then
     docker-cleanup
     if [[ -e ~/.up-docker-filter ]]; then
       filter=$(cat ~/.up-docker-filter)
