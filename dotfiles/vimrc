@@ -159,8 +159,12 @@ if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
   let g:ackprg = 'ag --vimgrep'
 
-  " Alias :Ag as :Ack.
-  command -nargs=* Ag Ack <args>
+  " Disable automatic jumping.
+  cnoreabbrev Ack Ack!
+
+  " Alias <Leader>a and :Ag as :Ack!
+  command -nargs=* Ag Ack! <args>
+  nnoremap <Leader>a :Ack!<Space>
 
   " Use ag in CtrlP for listing files.
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
