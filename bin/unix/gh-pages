@@ -19,19 +19,22 @@ if [[ $# -ne 1 ]]; then
   exit 2
 fi
 
+function setup {
+  if [[ ! -e Gemfile ]]; then
+    <<< $gemfile_contents > Gemfile
+  fi
+  bundle config --path=.bundle
+}
+
 case $1 in
   init)
-    rvm use --create --ruby-version ruby@github-pages
-    <<< $gemfile_contents > Gemfile
-    gem install bundler
+    setup
     bundle install
     ;;
   update)
-    rvm use --create --ruby-version ruby@github-pages
-    (ls .ruby-{gemset,version}.* 2>/dev/null || :) | xargs rm -f
-    gem install bundler
+    setup
     bundle update
-    gem cleanup
+    bundle clean
     ;;
   serve)
     bundle exec jekyll serve --watch --incremental
