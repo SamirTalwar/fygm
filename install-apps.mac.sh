@@ -97,8 +97,8 @@ brew cask install mactex
 # Containerisation
 brew cask install \
   virtualbox \
-  virtualbox-extension-pack
-brew cask install docker
+  virtualbox-extension-pack \
+  docker
 
 if ! fgrep /usr/local/bin/zsh /etc/shells; then
   sudo bash -c "echo /usr/local/bin/zsh >> /etc/shells"
