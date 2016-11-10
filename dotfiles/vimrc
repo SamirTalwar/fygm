@@ -271,7 +271,7 @@ function! RunTest()
   elseif file_readable('package.json')
     let commands = ['npm test']
   elseif file_readable('Makefile')
-    let commands = ['if [[ $(set +e; make -q check; echo $?) -ne 2 ]]', 'then', 'make check', 'else', 'make test', 'fi']
+    let commands = ['if [[ $(set +e; make -q check >& /dev/null; echo $?) -ne 2 ]]', 'then', 'make check', 'else', 'make test', 'fi']
   endif
   if exists('commands')
     call WriteToWatchFile(commands)
