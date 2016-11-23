@@ -162,9 +162,8 @@ if executable('ag')
   " Disable automatic jumping.
   cnoreabbrev Ack Ack!
 
-  " Alias <Leader>a and :Ag as :Ack!
+  " Alias :Ag as :Ack!
   command -nargs=* Ag Ack! <args>
-  nnoremap <Leader>a :Ack!<Space>
 
   " Use ag in CtrlP for listing files.
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
