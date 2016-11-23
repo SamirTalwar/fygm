@@ -1,0 +1,13 @@
+#!/usr/bin/env python3
+
+import argparse
+import sys
+import urllib.parse
+
+
+parser = argparse.ArgumentParser(description='URL-encode a string.')
+parser.add_argument('-s', '--safe', dest='safe', action='append', default=[], help='Characters to ignore')
+parser.add_argument('string', help='the string to URL-encode')
+args = parser.parse_args()
+
+print(urllib.parse.quote(args.string, safe=''.join(args.safe)))
