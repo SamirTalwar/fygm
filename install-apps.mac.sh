@@ -69,7 +69,8 @@ brew install \
   python \
   python3 \
   ruby \
-  sqlite
+  sqlite \
+  tidy-html5
 brew cask install \
   elm-platform \
   haskell-platform
