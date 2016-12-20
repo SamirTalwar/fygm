@@ -120,7 +120,8 @@ set background=dark
 colorscheme solarized
 
 " Wait 25ms for follow-up TTY input before processing; the default provided by
-" sensible.vim is 100ms, which is too slow when hitting <Esc><ch> quickly.
+" vim-sensible is 100ms, which is too slow when hitting <Esc><ch> quickly.
+runtime plugin/sensible.vim
 set ttimeoutlen=25
 
 " In Neovim, <C-h> generates a backspace. We want it to do the right thing.
