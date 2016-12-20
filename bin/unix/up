@@ -122,7 +122,9 @@ function update-pip3 {
 function update-pip-version {
   local pip="pip$1"
   if exists $pip; then
-    $pip list --outdated | field 1 | gxargs --no-run-if-empty $pip install --upgrade
+    $pip list --outdated --format=json \
+      | jq '.[] | .name' \
+      | gxargs --no-run-if-empty $pip install --upgrade
   fi
 }
 
