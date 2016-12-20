@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
 set -e
+set -o pipefail
 
 xargs=$(whence gxargs || whence xargs)
 
