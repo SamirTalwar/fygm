@@ -62,7 +62,9 @@ brew cask install gimp
 brew install \
   carthage \
   cmake \
+  elm \
   git \
+  haskell-stack \
   heroku-toolbelt \
   mercurial \
   node \
@@ -71,10 +73,6 @@ brew install \
   ruby \
   sqlite \
   tidy-html5
-brew cask install \
-  elm-platform \
-  haskell-platform
-brew install haskell-stack
 
 # Java Development
 brew cask install java
