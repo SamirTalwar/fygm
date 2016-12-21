@@ -39,6 +39,7 @@ brew install \
   gpg-agent \
   htop-osx \
   httpie \
+  httping \
   jq \
   moreutils \
   pinentry \
