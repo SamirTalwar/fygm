@@ -44,6 +44,7 @@ brew install \
   moreutils \
   pinentry \
   pinentry-mac \
+  socat \
   unrar \
   wget
 
