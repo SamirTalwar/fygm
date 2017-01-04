@@ -25,6 +25,7 @@ brew install \
   tree \
   watch \
   zsh
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # Core Tools
 brew install \

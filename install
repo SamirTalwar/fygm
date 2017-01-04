@@ -16,7 +16,6 @@ require 'pathname'
   @home + '.i3' => @dotfiles + 'i3',
   @home + '.config/nvim/init.vim' => @dotfiles + 'vimrc',
   @home + '.racketrc' => @dotfiles + 'racketrc',
-  @home + '.tmux' => @dotfiles + 'tmux',
   @home + '.tmux.conf' => @dotfiles + 'tmux.conf',
   @home + '.vimrc' => @dotfiles + 'vimrc',
   @home + '.zlogin' => @dotfiles + 'zlogin',

@@ -25,6 +25,7 @@ ALL_PACKAGE_MANAGERS=(
   cabal
   raco
   gcloud
+  tpm
   vim-plug
   nvim-plug
   docker-machine
@@ -157,6 +158,15 @@ function update-raco {
 function update-gcloud {
   if exists gcloud; then
     yes | gcloud components update
+  fi
+}
+
+function update-tpm {
+  if [[ -e "$HOME/.tmux/plugins/tpm" ]]; then
+    (cd "$HOME/.tmux/plugins/tpm" && git pull --prune --ff-only)
+    "$HOME/.tmux/plugins/tpm/bin/install_plugins"
+    "$HOME/.tmux/plugins/tpm/bin/update_plugins" all
+    "$HOME/.tmux/plugins/tpm/bin/clean_plugins"
   fi
 }
 
