@@ -91,6 +91,7 @@ brew install vim
 brew install neovim/neovim/neovim
 pip2 install neovim
 pip3 install neovim
+gem install neovim
 
 brew install pandoc
 brew cask install mactex
