@@ -198,6 +198,8 @@ let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
+let g:javascript_plugin_flow = 1
+
 let g:neomake_open_list = 2
 
 autocmd BufNewFile,BufRead Guardfile,*.Guardfile set filetype=ruby
