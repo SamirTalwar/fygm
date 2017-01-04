@@ -162,13 +162,16 @@ function update-gcloud {
 
 function update-vim-plug {
   if [[ -e "$HOME/.vim/autoload/plug.vim" ]]; then
-    vim +PlugInstall +PlugUpdate +PlugClean! +qall
+    \vim +PlugUpgrade +qall
+    \vim +PlugInstall +PlugUpdate +PlugClean! +qall
   fi
 }
 
 function update-nvim-plug {
   if [[ -e "$HOME/.config/nvim/autoload/plug.vim" ]]; then
+    nvim +PlugUpgrade +qall
     nvim +PlugInstall +PlugUpdate +PlugClean! +qall
+    nvim +UpdateRemotePlugins +qall
   fi
 }
 
