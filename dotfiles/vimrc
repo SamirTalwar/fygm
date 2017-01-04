@@ -40,9 +40,6 @@ call plug#begin()
 " Colors
 Plug 'altercation/solarized', {'rtp': '/vim-colors-solarized'}
 
-" Sensible defaults
-Plug 'tpope/vim-sensible'
-
 " Extra functionality in the status bar
 Plug 'bling/vim-airline'
 " Search files using Ctrl+P
@@ -118,11 +115,6 @@ call plug#end()
 syntax enable
 set background=dark
 colorscheme solarized
-
-" Wait 25ms for follow-up TTY input before processing; the default provided by
-" vim-sensible is 100ms, which is too slow when hitting <Esc><ch> quickly.
-runtime plugin/sensible.vim
-set ttimeoutlen=25
 
 " In Neovim, <C-h> generates a backspace. We want it to do the right thing.
 nmap <BS> <C-h>
