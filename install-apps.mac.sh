@@ -98,7 +98,6 @@ pip3 install neovim
 gem install neovim
 
 brew install pandoc
-brew cask install mactex
 
 # Containerisation
 brew cask install \
