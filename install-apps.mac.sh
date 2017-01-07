@@ -14,6 +14,7 @@ function quietly {
 }
 
 brew update
+brew upgrade
 
 # Shell
 brew install \
