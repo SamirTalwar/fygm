@@ -24,6 +24,7 @@ brew install \
   the_silver_searcher \
   tmux \
   tree \
+  urlview \
   watch \
   zsh
 if [[ ! -e ~/.tmux/plugins/tpm ]]; then
