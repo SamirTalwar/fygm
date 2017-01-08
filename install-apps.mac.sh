@@ -52,6 +52,7 @@ brew install \
   socat \
   unrar \
   wget
+brew cask install xquartz
 
 # Terminal Fu
 brew install \
@@ -75,6 +76,7 @@ brew install \
   heroku-toolbelt \
   mercurial \
   node \
+  octave \
   python \
   python3 \
   ruby \
