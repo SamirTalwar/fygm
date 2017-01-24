@@ -203,7 +203,7 @@ function update-docker {
       if [[ -n $filter && $image =~ $filter ]]; then
         echo "Skipping $image."
       elif [[ $image =~ '^([a-z]+\.)?gcr\.io' ]]; then
-        gcloud docker pull $image || :
+        gcloud docker -- pull $image || :
       else
         docker pull $image || :
       fi
