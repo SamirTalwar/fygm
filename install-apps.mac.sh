@@ -76,7 +76,6 @@ brew install \
   heroku-toolbelt \
   mercurial \
   node \
-  octave \
   python \
   python3 \
   ruby \
