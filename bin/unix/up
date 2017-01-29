@@ -23,6 +23,7 @@ ALL_PACKAGE_MANAGERS=(
   nvm
   npm
   cabal
+  opam
   raco
   gcloud
   tpm
@@ -146,6 +147,13 @@ function update-npm {
 function update-cabal {
   if exists cabal; then
     cabal update
+  fi
+}
+
+function update-opam {
+  if exists opam; then
+    opam update
+    opam upgrade
   fi
 }
 
