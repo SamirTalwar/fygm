@@ -52,7 +52,7 @@ if branch == main_branch and upstream_repo.nil?
   exit 1
 end
 
-unless system 'git', 'first-push'
+unless system 'git', 'first-push', *ARGV
   exit $?.exitstatus
 end
 
