@@ -1,19 +1,19 @@
 #!/usr/bin/env ruby
 
-Host = Struct.new(:name, :prefix, :pull_request_url) do
+Host = Struct.new(:name, :extraction, :pull_request_url) do
   def matches url
-    url.start_with? "#{prefix}:"
+    url =~ extraction
   end
 
   def extract_repo url
-    url.sub(/^#{prefix}:/, '').sub(/\.git$/, '')
+    url.match(extraction)[1]
   end
 end
 
 hosts = [
   Host.new(
     'GitHub',
-    'git@github.com',
+    %r{^(?:git@github.com:|https://github.com/)(.*)\.git$},
     lambda { |upstream_repo, repo, branch|
       if upstream_repo
         owner = repo.split('/')[0]
@@ -24,7 +24,7 @@ hosts = [
     }),
   Host.new(
     'BitBucket',
-    'git@bitbucket.org',
+    %r{^git@bitbucket.org(.*)\.git$},
     lambda { |upstream_repo, repo, branch|
       "https://bitbucket.org/#{upstream_repo || repo}/pull-request/new?source=#{repo}%3A%3A#{branch}%3A%3Amaster"
     })
