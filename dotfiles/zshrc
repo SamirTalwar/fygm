@@ -9,13 +9,6 @@ setopt interactivecomments
 export KEYTIMEOUT=1
 bindkey '^R' history-incremental-search-backward
 
-path=(
-  ~/bin/unix
-  ~/.local/bin
-  ./node_modules/.bin
-  $path
-)
-
 if [[ "$OSTYPE" == darwin* ]]; then
   export BROWSER='open'
   path=(
@@ -25,6 +18,13 @@ if [[ "$OSTYPE" == darwin* ]]; then
     $path
   )
 fi
+
+path=(
+  ~/bin/unix
+  ~/.local/bin
+  ./node_modules/.bin
+  $path
+)
 
 if [[ "$OSTYPE" == darwin* ]]; then
   alias ls='ls -G'
@@ -39,6 +39,10 @@ fi
 
 if (( $+commands[brew] )) && [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]]; then
   source $(brew --prefix)/etc/profile.d/autojump.sh
+fi
+
+if [[ -e ~/.opam/opam-init/init.zsh ]]; then
+  source ~/.opam/opam-init/init.zsh >& /dev/null || :
 fi
 
 # The next line updates PATH for the Google Cloud SDK.
