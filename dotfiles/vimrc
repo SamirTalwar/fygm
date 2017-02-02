@@ -207,15 +207,7 @@ autocmd BufNewFile,BufRead *.ru set filetype=ruby
 autocmd BufNewFile,BufRead *.gradle set filetype=groovy
 autocmd BufNewFile,BufRead *.stylus set filetype=sass
 
-autocmd Filetype clojure setlocal sw=2 ts=2 sts=2
-autocmd Filetype coffee,coffee.iced-coffee,litcoffee setlocal sw=2 ts=2 sts=2
-autocmd Filetype elm setlocal sw=2 ts=2 sts=2
-autocmd Filetype haskell setlocal sw=2 ts=2 sts=2
-autocmd Filetype jade setlocal sw=2 ts=2 sts=2
-autocmd Filetype ruby setlocal sw=2 ts=2 sts=2
-autocmd Filetype scala setlocal sw=2 ts=2 sts=2
-autocmd Filetype slim setlocal sw=2 ts=2 sts=2
-autocmd Filetype yaml setlocal sw=2 ts=2 sts=2
+autocmd Filetype python set sw=4 ts=4 sts=4
 
 autocmd VimEnter *.clj RainbowParenthesesToggle
 autocmd Syntax *.clj RainbowParenthesesLoadRound
