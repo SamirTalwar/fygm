@@ -6,7 +6,7 @@ set -o pipefail
 xargs=$(whence gxargs || whence xargs)
 
 echo 'Removing exited processes...'
-docker ps --filter=status=exited --quiet \
+docker ps --filter='status=exited' --quiet \
   | $xargs --no-run-if-empty docker rm
 
 echo 'Removing dangling images...'
@@ -28,4 +28,23 @@ docker volume ls --filter=dangling=true --quiet \
   | awk '$0 ~ "^[0-9a-f]{64}$"' \
   | $xargs --no-run-if-empty docker volume rm
 
-echo 'Your Docker is now sparkling.'
+created=$(docker ps --filter='status=created')
+has_created=$([[ -n $(echo $created | tail -n+2) ]] && echo true || echo false)
+dead=$(docker ps --filter='status=dead')
+has_dead=$([[ -n $(echo $dead | tail -n+2) ]] && echo true || echo false)
+
+if $has_created; then
+  echo
+  echo 'WARNING: Some processes have been created but not started.'
+  echo $created
+fi
+
+if $has_dead; then
+  echo
+  echo 'WARNING: Some processes have died.'
+  echo $dead
+fi
+
+if ! $has_created && ! $has_dead; then
+  echo 'Your Docker is now sparkling.'
+fi
