@@ -1,0 +1,42 @@
+#!/usr/bin/env zsh
+
+set -e
+set -o pipefail
+
+APP=$0
+
+function usage {
+  echo >&2 "Usage: $APP [REGISTRY] NAME"
+  echo >&2
+  echo >&2 "e.g.    $APP busybox"
+  echo >&2 "  or    $APP gcr.io google_containers/pause-amd64"
+}
+
+case $# in
+  1) REGISTRY=index.docker.io
+     NAME=$1
+     ;;
+  2) REGISTRY=$1
+     NAME=$2
+     ;;
+  *) usage
+     exit 2
+     ;;
+esac
+
+AUTH=()
+HEADERS=()
+
+if [[ $REGISTRY == 'index.docker.io' ]]; then
+  if [[ ! ($NAME =~ '/') ]]; then
+    NAME="library/${NAME}"
+  fi
+
+  TOKEN=$(http --check-status https://auth.docker.io/token 'service==registry.docker.io' "scope==repository:${NAME}:pull" | jq -r .token)
+  HEADERS+=("Authorization:Bearer ${TOKEN}")
+elif [[ $REGISTRY =~ '^gcr\.io$|\.gcr\.io$' ]]; then
+  AUTH=(--auth "oauth2accesstoken:$(gcloud auth print-access-token)")
+fi
+
+http --check-status $AUTH "https://${REGISTRY}/v2/${NAME}/tags/list" $HEADERS \
+  | jq -r 'if has("manifest") then (.manifest | to_entries | map(.value) | sort_by(.timeCreatedMs) | reverse | map(.tag) | flatten(1) | .[]) else (.tags | .[]) end'
