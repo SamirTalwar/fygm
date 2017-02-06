@@ -6,8 +6,8 @@ let maplocalleader=';' " The <LocalLeader> in map operations is the ';'
 
 set encoding=utf-8 " Assume UTF-8
 
+set colorcolumn=81,121 " Show the margin
 set number " Show line numbers
-set colorcolumn=121 " Show the margin
 set showcmd " Show the command at the bottom
 set laststatus=2 " Always show the status bar at the bottom
 
@@ -23,6 +23,8 @@ set ignorecase " Ignore case when searching
 set smartcase " Search case-insensitively until a capital letter is typed
 set hlsearch " Highlight search results in the document
 
+set cursorline cursorcolumn
+set scrolloff=5
 set mouse=a " Let the user use the mouse
 
 command W w " Bind ':W' to ':w'
