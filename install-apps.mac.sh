@@ -115,6 +115,9 @@ brew cask install \
   virtualbox \
   virtualbox-extension-pack \
   docker
+brew install \
+  docker-completion \
+  docker-compose-completion
 
 if ! fgrep /usr/local/bin/zsh /etc/shells; then
   sudo bash -c "echo /usr/local/bin/zsh >> /etc/shells"
