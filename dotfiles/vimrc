@@ -135,8 +135,8 @@ autocmd FileWritePre,BufWritePre *.go GoImports
 " Disable for text and Markdown files
 set list!
 set listchars=tab:\ \ ,trail:·,extends:>
-autocmd Filetype text setlocal nolist
-autocmd Filetype markdown setlocal nolist colorcolumn=0
+autocmd FileType text setlocal nolist
+autocmd FileType markdown setlocal nolist colorcolumn=0
 
 " Show/hide NERDTree with <§>, and find the current file with <±>
 map § :NERDTreeToggle<CR>
@@ -208,8 +208,7 @@ autocmd BufNewFile,BufRead Guardfile,*.Guardfile set filetype=ruby
 autocmd BufNewFile,BufRead *.ru set filetype=ruby
 autocmd BufNewFile,BufRead *.gradle set filetype=groovy
 autocmd BufNewFile,BufRead *.stylus set filetype=sass
-
-autocmd Filetype python set sw=4 ts=4 sts=4
+autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 
 autocmd VimEnter *.clj RainbowParenthesesToggle
 autocmd Syntax *.clj RainbowParenthesesLoadRound
