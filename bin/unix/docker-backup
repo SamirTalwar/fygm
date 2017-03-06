@@ -1,0 +1,26 @@
+#!/usr/bin/env zsh
+
+set -e
+
+function sanitize {
+  tr '/' '-' <<< $1
+}
+
+if [[ $# -ne 1 ]]; then
+  echo >&2 "Usage: $0 OUTPUT-DIRECTORY"
+  exit 2
+fi
+
+output_directory=$1
+mkdir -p $output_directory
+
+images=($(docker image ls | tail -n+2 | awk '$1 != "<none>" && $2 != "<none>" { print $1 " " $2 }'))
+
+for repository tag in $images; do
+  image="${repository}:${tag}"
+  file="${output_directory}/$(sanitize $repository)--$(sanitize $tag).image.tar"
+  echo >&2 "Saving ${image}..."
+  docker image save $image > $file
+done
+
+echo >&2 'Done.'

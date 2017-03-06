@@ -1,0 +1,22 @@
+#!/usr/bin/env zsh
+
+set -e
+
+if [[ $# -ne 1 ]]; then
+  echo >&2 "Usage: $0 INPUT-DIRECTORY"
+  exit 2
+fi
+
+input_directory=$1
+
+if [[ ! -d $input_directory ]]; then
+  echo >&2 "The input directory \"${input_directory}\" does not exist or is not a directory."
+  exit 3
+fi
+
+for file in $input_directory/*.image.tar; do
+  echo >&2 "Loading ${file}..."
+  docker image load < $file
+done
+
+echo >&2 'Done.'
