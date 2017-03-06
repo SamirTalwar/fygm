@@ -83,6 +83,7 @@ brew install \
   ruby \
   sqlite \
   tidy-html5
+brew cask install font-fira-code
 
 # Java Development
 brew cask install java
