@@ -101,6 +101,8 @@ Plug 'kien/rainbow_parentheses.vim'
 Plug 'tpope/vim-fugitive'
 " Make and lint
 Plug 'neomake/neomake'
+" Auto-format
+Plug 'sbdchd/neoformat'
 " Search across the JVM classpath
 Plug 'tpope/vim-classpath'
 " Clojure REPL
@@ -267,24 +269,11 @@ function! CheckForErrors()
   Neomake
 endfunction
 
-function! Autoformat()
-  if &ft == 'javascript' || &ft == 'javascript.jsx'
-    if executable('standard')
-      silent ! standard --fix %
-      call CheckForErrors()
-    elseif executable('eslint')
-      silent ! eslint --fix %
-      call CheckForErrors()
-    endif
-  endif
-endfunction
-
 noremap <Leader>x :lclose<CR>:cclose<CR>
 noremap <Leader>z :windo update<CR>:tabclose<CR>
 noremap <leader>c :nohlsearch<CR>:call ClearHighlights()<CR>
 noremap <Leader>b :call Build()<CR>
 noremap <Leader>t :call RunTest()<CR>
-noremap <Leader>a :call Autoformat()<CR>
 noremap <Leader>p :GhcModType<CR>
 noremap <Leader>e :update<CR>:call CheckForErrors()<CR>
 
