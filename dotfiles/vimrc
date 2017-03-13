@@ -70,6 +70,8 @@ Plug 'Lokaltog/vim-easymotion'
 Plug 'guns/vim-sexp'
 " JavaScript autocompletion
 Plug 'ternjs/tern_for_vim', {'do': 'npm install'}
+" Tab completion
+Plug 'ervandew/supertab'
 
 Plug 'plasticboy/vim-markdown'
 Plug 'ensime/ensime-vim'
@@ -145,10 +147,6 @@ map ± :NERDTreeFind<CR>
 " Show hidden files in NERDTree.
 let NERDTreeShowHidden=1
 
-" Set up tab-completion
-inoremap <expr><c-n> pumvisible() ? "\<c-n>" : "\<c-x>\<c-o>"
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
 if executable('ag')
   " Use ag for :grep and :Ack.
   set grepprg=ag\ --nogroup\ --nocolor
@@ -187,6 +185,8 @@ endif
 
 autocmd BufLeave,FocusLost * nested silent! update " Autosave the file when losing focus or leaving the buffer.
 let g:tmux_navigator_save_on_switch = 1
+
+let g:SuperTabDefaultCompletionType = "context"
 
 let g:vim_markdown_folding_disabled = 1
 let g:jsx_ext_required = 0
