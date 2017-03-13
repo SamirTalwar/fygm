@@ -33,11 +33,6 @@ else
   alias ls='ls --color'
 fi
 
-if [[ -n "$(command -v nvim)" ]]; then
-  alias vim='nvim'
-  alias view='nvim -R'
-fi
-
 if (( $+commands[brew] )) && [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]]; then
   source $(brew --prefix)/etc/profile.d/autojump.sh
 fi

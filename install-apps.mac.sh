@@ -96,11 +96,11 @@ brew install \
   sbt
 
 # Text Editing
-brew install vim
 brew install neovim/neovim/neovim
 pip2 install neovim
 pip3 install neovim
 gem install neovim
+(cd /usr/local/bin && ln -sf nvim vim)
 
 brew install pandoc
 
