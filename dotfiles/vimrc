@@ -185,7 +185,9 @@ let g:tmux_navigator_save_on_switch = 1
 let g:SuperTabDefaultCompletionType = "context"
 
 let g:vim_markdown_folding_disabled = 1
+let g:javascript_plugin_flow = 1
 let g:jsx_ext_required = 0
+let g:flow#enable = 1
 let g:flow#autoclose = 1
 let g:elm_setup_keybindings = 0
 
@@ -195,8 +197,6 @@ let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-
-let g:javascript_plugin_flow = 1
 
 let g:neomake_open_list = 2
 
