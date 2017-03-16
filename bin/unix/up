@@ -21,6 +21,7 @@ ALL_PACKAGE_MANAGERS=(
   pip2
   pip3
   nvm
+  yarn
   npm
   cabal
   opam
@@ -134,6 +135,12 @@ function update-nvm {
   if exists nvm; then
     nvm_version="$(http https://api.github.com/repos/creationix/nvm/tags | jq -r '.[0].name')"
     curl -fsSL "https://raw.githubusercontent.com/creationix/nvm/$nvm_version/install.sh" | bash
+  fi
+}
+
+function update-yarn {
+  if exists yarn; then
+    yarn global upgrade
   fi
 }
 
