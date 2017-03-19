@@ -128,8 +128,12 @@ vnoremap <expr>y "my\"" . v:register . "y`y"
 nmap ' <Plug>(easymotion-s2)
 vmap ' <Plug>(easymotion-s2)
 
-autocmd BufWritePre * :%s/\s\+$//e " Delete trailing spaces
-autocmd FileWritePre,BufWritePre *.go GoImports
+let g:neoformat_basic_format_trim = 1
+augroup format
+  autocmd!
+  autocmd BufWritePre * Neoformat
+  autocmd BufWritePre *.go GoImports
+augroup END
 
 " Show tabs, trailing spaces and lines that extend past the right of the screen
 " Disable for text and Markdown files
