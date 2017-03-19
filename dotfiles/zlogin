@@ -2,8 +2,6 @@ if [[ -d /usr/local/share/zsh/site-functions ]]; then
   fpath=(/usr/local/share/zsh/site-functions $fpath)
 fi
 
-source ${ZDOTDIR:-$HOME}/.zprezto/runcoms/zlogin
-
 [[ -e ~/.ssh/*.pem ]] && ssh-add ~/.ssh/*.pem 2>/dev/null
 
 export GPG_TTY=$(tty)

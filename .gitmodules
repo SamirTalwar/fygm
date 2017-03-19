@@ -1,9 +1,0 @@
-[submodule "dotfiles/zprezto"]
-	path = dotfiles/zprezto
-	url = git://github.com/sorin-ionescu/prezto.git
-[submodule "dotfiles/tmux/plugins/tpm"]
-	path = dotfiles/tmux/plugins/tpm
-	url = git@github.com:tmux-plugins/tpm.git
-[submodule "dotfiles/tmux/plugins/tmux-sensible"]
-	path = dotfiles/tmux/plugins/tmux-sensible
-	url = git@github.com:tmux-plugins/tmux-sensible.git

@@ -1,12 +1,15 @@
-if [[ -s ${ZDOTDIR:-$HOME}/.zprezto/init.zsh ]]; then
-  source ${ZDOTDIR:-$HOME}/.zprezto/init.zsh
-fi
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
 
 setopt clobber
 unsetopt correct
 setopt interactivecomments
+setopt prompt_subst
 
-export KEYTIMEOUT=1
+KEYTIMEOUT=1
+
+HISTFILE=~/.zhistory
+setopt append_history inc_append_history share_history
 bindkey '^R' history-incremental-search-backward
 
 if [[ "$OSTYPE" == darwin* ]]; then
@@ -27,11 +30,49 @@ path=(
   $path
 )
 
+alias ll='ls -l'
+alias la='ls -al'
 if [[ "$OSTYPE" == darwin* ]]; then
   alias ls='ls -G'
 else
   alias ls='ls --color'
 fi
+
+# Switch to vi mode and show it with the cursor style.
+bindkey -v
+
+function zle-keymap-select {
+  if [[ $KEYMAP == 'vicmd' ]]; then
+    printf '\e[2 q'
+  else
+    printf '\e[6 q'
+  fi
+}
+function zle-line-init {
+  zle -K viins
+  printf '\e[6 q'
+}
+function zle-line-deinit {
+  printf '\e[2 q'
+}
+zle -N zle-keymap-select
+zle -N zle-line-init
+add-zsh-hook preexec zle-line-deinit
+
+# Show the directory path on the left-hand side.
+PROMPT="%{$fg[blue]%}%(4~|…/%3~|%~) %B❯%b %{$reset_color%}"
+
+# Show Git information on the right-hand side.
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' stagedstr '✚'
+zstyle ':vcs_info:*' unstagedstr '✱'
+zstyle ':vcs_info:*' formats "%{$fg[yellow]%}%b%{$reset_color%}%{$fg[gray]%}%m %c %u%{$reset_color%}"
+precmd() {
+  vcs_info
+}
+RPROMPT='${vcs_info_msg_0_}'
 
 if (( $+commands[brew] )) && [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]]; then
   source $(brew --prefix)/etc/profile.d/autojump.sh
