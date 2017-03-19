@@ -217,7 +217,7 @@ autocmd Syntax *.clj RainbowParenthesesLoadRound
 autocmd Syntax *.clj RainbowParenthesesLoadSquare
 autocmd Syntax *.clj RainbowParenthesesLoadBraces
 
-autocmd FileWritePost,BufWritePost * call CheckForErrors()
+autocmd FileWritePost,BufWritePost * Neomake
 
 function! ClearHighlights()
   if &ft == 'haskell'
@@ -269,16 +269,12 @@ function! RunTest()
   endif
 endfunction
 
-function! CheckForErrors()
-  Neomake
-endfunction
-
 noremap <Leader>x :lclose<CR>:cclose<CR>
 noremap <Leader>z :windo update<CR>:tabclose<CR>
 noremap <leader>c :nohlsearch<CR>:call ClearHighlights()<CR>
 noremap <Leader>b :call Build()<CR>
 noremap <Leader>t :call RunTest()<CR>
 noremap <Leader>p :GhcModType<CR>
-noremap <Leader>e :update<CR>:call CheckForErrors()<CR>
+noremap <Leader>e :update<CR>:Neomake<CR>
 
 let g:GPGPreferSymmetric=1 " Use symmetric GPG encryption with new files
