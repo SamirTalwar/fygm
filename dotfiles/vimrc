@@ -278,3 +278,10 @@ noremap <Leader>p :GhcModType<CR>
 noremap <Leader>e :update<CR>:Neomake<CR>
 
 let g:GPGPreferSymmetric=1 " Use symmetric GPG encryption with new files
+
+if getcwd() != $HOME && filereadable('.vimrc')
+  let output = system('grep ' . shellescape(getcwd()) . ' ~/.vimautosource')
+  if ! v:shell_error
+    execute 'source' (getcwd() . '/' . '.vimrc')
+  endif
+endif
