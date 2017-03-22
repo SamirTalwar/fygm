@@ -23,7 +23,7 @@ set ignorecase " Ignore case when searching
 set smartcase " Search case-insensitively until a capital letter is typed
 set hlsearch " Highlight search results in the document
 
-set cursorline cursorcolumn
+set cursorline
 set scrolloff=5
 set mouse=a " Let the user use the mouse
 
