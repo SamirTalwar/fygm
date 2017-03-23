@@ -62,7 +62,7 @@ zle -N zle-line-init
 add-zsh-hook preexec zle-line-deinit
 
 # Show the directory path on the left-hand side.
-PROMPT="%{$fg[blue]%}%(4~|…/%3~|%~) %B❯%b %{$reset_color%}"
+PROMPT="%{$fg[blue]%}%(4~|…/%3~|%~) %B\$([[ \$? -eq 0 ]] && echo '❯' || echo '%{$fg[red]%}❯%{$reset_color%}')%b %{$reset_color%}"
 
 # Show Git information on the right-hand side.
 autoload -Uz vcs_info
