@@ -83,8 +83,14 @@ precmd() {
 }
 RPROMPT='${vcs_info_msg_0_}'
 
-if (( $+commands[brew] )) && [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]]; then
-  source $(brew --prefix)/etc/profile.d/autojump.sh
+if (( $+commands[brew] )); then
+  if [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]]; then
+    source $(brew --prefix)/etc/profile.d/autojump.sh
+  fi
+
+  if [[ -s $(brew --prefix autoenv)/activate.sh ]]; then
+    source $(brew --prefix autoenv)/activate.sh
+  fi
 fi
 
 if [[ -e ~/.opam/opam-init/init.zsh ]]; then
