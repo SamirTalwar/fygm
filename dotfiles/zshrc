@@ -55,7 +55,7 @@ function zle-line-init {
   printf '\e[6 q'
 }
 function zle-line-deinit {
-  PROMPT="${PROMPT_DIR} %{$fg[green]%}[%T]%{$reset_color%} ${PROMPT_ARROW} "
+  PROMPT="${PROMPT_DIR} %{$fg[green]%}[%D{%H:%M}]%{$reset_color%} ${PROMPT_ARROW} "
   zle reset-prompt
   PROMPT="${PROMPT_DIR} ${PROMPT_ARROW} "
   zle accept-line
