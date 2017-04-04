@@ -40,8 +40,6 @@ brew install \
   gawk \
   gnu-sed \
   gnupg \
-  gnupg2 \
-  gpg-agent \
   htop-osx \
   httpie \
   httping \
