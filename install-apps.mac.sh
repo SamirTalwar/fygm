@@ -79,6 +79,7 @@ brew install \
   python \
   python3 \
   ruby \
+  shellcheck \
   sqlite \
   tidy-html5
 brew cask install font-fira-code
@@ -118,11 +119,11 @@ brew install \
   docker-completion \
   docker-compose-completion
 
-if ! fgrep /usr/local/bin/zsh /etc/shells; then
+if ! grep -F /usr/local/bin/zsh /etc/shells; then
   sudo bash -c "echo /usr/local/bin/zsh >> /etc/shells"
 fi
-if [[ $(dscl . -read /Users/$USER UserShell | field 2) != '/usr/local/bin/zsh' ]]; then
-  sudo chsh -s /usr/local/bin/zsh $USER
+if [[ "$(dscl . -read "/Users/$USER" UserShell | field 2)" != '/usr/local/bin/zsh' ]]; then
+  sudo chsh -s /usr/local/bin/zsh "$USER"
 fi
 
 brew linkapps
