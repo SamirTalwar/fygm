@@ -129,10 +129,11 @@ nmap ' <Plug>(easymotion-s2)
 vmap ' <Plug>(easymotion-s2)
 
 let g:neoformat_basic_format_trim = 1
+let g:neomake_html_enabled_makers = []
+let g:neoformat_enabled_html = []
 augroup format
-  autocmd!
   autocmd BufWritePre * Neoformat
-  autocmd BufWritePre *.go GoImports
+  autocmd BufWritePost * Neomake
 augroup END
 
 " Show tabs, trailing spaces and lines that extend past the right of the screen
@@ -216,8 +217,6 @@ autocmd VimEnter *.clj RainbowParenthesesToggle
 autocmd Syntax *.clj RainbowParenthesesLoadRound
 autocmd Syntax *.clj RainbowParenthesesLoadSquare
 autocmd Syntax *.clj RainbowParenthesesLoadBraces
-
-autocmd FileWritePost,BufWritePost * Neomake
 
 function! ClearHighlights()
   if &ft == 'haskell'
