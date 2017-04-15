@@ -28,6 +28,7 @@ path=(
   ~/bin/unix
   ~/.local/bin
   ~/.config/yarn/global/node_modules/.bin
+  ~/.cargo/bin
   ./node_modules/.bin
   $path
 )
