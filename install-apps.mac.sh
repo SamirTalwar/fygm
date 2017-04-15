@@ -70,6 +70,7 @@ brew install \
   cmake \
   elm \
   git \
+  go \
   haskell-stack \
   heroku-toolbelt \
   mercurial \
