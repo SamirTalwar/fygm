@@ -159,7 +159,7 @@ function update-cabal {
 
 function update-opam {
   if exists opam; then
-    opam update
+    opam update --yes
     opam upgrade --yes
   fi
 }
