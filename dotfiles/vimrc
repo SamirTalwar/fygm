@@ -74,6 +74,7 @@ Plug 'ternjs/tern_for_vim', {'do': 'npm install'}
 Plug 'ervandew/supertab'
 
 Plug 'plasticboy/vim-markdown'
+Plug 'tpope/vim-cucumber'
 Plug 'ensime/ensime-vim'
 Plug 'derekwyatt/vim-scala'
 Plug 'guns/vim-clojure-static'
@@ -93,7 +94,7 @@ Plug 'lunaru/vim-less'
 Plug 'tpope/vim-liquid'
 Plug 'docker/docker', {'rtp': '/contrib/syntax/vim/'}
 Plug 'rodjek/vim-puppet'
-Plug 'tpope/vim-cucumber'
+Plug 'hashivim/vim-hashicorp-tools'
 
 " Colour parentheses according to depth
 Plug 'kien/rainbow_parentheses.vim'
@@ -132,6 +133,7 @@ vmap ' <Plug>(easymotion-s2)
 let g:neoformat_basic_format_trim = 1
 let g:neomake_html_enabled_makers = []
 let g:neoformat_enabled_html = []
+let g:terraform_fmt_on_save = 1
 augroup format
   autocmd BufWritePre * Neoformat
   autocmd BufWritePost * Neomake
