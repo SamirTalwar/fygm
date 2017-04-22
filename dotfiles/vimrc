@@ -115,10 +115,14 @@ Plug 'jamessan/vim-gnupg'
 
 call plug#end()
 
-" Make things pretty with Solarized
 syntax enable
-set background=dark
-colorscheme solarized
+
+" Make things pretty with Solarized
+let s:ignored = system("! grep -q 'Microsoft' /proc/version")
+if v:shell_error == 0
+  set background=dark
+  colorscheme solarized
+endif
 
 " In Neovim, <C-h> generates a backspace. We want it to do the right thing.
 nmap <BS> <C-h>
