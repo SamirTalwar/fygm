@@ -92,7 +92,7 @@ Plug 'digitaltoad/vim-pug'
 Plug 'slim-template/vim-slim'
 Plug 'lunaru/vim-less'
 Plug 'tpope/vim-liquid'
-Plug 'docker/docker', {'rtp': '/contrib/syntax/vim/'}
+Plug 'ekalinin/Dockerfile.vim'
 Plug 'rodjek/vim-puppet'
 Plug 'hashivim/vim-hashicorp-tools'
 
