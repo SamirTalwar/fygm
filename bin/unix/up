@@ -74,8 +74,8 @@ function update-brew {
 
 function update-apt {
   if exists apt-get; then
-    apt-get update
-    apt-get upgrade
+    sudo apt-get update
+    sudo apt-get upgrade
   fi
 }
 
