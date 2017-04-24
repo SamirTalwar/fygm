@@ -1,6 +1,8 @@
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+
 setopt clobber
 unsetopt correct
 setopt interactivecomments
@@ -111,3 +113,5 @@ fi
 if [[ -e ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
+
+zplug load
