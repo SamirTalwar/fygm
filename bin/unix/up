@@ -28,6 +28,7 @@ ALL_PACKAGE_MANAGERS=(
   raco
   gcloud
   tpm
+  zplug
   vim-plug
   nvim-plug
   docker-machine
@@ -182,6 +183,13 @@ function update-tpm {
     "$HOME/.tmux/plugins/tpm/bin/install_plugins"
     "$HOME/.tmux/plugins/tpm/bin/update_plugins" all
     "$HOME/.tmux/plugins/tpm/bin/clean_plugins"
+  fi
+}
+
+function update-zplug {
+  if exists zplug; then
+    zplug update
+    zplug clean
   fi
 }
 
