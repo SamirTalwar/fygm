@@ -152,6 +152,11 @@ set listchars=tab:\ \ ,trail:·,extends:>
 autocmd FileType text setlocal nolist
 autocmd FileType markdown setlocal nolist colorcolumn=0
 
+" Spellcheck text and markdown files
+set spelllang=en_gb
+autocmd FileType text setlocal spell
+autocmd FileType markdown setlocal spell
+
 " Show/hide NERDTree with <§>, and find the current file with <±>
 map § :NERDTreeToggle<CR>
 map ± :NERDTreeFind<CR>
