@@ -78,6 +78,7 @@ Plug 'tpope/vim-cucumber'
 Plug 'ensime/ensime-vim'
 Plug 'derekwyatt/vim-scala'
 Plug 'guns/vim-clojure-static'
+Plug 'venantius/vim-cljfmt'
 Plug 'fsharp/vim-fsharp'
 Plug 'elixir-lang/vim-elixir'
 Plug 'fatih/vim-go'
@@ -137,9 +138,10 @@ vmap ' <Plug>(easymotion-s2)
 let g:neoformat_basic_format_trim = 1
 let g:neomake_html_enabled_makers = []
 let g:neoformat_enabled_html = []
+let g:clj_fmt_autosave = 1
 let g:terraform_fmt_on_save = 1
 augroup format
-  autocmd BufWritePre * Neoformat
+  autocmd BufWritePre * silent! Neoformat
   autocmd BufWritePost * Neomake
 augroup END
 
