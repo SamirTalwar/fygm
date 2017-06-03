@@ -69,7 +69,6 @@ function update-brew {
     brew upgrade
     brew cleanup
     brew cask cleanup
-    brew linkapps
   fi
 }
 
