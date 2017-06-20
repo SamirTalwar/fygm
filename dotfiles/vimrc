@@ -102,8 +102,8 @@ Plug 'kien/rainbow_parentheses.vim'
 
 " Git support
 Plug 'tpope/vim-fugitive'
-" Make and lint
-Plug 'neomake/neomake'
+" Lint
+Plug 'w0rp/ale'
 " Auto-format
 Plug 'sbdchd/neoformat'
 " Search across the JVM classpath
@@ -136,13 +136,11 @@ nmap ' <Plug>(easymotion-s2)
 vmap ' <Plug>(easymotion-s2)
 
 let g:neoformat_basic_format_trim = 1
-let g:neomake_html_enabled_makers = []
 let g:neoformat_enabled_html = []
 let g:clj_fmt_autosave = 1
 let g:terraform_fmt_on_save = 1
 augroup format
   autocmd BufWritePre * silent! Neoformat
-  autocmd BufWritePost * Neomake
 augroup END
 
 " Show tabs, trailing spaces and lines that extend past the right of the screen
