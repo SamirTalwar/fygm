@@ -15,6 +15,7 @@ brew upgrade
 brew install \
   autojump \
   bash \
+  direnv \
   mobile-shell \
   the_silver_searcher \
   tmux \
