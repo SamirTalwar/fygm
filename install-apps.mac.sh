@@ -8,12 +8,6 @@ command -v rustup >& /dev/null || (curl https://sh.rustup.rs -sSf | sh -s -- -y)
 set -e
 set -x
 
-function quietly {
-  set +x
-  "$@"
-  set -x
-}
-
 brew update
 brew upgrade
 
