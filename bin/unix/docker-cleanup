@@ -28,7 +28,7 @@ function run {
 
 echo 'Removing exited processes...'
 for process in $(docker container ls --filter='status=exited' --quiet); do
-  run docker container rm foo $process
+  run docker container rm $process
 done
 
 echo 'Removing dangling images...'
