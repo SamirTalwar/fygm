@@ -39,6 +39,11 @@ for repository id in $(docker image ls | tail +2 | awk '$1 != "<none>" && $2 == 
   run docker image rm "${repository}:${id}"
 done
 
+# Next, remove unnamed images.
+for id in $(docker image ls | tail +2 | awk '$1 == "<none>" && $2 == "<none>" { print $3 }'); do
+  run docker image rm "${id}"
+done
+
 # Then remove the rest.
 for image in $(docker image ls --filter=dangling=true --quiet | awk '{ print $1 ":" $2 }'); do
   run docker image rm $image
