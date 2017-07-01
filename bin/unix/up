@@ -26,6 +26,7 @@ ALL_PACKAGE_MANAGERS=(
   cabal
   opam
   raco
+  rustup
   gcloud
   tpm
   zplug
@@ -167,6 +168,12 @@ function update-opam {
 function update-raco {
   if exists raco; then
     raco pkg update --all --auto
+  fi
+}
+
+function update-rustup {
+  if exists rustup; then
+    rustup update
   fi
 }
 
