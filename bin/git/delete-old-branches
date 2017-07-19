@@ -1,6 +1,8 @@
 #!/bin/bash
 
-set -e
+set -eu
 
-branches=$((git branch --merged | egrep -v "^\*| $(git main-branch)$| master$") || :)
-[[ -z "$branches" ]] || git branch -d $branches
+branches=($( (git branch --merged | grep -E -v "^\*| $(git main-branch)$| master$" | sed 's/^ *//') || : ))
+if [[ -n "${branches[*]+x}" ]]; then
+  git branch -d "${branches[@]}"
+fi

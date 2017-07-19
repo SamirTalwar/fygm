@@ -1,18 +1,18 @@
 #!/bin/bash
 
-set -e
+set -eu
 
-current_branch=$(git name)
-main_branch=$(git main-branch)
-upstream=$(git config --get remote.upstream.url || :)
+current_branch="$(git name)"
+main_branch="$(git main-branch)"
+upstream="$(git config --get remote.upstream.url || :)"
 
-[[ $current_branch == $main_branch ]] || git checkout $main_branch
+[[ "$current_branch" == "$main_branch" ]] || git checkout "$main_branch"
 
 git pull-everything
 
-if [[ $upstream ]]; then
-  git pull-everything upstream $main_branch
-  git push origin $main_branch
+if [[ "$upstream" ]]; then
+  git pull-everything upstream "$main_branch"
+  git push origin "$main_branch"
 fi
 
 git delete-old-branches

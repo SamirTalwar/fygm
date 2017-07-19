@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -eu
 
 if [[ -n "$(git status --porcelain)" ]]; then
   echo >&2 'This is a destructive operation.'
@@ -8,6 +8,6 @@ if [[ -n "$(git status --porcelain)" ]]; then
   exit 1
 fi
 
-git branch $1
-git reset --hard origin/$(git name)
-git checkout $1
+git branch "$1"
+git reset --hard "origin/$(git name)"
+git checkout "$1"

@@ -1,11 +1,11 @@
 #!/bin/bash
 
-set -e
+set -eu
 
-find . -maxdepth 1 -type d | while read dir; do
-  if [[ -e $dir/.git ]]; then
-    echo "In $(basename $dir): git $@"
-    (cd $dir && git $@)
+find . -maxdepth 1 -type d | while read -r dir; do
+  if [[ -e "$dir/.git" ]]; then
+    echo "In $(basename "$dir"): git $*"
+    (cd "$dir" && git "$@")
     echo
   fi
 done
