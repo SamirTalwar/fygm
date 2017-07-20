@@ -43,15 +43,15 @@ else
   alias ls='ls --color'
 fi
 
-# Switch to vi mode and show it with the cursor style.
-bindkey -v
-
 # Fuzzy completion.
 zstyle ':completion:*' matcher-list \
   '' \
   'm:{a-z\-}={A-Z\_}' \
   'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
   'r:|?=** m:{a-z\-}={A-Z\_}'
+
+# Switch to vi mode and show it with the cursor style.
+bindkey -v
 
 function zle-keymap-select {
   if [[ $KEYMAP == 'vicmd' ]]; then
