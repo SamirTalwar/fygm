@@ -55,8 +55,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'editorconfig/editorconfig-vim'
 " Connect up tmux
 Plug 'christoomey/vim-tmux-navigator'
-" Interactive command execution
-Plug 'Shougo/vimproc.vim', {'do': ':VimProcInstall'}
 
 " Better repeat support with '.'
 Plug 'tpope/vim-repeat'
@@ -64,23 +62,18 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 " Comment with '\'
 Plug 'tpope/vim-commentary'
-" Move about with ','
-Plug 'Lokaltog/vim-easymotion'
 " Precision editing for S-expressions
 Plug 'guns/vim-sexp'
-" JavaScript autocompletion
-Plug 'ternjs/tern_for_vim', {'do': 'npm install'}
 " Tab completion
 Plug 'ervandew/supertab'
+" JavaScript autocompletion
+Plug 'ternjs/tern_for_vim', {'do': 'npm install'}
 
+" Language support
 Plug 'plasticboy/vim-markdown'
 Plug 'tpope/vim-cucumber'
 Plug 'ensime/ensime-vim'
 Plug 'derekwyatt/vim-scala'
-Plug 'guns/vim-clojure-static'
-Plug 'venantius/vim-cljfmt'
-Plug 'fsharp/vim-fsharp'
-Plug 'elixir-lang/vim-elixir'
 Plug 'fatih/vim-go'
 Plug 'eagletmt/ghcmod-vim'
 Plug 'rust-lang/rust.vim'
@@ -88,28 +81,15 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'flowtype/vim-flow'
 Plug 'elmcast/elm-vim'
-Plug 'tpope/vim-haml'
-Plug 'digitaltoad/vim-pug'
-Plug 'slim-template/vim-slim'
 Plug 'lunaru/vim-less'
 Plug 'tpope/vim-liquid'
 Plug 'ekalinin/Dockerfile.vim'
-Plug 'rodjek/vim-puppet'
 Plug 'hashivim/vim-hashicorp-tools'
 
-" Colour parentheses according to depth
-Plug 'kien/rainbow_parentheses.vim'
-
-" Git support
-Plug 'tpope/vim-fugitive'
 " Lint
 Plug 'w0rp/ale'
 " Auto-format
 Plug 'sbdchd/neoformat'
-" Search across the JVM classpath
-Plug 'tpope/vim-classpath'
-" Clojure REPL
-Plug 'tpope/vim-fireplace'
 
 " Edit encrypted files
 Plug 'jamessan/vim-gnupg'
@@ -131,10 +111,7 @@ nmap <BS> <C-h>
 " Yank, without jank.
 vnoremap <expr>y "my\"" . v:register . "y`y"
 
-" Search for two characters with the ' key.
-nmap ' <Plug>(easymotion-s2)
-vmap ' <Plug>(easymotion-s2)
-
+" Auto-format on save.
 let g:neoformat_basic_format_trim = 1
 let g:neoformat_enabled_html = []
 let g:clj_fmt_autosave = 1
