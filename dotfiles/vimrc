@@ -65,9 +65,7 @@ Plug 'tpope/vim-commentary'
 " Precision editing for S-expressions
 Plug 'guns/vim-sexp'
 " Tab completion
-Plug 'ervandew/supertab'
-" JavaScript autocompletion
-Plug 'ternjs/tern_for_vim', {'do': 'npm install'}
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --omnisharp-completer --gocode-completer --tern-completer --racer-completer' }
 
 " Language support
 Plug 'plasticboy/vim-markdown'
@@ -110,6 +108,9 @@ nmap <BS> <C-h>
 
 " Yank, without jank.
 vnoremap <expr>y "my\"" . v:register . "y`y"
+
+" Don't show a preview window on auto-complete.
+set completeopt-=preview
 
 " Auto-format on save.
 let g:neoformat_basic_format_trim = 1
