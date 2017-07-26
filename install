@@ -8,6 +8,7 @@ require 'pathname'
 @home = Pathname.new(ENV['HOME']).realpath
 
 @links = {
+  @home + '.emacs.d' => @dotfiles + 'emacs.d',
   @home + '.ghc+ghci.conf' => @dotfiles + 'ghc+ghci.conf',
   @home + '.gitconfig' => @dotfiles + 'gitconfig',
   @home + '.gitignore' => @dotfiles + 'gitignore',
@@ -16,6 +17,7 @@ require 'pathname'
   @home + '.i3' => @dotfiles + 'i3',
   @home + '.config/nvim/init.vim' => @dotfiles + 'vimrc',
   @home + '.racketrc' => @dotfiles + 'racketrc',
+  @home + '.spacemacs' => @dotfiles + 'spacemacs',
   @home + '.tmux.conf' => @dotfiles + 'tmux.conf',
   @home + '.vimrc' => @dotfiles + 'vimrc',
   @home + '.zlogin' => @dotfiles + 'zlogin',

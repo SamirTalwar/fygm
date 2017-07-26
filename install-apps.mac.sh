@@ -64,6 +64,7 @@ brew cask install gimp
 brew install \
   carthage \
   cmake \
+  emacs \
   elm \
   git \
   go \
