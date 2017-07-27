@@ -79,8 +79,10 @@ brew install \
   ruby \
   shellcheck \
   sqlite \
-  tidy-html5
+  tidy-html5 \
+  yarn
 brew cask install font-fira-code
+yarn global add tern
 
 # Java Development
 brew cask install java
