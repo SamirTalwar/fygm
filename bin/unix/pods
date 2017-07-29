@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+
+set -e
+set -u
+set -o pipefail
+
+function first {
+  IFS='' read -r line
+  echo $line
+}
+
+kubectl get pods --selector=$1 --output=name | sed 's#.*/##'
