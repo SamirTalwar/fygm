@@ -3,6 +3,8 @@
 export PATH="/usr/local/bin:$PATH"
 
 command -v brew >& /dev/null || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew tap caskroom/fonts
+
 command -v rustup >& /dev/null || (curl https://sh.rustup.rs -sSf | sh -s -- -y)
 
 set -e
