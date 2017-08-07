@@ -105,13 +105,6 @@ gem install neovim
 
 brew install pandoc
 
-# Chat
-brew install weechat --with-curl --with-lua --with-perl --with-python --with-ruby
-pip2 install websocket-client
-mkdir -p ~/.weechat/python/autoload
-curl -fsSL https://raw.githubusercontent.com/rawdigits/wee-slack/master/wee_slack.py \
-  > ~/.weechat/python/autoload/wee_slack.py
-
 # Containerisation
 brew cask install \
   virtualbox \
