@@ -326,6 +326,10 @@ you should place your code here."
               (interactive)
               (when (and (buffer-file-name) (buffer-modified-p))
                 (save-buffer))))
+
+  (set-fill-column 80)
+  (add-hook 'prog-mode-hook 'turn-on-fci-mode)
+  (add-hook 'text-mode-hook 'turn-on-fci-mode)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
