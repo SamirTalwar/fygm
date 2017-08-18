@@ -64,8 +64,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 " Precision editing for S-expressions
 Plug 'guns/vim-sexp'
-" Tab completion
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --omnisharp-completer --gocode-completer --tern-completer --racer-completer' }
 
 " Language support
 Plug 'plasticboy/vim-markdown'
