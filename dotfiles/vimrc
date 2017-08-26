@@ -80,6 +80,12 @@ Plug 'tpope/vim-liquid'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'hashivim/vim-hashicorp-tools'
 
+" Auto-completion
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/neco-syntax'
+Plug 'Shougo/neco-vim'
+Plug 'autozimu/LanguageClient-neovim'
+
 " Lint
 Plug 'w0rp/ale'
 " Auto-format
@@ -162,8 +168,6 @@ endif
 autocmd BufLeave,FocusLost * nested silent! update " Autosave the file when losing focus or leaving the buffer.
 let g:tmux_navigator_save_on_switch = 1
 
-let g:SuperTabDefaultCompletionType = "context"
-
 let g:vim_markdown_folding_disabled = 1
 let g:javascript_plugin_flow = 1
 let g:jsx_ext_required = 0
@@ -178,7 +182,14 @@ let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
-let g:neomake_open_list = 2
+call deoplete#enable()
+inoremap <C-Space> <C-x><C-o>
+inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+let g:LanguageClient_serverCommands = {
+\ 'javascript': ['flow-language-server', '--stdio'],
+\ 'javascript.jsx': ['flow-language-server', '--stdio'],
+\ }
+let g:LanguageClient_autoStart = 1
 
 autocmd BufNewFile,BufRead Guardfile,*.Guardfile set filetype=ruby
 autocmd BufNewFile,BufRead *.ru set filetype=ruby
