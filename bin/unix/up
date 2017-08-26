@@ -59,8 +59,9 @@ function self-update {
 
 function update-nix {
   if exists nix-env; then
-    SSL_CERT_FILE=$NIX_SSL_CERT_FILE nix-channel --update
-    SSL_CERT_FILE=$NIX_SSL_CERT_FILE nix-env --upgrade
+    nix-channel --update
+    nix-env --upgrade
+    nix-collect-garbage --delete-old
   fi
 }
 
@@ -247,12 +248,6 @@ if self-update; then
   echo "Updated $ROOT. Restarting..."
   exec $SELF "$@"
 fi
-
-# Workaround: Nix overrides the SSL/TLS certificate file, and the default
-# version of curl bundled with Mac OS doesn't support the format, as it uses
-# SecureTransport, not OpenSSL.
-export NIX_SSL_CERT_FILE=$SSL_CERT_FILE
-unset SSL_CERT_FILE
 
 typeset -a package_managers
 if [[ $# -eq 0 ]]; then

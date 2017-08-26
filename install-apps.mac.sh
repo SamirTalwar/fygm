@@ -1,14 +1,16 @@
 #!/bin/bash
 
+set -e
+set -x
+
 export PATH="/usr/local/bin:$PATH"
+
+command -v nix-env >& /dev/null || curl -fsS https://nixos.org/nix/install | sh
 
 command -v brew >& /dev/null || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew tap caskroom/fonts
 
-command -v rustup >& /dev/null || (curl https://sh.rustup.rs -sSf | sh -s -- -y)
-
-set -e
-set -x
+command -v rustup >& /dev/null || (curl https://sh.rustup.rs -fsS | sh -s -- -y)
 
 brew update
 brew upgrade
