@@ -18,6 +18,7 @@ brew install \
   autojump \
   bash \
   direnv \
+  fzf \
   mobile-shell \
   the_silver_searcher \
   tmux \
