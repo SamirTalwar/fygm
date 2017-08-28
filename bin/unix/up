@@ -5,6 +5,8 @@
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && \
   export SDKMAN_DIR="$HOME/.sdkman" && \
   source "$HOME/.sdkman/bin/sdkman-init.sh"
+[[ -f "$HOME/.zplug" ]] && \
+  source "$HOME/.zplug"
 
 set -e
 
@@ -197,8 +199,9 @@ function update-tpm {
 
 function update-zplug {
   if exists zplug; then
+    zplug install
     zplug update
-    zplug clean
+    zplug clean --force
   fi
 }
 
