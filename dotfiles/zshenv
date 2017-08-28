@@ -1,3 +1,14 @@
+path=(
+  ~/bin/unix
+  ~/.local/bin
+  ~/.config/yarn/global/node_modules/.bin
+  ~/.cargo/bin
+  ~/.yarn/bin
+  ./node_modules/.bin
+  /usr/local/bin
+  $path
+)
+
 if [[ "$OSTYPE" == darwin* ]]; then
   export BROWSER='open'
   path=(
@@ -7,16 +18,6 @@ if [[ "$OSTYPE" == darwin* ]]; then
     $path
   )
 fi
-
-path=(
-  ~/bin/unix
-  ~/.local/bin
-  ~/.config/yarn/global/node_modules/.bin
-  ~/.cargo/bin
-  ~/.yarn/bin
-  ./node_modules/.bin
-  $path
-)
 
 export EDITOR='nvim'
 export VISUAL='nvim'

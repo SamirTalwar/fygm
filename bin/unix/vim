@@ -1,0 +1,28 @@
+#!/usr/bin/env zsh
+
+set -e
+set -u
+
+cmd=()
+if (( ${+commands[reattach-to-user-namespace]} )); then
+  cmd+=(reattach-to-user-namespace)
+fi
+if (( ${+commands[nvim]} )); then
+  cmd+=(nvim)
+else
+  vim_set=0
+  for dir in $path; do
+    if [[ -x "$dir/vim" && "$dir/vim" != $0 ]]; then
+      cmd+=("$dir/vim")
+      vim_set=1
+      break
+    fi
+  done
+
+  if ! (( $+vim_set )); then
+    echo 'Could not find "vim".'
+    exit 1
+  fi
+fi
+
+exec ${cmd[@]} $@
