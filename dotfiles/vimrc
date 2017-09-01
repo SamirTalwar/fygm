@@ -168,6 +168,7 @@ endif
 autocmd BufLeave,FocusLost * nested silent! update " Autosave the file when losing focus or leaving the buffer.
 let g:tmux_navigator_save_on_switch = 1
 
+" Language-specific configuration
 let g:vim_markdown_folding_disabled = 1
 let g:javascript_plugin_flow = 1
 let g:jsx_ext_required = 0
@@ -182,6 +183,7 @@ let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
+" Auto-complete based on the language server
 call deoplete#enable()
 inoremap <C-Space> <C-x><C-o>
 inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -190,6 +192,16 @@ let g:LanguageClient_serverCommands = {
 \ 'javascript.jsx': ['flow-language-server', '--stdio'],
 \ }
 let g:LanguageClient_autoStart = 1
+
+" Auto-lint and fix.
+nnoremap <Leader>n :ALENextWrap<CR>
+nnoremap <Leader>N :ALEPreviousWrap<CR>
+nnoremap <Leader>e :ALEDetail<CR>
+nnoremap <Leader>f :ALEFix<CR>
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\   'javascript.jsx': ['eslint'],
+\}
 
 autocmd BufNewFile,BufRead Guardfile,*.Guardfile set filetype=ruby
 autocmd BufNewFile,BufRead *.ru set filetype=ruby
@@ -254,11 +266,10 @@ endfunction
 
 noremap <Leader>x :lclose<CR>:cclose<CR>
 noremap <Leader>z :windo update<CR>:tabclose<CR>
-noremap <leader>c :nohlsearch<CR>:call ClearHighlights()<CR>
+noremap <Leader>c :nohlsearch<CR>:call ClearHighlights()<CR>
 noremap <Leader>b :call Build()<CR>
 noremap <Leader>t :call RunTest()<CR>
 noremap <Leader>p :GhcModType<CR>
-noremap <Leader>e :update<CR>:Neomake<CR>
 
 let g:GPGPreferSymmetric=1 " Use symmetric GPG encryption with new files
 
