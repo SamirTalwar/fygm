@@ -4,4 +4,15 @@ set -e
 set -u
 set -o pipefail
 
-$(dirname $0)/pods $1 | head -1
+if [[ $# -eq 1 ]]; then
+  index=1
+  label=$1
+elif [[ $# -eq 2 ]]; then
+  index=$1
+  label=$2
+else
+  echo >&2 'Usage:'
+  echo >&2 "  $(basename $0) [INDEX] LABEL"
+fi
+
+$(dirname $0)/pods $label | tail +$index | head -1
