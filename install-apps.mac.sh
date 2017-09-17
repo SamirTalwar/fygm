@@ -12,78 +12,74 @@ brew tap caskroom/fonts
 
 command -v rustup >& /dev/null || (curl https://sh.rustup.rs -fsS | sh -s -- -y)
 
+nix-channel --update
+nix-env --upgrade
+
 brew update
 brew upgrade
 
-# Shell
-brew install \
-  autojump \
-  bash \
-  direnv \
-  fzf \
-  mobile-shell \
-  the_silver_searcher \
-  tmux \
-  tree \
-  urlview \
-  watch \
-  zsh
+nix-env --install --attr \
+  nixpkgs.ag \
+  nixpkgs.autojump \
+  nixpkgs.bash \
+  nixpkgs.mosh \
+  nixpkgs.tmux \
+  nixpkgs.tree \
+  nixpkgs.urlview \
+  nixpkgs.watch \
+  nixpkgs.zsh \
+  nixpkgs.zsh-completions
 if [[ ! -e ~/.tmux/plugins/tpm ]]; then
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
 # Core Tools
+nix-env --install --attr \
+  nixpkgs.coreutils-prefixed \
+  nixpkgs.curl \
+  nixpkgs.dos2unix \
+  nixpkgs.findutils \
+  nixpkgs.htop \
+  nixpkgs.httpie \
+  nixpkgs.jq \
+  nixpkgs.moreutils \
+  nixpkgs.socat \
+  nixpkgs.wget
 brew install \
-  coreutils \
-  curl \
-  dos2unix \
-  findutils \
-  gawk \
-  gnu-sed \
   gnupg \
-  htop-osx \
-  httpie \
-  httping \
-  jq \
-  moreutils \
-  pinentry \
-  pinentry-mac \
-  socat \
-  unrar \
-  wget
+  pinentry-mac
 brew cask install xquartz
 
 # Terminal Fu
-brew install \
-  entr \
-  fswatch \
-  terminal-notifier
+nix-env --install --attr \
+  nixpkgs.entr \
+  nixpkgs.fswatch
+brew install terminal-notifier
 
 # Image Manipulation
-brew install \
-  imagemagick \
-  pngcrush
+nix-env --install --attr \
+  nixpkgs.imagemagick \
+  nixpkgs.pngcrush
 brew cask install gimp
 
 # Development
+nix-env --install --attr \
+  nixpkgs.cmake \
+  nixpkgs.elmPackages.elm \
+  nixpkgs.git \
+  nixpkgs.go \
+  nixpkgs.mercurial \
+  nixpkgs.nodejs-8_x \
+  nixpkgs.ocaml \
+  nixpkgs.opam \
+  nixpkgs.shellcheck \
+  nixpkgs.sqlite \
+  nixpkgs.stack
 brew install \
-  carthage \
-  cmake \
-  emacs \
-  elm \
-  git \
-  go \
-  haskell-stack \
   heroku-toolbelt \
-  mercurial \
-  node \
-  ocaml \
-  opam \
   python \
   python3 \
   ruby \
-  shellcheck \
-  sqlite \
   tidy-html5 \
   yarn
 brew cask install font-fira-code
@@ -91,22 +87,26 @@ yarn global add flow-language-server tern
 
 # Java Development
 brew cask install java
-brew install \
-  groovy \
-  gradle \
-  leiningen \
-  maven \
-  scala \
-  sbt
+nix-env --install --attr \
+  nixpkgs.groovy \
+  nixpkgs.gradle \
+  nixpkgs.maven \
+  nixpkgs.scala \
+  nixpkgs.sbt
+brew install leiningen
 
 # Text Editing
+nix-env --install --attr \
+  nixpkgs.emacs \
+  nixpkgs.pandoc \
+  nixpkgs.vim
+
 brew install neovim/neovim/neovim
 pip2 install neovim
 pip3 install neovim
 gem install neovim
-(cd /usr/local/bin && ln -sf nvim vim)
 
-brew install pandoc
+brew cask install emacs
 
 # Containerisation
 brew cask install \
@@ -123,6 +123,8 @@ fi
 if [[ "$(dscl . -read "/Users/$USER" UserShell | field 2)" != '/usr/local/bin/zsh' ]]; then
   sudo chsh -s /usr/local/bin/zsh "$USER"
 fi
+
+nix-collect-garbage --delete-old
 
 brew linkapps
 brew cleanup
