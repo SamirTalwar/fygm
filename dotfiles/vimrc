@@ -43,12 +43,14 @@ call plug#begin()
 Plug 'altercation/solarized', {'rtp': '/vim-colors-solarized'}
 
 " Extra functionality in the status bar
-Plug 'bling/vim-airline'
+Plug 'itchyny/lightline.vim'
 " Search files with fzf
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 " File/directory management
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+" Git support
+Plug 'tpope/vim-fugitive'
 " EditorConfig support
 Plug 'editorconfig/editorconfig-vim'
 " Connect up tmux
@@ -110,6 +112,32 @@ nmap <BS> <C-h>
 
 " Yank, without jank.
 vnoremap <expr>y "my\"" . v:register . "y`y"
+
+" Status bars.
+set noshowmode
+set laststatus=2
+let g:lightline = {
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ],
+  \   'right': [ [ 'lineinfo' ],
+  \              [ 'percent' ],
+  \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
+  \ },
+  \ 'component_function': {
+  \   'fugitive': 'LightlineFugitive',
+  \ },
+  \ 'separator': { 'left': '', 'right': '' },
+  \ 'subseparator': { 'left': '', 'right': '' }
+\ }
+
+function! LightlineFugitive()
+    if exists("*fugitive#head")
+        let branch = fugitive#head()
+       return branch !=# '' ? ' '.branch : ''
+    endif
+    return ''
+  endfunction
 
 " Map Ctrl+P to fzf's files view.
 nnoremap <C-p> :GFiles<CR>
