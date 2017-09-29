@@ -165,7 +165,9 @@ elseif has("win32")
   set guifont=Consolas:h12
 endif
 
-autocmd BufLeave,FocusLost * nested silent! update " Autosave the file when losing focus or leaving the buffer.
+autocmd BufNew * set bufhidden=delete " Don't keep files around in memory.
+autocmd BufEnter,FocusGained * checktime " Auto-load the file if it's changed.
+autocmd BufLeave,FocusLost * silent! update " Auto-save the file.
 let g:tmux_navigator_save_on_switch = 1
 
 " Language-specific configuration
