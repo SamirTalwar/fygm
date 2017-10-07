@@ -39,6 +39,9 @@ set pastetoggle=<F2> " F2 toggles paste mode
 " Set up plugins
 call plug#begin()
 
+" Asynchronous execution (required by ghcmod-vim)
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+
 " Colors
 Plug 'altercation/solarized', {'rtp': '/vim-colors-solarized'}
 
