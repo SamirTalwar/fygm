@@ -122,10 +122,13 @@ set laststatus=2
 let g:lightline = {
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ],
+  \             [ 'fugitive', 'readonly', 'filepath', 'modified' ] ],
   \   'right': [ [ 'lineinfo' ],
   \              [ 'percent' ],
   \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
+  \ },
+  \ 'component': {
+  \   'filepath': '%f',
   \ },
   \ 'component_function': {
   \   'fugitive': 'LightlineFugitive',
@@ -303,6 +306,7 @@ noremap <Leader>c :nohlsearch<CR>:call ClearHighlights()<CR>
 noremap <Leader>b :call Build()<CR>
 noremap <Leader>t :call RunTest()<CR>
 noremap <Leader>p :GhcModType<CR>
+noremap <Leader>P :GhcModTypeInsert<CR>
 
 let g:GPGPreferSymmetric=1 " Use symmetric GPG encryption with new files
 
