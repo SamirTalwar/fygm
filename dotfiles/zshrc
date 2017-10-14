@@ -99,5 +99,3 @@ zplug load
 
 # Use a faint grey for autosuggestions.
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
-
-export PATH="$HOME/.yarn/bin:$PATH"

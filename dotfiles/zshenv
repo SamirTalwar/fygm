@@ -1,3 +1,5 @@
+setopt no_global_rcs
+
 path=(
   ~/.local/bin
   ~/.config/yarn/global/node_modules/.bin
