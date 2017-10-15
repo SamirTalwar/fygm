@@ -7,6 +7,8 @@ path=(
   ~/.yarn/bin
   ./node_modules/.bin
   /usr/local/bin
+  /usr/sbin
+  /sbin
   $path
 )
 
