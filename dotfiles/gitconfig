@@ -42,6 +42,7 @@
 	update-master = ! ~/bin/git/update-master
 
 	a = ! git add-all
+	c = commit -v
 	co = ! git checkout-and-pull
 	lg = ! git log-tree
 	m = ! git checkout-master-and-update
