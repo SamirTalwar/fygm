@@ -15,4 +15,4 @@ else
   echo >&2 "  $(basename $0) [INDEX] LABEL"
 fi
 
-$(dirname $0)/pods $label | tail +$index | head -1
+$(dirname $0)/pods $label | tail -n+$index | head -n1
