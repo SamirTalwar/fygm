@@ -48,7 +48,7 @@
 	m = ! git checkout-master-and-update
 	p = ! git pull-everything
 	pr = ! git pull-request
-	s = ! git status
+	s = status
 	up = ! git update-master
 	upm = ! git update-master && git merge $(git main-branch)
 	upr = ! git update-master && git rebase $(git main-branch)
