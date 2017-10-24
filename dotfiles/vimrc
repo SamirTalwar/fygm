@@ -89,7 +89,7 @@ Plug 'hashivim/vim-hashicorp-tools'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/neco-vim'
-Plug 'autozimu/LanguageClient-neovim'
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 
 " Lint
 Plug 'w0rp/ale'
@@ -220,7 +220,7 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
 " Auto-complete based on the language server
-call deoplete#enable()
+let g:deoplete#enable_at_startup = 1
 inoremap <C-Space> <C-x><C-o>
 inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 let g:LanguageClient_serverCommands = {
