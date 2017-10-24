@@ -19,12 +19,12 @@ ALL_PACKAGE_MANAGERS=(
   apt
   sdk
   rvm
-  gem
+  # gem
   pip2
   pip3
   nvm
   yarn
-  npm
+  # npm
   cabal
   opam
   raco
