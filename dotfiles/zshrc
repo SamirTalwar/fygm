@@ -76,6 +76,9 @@ function +vi-git-extras {
     if [[ $(git rev-list --count ..@{u} 2> /dev/null) -ne 0 ]]; then
       hook_com[misc]+=' ↓'
     fi
+    if [[ $(git stash list | wc -l) -gt 0 ]]; then
+      hook_com[misc]+=' ※'
+    fi
     if git status --porcelain | grep -E '^(\?\?| D) ' &> /dev/null && [[ -z ${hook_com[unstaged]} ]]; then
       hook_com[unstaged]+=' ☆'
     fi
