@@ -17,8 +17,8 @@ function silence {
   set -e
   if [[ $exit_status -ne 0 ]]; then
     cat $output_file
-    exit $exit_status
   fi
+  return $exit_status
 }
 
 function run {
@@ -26,32 +26,35 @@ function run {
   silence $@
 }
 
+success=true
+
 echo 'Removing exited processes...'
 for process in $(docker container ls --filter='status=exited' --quiet); do
-  run docker container rm $process
+  run docker container rm $process || success=false
 done
 
 echo 'Removing dangling images...'
 # First, remove dangling images that have been somehow tagged with a repository but no name.
 # We do this by re-tagging them and then removing them.
 for repository id in $(docker image ls | tail -n+2 | awk '$1 != "<none>" && $2 == "<none>" { print $1 " " $3 }'); do
-  silence docker image tag $id "${repository}:${id}"
-  run docker image rm "${repository}:${id}"
+  silence docker image tag $id "${repository}:${id}" \
+    && run docker image rm "${repository}:${id}" \
+    || success=false
 done
 
 # Next, remove unnamed images.
 for id in $(docker image ls | tail -n+2 | awk '$1 == "<none>" && $2 == "<none>" { print $3 }'); do
-  run docker image rm "${id}"
+  run docker image rm $id || success=false
 done
 
 # Then remove the rest.
 for image in $(docker image ls --filter=dangling=true --quiet | awk '{ print $1 ":" $2 }'); do
-  run docker image rm $image
+  run docker image rm $image || success=false
 done
 
 echo 'Removing dangling, unnamed volumes...'
 for volume in $(docker volume ls --filter=dangling=true --quiet | awk '$0 ~ "^[0-9a-f]{64}$"'); do
-  run docker volume rm $volume
+  run docker volume rm $volume || success=false
 done
 
 created=$(docker container ls --filter='status=created')
@@ -60,12 +63,14 @@ dead=$(docker container ls --filter='status=dead')
 has_dead=$([[ -n $(echo $dead | tail -n+2) ]] && echo true || echo false)
 
 if $has_created; then
+  success=false
   echo
   echo 'WARNING: Some processes have been created but not started.'
   echo $created
 fi
 
 if $has_dead; then
+  success=false
   echo
   echo 'WARNING: Some processes have died.'
   echo $dead
@@ -74,3 +79,5 @@ fi
 if ! $has_created && ! $has_dead; then
   echo 'Your Docker is now sparkling.'
 fi
+
+$success
