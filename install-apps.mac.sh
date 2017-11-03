@@ -77,6 +77,7 @@ nix-env --install --attr \
   nixpkgs.stack
 brew install \
   heroku-toolbelt \
+  llvm \
   python \
   python3 \
   ruby \

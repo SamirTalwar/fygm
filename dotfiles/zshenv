@@ -6,6 +6,7 @@ path=(
   ~/.cargo/bin
   ~/.yarn/bin
   ./node_modules/.bin
+  /usr/local/opt/llvm/bin
   /usr/local/bin
   /usr/sbin
   /sbin

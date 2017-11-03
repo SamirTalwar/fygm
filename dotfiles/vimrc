@@ -84,6 +84,7 @@ Plug 'lunaru/vim-less'
 Plug 'tpope/vim-liquid'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'hashivim/vim-hashicorp-tools'
+Plug 'https://git.llvm.org/git/llvm', {'rtp': 'utils/vim'}
 
 " Auto-completion
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
