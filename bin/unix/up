@@ -52,7 +52,7 @@ function self-update {
     exit $exit_code
   fi
 
-  if [[ $output != 'Already up-to-date.' ]]; then
+  if ! [[ $output =~ '^Already up[ -]to[ -]date.$' ]]; then
     echo "$output"
   else
     return 1
