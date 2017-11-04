@@ -43,7 +43,7 @@ call plug#begin()
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
 " Colors
-Plug 'altercation/solarized', {'rtp': '/vim-colors-solarized'}
+Plug 'altercation/solarized', {'rtp': 'vim-colors-solarized'}
 
 " Extra functionality in the status bar
 Plug 'itchyny/lightline.vim'
@@ -86,10 +86,10 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'hashivim/vim-hashicorp-tools'
 
 " Auto-completion
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/neco-vim'
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+Plug 'autozimu/LanguageClient-neovim', {'do': ':UpdateRemotePlugins'}
 
 " Lint
 Plug 'w0rp/ale'
