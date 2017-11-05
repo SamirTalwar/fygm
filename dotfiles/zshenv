@@ -1,12 +1,6 @@
 setopt no_global_rcs
 
 path=(
-  ~/.local/bin
-  ~/.config/yarn/global/node_modules/.bin
-  ~/.cargo/bin
-  ~/.yarn/bin
-  ./node_modules/.bin
-  /usr/local/opt/llvm/bin
   /usr/local/bin
   /usr/sbin
   /sbin
@@ -36,6 +30,16 @@ fi
 if [[ -f /usr/local/opt/google-cloud-sdk/path.zsh.inc ]]; then
   source '/usr/local/opt/google-cloud-sdk/path.zsh.inc'
 fi
+
+path=(
+  ~/.local/bin
+  ~/.config/yarn/global/node_modules/.bin
+  ~/.cargo/bin
+  ~/.yarn/bin
+  ./node_modules/.bin
+  /usr/local/opt/llvm/bin
+  $path
+)
 
 path=(~/bin/unix $path)
 if [[ "$OSTYPE" == darwin* ]]; then
