@@ -89,14 +89,12 @@ function precmd {
 }
 RPROMPT='${vcs_info_msg_0_}'
 
-if (( $+commands[brew] )); then
-  if [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]]; then
-    source $(brew --prefix)/etc/profile.d/autojump.sh
-  fi
+if [[ -s /usr/local/share/autojump/autojump.zsh ]]; then
+  source /usr/local/share/autojump/autojump.zsh
+fi
 
-  if (( $+commands[direnv] )); then
-    eval "$(direnv hook zsh)"
-  fi
+if (( $+commands[direnv] )); then
+  eval "$(direnv hook zsh)"
 fi
 
 if [[ -e ~/.opam/opam-init/init.zsh ]]; then
