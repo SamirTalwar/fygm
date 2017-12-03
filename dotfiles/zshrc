@@ -94,7 +94,7 @@ if (( $+commands[brew] )); then
     source $(brew --prefix)/etc/profile.d/autojump.sh
   fi
 
-  if [[ -s $(brew --prefix direnv) ]]; then
+  if (( $+commands[direnv] )); then
     eval "$(direnv hook zsh)"
   fi
 fi
