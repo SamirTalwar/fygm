@@ -18,6 +18,7 @@ require 'pathname'
   @home + '.config/nvim/init.vim' => @dotfiles + 'vimrc',
   @home + '.racketrc' => @dotfiles + 'racketrc',
   @home + '.spacemacs' => @dotfiles + 'spacemacs',
+  @home + '.swiplrc' => @dotfiles + 'swiplrc',
   @home + '.tmux.conf' => @dotfiles + 'tmux.conf',
   @home + '.vimrc' => @dotfiles + 'vimrc',
   @home + '.zlogin' => @dotfiles + 'zlogin',

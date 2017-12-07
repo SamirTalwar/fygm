@@ -86,6 +86,13 @@ brew install \
 brew cask install font-fira-code
 yarn global add flow-language-server tern
 
+brew install swi-prolog --with-libarchive
+mkdir -p ~/.config/swipl/packs
+swipl <<EOF
+pack_install(regex, [upgrade(true), interactive(false)]).
+halt.
+EOF
+
 # Java Development
 brew cask install java
 nix-env --install --attr \
