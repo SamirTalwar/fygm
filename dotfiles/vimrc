@@ -73,6 +73,7 @@ Plug 'plasticboy/vim-markdown'
 Plug 'tpope/vim-cucumber'
 Plug 'ensime/ensime-vim'
 Plug 'derekwyatt/vim-scala'
+Plug 'udalov/kotlin-vim'
 Plug 'fatih/vim-go'
 Plug 'eagletmt/ghcmod-vim'
 Plug 'rust-lang/rust.vim'
@@ -244,7 +245,7 @@ autocmd BufNewFile,BufRead Guardfile,*.Guardfile set filetype=ruby
 autocmd BufNewFile,BufRead *.ru set filetype=ruby
 autocmd BufNewFile,BufRead *.gradle set filetype=groovy
 autocmd BufNewFile,BufRead *.stylus set filetype=sass
-autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
+autocmd FileType java,kotlin,python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 
 autocmd VimEnter *.clj RainbowParenthesesToggle
 autocmd Syntax *.clj RainbowParenthesesLoadRound
