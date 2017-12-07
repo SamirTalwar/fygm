@@ -12,6 +12,7 @@ command -v rustup >& /dev/null || (curl https://sh.rustup.rs -fsS | sh -s -- -y)
 
 brew update
 brew upgrade
+brew cask upgrade
 
 # Shell
 brew install \

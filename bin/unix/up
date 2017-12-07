@@ -71,6 +71,7 @@ function update-brew {
   if exists brew; then
     brew update
     brew upgrade
+    brew cask upgrade
     brew cleanup
     brew cask cleanup
   fi
