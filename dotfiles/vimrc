@@ -271,6 +271,10 @@ function! Build()
     let commands = g:build_commands
   elseif file_readable('Makefile')
     let commands = ['make']
+  elseif file_readable('stack.yaml')
+    let commands = ['stack build']
+  elseif file_readable('Setup.hs')
+    let commands = ['cabal build']
   endif
   if exists('commands')
     call WriteToWatchFile(commands)
