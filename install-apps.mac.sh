@@ -89,9 +89,13 @@ brew install \
 brew cask install font-fira-code
 yarn global add flow-language-server tern
 
+# Prolog Development
 brew install swi-prolog --with-libarchive
 mkdir -p ~/.config/swipl/packs
 swipl <<EOF
+expand_file_name('~/.config/swipl/packs', [PacksDirectory]),
+  asserta( (file_search_path(pack, PacksDirectory)) ).
+attach_packs.
 pack_install(regex, [upgrade(true), interactive(false)]).
 halt.
 EOF
