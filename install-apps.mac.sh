@@ -86,8 +86,12 @@ brew install \
   sqlite \
   tidy-html5 \
   yarn
-brew cask install font-fira-code
-yarn global add flow-language-server tern
+brew cask install \
+  anaconda \
+  font-fira-code
+yarn global add \
+  flow-language-server \
+  tern
 
 # Prolog Development
 brew install swi-prolog --with-libarchive
