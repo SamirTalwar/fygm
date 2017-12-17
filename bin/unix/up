@@ -80,7 +80,7 @@ function update-brew {
 function update-apt {
   if exists apt-get; then
     sudo apt-get update
-    sudo apt-get upgrade
+    sudo apt-get upgrade -y
   fi
 }
 
