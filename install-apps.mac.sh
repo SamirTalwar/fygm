@@ -117,10 +117,9 @@ brew install \
 
 # Text Editing
 brew install neovim/neovim/neovim
-pip2 install neovim
-pip3 install neovim
+pip2 install sexpdata websocket-client neovim
+pip3 install sexpdata websocket-client neovim
 gem install neovim
-(cd /usr/local/bin && ln -sf nvim vim)
 
 brew install pandoc
 
