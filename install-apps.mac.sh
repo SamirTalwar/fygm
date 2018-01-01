@@ -128,10 +128,12 @@ brew install pandoc
 brew cask install \
   virtualbox \
   virtualbox-extension-pack \
-  docker
+  docker \
+  google-cloud-sdk
 brew install \
   docker-completion \
   docker-compose-completion
+gcloud components install -q alpha beta kubectl
 
 if ! grep -F /usr/local/bin/zsh /etc/shells; then
   sudo bash -c "echo /usr/local/bin/zsh >> /etc/shells"
