@@ -136,7 +136,7 @@ brew install \
 if ! grep -F /usr/local/bin/zsh /etc/shells; then
   sudo bash -c "echo /usr/local/bin/zsh >> /etc/shells"
 fi
-if [[ "$(dscl . -read "/Users/$USER" UserShell | field 2)" != '/usr/local/bin/zsh' ]]; then
+if [[ "$(dscl . -read "/Users/$USER" UserShell | cut -d ' ' -f 2)" != '/usr/local/bin/zsh' ]]; then
   sudo chsh -s /usr/local/bin/zsh "$USER"
 fi
 
