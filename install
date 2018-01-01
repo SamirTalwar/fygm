@@ -8,6 +8,7 @@ require 'pathname'
 @home = Pathname.new(ENV['HOME']).realpath
 
 @links = {
+  @home + 'bin' => @dir + 'bin',
   @home + '.emacs.d' => @dotfiles + 'emacs.d',
   @home + '.ghc+ghci.conf' => @dotfiles + 'ghc+ghci.conf',
   @home + '.gitconfig' => @dotfiles + 'gitconfig',
@@ -42,17 +43,17 @@ def link source, destination
   destination.make_symlink(source)
 end
 
-puts 'Symlinking configuration files'
+puts 'Symlinking files...'
 @links.each do |destination, source|
   link source, destination
 end
 
 if RbConfig::CONFIG['host_os'] =~ /^darwin/
-  puts 'Installing useful software'
+  puts 'Installing useful software...'
   run (@dir + 'install-apps.mac.sh').to_s
 end
 
-puts 'Installing vim plugins'
+puts 'Installing vim plugins...'
 autoload = @home + '.config/nvim/autoload'
 autoload.mkpath()
 open('https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim') do |plug|
@@ -62,3 +63,5 @@ open('https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim') do |
 end
 
 run 'nvim +PlugInstall +PlugClean! +qall'
+
+puts 'Done!'
