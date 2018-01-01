@@ -3,7 +3,7 @@
 set -e
 set -x
 
-export PATH="/usr/local/bin:$PATH"
+export PATH="$HOME/.cargo/bin:/usr/local/bin:$PATH"
 
 command -v brew >& /dev/null || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew tap caskroom/fonts
