@@ -20,7 +20,7 @@ brew install \
   bash \
   direnv \
   fzf \
-  mobile-shell \
+  mosh \
   the_silver_searcher \
   tmux \
   tree \
