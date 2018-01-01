@@ -14,7 +14,10 @@ brew update
 brew upgrade
 brew cask upgrade
 
+
 # Shell
+brew cask install font-fira-code
+
 brew install \
   autojump \
   bash \
@@ -86,9 +89,7 @@ brew install \
   sqlite \
   tidy-html5 \
   yarn
-brew cask install \
-  anaconda \
-  font-fira-code
+brew cask install anaconda
 yarn global add \
   flow-language-server \
   tern
