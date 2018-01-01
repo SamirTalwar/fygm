@@ -144,3 +144,4 @@ fi
 
 brew linkapps
 brew cleanup
+brew cask cleanup
