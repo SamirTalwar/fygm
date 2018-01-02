@@ -62,6 +62,9 @@ brew install \
   fswatch \
   terminal-notifier
 
+# macOS
+brew cask install scroll-reverser
+
 # Image Manipulation
 brew install \
   imagemagick \
