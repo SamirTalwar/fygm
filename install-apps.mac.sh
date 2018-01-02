@@ -83,6 +83,7 @@ brew install \
   haskell-stack \
   heroku-toolbelt \
   llvm \
+  make \
   mercurial \
   node \
   ocaml \
