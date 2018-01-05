@@ -211,7 +211,8 @@ let g:tmux_navigator_save_on_switch = 1
 let g:vim_markdown_folding_disabled = 1
 let g:javascript_plugin_flow = 1
 let g:jsx_ext_required = 0
-let g:flow#enable = 0
+let g:flow#enable = 1
+let g:flow#autoclose = 1
 let g:elm_setup_keybindings = 0
 
 let g:go_highlight_functions = 1
@@ -225,10 +226,10 @@ let g:go_highlight_build_constraints = 1
 let g:deoplete#enable_at_startup = 1
 inoremap <C-Space> <C-x><C-o>
 inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-let g:LanguageClient_serverCommands = {
-\ 'javascript': ['flow-language-server', '--stdio'],
-\ 'javascript.jsx': ['flow-language-server', '--stdio'],
-\ }
+" let g:LanguageClient_serverCommands = {
+" \ 'javascript': ['flow-language-server', '--stdio'],
+" \ 'javascript.jsx': ['flow-language-server', '--stdio'],
+" \ }
 let g:LanguageClient_autoStart = 1
 
 " Auto-lint and fix.
