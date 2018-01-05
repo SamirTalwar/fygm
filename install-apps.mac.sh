@@ -120,6 +120,7 @@ brew install \
   maven \
   scala \
   sbt
+brew cask install intellij-idea
 
 # Text Editing
 brew install neovim/neovim/neovim
