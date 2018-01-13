@@ -312,13 +312,27 @@ function! RunTest()
   endif
 endfunction
 
+function! CheckType()
+  if &ft == 'haskell'
+    GhcModType
+  elseif !empty(matchstr(&ft, '^javascript'))
+    FlowType
+  endif
+endfunction
+
+function! InsertType()
+  if &ft == 'haskell'
+    GhcModTypeInsert
+  endif
+endfunction
+
 noremap <Leader>x :lclose<CR>:cclose<CR>
 noremap <Leader>z :windo update<CR>:tabclose<CR>
 noremap <Leader>c :nohlsearch<CR>:call ClearHighlights()<CR>
 noremap <Leader>b :call Build()<CR>
 noremap <Leader>t :call RunTest()<CR>
-noremap <Leader>p :GhcModType<CR>
-noremap <Leader>P :GhcModTypeInsert<CR>
+noremap <Leader>p :call CheckType()<CR>
+noremap <Leader>P :call InsertType()<CR>
 
 let g:GPGPreferSymmetric=1 " Use symmetric GPG encryption with new files
 
