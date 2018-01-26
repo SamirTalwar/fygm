@@ -16,8 +16,8 @@ if [[ "$OSTYPE" == darwin* ]]; then
   )
 fi
 
-export EDITOR='nvim'
-export VISUAL='nvim'
+export EDITOR='vim'
+export VISUAL='vim'
 export PAGER='less'
 
 export GRADLE_OPTS="$GRADLE_OPTS -Dorg.gradle.daemon=true"

@@ -7,22 +7,26 @@ cmd=()
 if (( ${+commands[reattach-to-user-namespace]} )); then
   cmd+=(reattach-to-user-namespace)
 fi
+
+found=false
 if (( ${+commands[nvim]} )); then
-  cmd+=(nvim)
+  nvim=${commands[nvim]}
+  cmd+=($nvim)
+  path=(${nvim:h} $path)
+  found=true
 else
-  vim_set=0
   for dir in $path; do
     if [[ -x "$dir/vim" && "$dir/vim" != $0 ]]; then
       cmd+=("$dir/vim")
-      vim_set=1
+      found=true
       break
     fi
   done
+fi
 
-  if ! (( $+vim_set )); then
-    echo 'Could not find "vim".'
-    exit 1
-  fi
+if ! $found; then
+  echo 'Could not find "vim".'
+  exit 1
 fi
 
 exec ${cmd[@]} $@
