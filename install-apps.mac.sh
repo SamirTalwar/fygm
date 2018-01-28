@@ -96,9 +96,6 @@ brew install \
   tidy-html5 \
   yarn
 brew cask install anaconda
-yarn global add \
-  flow-language-server \
-  tern
 
 # Prolog Development
 brew install swi-prolog --with-libarchive
