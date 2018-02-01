@@ -4,11 +4,7 @@ set -e
 set -u
 set -o pipefail
 
-if [[ -z $TMPDIR ]]; then
-  TMPDIR=/tmp
-fi
-
-output_file=$TMPDIR/docker-cleanup.out
+output_file=${TMPDIR:-/tmp}/docker-cleanup.out
 
 function silence {
   set +e
