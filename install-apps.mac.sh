@@ -83,7 +83,6 @@ brew install \
   haskell-stack \
   heroku-toolbelt \
   llvm \
-  make \
   mercurial \
   node \
   ocaml \
@@ -95,6 +94,7 @@ brew install \
   sqlite \
   tidy-html5 \
   yarn
+brew install make --with-default-names
 brew cask install anaconda
 
 # Prolog Development
