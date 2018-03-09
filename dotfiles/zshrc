@@ -57,7 +57,7 @@ for key in $(bindkey | fgrep accept-line | sed 's/^"\([^"]*\)".*/\1/'); do bindk
 
 # Show the directory path on the left-hand side.
 PROMPT_DIR="%{$fg[blue]%}%(4~|…/%3~|%~)%{$reset_color%}"
-PROMPT_ARROW="%B\$([[ \$? -eq 0 ]] && echo '❯' || echo '%{$fg[red]%}❯%{$reset_color%}')%b"
+PROMPT_ARROW="%B\$([[ \$? -eq 0 ]] && echo '>' || echo '%{$fg[red]%}>%{$reset_color%}')%b"
 PROMPT="${PROMPT_DIR} ${PROMPT_ARROW} "
 
 # Show Git information on the right-hand side.
