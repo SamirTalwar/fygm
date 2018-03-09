@@ -49,6 +49,7 @@ brew install \
   httping \
   jq \
   moreutils \
+  ncdu \
   pinentry \
   pinentry-mac \
   socat \
