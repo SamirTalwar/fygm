@@ -28,6 +28,7 @@
 	pick-axe = log -p -S
 	praise = blame
 
+  add-all-and-commit = ! ~/bin/git/add-all-and-commit
 	checkout-and-pull = ! ~/bin/git/checkout-and-pull
 	checkout-master-and-update = ! ~/bin/git/checkout-master-and-update
 	delete-old-branches = ! ~/bin/git/delete-old-branches
@@ -41,7 +42,8 @@
 	update-master = ! ~/bin/git/update-master
 
 	a = ! git add-all
-	c = commit -v
+	c = commit --verbose
+  ac = ! git add-all-and-commit
 	co = ! git checkout-and-pull
 	lg = ! git log-tree
 	m = ! git checkout-master-and-update

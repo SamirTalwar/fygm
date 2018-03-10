@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -eu
+
+git add --all
+git status
+
+ANSWER=x
+while true; do
+  echo -n 'Do you want to commit? (Y/n) '
+  read -r ANSWER
+  case "$ANSWER" in
+    ''|'y')
+      git commit --verbose
+      break ;;
+    'n')
+      break ;;
+  esac
+done
