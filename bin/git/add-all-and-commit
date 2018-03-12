@@ -5,6 +5,10 @@ set -eu
 git add --all
 git status
 
+if [[ -z "$(git status --porcelain)" ]]; then
+  exit 1
+fi
+
 ANSWER=x
 while true; do
   echo -n 'Do you want to commit? (Y/n) '
