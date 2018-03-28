@@ -88,6 +88,7 @@ brew install \
   node \
   ocaml \
   opam \
+  pipenv \
   python \
   python3 \
   ruby \
