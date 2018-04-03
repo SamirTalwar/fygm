@@ -10,7 +10,7 @@ require 'pathname'
 @links = {
   @home + 'bin' => @dir + 'bin',
   @home + '.emacs.d' => @dotfiles + 'emacs.d',
-  @home + '.ghc+ghci.conf' => @dotfiles + 'ghc+ghci.conf',
+  @home + '.ghc/ghci.conf' => @dotfiles + 'ghc/ghci.conf',
   @home + '.gitconfig' => @dotfiles + 'gitconfig',
   @home + '.gitignore' => @dotfiles + 'gitignore',
   @home + '.gnupg/gpg.conf' => @dotfiles + 'gnupg/gpg.conf',
