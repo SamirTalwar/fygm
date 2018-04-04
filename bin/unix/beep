@@ -1,17 +1,20 @@
 #!/usr/bin/env zsh
 
+set -e
+set -u
+
 if [[ $_ != $0 ]]; then
-  for arg in "$@"; do
+  for arg in $@; do
     if [[ $arg != 'beep' ]]; then
-      echo "I don't know how to \"$arg\"." >&2
+      echo >&2 "I don't know how to \"${arg}\"."
       exit 1
     fi
   done
 
-  print -n "\a"
+  print -n '\a'
   sleep 0.5
-  for arg in "$@"; do
-    print -n "\a"
+  for arg in $@; do
+    print -n '\a'
     sleep 0.5
   done
 fi
