@@ -44,7 +44,7 @@ function zle-line-init {
   printf '\e[6 q'
 }
 function zle-line-deinit {
-  PROMPT="${PROMPT_DIR} %{$fg[green]%}[%D{%H:%M}]%{$reset_color%} ${PROMPT_ARROW} "
+  PROMPT="${PROMPT_DIR} %{${fg[green]}%}[%D{%H:%M}]%{$reset_color%} ${PROMPT_ARROW} "
   zle reset-prompt
   PROMPT="${PROMPT_DIR} ${PROMPT_ARROW} "
   zle accept-line
@@ -56,8 +56,8 @@ zle -N zle-line-deinit
 for key in $(bindkey | fgrep accept-line | sed 's/^"\([^"]*\)".*/\1/'); do bindkey $key zle-line-deinit; done
 
 # Show the directory path on the left-hand side.
-PROMPT_DIR="%{$fg[blue]%}%(4~|…/%3~|%~)%{$reset_color%}"
-PROMPT_ARROW="%B\$([[ \$? -eq 0 ]] && echo '>' || echo '%{$fg[red]%}>%{$reset_color%}')%b"
+PROMPT_DIR="%{${fg[blue]}%}%(4~|…/%3~|%~)%{$reset_color%}"
+PROMPT_ARROW="%B\$([[ \$? -eq 0 ]] && echo '>' || echo '%{${fg[red]}%}>%{$reset_color%}')%b"
 PROMPT="${PROMPT_DIR} ${PROMPT_ARROW} "
 
 # Show Git information on the right-hand side.
@@ -66,7 +66,7 @@ zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' stagedstr ' ★'
 zstyle ':vcs_info:*' unstagedstr ' ☆'
-zstyle ':vcs_info:*' formats "%{$fg[yellow]%}%b%{$reset_color%}%{$fg[gray]%}%m%c%u%{$reset_color%}"
+zstyle ':vcs_info:*' formats "%{${fg[yellow]}%}%b%{$reset_color%}%{${fg[gray]}%}%m%c%u%{$reset_color%}"
 zstyle ':vcs_info:git*+set-message:*' hooks git-extras
 function +vi-git-extras {
   if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]]; then
