@@ -3,14 +3,19 @@
 set -e
 set -u
 
-for arg in $@; do
-  if [[ $arg != 'beep' ]]; then
-    echo >&2 "I don't know how to \"${arg}\"."
-    exit 1
-  fi
-done
+if [[ $# -eq 1 && $1 =~ '^[0-9]+$' ]]; then
+  count=$1
+else
+  for arg in $@; do
+    if [[ $arg != 'beep' ]]; then
+      echo >&2 "I don't know how to \"${arg}\"."
+      exit 1
+    fi
+  done
+  count=$(( $# + 1 ))
+fi
 
-for arg in {0..$#}; do
+for arg in {1..$count}; do
   print -n '\a'
   sleep 0.5
 done
