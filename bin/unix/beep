@@ -3,18 +3,14 @@
 set -e
 set -u
 
-if [[ $_ != $0 ]]; then
-  for arg in $@; do
-    if [[ $arg != 'beep' ]]; then
-      echo >&2 "I don't know how to \"${arg}\"."
-      exit 1
-    fi
-  done
+for arg in $@; do
+  if [[ $arg != 'beep' ]]; then
+    echo >&2 "I don't know how to \"${arg}\"."
+    exit 1
+  fi
+done
 
+for arg in {0..$#}; do
   print -n '\a'
   sleep 0.5
-  for arg in $@; do
-    print -n '\a'
-    sleep 0.5
-  done
-fi
+done
