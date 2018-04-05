@@ -3,13 +3,27 @@
 set -e
 set -u
 
+name='beep'
+
+function usage {
+  echo >&2 "Usage: ${name} [${name} ...]"
+  echo >&2 "   or: ${name} COUNT"
+  echo >&2
+  echo >&2 'The following examples beep 5 times:'
+  echo >&2
+  echo >&2 '    $ beep beep beep beep beep'
+  echo >&2 '    $ beep 5'
+  exit 2
+}
+
 if [[ $# -eq 1 && $1 =~ '^[0-9]+$' ]]; then
   count=$1
 else
   for arg in $@; do
-    if [[ $arg != 'beep' ]]; then
+    if [[ $arg != $name ]]; then
       echo >&2 "I don't know how to \"${arg}\"."
-      exit 1
+      echo >&2
+      usage
     fi
   done
   count=$(( $# + 1 ))
