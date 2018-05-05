@@ -260,7 +260,7 @@ autocmd Syntax *.clj RainbowParenthesesLoadSquare
 autocmd Syntax *.clj RainbowParenthesesLoadBraces
 
 function! ClearHighlights()
-  if &ft == 'haskell'
+  if &ft == 'haskell' && exists(':GhcModTypeClear')
     GhcModTypeClear
   endif
 endfunction
