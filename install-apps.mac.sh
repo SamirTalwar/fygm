@@ -79,6 +79,7 @@ brew install \
   dep \
   emacs \
   elm \
+  gcc \
   git \
   go \
   haskell-stack \
