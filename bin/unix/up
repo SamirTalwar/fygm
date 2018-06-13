@@ -33,6 +33,7 @@ ALL_PACKAGE_MANAGERS=(
   tpm
   zplug
   vim-plug
+  nvim
   nvim-plug
   docker-machine
   docker
@@ -213,8 +214,16 @@ function update-vim-plug {
   fi
 }
 
+function update-nvim {
+  if exists nvim; then
+    pip2 install --upgrade neovim
+    pip3 install --upgrade neovim
+    gem install neovim
+  fi
+}
+
 function update-nvim-plug {
-  if [[ -e "$HOME/.config/nvim/autoload/plug.vim" ]]; then
+  if exists nvim && [[ -e "$HOME/.config/nvim/autoload/plug.vim" ]]; then
     nvim +PlugUpgrade +qall
     nvim +PlugInstall +PlugUpdate +PlugClean! +qall
     nvim +UpdateRemotePlugins +qall
