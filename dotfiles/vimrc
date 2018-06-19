@@ -80,6 +80,9 @@ Plug 'rust-lang/rust.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'flowtype/vim-flow'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'Quramy/tsuquyomi'
 Plug 'elmcast/elm-vim'
 Plug 'lunaru/vim-less'
 Plug 'tpope/vim-liquid'
@@ -249,6 +252,7 @@ autocmd BufNewFile,BufRead Guardfile,*.Guardfile set filetype=ruby
 autocmd BufNewFile,BufRead *.ru set filetype=ruby
 autocmd BufNewFile,BufRead *.gradle set filetype=groovy
 autocmd BufNewFile,BufRead *.stylus set filetype=sass
+autocmd BufNewFile,BufRead *.tsx set filetype=typescript.jsx
 autocmd BufNewFile,BufRead elm-package.json let b:neoformat_json_jq = {
       \   'exe': 'jq',
       \   'args': ['--indent', '4', '.'],
