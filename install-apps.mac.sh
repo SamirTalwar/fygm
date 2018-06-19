@@ -148,6 +148,5 @@ if [[ "$(dscl . -read "/Users/$USER" UserShell | cut -d ' ' -f 2)" != '/usr/loca
   sudo chsh -s /usr/local/bin/zsh "$USER"
 fi
 
-brew linkapps
 brew cleanup
 brew cask cleanup
