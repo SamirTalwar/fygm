@@ -73,6 +73,7 @@ brew install \
 brew cask install gimp
 
 # Development
+brew install make --with-default-names
 brew install \
   carthage \
   cmake \
@@ -83,7 +84,6 @@ brew install \
   git \
   go \
   haskell-stack \
-  heroku-toolbelt \
   llvm \
   mercurial \
   node \
@@ -97,8 +97,17 @@ brew install \
   sqlite \
   tidy-html5 \
   yarn
-brew install make --with-default-names
 brew cask install anaconda
+
+brew cask install \
+  docker \
+  google-cloud-sdk
+brew install \
+  awscli \
+  heroku-toolbelt \
+  docker-completion \
+  docker-compose-completion
+gcloud components install -q alpha beta kubectl
 
 # Prolog Development
 brew install swi-prolog --with-libarchive
@@ -129,15 +138,6 @@ pip3 install sexpdata websocket-client neovim
 gem install neovim
 
 brew install pandoc
-
-# Containerisation
-brew cask install \
-  docker \
-  google-cloud-sdk
-brew install \
-  docker-completion \
-  docker-compose-completion
-gcloud components install -q alpha beta kubectl
 
 if ! grep -F /usr/local/bin/zsh /etc/shells; then
   sudo bash -c "echo /usr/local/bin/zsh >> /etc/shells"
