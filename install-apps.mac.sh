@@ -107,6 +107,8 @@ brew install \
   heroku-toolbelt \
   docker-completion \
   docker-compose-completion
+pip3 install --user --upgrade \
+  aws-sam-cli
 gcloud components install -q alpha beta kubectl
 
 # Prolog Development

@@ -11,6 +11,7 @@ if [[ "$OSTYPE" == darwin* ]]; then
   export BROWSER='open'
   path=(
     ~/Library/Haskell/bin
+    ~/Library/Python/3.*/bin
     /Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin
     $path
   )
