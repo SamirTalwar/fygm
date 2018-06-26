@@ -104,6 +104,11 @@ if [[ -d /usr/local/opt/fzf ]]; then
   export PATH
 fi
 
+export NVM_DIR="$HOME/.nvm"
+if [[ -s "$NVM_DIR/nvm.sh" ]]; then
+  source "$NVM_DIR/nvm.sh" --no-use
+fi
+
 if [[ -e ~/.opam/opam-init/init.zsh ]]; then
   source ~/.opam/opam-init/init.zsh >& /dev/null || :
 fi
