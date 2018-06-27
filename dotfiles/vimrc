@@ -239,7 +239,7 @@ let g:LanguageClient_autoStart = 1
 nnoremap <Leader>n :ALENextWrap<CR>
 nnoremap <Leader>N :ALEPreviousWrap<CR>
 nnoremap <Leader>e :ALEDetail<CR>
-nnoremap <Leader>f :ALEFix<CR>
+nnoremap <Leader>f :Neoformat<CR>:ALEFix<CR>
 let g:ale_linters = {
   \   'haskell': ['stack-ghc-mod', 'stack-build', 'hdevtools', 'hlint'],
   \}
