@@ -216,8 +216,8 @@ function update-vim-plug {
 
 function update-nvim {
   if exists nvim; then
-    pip2 install --upgrade neovim
-    pip3 install --upgrade neovim
+    pip2 install --user --upgrade sexpdata websocket-client neovim
+    pip3 install --user --upgrade sexpdata websocket-client neovim
     gem install neovim
   fi
 }

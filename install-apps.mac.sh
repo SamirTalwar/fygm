@@ -135,8 +135,8 @@ brew cask install intellij-idea
 
 # Text Editing
 brew install neovim/neovim/neovim
-pip2 install sexpdata websocket-client neovim
-pip3 install sexpdata websocket-client neovim
+pip2 install --user sexpdata websocket-client neovim
+pip3 install --user sexpdata websocket-client neovim
 gem install neovim
 
 brew install pandoc
