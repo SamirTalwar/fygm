@@ -11,10 +11,17 @@ if [[ "$OSTYPE" == darwin* ]]; then
   export BROWSER='open'
   path=(
     ~/Library/Haskell/bin
-    ~/Library/Python/3.*/bin
     /Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin
     $path
   )
+
+  if (
+    set -o nullglob
+    PYTHON_3_DIRS=(~/Library/Python/3.*)
+    [[ ${#PYTHON_3_DIRS} -eq 1 ]]
+  ); then
+    path=(~/Library/Python/3.*/bin $path)
+  fi
 fi
 
 export EDITOR='vim'
