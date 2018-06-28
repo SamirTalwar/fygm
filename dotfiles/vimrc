@@ -327,6 +327,8 @@ function! CheckType()
     GhcModType
   elseif !empty(matchstr(&ft, '^javascript'))
     FlowType
+  elseif !empty(matchstr(&ft, '^typescript'))
+    echo tsuquyomi#hint()
   endif
 endfunction
 
