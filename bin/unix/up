@@ -166,7 +166,7 @@ function update-cabal {
 }
 
 function update-opam {
-  if exists opam; then
+  if exists opam && [[ -d ~/.opam ]]; then
     opam update --yes
     opam upgrade --yes
   fi
