@@ -94,7 +94,7 @@ Plug 'https://git.llvm.org/git/llvm', {'rtp': 'utils/vim'}
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/neco-vim'
-Plug 'autozimu/LanguageClient-neovim', {'do': ':UpdateRemotePlugins'}
+Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
 
 " Lint
 Plug 'w0rp/ale'
