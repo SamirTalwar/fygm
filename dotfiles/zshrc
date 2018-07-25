@@ -89,6 +89,11 @@ function precmd {
 }
 RPROMPT='${vcs_info_msg_0_}'
 
+zplug load
+
+# Use a faint grey for autosuggestions.
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=236'
+
 if [[ -s /usr/local/share/autojump/autojump.zsh ]]; then
   source /usr/local/share/autojump/autojump.zsh
 fi
@@ -121,8 +126,3 @@ fi
 if [[ -e ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
-
-zplug load
-
-# Use a faint grey for autosuggestions.
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=236'
