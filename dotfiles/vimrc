@@ -152,7 +152,7 @@ function! LightlineFugitive()
 
 " Map Ctrl+P to fzf's files view.
 nnoremap <C-p> :GFiles<CR>
-nnoremap π :GFiles?<CR>
+nnoremap <C-o> :GFiles?<CR>
 
 " Don't show a preview window on auto-complete.
 set completeopt-=preview
