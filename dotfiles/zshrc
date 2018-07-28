@@ -103,10 +103,8 @@ if (( $+commands[direnv] )); then
 fi
 
 if [[ -d /usr/local/opt/fzf ]]; then
-  path=(/usr/local/opt/fzf/bin $path)
   [[ $- == *i* ]] && source /usr/local/opt/fzf/shell/completion.zsh 2> /dev/null
   source /usr/local/opt/fzf/shell/key-bindings.zsh
-  export PATH
 fi
 
 export NVM_DIR="$HOME/.nvm"

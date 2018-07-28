@@ -35,9 +35,12 @@ if [[ -d /nix ]]; then
   source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 fi
 
+if [[ -d /usr/local/opt/fzf ]]; then
+  path=(/usr/local/opt/fzf/bin $path)
+fi
+
 if [[ -d '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk' ]]; then
   source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
-  source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
 fi
 
 path=(
