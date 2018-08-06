@@ -319,6 +319,11 @@ before packages are loaded. If you are unsure, you should try in setting them in
   This is the place where most of your configurations should be done. Unless it is
   explicitly specified that a variable should be set before a package is loaded,
   you should place your code here."
+  (use-package flycheck
+    :init
+    (with-eval-after-load 'intero
+      (flycheck-add-next-checker 'intero '(warning . haskell-hlint))
+      ))
   (use-package focus-autosave-mode
     :init
     (focus-autosave-mode t))
