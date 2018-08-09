@@ -47,6 +47,7 @@ path=(
   ~/.local/bin
   ~/.config/yarn/global/node_modules/.bin
   ~/.cargo/bin
+  ~/.pulumi/bin
   ~/.yarn/bin
   ./node_modules/.bin
   /usr/local/opt/llvm/bin
