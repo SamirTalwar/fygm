@@ -11,7 +11,7 @@ upstream="$(git config --get remote.upstream.url || :)"
 git pull-everything
 
 if [[ "$upstream" ]]; then
-  git pull-everything upstream "$main_branch"
+  git pull --ff-only upstream "$main_branch"
   git push origin "$main_branch"
 fi
 
