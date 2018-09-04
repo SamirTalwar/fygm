@@ -485,10 +485,10 @@ before packages are loaded."
                           json-mode-hook
                           markdown-mode-hook
                           typescript-mode-hook
+                          typescript-tsx-mode-hook
                           yaml-mode-hook
                           ) do
             (add-hook hook 'prettier-js-mode)
-            (add-hook hook 'add-node-modules-path)
             )
   (add-hook 'terraform-mode-hook 'terraform-format-on-save-mode)
   )
