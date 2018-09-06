@@ -1,7 +1,18 @@
+# macOS
 .DS_Store
 
-/tags
+# emacs
 .#*
-.lein-repl-history
+
+# vim
 *.swp
 *.swo
+
+# C
+/tags
+
+# Clojure
+.lein-repl-history
+
+# JavaScript
+.tern-port
