@@ -59,7 +59,8 @@ This function should only modify configuration layer settings."
      javascript
      markdown
      (node :variables
-           node-add-modules-path t)
+           node-add-modules-path t
+           )
      prettier
      python
      ruby
@@ -470,6 +471,8 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+
+  ; Auto-save when losing focus.
   (use-package focus-autosave-mode
     :init
     (focus-autosave-mode t))
@@ -482,15 +485,16 @@ before packages are loaded."
       ))
 
   ; Run Prettier on pretty much everything.
-  (cl-loop for hook in '(css-mode-hook
-                          js-mode-hook
-                          js2-mode-hook
-                          json-mode-hook
-                          markdown-mode-hook
-                          typescript-mode-hook
-                          typescript-tsx-mode-hook
-                          yaml-mode-hook
-                          ) do
+  (cl-loop for hook in '(
+                         css-mode-hook
+                         js-mode-hook
+                         js2-mode-hook
+                         json-mode-hook
+                         markdown-mode-hook
+                         typescript-mode-hook
+                         typescript-tsx-mode-hook
+                         yaml-mode-hook
+                         ) do
             (add-hook hook 'prettier-js-mode)
             )
   (add-hook 'terraform-mode-hook 'terraform-format-on-save-mode)
