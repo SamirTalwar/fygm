@@ -48,6 +48,9 @@ This function should only modify configuration layer settings."
      syntax-checking
      ;; languages
      emacs-lisp
+     (go :variables
+         go-tab-width 2
+         )
      (haskell :variables
               haskell-completion-backend 'intero
               haskell-enable-hindent t
