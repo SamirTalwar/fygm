@@ -472,6 +472,22 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
+  ; Set the indent width to 2.
+  (cl-loop for variable in '(
+                             c-basic-offset
+                             coffee-tab-width
+                             css-indent-offset
+                             javascript-indent-level
+                             js-indent-level
+                             ruby-indent-level
+                             standard-indent
+                             tab-width
+                             web-mode-code-indent-offset
+                             web-mode-css-indent-offset
+                             web-mode-markup-indent-offset
+                             )
+           do (custom-set-variables (list variable 2)))
+
   ; Auto-save when losing focus.
   (use-package focus-autosave-mode
     :init
