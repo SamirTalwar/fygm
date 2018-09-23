@@ -47,6 +47,7 @@ This function should only modify configuration layer settings."
      auto-completion
      syntax-checking
      ;; languages
+     docker
      emacs-lisp
      (go :variables
          go-tab-width 2
