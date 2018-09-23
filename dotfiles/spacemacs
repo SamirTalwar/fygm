@@ -481,8 +481,10 @@ before packages are loaded."
                              javascript-indent-level
                              js-indent-level
                              ruby-indent-level
+                             sh-basic-offset
                              standard-indent
                              tab-width
+                             typescript-indent-level
                              web-mode-code-indent-offset
                              web-mode-css-indent-offset
                              web-mode-markup-indent-offset
