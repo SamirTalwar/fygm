@@ -491,6 +491,15 @@ before packages are loaded."
                              )
            do (custom-set-variables (list variable 2)))
 
+  ; Insert a newline at the end of every file.
+  (custom-set-variables '(require-final-newline t))
+
+  ; Disable confirmations.
+  (custom-set-variables
+   '(magit-no-confirm (quote (stage-all-changes unstage-all-changes)))
+   '(neo-confirm-create-directory (quote off-p))
+   '(neo-confirm-create-file (quote off-p)))
+
   ; Auto-save when losing focus.
   (use-package focus-autosave-mode
     :init
