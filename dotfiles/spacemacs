@@ -79,6 +79,7 @@ This function should only modify configuration layer settings."
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages
    '(
+     direnv
      focus-autosave-mode
      )
 
@@ -504,6 +505,11 @@ before packages are loaded."
   (use-package focus-autosave-mode
     :init
     (focus-autosave-mode t))
+
+  ; Source .envrc
+  (use-package direnv
+    :config
+    (direnv-mode))
 
   ; Run HLint when checking Haskell files.
   (use-package flycheck
