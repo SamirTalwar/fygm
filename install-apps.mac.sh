@@ -87,8 +87,6 @@ brew install \
   llvm \
   mercurial \
   node \
-  ocaml \
-  opam \
   pipenv \
   python \
   python3 \
@@ -110,6 +108,14 @@ brew install \
 pip3 install --user --upgrade \
   aws-sam-cli
 gcloud components install -q alpha beta kubectl
+
+# OCaml Development
+brew install opam
+opam init --no-setup
+opam upgrade
+opam install \
+  ocaml \
+  ocamlbuild
 
 # Prolog Development
 brew install swi-prolog --with-libarchive
