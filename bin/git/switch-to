@@ -8,6 +8,15 @@ if [[ -n "$(git status --porcelain)" ]]; then
   exit 1
 fi
 
-git branch "$1"
-git reset --hard "origin/$(git name)"
-git checkout "$1"
+OLD_BRANCH="$(git symbolic-ref --short HEAD)"
+NEW_BRANCH="$1"
+
+git branch "$NEW_BRANCH"
+
+if git rev-parse '@{u}' >& /dev/null; then
+  git reset --hard '@{u}'
+  git checkout "$NEW_BRANCH"
+else
+  git checkout "$NEW_BRANCH"
+  git branch -d "$OLD_BRANCH"
+fi
