@@ -495,6 +495,9 @@ before packages are loaded."
   ; Insert a newline at the end of every file.
   (custom-set-variables '(require-final-newline t))
 
+  ; Scroll when the cursor is close to the window border.
+  (custom-set-variables '(scroll-margin 5))
+
   ; Disable confirmations.
   (custom-set-variables
    '(magit-no-confirm (quote (stage-all-changes unstage-all-changes)))
