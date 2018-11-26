@@ -48,6 +48,8 @@ This function should only modify configuration layer settings."
      syntax-checking
      ;; languages
      docker
+     (elm :variables
+          elm-sort-imports-on-save t)
      emacs-lisp
      (go :variables
          go-tab-width 2
@@ -514,14 +516,17 @@ before packages are loaded."
     :config
     (direnv-mode))
 
-  ; Run HLint when checking Haskell files.
+  ; Elm: Format on save.
+  (custom-set-variables '(elm-format-on-save t))
+
+  ; Haskell: Run HLint when checking Haskell files.
   (use-package flycheck
     :init
     (with-eval-after-load 'intero
       (flycheck-add-next-checker 'intero '(warning . haskell-hlint))
       ))
 
-  ; Run Prettier on pretty much everything.
+  ; Web: Run Prettier on pretty much everything.
   (cl-loop for hook in '(
                          css-mode-hook
                          js-mode-hook
