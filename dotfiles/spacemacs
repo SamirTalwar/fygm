@@ -60,7 +60,9 @@ This function should only modify configuration layer settings."
               )
      html
      javascript
-     markdown
+     (markdown :variables
+               markdown-live-preview-engine 'vmd
+               )
      (node :variables
            node-add-modules-path t
            )
@@ -525,6 +527,9 @@ before packages are loaded."
     (with-eval-after-load 'intero
       (flycheck-add-next-checker 'intero '(warning . haskell-hlint))
       ))
+
+  ; Markdown: Render Markdown with Pandoc.
+  (custom-set-variables '(markdown-command "pandoc --from=markdown"))
 
   ; Web: Run Prettier on pretty much everything.
   (cl-loop for hook in '(
