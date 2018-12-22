@@ -3,7 +3,7 @@
 set -e
 set -x
 
-export PATH="$HOME/.cargo/bin:/usr/local/bin:$PATH"
+export PATH="$HOME/.cargo/bin:/usr/local/opt/ruby/bin:/usr/local/bin:$PATH"
 
 command -v brew >& /dev/null || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew tap caskroom/fonts
@@ -95,14 +95,15 @@ brew install \
   sqlite \
   tidy-html5 \
   yarn
-brew cask install anaconda
+brew cask install \
+  anaconda \
+  emacs
 
 brew cask install \
   docker \
   google-cloud-sdk
 brew install \
   awscli \
-  heroku-toolbelt \
   docker-completion \
   docker-compose-completion
 pip3 install --user --upgrade \
@@ -140,7 +141,7 @@ brew install \
 brew cask install intellij-idea
 
 # Text Editing
-brew install neovim/neovim/neovim
+brew install neovim
 pip2 install --user sexpdata websocket-client neovim
 pip3 install --user sexpdata websocket-client neovim
 gem install neovim
@@ -155,4 +156,3 @@ if [[ "$(dscl . -read "/Users/$USER" UserShell | cut -d ' ' -f 2)" != '/usr/loca
 fi
 
 brew cleanup
-brew cask cleanup

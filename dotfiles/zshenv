@@ -35,6 +35,10 @@ if [[ -d /nix ]]; then
   source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 fi
 
+if [[ -d /usr/local/opt/ruby ]]; then
+  path=(/usr/local/opt/ruby/bin $path)
+fi
+
 if [[ -d /usr/local/opt/fzf ]]; then
   path=(/usr/local/opt/fzf/bin $path)
 fi
