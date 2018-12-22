@@ -93,6 +93,7 @@ brew install \
   ruby \
   shellcheck \
   sqlite \
+  swiftformat \
   tidy-html5 \
   yarn
 brew cask install \
