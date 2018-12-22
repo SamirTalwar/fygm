@@ -1,7 +1,10 @@
 #!/usr/bin/env ruby
 
 require 'open-uri'
+require 'open3'
 require 'pathname'
+require 'shellwords'
+require 'stringio'
 
 @dir = Pathname.new(File.dirname(__FILE__)).realpath
 @dotfiles = @dir + 'dotfiles'
@@ -31,17 +34,32 @@ require 'pathname'
   @home + '.zshrc' => @dotfiles + 'zshrc',
 }
 
-def run command
-  unless system command
+def run *command
+  puts "$ #{Shellwords.join(command)}"
+  output, process = Open3.capture2e(*command, chdir: @dir)
+  puts output
+  unless process.success?
     $stderr.puts "FAIL: #{command}"
     exit 1
   end
+  return output
+end
+
+def self_update
+  output = run 'git', 'pull', '--ff-only'
+  run 'git', 'submodule', 'update', '--init', '--recursive'
+  return !(output =~ /^Already up[ -]to[ -]date\.$/)
 end
 
 def link source, destination
   destination.dirname.mkpath()
   destination.unlink() if destination.symlink?
   destination.make_symlink(source)
+end
+
+if self_update
+  puts "Updated #{@dir}. Restarting..."
+  exec __FILE__, *ARGV
 end
 
 puts 'Symlinking files...'
@@ -51,7 +69,7 @@ end
 
 if RbConfig::CONFIG['host_os'] =~ /^darwin/
   puts 'Installing useful software...'
-  run (@dir + 'install-apps.mac.sh').to_s
+  run './install-apps.mac.sh'
 end
 
 puts 'Installing vim plugins...'
@@ -63,6 +81,6 @@ open('https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim') do |
   end
 end
 
-run 'nvim +PlugInstall +PlugClean! +qall'
+run 'nvim', '+PlugInstall', '+PlugClean!', '+qall'
 
 puts 'Done!'
