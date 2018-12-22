@@ -47,6 +47,7 @@ brew install \
   htop-osx \
   httpie \
   httping \
+  ispell \
   jq \
   moreutils \
   ncdu \
