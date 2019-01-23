@@ -64,6 +64,7 @@ This function should only modify configuration layer settings."
      (markdown :variables
                markdown-command "pandoc --from=markdown"
                markdown-live-preview-engine 'vmd
+               word-wrap t
                )
      (node :variables
            node-add-modules-path t
