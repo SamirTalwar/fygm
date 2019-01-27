@@ -533,11 +533,6 @@ before packages are loaded."
       (flycheck-add-next-checker 'intero '(warning . haskell-hlint))
       ))
 
-  ; Swift: Load Flycheck.
-  (use-package flycheck
-    :init
-    (flycheck-swift-setup))
-
   ; Web: Run Prettier on pretty much everything.
   (cl-loop for hook in '(
                          css-mode-hook
