@@ -533,6 +533,9 @@ before packages are loaded."
       (flycheck-add-next-checker 'intero '(warning . haskell-hlint))
       ))
 
+  ; Terraform: Format on save.
+  (add-hook 'terraform-mode-hook 'terraform-format-on-save-mode)
+
   ; Web: Run Prettier on pretty much everything.
   (cl-loop for hook in '(
                          css-mode-hook
@@ -546,7 +549,6 @@ before packages are loaded."
                          ) do
             (add-hook hook 'prettier-js-mode)
             )
-  (add-hook 'terraform-mode-hook 'terraform-format-on-save-mode)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
