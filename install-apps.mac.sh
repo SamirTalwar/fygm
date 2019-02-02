@@ -49,6 +49,7 @@ brew install \
   httping \
   ispell \
   jq \
+  lastpass-cli \
   moreutils \
   ncdu \
   pinentry \
