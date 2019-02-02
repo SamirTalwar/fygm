@@ -66,12 +66,14 @@ This function should only modify configuration layer settings."
                markdown-live-preview-engine 'vmd
                word-wrap t
                )
+     nginx
      (node :variables
            node-add-modules-path t
            )
      prettier
      python
      ruby
+     rust
      swift
      terraform
      typescript
