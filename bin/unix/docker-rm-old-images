@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+set -e
+set -u
+set -o pipefail
+
+docker image ls | awk --assign=IMAGE=$1 '$1 == IMAGE { print $1 ":" $2 }' | tail +2 | xargs docker image rm
