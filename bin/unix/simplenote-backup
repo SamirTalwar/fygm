@@ -65,6 +65,7 @@ http --check-status --session=$session_file \
   'X-Requested-With: XMLHttpRequest' \
   > /dev/null
 
+rm -f $output_file
 if $encrypt; then
   gpg -e -r $email -o $output_file $downloaded_file
   rm $downloaded_file
