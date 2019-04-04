@@ -550,6 +550,7 @@ before packages are loaded."
                          markdown-mode-hook
                          typescript-mode-hook
                          typescript-tsx-mode-hook
+                         web-mode-hook
                          yaml-mode-hook
                          ) do
             (add-hook hook 'prettier-js-mode)
