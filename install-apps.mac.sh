@@ -80,7 +80,6 @@ brew install \
   carthage \
   cmake \
   dep \
-  emacs \
   elm \
   gcc \
   git \
@@ -99,8 +98,7 @@ brew install \
   tidy-html5 \
   yarn
 brew cask install \
-  anaconda \
-  emacs
+  anaconda
 
 brew cask install \
   docker \
@@ -143,13 +141,17 @@ brew install \
   sbt
 brew cask install intellij-idea
 
-# Text Editing
-brew install neovim
+# Editors
+brew install
+  aspell \
+  emacs \
+  neovim \
+  pandoc
+brew cask install \
+  emacs
 pip2 install --user pynvim sexpdata websocket-client
 pip3 install --user pynvim sexpdata websocket-client
 gem install neovim
-
-brew install pandoc
 
 if ! grep -F /usr/local/bin/zsh /etc/shells; then
   sudo bash -c "echo /usr/local/bin/zsh >> /etc/shells"
