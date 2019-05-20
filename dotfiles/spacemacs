@@ -540,6 +540,9 @@ before packages are loaded."
       (flycheck-add-next-checker 'intero '(warning . haskell-hlint))
       ))
 
+  ; Markdown: Render *.mdx files as Markdown.
+  (add-to-list 'auto-mode-alist '("\\.mdx\\'" . markdown-mode))
+
   ; Terraform: Format on save.
   (add-hook 'terraform-mode-hook 'terraform-format-on-save-mode)
 
