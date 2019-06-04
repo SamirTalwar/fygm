@@ -97,6 +97,7 @@ brew install \
 brew cask install \
   anaconda
 
+# Cloud Development
 brew cask install \
   docker \
   google-cloud-sdk
@@ -107,6 +108,17 @@ brew install \
 pip3 install --user --upgrade \
   aws-sam-cli
 gcloud components install -q alpha beta kubectl
+
+# Java Development
+brew cask install java
+brew install \
+  groovy \
+  gradle \
+  leiningen \
+  maven \
+  scala \
+  sbt
+brew cask install intellij-idea
 
 # Haskell Development
 command -v ghcup >& /dev/null || (
@@ -139,17 +151,6 @@ EOF
 command -v rustup >& /dev/null || (
   curl https://sh.rustup.rs -fsS | sh -s -- -y
 )
-
-# Java Development
-brew cask install java
-brew install \
-  groovy \
-  gradle \
-  leiningen \
-  maven \
-  scala \
-  sbt
-brew cask install intellij-idea
 
 # Editors
 brew install
