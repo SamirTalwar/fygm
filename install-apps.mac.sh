@@ -3,7 +3,7 @@
 set -e
 set -x
 
-export PATH="$HOME/.cargo/bin:/usr/local/opt/ruby/bin:/usr/local/bin:$PATH"
+export PATH="${HOME}/.cabal/bin:${HOME}/.cargo/bin:${HOME}/.ghcup/bin:/usr/local/opt/ruby/bin:/usr/local/bin:${PATH}"
 
 command -v brew >& /dev/null || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew tap caskroom/fonts
@@ -82,7 +82,6 @@ brew install \
   gcc \
   git \
   go \
-  haskell-stack \
   llvm \
   mercurial \
   node \
@@ -108,6 +107,14 @@ brew install \
 pip3 install --user --upgrade \
   aws-sam-cli
 gcloud components install -q alpha beta kubectl
+
+# Haskell Development
+command -v ghcup >& /dev/null || (
+  export BOOTSTRAP_HASKELL_NONINTERACTIVE=true
+  curl https://get-ghcup.haskell.org -sSf | sh
+)
+cabal new-install cabal-install
+brew install haskell-stack
 
 # OCaml Development
 brew install opam

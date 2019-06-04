@@ -51,6 +51,8 @@ if ! (( ${+LOADED_ZSHENV} )); then
   path=(
     ~/.local/bin
     ~/.config/yarn/global/node_modules/.bin
+    ~/.cabal/bin
+    ~/.ghcup/bin
     ~/.cargo/bin
     ~/.pulumi/bin
     ~/.yarn/bin
