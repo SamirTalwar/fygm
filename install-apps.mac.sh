@@ -8,8 +8,6 @@ export PATH="$HOME/.cargo/bin:/usr/local/opt/ruby/bin:/usr/local/bin:$PATH"
 command -v brew >& /dev/null || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew tap caskroom/fonts
 
-command -v rustup >& /dev/null || (curl https://sh.rustup.rs -fsS | sh -s -- -y)
-
 brew update
 brew upgrade
 brew cask upgrade
@@ -129,6 +127,11 @@ attach_packs.
 pack_install(regex, [upgrade(true), interactive(false)]).
 halt.
 EOF
+
+# Rust Development
+command -v rustup >& /dev/null || (
+  curl https://sh.rustup.rs -fsS | sh -s -- -y
+)
 
 # Java Development
 brew cask install java
