@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
 set -e
+set -u
 
 # Sets the title of the current Terminal tab/window.
 # Defaults to the directory name if no title is passed in.
@@ -8,9 +9,9 @@ set -e
 title=$@
 if [[ -z $title ]]; then
   if git_directory=$(git rev-parse --show-toplevel 2>/dev/null); then
-  title=${PWD#$(dirname $git_directory)/}
+    title=${PWD#$(dirname $git_directory)/}
   else
-  title=$(basename $PWD)
+    title=$(basename $PWD)
   fi
 fi
 
