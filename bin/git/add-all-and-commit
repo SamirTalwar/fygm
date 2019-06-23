@@ -15,7 +15,7 @@ while true; do
   read -r ANSWER
   case "$ANSWER" in
     ''|'y')
-      git commit --verbose
+      git commit --verbose "$@"
       break ;;
     'n')
       break ;;
