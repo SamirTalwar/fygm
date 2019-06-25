@@ -70,7 +70,6 @@ brew cask install scroll-reverser
 brew install \
   imagemagick \
   pngcrush
-brew cask install gimp
 
 # Development
 brew install make --with-default-names
@@ -94,8 +93,6 @@ brew install \
   swiftformat \
   tidy-html5 \
   yarn
-brew cask install \
-  anaconda
 
 # Cloud Development
 brew cask install \
