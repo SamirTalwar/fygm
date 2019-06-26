@@ -152,7 +152,6 @@ command -v rustup >& /dev/null || (
 # Editors
 brew install
   aspell \
-  emacs \
   neovim \
   pandoc
 brew cask install \
