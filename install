@@ -22,6 +22,7 @@ require 'stringio'
   @home + '.ideavimrc' => @dotfiles + 'ideavimrc',
   @home + '.config/nvim/init.vim' => @dotfiles + 'vimrc',
   @home + '.racketrc' => @dotfiles + 'racketrc',
+  @home + '.stack/config.yaml' => @dotfiles + 'stack/config.yaml',
   @home + '.spacemacs' => @dotfiles + 'spacemacs',
   @home + '.swiplrc' => @dotfiles + 'swiplrc',
   @home + '.tmux.conf' => @dotfiles + 'tmux.conf',
