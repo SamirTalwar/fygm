@@ -2,4 +2,9 @@
 
 # Deletes .DS_Store files.
 
-find . -name .DS_Store -delete
+set -e
+set -u
+
+DIR=${1:-.}
+
+find $DIR -name .DS_Store -delete
