@@ -44,7 +44,9 @@ This function should only modify configuration layer settings."
      git
      treemacs
      spell-checking
-     auto-completion
+     (auto-completion
+      (haskell :variables haskell-completion-backend 'intero)
+      )
      syntax-checking
      emoji
      ;; languages
