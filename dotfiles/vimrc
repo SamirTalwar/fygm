@@ -86,6 +86,7 @@ Plug 'Quramy/tsuquyomi'
 Plug 'elmcast/elm-vim'
 Plug 'lunaru/vim-less'
 Plug 'tpope/vim-liquid'
+Plug 'LnL7/vim-nix'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'hashivim/vim-hashicorp-tools'
 Plug 'https://git.llvm.org/git/llvm', {'rtp': 'utils/vim'}

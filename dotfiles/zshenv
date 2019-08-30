@@ -32,8 +32,8 @@ if ! (( ${+LOADED_ZSHENV} )); then
 
   export GRADLE_OPTS="$GRADLE_OPTS -Dorg.gradle.daemon=true"
 
-  if [[ -d /nix ]]; then
-    source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+  if [[ -d ~/.nix-profile ]]; then
+    source ~/.nix-profile/etc/profile.d/nix.sh
   fi
 
   if [[ -d /usr/local/opt/ruby ]]; then
