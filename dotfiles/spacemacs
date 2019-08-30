@@ -578,7 +578,11 @@ This function is called at the very end of Spacemacs initialization."
  '(c-basic-offset 2)
  '(coffee-tab-width 2)
  '(css-indent-offset 2)
+ '(custom-safe-themes
+   (quote
+    ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" default)))
  '(elm-format-on-save t)
+ '(evil-want-Y-yank-to-eol nil)
  '(javascript-indent-level 2)
  '(js-indent-level 2)
  '(magit-no-confirm (quote (stage-all-changes unstage-all-changes)))
