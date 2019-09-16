@@ -1,74 +1,69 @@
 setopt no_global_rcs
 
-if ! (( ${+LOADED_ZSHENV} )); then
+path=(
+  /usr/local/bin
+  /usr/local/sbin
+  /usr/sbin
+  /sbin
+  $path
+)
+
+if [[ "$OSTYPE" == darwin* ]]; then
+  export BROWSER='open'
   path=(
-    /usr/local/bin
-    /usr/local/sbin
-    /usr/sbin
-    /sbin
+    ~/Library/Haskell/bin
+    /Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin
     $path
   )
 
-  if [[ "$OSTYPE" == darwin* ]]; then
-    export BROWSER='open'
-    path=(
-      ~/Library/Haskell/bin
-      /Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin
-      $path
-    )
-
-    if (
-      set -o nullglob
-      PYTHON_3_DIRS=(~/Library/Python/3.*)
-      [[ ${#PYTHON_3_DIRS} -eq 1 ]]
-    ); then
-      path=(~/Library/Python/3.*/bin $path)
-    fi
+  if (
+    set -o nullglob
+    PYTHON_3_DIRS=(~/Library/Python/3.*)
+    [[ ${#PYTHON_3_DIRS} -eq 1 ]]
+  ); then
+    path=(~/Library/Python/3.*/bin $path)
   fi
+fi
 
-  export EDITOR='vim'
-  export VISUAL='vim'
-  export PAGER='less'
+export EDITOR='vim'
+export VISUAL='vim'
+export PAGER='less'
 
-  export GRADLE_OPTS="$GRADLE_OPTS -Dorg.gradle.daemon=true"
+export GRADLE_OPTS="$GRADLE_OPTS -Dorg.gradle.daemon=true"
 
-  if [[ -d ~/.nix-profile ]]; then
-    source ~/.nix-profile/etc/profile.d/nix.sh
-  fi
+if [[ -d ~/.nix-profile ]]; then
+  source ~/.nix-profile/etc/profile.d/nix.sh
+fi
 
-  if [[ -d /usr/local/opt/ruby ]]; then
-    path=(/usr/local/opt/ruby/bin $path)
-  fi
+if [[ -d /usr/local/opt/ruby ]]; then
+  path=(/usr/local/opt/ruby/bin $path)
+fi
 
-  if [[ -d /usr/local/opt/fzf ]]; then
-    path=(/usr/local/opt/fzf/bin $path)
-  fi
+if [[ -d /usr/local/opt/fzf ]]; then
+  path=(/usr/local/opt/fzf/bin $path)
+fi
 
-  if [[ -d '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk' ]]; then
-    source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
-  fi
+if [[ -d '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk' ]]; then
+  source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
+fi
 
-  path=(
-    ~/.local/bin
-    ~/.config/yarn/global/node_modules/.bin
-    ~/.cabal/bin
-    ~/.ghcup/bin
-    ~/.cargo/bin
-    ~/.pulumi/bin
-    ~/.yarn/bin
-    ./node_modules/.bin
-    /usr/local/opt/llvm/bin
-    $path
-  )
+path=(
+  ~/.local/bin
+  ~/.config/yarn/global/node_modules/.bin
+  ~/.cabal/bin
+  ~/.ghcup/bin
+  ~/.cargo/bin
+  ~/.pulumi/bin
+  ~/.yarn/bin
+  /usr/local/opt/llvm/bin
+  $path
+)
 
-  path=(~/bin/unix $path)
-  if [[ "$OSTYPE" == darwin* ]]; then
-    path=(~/bin/mac $path)
-  fi
+path=(~/bin/unix $path)
+if [[ "$OSTYPE" == darwin* ]]; then
+  path=(~/bin/mac $path)
+fi
 
-  if [[ -e ~/.zshenv.local ]]; then
-    source ~/.zshenv.local
-  fi
-
-  export LOADED_ZSHENV=true
+if [[ -e ~/.zshenv.local ]]; then
+  source ~/.zshenv.local
 fi
