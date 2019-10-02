@@ -35,18 +35,6 @@ if [[ -d ~/.nix-profile ]]; then
   source ~/.nix-profile/etc/profile.d/nix.sh
 fi
 
-if [[ -d /usr/local/opt/ruby ]]; then
-  path=(/usr/local/opt/ruby/bin $path)
-fi
-
-if [[ -d /usr/local/opt/fzf ]]; then
-  path=(/usr/local/opt/fzf/bin $path)
-fi
-
-if [[ -d '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk' ]]; then
-  source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
-fi
-
 path=(
   ~/.local/bin
   ~/.config/yarn/global/node_modules/.bin
@@ -55,7 +43,6 @@ path=(
   ~/.cargo/bin
   ~/.pulumi/bin
   ~/.yarn/bin
-  /usr/local/opt/llvm/bin
   $path
 )
 

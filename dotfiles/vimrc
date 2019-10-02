@@ -48,7 +48,7 @@ Plug 'altercation/solarized', {'rtp': 'vim-colors-solarized'}
 " Extra functionality in the status bar
 Plug 'itchyny/lightline.vim'
 " Search files with fzf
-Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+Plug '~/.nix-profile/share/fzf' | Plug 'junegunn/fzf.vim'
 " File/directory management
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'

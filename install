@@ -20,6 +20,7 @@ require 'stringio'
   @home + '.gnupg/gpg-agent.conf' => @dotfiles + 'gnupg/gpg-agent.conf',
   @home + '.i3' => @dotfiles + 'i3',
   @home + '.ideavimrc' => @dotfiles + 'ideavimrc',
+  @home + '.config/nixpkgs/home.nix' => @dotfiles + 'nixpkgs/home.nix',
   @home + '.config/nvim/init.vim' => @dotfiles + 'vimrc',
   @home + '.racketrc' => @dotfiles + 'racketrc',
   @home + '.stack/config.yaml' => @dotfiles + 'stack/config.yaml',
@@ -68,8 +69,9 @@ puts 'Symlinking files...'
   link source, destination
 end
 
+puts 'Installing useful software...'
+run './set-up-nix.sh'
 if RbConfig::CONFIG['host_os'] =~ /^darwin/
-  puts 'Installing useful software...'
   run './install-apps.mac.sh'
 end
 

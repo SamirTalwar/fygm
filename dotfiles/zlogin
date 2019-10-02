@@ -1,5 +1,5 @@
-if [[ -d /usr/local/share/zsh/site-functions ]]; then
-  fpath=(/usr/local/share/zsh/site-functions $fpath)
+if [[ -d ~/.nix-profile/share/zsh/site-functions ]]; then
+  fpath=(~/.nix-profile/share/zsh/site-functions $fpath)
 fi
 
 [[ -e ~/.ssh/*.pem ]] && ssh-add ~/.ssh/*.pem 2>/dev/null
