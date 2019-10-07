@@ -73,7 +73,7 @@
     pkgs.yarn
 
     # Java Development
-    pkgs.openjdk
+    pkgs.openjdk12
     pkgs.scala
     pkgs.sbt
 
