@@ -144,12 +144,12 @@ let g:lightline = {
 \ }
 
 function! LightlineFugitive()
-    if exists("*fugitive#head")
-        let branch = fugitive#head()
-       return branch !=# '' ? ' '.branch : ''
-    endif
-    return ''
-  endfunction
+  if exists("*fugitive#head")
+      let branch = fugitive#head()
+     return branch !=# '' ? ' '.branch : ''
+  endif
+  return ''
+endfunction
 
 " Map Ctrl+P to fzf's files view.
 nnoremap <C-p> :GFiles<CR>
