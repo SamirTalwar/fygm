@@ -1,0 +1,16 @@
+#!/usr/bin/env zsh
+
+set -e
+set -u
+
+echo 'Before:'
+xcrun simctl list devices
+echo
+
+echo 'Deleting...'
+xcrun simctl delete unavailable
+echo 'Deleted.'
+echo
+
+echo 'After:'
+xcrun simctl list devices
