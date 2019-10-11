@@ -69,7 +69,6 @@
     pkgs.rustup
     pkgs.shellcheck
     pkgs.sqlite
-    pkgs.stack
     pkgs.yarn
 
     # Java Development
