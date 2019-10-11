@@ -1,1 +1,0 @@
-sudo killall -HUP mDNSResponder
