@@ -248,7 +248,11 @@ let g:ale_linters = {
 let g:ale_fixers = {
   \   'javascript': ['eslint'],
   \   'javascript.jsx': ['eslint'],
+  \   'nix': [
+  \     {-> {'command': ale#Escape('nixpkgs-fmt')}},
+  \   ],
   \}
+let g:ale_fix_on_save = 1
 
 autocmd BufNewFile,BufRead Guardfile,*.Guardfile set filetype=ruby
 autocmd BufNewFile,BufRead *.ru set filetype=ruby
