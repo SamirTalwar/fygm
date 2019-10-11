@@ -1,7 +1,5 @@
 #!/usr/bin/env zsh
 
-# Deletes .DS_Store files.
-
 set -e
 set -u
 
