@@ -61,7 +61,8 @@ function self-update {
 }
 
 function update-nix {
-  if exists nix-env; then
+  if exists nix; then
+    nix upgrade-nix
     nix-channel --update
     nix-env --upgrade
     nix-collect-garbage --delete-old
