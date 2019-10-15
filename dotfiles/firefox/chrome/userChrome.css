@@ -10,4 +10,12 @@
 
 #TabsToolbar > .titlebar-buttonbox-container {
   position: absolute;
+  display: block;
+}
+
+#TabsToolbar > .titlebar-secondary-buttonbox {
+  position: fixed;
+  display: block;
+  bottom: 1em;
+  left: 1em;
 }
