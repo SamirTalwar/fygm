@@ -10,8 +10,7 @@
 
 set -e
 
-SELF=$(realpath $0)
-ROOT=$(realpath $(dirname $SELF)/../..)
+source ../../self-update.sh
 
 ALL_PACKAGE_MANAGERS=(
   nix
@@ -41,23 +40,6 @@ ALL_PACKAGE_MANAGERS=(
 
 function exists {
   (( $+commands[$1] )) || command -v $1 >/dev/null
-}
-
-function self-update {
-  local output exit_code
-  output=$(cd $ROOT && git pull --ff-only 2>&1)
-  exit_code=$?
-  if [[ $exit_code -ne 0 ]]; then
-    echo "$output"
-    echo "Updating $ROOT failed with status code $exit_code."
-    exit $exit_code
-  fi
-
-  if ! [[ $output =~ '^Already up[ -]to[ -]date.$' ]]; then
-    echo "$output"
-  else
-    return 1
-  fi
 }
 
 function update-nix {
@@ -257,11 +239,6 @@ function update-docker {
     docker-cleanup
   fi
 }
-
-if self-update; then
-  echo "Updated $ROOT. Restarting..."
-  exec $SELF "$@"
-fi
 
 typeset -a package_managers
 if [[ $# -eq 0 ]]; then
