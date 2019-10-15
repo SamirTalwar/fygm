@@ -10,7 +10,7 @@
 
 set -e
 
-source ../../self-update.sh
+source ${0:h}/../../self-update.sh
 
 ALL_PACKAGE_MANAGERS=(
   nix

@@ -2,6 +2,7 @@
 
 set -e
 set -u
+set -o pipefail
 set -x
 
 if ! command -v brew >& /dev/null; then
@@ -44,27 +45,3 @@ brew install \
   zplug
 
 brew cleanup
-
-# tmux plugins
-if [[ ! -e ~/.tmux/plugins/tpm ]]; then
-  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-fi
-
-# SWI Prolog packs
-mkdir -p ~/.config/swipl/packs
-swipl <<EOF
-expand_file_name('~/.config/swipl/packs', [PacksDirectory]),
-  asserta( (file_search_path(pack, PacksDirectory)) ).
-attach_packs.
-pack_install(regex, [upgrade(true), interactive(false)]).
-halt.
-EOF
-
-# configure the user shell
-CURRENT_SHELL=$(
-  dscl . -read /Users/${USER} UserShell \
-    | cut -d ' ' -f 2
-)
-if [[ $CURRENT_SHELL != ${HOME}/.nix-profile/bin/zsh ]]; then
-  sudo chsh -s ${HOME}/.nix-profile/bin/zsh $USER
-fi
