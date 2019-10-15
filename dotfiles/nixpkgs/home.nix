@@ -46,6 +46,7 @@
 
     # Editors
     pkgs.aspell
+    pkgs.neovim
     pkgs.pandoc
 
     # Development

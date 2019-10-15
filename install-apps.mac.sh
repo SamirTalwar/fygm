@@ -39,7 +39,6 @@ brew cask install \
 
 # Packages that can't be handled with Nix
 brew install \
-  neovim \
   swi-prolog \
   swiftformat \
   zplug
