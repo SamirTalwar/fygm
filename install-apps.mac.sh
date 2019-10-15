@@ -14,10 +14,18 @@ brew update
 brew upgrade
 brew cask upgrade
 
+# Packages that can't be handled with Nix
+brew install \
+  swi-prolog \
+  swiftformat \
+  zplug
+
 # macOS applications
 brew cask install \
   beaker-browser \
+  dash \
   docker \
+  dropbox \
   emacs \
   etcher \
   firefox \
@@ -30,17 +38,11 @@ brew cask install \
   ngrok \
   nordvpn \
   scroll-reverser \
-  sketch \
+  sync \
   transmission \
   visual-studio \
   visual-studio-code \
   vlc \
   xquartz
-
-# Packages that can't be handled with Nix
-brew install \
-  swi-prolog \
-  swiftformat \
-  zplug
 
 brew cleanup
