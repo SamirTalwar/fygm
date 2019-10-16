@@ -64,7 +64,6 @@ now 'Installing software with Nix'
 nix-env --upgrade
 nix-shell '<home-manager>' -A install
 home-manager switch
-nix-collect-garbage --delete-old
 
 if [[ $(uname -s) == 'Darwin' ]]; then
   now 'Installing macOS-only software'
