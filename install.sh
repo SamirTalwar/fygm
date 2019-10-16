@@ -6,6 +6,7 @@ set -o pipefail
 
 dir=${0:A:h}
 dotfiles=$dir/dotfiles
+macos_application_support=~/Library/Application\ Support
 
 set -A links
 links=(
@@ -31,6 +32,12 @@ links=(
   ~/.zshenv $dotfiles/zshenv
   ~/.zshrc $dotfiles/zshrc
 )
+
+if [[ $(uname -s) == 'Darwin' ]]; then
+  links+=(
+    $macos_application_support/Code/User/settings.json $dotfiles/code/settings.json
+  )
+fi
 
 function now {
   echo >&2

@@ -1,0 +1,7 @@
+{
+  "editor.formatOnSave": true,
+  "files.autoSave": "onFocusChange",
+  "editor.fontFamily": "'Fira Code', Menlo, Monaco, 'Courier New', monospace",
+  "editor.renderWhitespace": "boundary",
+  "editor.fontLigatures": true
+}
