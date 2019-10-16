@@ -32,7 +32,6 @@ brew cask install \
   docker \
   dropbox \
   emacs \
-  etcher \
   firefox \
   jetbrains-toolbox \
   google-chrome \
@@ -43,9 +42,7 @@ brew cask install \
   scroll-reverser \
   sync \
   transmission \
-  visual-studio \
   visual-studio-code \
-  vlc \
-  xquartz
+  vlc
 
 brew cleanup
