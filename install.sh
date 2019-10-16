@@ -47,7 +47,9 @@ for dest src in $links; do
       exit 1
     fi
   else
-    echo ln -s $src $dest
+    echo $dest '->' $src
+    mkdir -p ${dest:h}
+    ln -s $src $dest
   fi
 done
 
