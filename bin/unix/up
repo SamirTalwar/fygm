@@ -17,24 +17,19 @@ ALL_PACKAGE_MANAGERS=(
   brew
   apt
   sdk
+  pip
   rvm
-  # gem
-  pip2
-  pip3
   nvm
+  npm
   yarn
-  # npm
   cabal
   opam
   raco
   rustup
-  gcloud
   tpm
   zplug
   vim-plug
-  nvim
   nvim-plug
-  docker-machine
   docker
 )
 
@@ -79,46 +74,21 @@ function update-sdk {
   fi
 }
 
+function update-pip {
+  local packages
+  if exists pip; then
+    packages=($(pip list --user --outdated --format=json | jq -r '.[] | .name'))
+    if [[ ${#packages} -gt 0 ]]; then
+      pip install --user --upgrade ${packages[@]}
+    fi
+  fi
+}
+
 function update-rvm {
   if exists rvm; then
     rvm get head
     rvm cleanup all
     rvm reload
-  fi
-}
-
-function update-gem {
-  if exists gem; then
-    if exists rvm; then
-      (rvm use ruby@global && update-all-gems)
-    fi
-
-    update-all-gems
-  fi
-}
-
-function update-all-gems {
-  gem update --system
-  gem update
-  gem cleanup
-}
-
-function update-pip2 {
-  update-pip-version 2
-}
-
-function update-pip3 {
-  update-pip-version 3
-}
-
-function update-pip-version {
-  local pip packages
-  pip="pip$1"
-  if exists $pip; then
-    packages=($($pip list --outdated --format=json | jq -r '.[] | .name'))
-    if [[ ${#packages} -gt 0 ]]; then
-      $pip install --upgrade ${packages[@]}
-    fi
   fi
 }
 
@@ -131,16 +101,16 @@ function update-nvm {
   fi
 }
 
-function update-yarn {
-  if exists yarn; then
-    yarn global upgrade
-  fi
-}
-
 function update-npm {
   if exists npm; then
     npm update -g
     npm upgrade -g
+  fi
+}
+
+function update-yarn {
+  if exists yarn; then
+    yarn global upgrade
   fi
 }
 
@@ -199,14 +169,6 @@ function update-vim-plug {
   fi
 }
 
-function update-nvim {
-  if exists nvim; then
-    pip2 install --user --upgrade sexpdata websocket-client neovim
-    pip3 install --user --upgrade sexpdata websocket-client neovim
-    gem install neovim
-  fi
-}
-
 function update-nvim-plug {
   if exists nvim && [[ -e "$HOME/.config/nvim/autoload/plug.vim" ]]; then
     nvim +PlugUpgrade +qall
@@ -215,16 +177,9 @@ function update-nvim-plug {
   fi
 }
 
-function update-docker-machine {
-  if exists docker-machine && [[ -n $DOCKER_MACHINE_NAME ]]; then
-    docker-machine upgrade $DOCKER_MACHINE_NAME
-    waituntil --timeout=30 docker ps >/dev/null
-  fi
-}
-
 function update-docker {
   local image filter
-  if exists docker && (! exists docker-machine || [[ -z $DOCKER_MACHINE_NAME ]] || $(docker-machine status $DOCKER_MACHINE_NAME) == 'Running' ]]); then
+  if exists docker; then
     docker-cleanup
     if [[ -e ~/.up-docker-filter ]]; then
       filter=$(cat ~/.up-docker-filter)
