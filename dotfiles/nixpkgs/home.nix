@@ -55,6 +55,7 @@
     pkgs.git
     pkgs.gnumake
     pkgs.go
+    pkgs.hugo
     pkgs.llvm
     pkgs.mercurial
     pkgs.nixpkgs-fmt
