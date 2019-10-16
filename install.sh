@@ -52,8 +52,10 @@ for dest src in $links; do
 done
 
 now 'Installing Nix'
-if [[ ! -d /nix ]]; then
-  curl https://nixos.org/nix/install | sh
+if [[ ! -e /nix/store ]]; then
+  echo "Changing ownership of /nix to ${USER}..."
+  sudo chown -R "${USER}:" /nix
+  sh <(curl https://nixos.org/nix/install)
 fi
 nix upgrade-nix
 nix-channel --add https://nixos.org/channels/nixpkgs-unstable
