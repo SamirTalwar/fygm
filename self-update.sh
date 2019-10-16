@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-root=${0:h:a}
+root=${0:A:h}
 
 function self-update {
   local output exit_code

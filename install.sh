@@ -4,9 +4,7 @@ set -e
 set -u
 set -o pipefail
 
-source ./self-update.sh
-
-dir=${0:h:A}
+dir=${0:A:h}
 dotfiles=$dir/dotfiles
 
 set -A links
@@ -38,6 +36,8 @@ function now {
   echo >&2
   echo >&2 '===' $@ '==='
 }
+
+source ${dir}/self-update.sh
 
 now 'Symlinking files'
 for dest src in $links; do
