@@ -20,6 +20,11 @@ brew install \
   swiftformat \
   zplug
 
+# Fonts
+brew cask install \
+  font-fira-code \
+  font-source-code-pro
+
 # macOS applications
 brew cask install \
   beaker-browser \
@@ -29,8 +34,6 @@ brew cask install \
   emacs \
   etcher \
   firefox \
-  font-fira-code \
-  font-source-code-pro \
   jetbrains-toolbox \
   google-chrome \
   gpg-suite \
