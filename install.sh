@@ -61,11 +61,17 @@ for dest src in $links; do
 done
 
 now 'Installing Nix'
+if [[ ! -e /nix ]]; then
+  echo 'Creating /nix...'
+  sudo mkdir /nix
+fi
 if [[ ! -e /nix/store ]]; then
   echo "Changing ownership of /nix to ${USER}..."
   sudo chown -R "${USER}:" /nix
   sh <(curl https://nixos.org/nix/install)
 fi
+
+source ${HOME}/.nix-profile/etc/profile.d/nix.sh
 nix upgrade-nix
 nix-channel --add https://nixos.org/channels/nixpkgs-unstable
 nix-channel --add https://github.com/rycee/home-manager/archive/master.tar.gz home-manager
