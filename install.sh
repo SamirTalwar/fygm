@@ -5,8 +5,8 @@ set -u
 set -o pipefail
 
 dir=${0:A:h}
-dotfiles=$dir/dotfiles
-macos_application_support=~/Library/Application\ Support
+dotfiles=${dir}/dotfiles
+macos_application_support="${HOME}/Library/Application Support"
 
 set -A links
 links=(
