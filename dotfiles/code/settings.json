@@ -4,5 +4,11 @@
   "editor.fontSize": 14,
   "editor.formatOnSave": true,
   "editor.renderWhitespace": "boundary",
-  "files.autoSave": "onFocusChange"
+  "editor.tabSize": 2,
+  "files.autoSave": "onFocusChange",
+  "files.enableTrash": false,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "window.zoomLevel": 0
 }
