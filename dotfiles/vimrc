@@ -262,7 +262,7 @@ autocmd BufNewFile,BufRead elm-package.json let b:neoformat_json_jq = {
       \   'args': ['--indent', '4', '.'],
       \   'stdin': 1,
       \ }
-autocmd FileType java,groovy,kotlin,make,python
+autocmd FileType bzl,java,groovy,kotlin,make,python
       \ setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd FileType python setlocal colorcolumn=80
 autocmd FileType gitcommit setlocal colorcolumn=73
