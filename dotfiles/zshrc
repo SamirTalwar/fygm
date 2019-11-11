@@ -44,9 +44,9 @@ function zle-line-init {
   printf '\e[6 q'
 }
 function zle-line-deinit {
-  PROMPT="${PROMPT_DIR} %{${fg[green]}%}[%D{%H:%M}]%{$reset_color%} ${PROMPT_ARROW} "
+  PROMPT="${PROMPT_MODE}${PROMPT_DIR} %{${fg[green]}%}[%D{%H:%M}]%{$reset_color%} ${PROMPT_ARROW} "
   zle reset-prompt
-  PROMPT="${PROMPT_DIR} ${PROMPT_ARROW} "
+  PROMPT="${PROMPT_MODE}${PROMPT_DIR} ${PROMPT_ARROW} "
   zle accept-line
   printf '\e[2 q'
 }
@@ -56,9 +56,10 @@ zle -N zle-line-deinit
 for key in $(bindkey | fgrep accept-line | sed 's/^"\([^"]*\)".*/\1/'); do bindkey $key zle-line-deinit; done
 
 # Show the directory path on the left-hand side.
+PROMPT_MODE="\$((( \${+IN_NIX_SHELL} )) && echo '%{${fg[green]}%}nix%{$reset_color%} ' || echo '')"
 PROMPT_DIR="%{${fg[blue]}%}%(4~|…/%3~|%~)%{$reset_color%}"
 PROMPT_ARROW="%B\$([[ \$? -eq 0 ]] && echo '>' || echo '%{${fg[red]}%}>%{$reset_color%}')%b"
-PROMPT="${PROMPT_DIR} ${PROMPT_ARROW} "
+PROMPT="${PROMPT_MODE}${PROMPT_DIR} ${PROMPT_ARROW} "
 
 # Show Git information on the right-hand side.
 autoload -Uz vcs_info
