@@ -46,6 +46,7 @@
 
     # Editors
     pkgs.aspell
+    pkgs.aspellDicts.en
     pkgs.neovim
     pkgs.pandoc
 
