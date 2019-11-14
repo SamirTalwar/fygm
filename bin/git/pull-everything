@@ -1,6 +1,7 @@
 #!/bin/bash
 
-set -eu
+set -e
+set -u
 
 if git rev-parse --abbrev-ref --symbolic-full-name '@{u}' &>/dev/null; then
   git pull --all --ff-only "$@"

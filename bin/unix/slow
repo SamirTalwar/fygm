@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
-set -eu
+set -e
+set -u
 
 IFS=$'\n'
 
