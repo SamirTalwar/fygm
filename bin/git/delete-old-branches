@@ -1,8 +1,25 @@
 #!/bin/bash
 
-set -eu
+set -e
+set -u
+set -o pipefail
 
-branches=($( (git branch --merged | grep -E -v "^\*| $(git main-branch)$| master$" | sed 's/^ *//') || : ))
-if [[ -n "${branches[*]+x}" ]]; then
-  git branch -d "${branches[@]}"
-fi
+function remove-branches-in-use {
+  ( grep -E -v "^\*| $(git main-branch)$| master$" || : ) | sed 's/^ *//'
+}
+
+# Remove merged branches.
+git branch --merged \
+  | remove-branches-in-use \
+  | xargs --no-run-if-empty git branch -d
+
+# Remove branches that have been squashed and merged.
+for branch in $(git branch | remove-branches-in-use); do
+  branch_diff="$(git diff "master...${branch}")"
+  for commit in $(git log -n 10 --pretty='%H' "$(git main-branch)"); do
+    if [[ "$branch_diff" == "$(git diff "${commit}^..${commit}")" ]]; then
+      git branch -D "$branch"
+      break
+    fi
+  done
+done
