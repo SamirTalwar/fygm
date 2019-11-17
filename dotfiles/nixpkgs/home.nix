@@ -81,7 +81,5 @@
 
     # Cloud Development
     pkgs.awscli
-    pkgs.google-cloud-sdk
-    pkgs.kubectl
   ];
 }
