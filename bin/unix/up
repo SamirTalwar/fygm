@@ -42,7 +42,6 @@ function update-nix {
     nix upgrade-nix
     nix-channel --update
     nix-env --upgrade
-    nix-collect-garbage
   fi
 }
 
