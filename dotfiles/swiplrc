@@ -1,5 +1,0 @@
-% vim: set filetype=prolog
-
-:- expand_file_name('~/.config/swipl/packs', [PacksDirectory]),
-   asserta( (file_search_path(pack, PacksDirectory)) ),
-   attach_packs.

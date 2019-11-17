@@ -16,7 +16,6 @@ brew cask upgrade
 
 # Packages that can't be handled with Nix
 brew install \
-  swi-prolog \
   swiftformat \
   zplug
 

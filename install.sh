@@ -22,7 +22,6 @@ links=(
   ~/.racketrc $dotfiles/racketrc
   ~/.stack/config.yaml $dotfiles/stack/config.yaml
   ~/.spacemacs $dotfiles/spacemacs
-  ~/.swiplrc $dotfiles/swiplrc
   ~/.tmux.conf $dotfiles/tmux.conf
   ~/.vimrc $dotfiles/vimrc
   ~/.zlogin $dotfiles/zlogin
@@ -106,15 +105,5 @@ now 'Installing tmux plugins'
 if [[ ! -e ~/.tmux/plugins/tpm ]]; then
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
-
-now 'Installing SWI-Prolog packs'
-mkdir -p ~/.config/swipl/packs
-swipl <<EOF
-expand_file_name('~/.config/swipl/packs', [PacksDirectory]),
-  asserta( (file_search_path(pack, PacksDirectory)) ).
-attach_packs.
-pack_install(regex, [upgrade(true), interactive(false)]).
-halt.
-EOF
 
 now 'Done!'
