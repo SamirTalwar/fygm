@@ -15,9 +15,7 @@ brew upgrade
 brew cask upgrade
 
 # Packages that can't be handled with Nix
-brew install \
-  swiftformat \
-  zplug
+brew install swiftformat
 
 # Fonts
 brew cask install \

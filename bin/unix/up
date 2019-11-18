@@ -5,8 +5,6 @@
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && \
   export SDKMAN_DIR="$HOME/.sdkman" && \
   source "$HOME/.sdkman/bin/sdkman-init.sh"
-[[ -f "$HOME/.zplug" ]] && \
-  source "$HOME/.zplug"
 
 set -e
 
@@ -27,7 +25,6 @@ ALL_PACKAGE_MANAGERS=(
   raco
   rustup
   tpm
-  zplug
   vim-plug
   nvim-plug
   docker
@@ -154,14 +151,6 @@ function update-tpm {
     "$HOME/.tmux/plugins/tpm/bin/install_plugins"
     "$HOME/.tmux/plugins/tpm/bin/update_plugins" all
     "$HOME/.tmux/plugins/tpm/bin/clean_plugins"
-  fi
-}
-
-function update-zplug {
-  if exists zplug; then
-    zplug install
-    zplug update
-    zplug clean --force
   fi
 }
 

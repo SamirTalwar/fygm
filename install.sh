@@ -26,10 +26,9 @@ links=(
   ~/.vimrc $dotfiles/vimrc
   ~/.zlogin $dotfiles/zlogin
   ~/.zlogout $dotfiles/zlogout
-  ~/.zplug $dotfiles/zplug
   ~/.zprofile $dotfiles/zprofile
   ~/.zshenv $dotfiles/zshenv
-  ~/.zshrc $dotfiles/zshrc
+  ~/.zshrc.fygm $dotfiles/zshrc
 )
 
 if [[ $(uname -s) == 'Darwin' ]]; then

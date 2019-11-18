@@ -1,6 +1,3 @@
-export ZPLUG_HOME=/usr/local/opt/zplug
-source ~/.zplug
-
 setopt clobber
 unsetopt correct
 setopt interactivecomments
@@ -44,7 +41,7 @@ function zle-line-init {
   printf '\e[6 q'
 }
 function zle-line-deinit {
-  PROMPT="${PROMPT_DIR} %{${fg[green]}%}[%D{%H:%M}]%{$reset_color%} ${PROMPT_ARROW} "
+  PROMPT="${PROMPT_DIR} %F{green}[%D{%H:%M}]%f ${PROMPT_ARROW} "
   zle reset-prompt
   PROMPT="${PROMPT_DIR} ${PROMPT_ARROW} "
   zle accept-line
@@ -56,19 +53,19 @@ zle -N zle-line-deinit
 for key in $(bindkey | fgrep accept-line | sed 's/^"\([^"]*\)".*/\1/'); do bindkey $key zle-line-deinit; done
 
 # Show the directory path on the left-hand side.
-PROMPT_DIR="%{${fg[blue]}%}%(4~|…/%3~|%~)%{$reset_color%}"
-PROMPT_ARROW="%B\$([[ \$? -eq 0 ]] && echo '>' || echo '%{${fg[red]}%}>%{$reset_color%}')%b"
+PROMPT_DIR="%F{blue}%(4~|…/%3~|%~)%f"
+PROMPT_ARROW="%B\$([[ \$? -eq 0 ]] && echo '>' || echo '%F{red}>%f')%b"
 PROMPT="${PROMPT_DIR} ${PROMPT_ARROW} "
 
 # Show Nix and Git information on the right-hand side.
-SHELL_INFO="\$((( \${+IN_NIX_SHELL} )) && echo '%{${fg[green]}%}nix%{$reset_color%} ' || echo '')"
+SHELL_INFO="\$((( \${+IN_NIX_SHELL} )) && echo '%F{green}nix%f ' || echo '')"
 
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' stagedstr ' ★'
 zstyle ':vcs_info:*' unstagedstr ' ☆'
-zstyle ':vcs_info:*' formats "%{${fg[yellow]}%}%b%{$reset_color%}%{${fg[gray]}%}%m%c%u%{$reset_color%}"
+zstyle ':vcs_info:*' formats "%F{yellow}%b%F{gray}%m%c%u%f"
 zstyle ':vcs_info:git*+set-message:*' hooks git-extras
 function +vi-git-extras {
   if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]]; then
@@ -90,8 +87,6 @@ function precmd {
   vcs_info
 }
 RPROMPT="${SHELL_INFO}"'${vcs_info_msg_0_}'
-
-zplug load
 
 # Use a faint grey for autosuggestions.
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=236'
