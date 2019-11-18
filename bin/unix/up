@@ -41,6 +41,10 @@ function update-nix {
   if exists nix; then
     nix upgrade-nix
     nix-channel --update
+  fi
+  if exists home-manager; then
+    home-manager switch
+  else
     nix-env --upgrade
   fi
 }
