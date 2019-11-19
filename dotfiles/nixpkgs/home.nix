@@ -62,9 +62,6 @@ with pkgs;
     mercurial
     nixpkgs-fmt
     nodejs
-    ocaml
-    ocamlPackages.ocamlbuild
-    opam
     pipenv
     python
     python3
@@ -83,6 +80,14 @@ with pkgs;
     # Cloud Development
     awscli
   ];
+
+  programs.direnv = {
+    enable = true;
+  };
+
+  programs.fzf = {
+    enable = true;
+  };
 
   programs.zsh = {
     enable = true;
