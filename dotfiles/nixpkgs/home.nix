@@ -1,86 +1,87 @@
 { config, pkgs, ... }:
 
+with pkgs;
 {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
   home.packages = [
     # Core
-    pkgs.stdenv
-    pkgs.coreutils
-    pkgs.findutils
-    pkgs.moreutils
-    pkgs.curl
-    pkgs.dos2unix
-    pkgs.gawk
-    pkgs.gnupg
-    pkgs.gnused
-    pkgs.hello
-    pkgs.httpie
-    pkgs.httping
-    pkgs.jq
-    pkgs.lastpass-cli
-    pkgs.ncdu
-    pkgs.socat
-    pkgs.tree
-    pkgs.wget
+    stdenv
+    coreutils
+    findutils
+    moreutils
+    curl
+    dos2unix
+    gawk
+    gnupg
+    gnused
+    hello
+    httpie
+    httping
+    jq
+    lastpass-cli
+    ncdu
+    socat
+    tree
+    wget
 
     # Shell
-    pkgs.autojump
-    pkgs.bash
-    pkgs.direnv
-    pkgs.entr
-    pkgs.fswatch
-    pkgs.fzf
-    pkgs.mosh
-    pkgs.silver-searcher
-    pkgs.terminal-notifier
-    pkgs.tmux
-    pkgs.urlview
-    pkgs.watch
-    pkgs.zsh
+    autojump
+    bash
+    direnv
+    entr
+    fswatch
+    fzf
+    mosh
+    silver-searcher
+    terminal-notifier
+    tmux
+    urlview
+    watch
+    zsh
 
     # Image Manipulation
-    pkgs.imagemagick
-    pkgs.pngcrush
+    imagemagick
+    pngcrush
 
     # Editors
-    pkgs.aspell
-    pkgs.aspellDicts.en
-    pkgs.neovim
-    pkgs.pandoc
+    aspell
+    aspellDicts.en
+    neovim
+    pandoc
 
     # Development
-    pkgs.cmake
-    pkgs.gcc
-    pkgs.git
-    pkgs.gnumake
-    pkgs.go
-    pkgs.hugo
-    pkgs.llvm
-    pkgs.mercurial
-    pkgs.nixpkgs-fmt
-    pkgs.nodejs
-    pkgs.ocaml
-    pkgs.ocamlPackages.ocamlbuild
-    pkgs.opam
-    pkgs.pipenv
-    pkgs.python
-    pkgs.python3
-    pkgs.python3Packages.pip
-    pkgs.ruby
-    pkgs.rustup
-    pkgs.shellcheck
-    pkgs.sqlite
-    pkgs.yarn
+    cmake
+    gcc
+    git
+    gnumake
+    go
+    hugo
+    llvm
+    mercurial
+    nixpkgs-fmt
+    nodejs
+    ocaml
+    ocamlPackages.ocamlbuild
+    opam
+    pipenv
+    python
+    python3
+    python3Packages.pip
+    ruby
+    rustup
+    shellcheck
+    sqlite
+    yarn
 
     # Java Development
-    pkgs.openjdk12
-    pkgs.scala
-    pkgs.sbt
+    openjdk12
+    scala
+    sbt
 
     # Cloud Development
-    pkgs.awscli
+    awscli
   ];
 
   programs.zsh = {
@@ -89,11 +90,11 @@
     plugins = [
       {
         name = "zsh-autosuggestions";
-        src = pkgs.zsh-autosuggestions;
+        src = zsh-autosuggestions;
       }
       {
         name = "zsh-syntax-highlighting";
-        src = pkgs.fetchFromGitHub {
+        src = fetchFromGitHub {
           owner = "zsh-users";
           repo = "zsh-syntax-highlighting";
           rev = "e7d3fbc50b0209cb9f9b0812fd40298be03c7808";
