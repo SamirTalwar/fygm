@@ -95,7 +95,12 @@ with pkgs;
     plugins = [
       {
         name = "zsh-autosuggestions";
-        src = zsh-autosuggestions;
+        src = pkgs.fetchFromGitHub {
+          owner = "zsh-users";
+          repo = "zsh-autosuggestions";
+          rev = "v0.6.3";
+          sha256 = "1h8h2mz9wpjpymgl2p7pc146c1jgb3dggpvzwm9ln3in336wl95c";
+        };
       }
       {
         name = "zsh-syntax-highlighting";
