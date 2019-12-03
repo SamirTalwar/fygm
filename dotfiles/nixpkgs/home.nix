@@ -68,7 +68,6 @@ with pkgs;
     python3
     python3Packages.pip
     ruby
-    rustup
     shellcheck
     sqlite
     yarn
