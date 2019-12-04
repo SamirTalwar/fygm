@@ -10,41 +10,15 @@ path=(
 
 if [[ "$OSTYPE" == darwin* ]]; then
   export BROWSER='open'
-  path=(
-    ~/Library/Haskell/bin
-    /Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin
-    $path
-  )
-
-  if (
-    set -o nullglob
-    PYTHON_3_DIRS=(~/Library/Python/3.*)
-    [[ ${#PYTHON_3_DIRS} -eq 1 ]]
-  ); then
-    path=(~/Library/Python/3.*/bin $path)
-  fi
 fi
 
 export EDITOR='vim'
 export VISUAL='vim'
 export PAGER='less'
 
-export GRADLE_OPTS="$GRADLE_OPTS -Dorg.gradle.daemon=true"
-
 if [[ -d ~/.nix-profile ]]; then
   source ~/.nix-profile/etc/profile.d/nix.sh
 fi
-
-path=(
-  ~/.local/bin
-  ~/.config/yarn/global/node_modules/.bin
-  ~/.cabal/bin
-  ~/.ghcup/bin
-  ~/.cargo/bin
-  ~/.pulumi/bin
-  ~/.yarn/bin
-  $path
-)
 
 path=(~/bin/unix $path)
 if [[ "$OSTYPE" == darwin* ]]; then
