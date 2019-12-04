@@ -62,6 +62,7 @@ with pkgs;
     mercurial
     nixpkgs-fmt
     nodejs
+    nodePackages.prettier
     pipenv
     python
     python3
