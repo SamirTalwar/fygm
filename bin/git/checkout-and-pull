@@ -1,7 +1,0 @@
-#!/bin/bash
-
-set -e
-set -u
-
-git checkout "$@"
-git pull-everything

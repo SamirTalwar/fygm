@@ -29,7 +29,6 @@
 	praise = blame
 
 	add-all-and-commit = ! ~/bin/git/add-all-and-commit
-	checkout-and-pull = ! ~/bin/git/checkout-and-pull
 	checkout-master-and-update = ! ~/bin/git/checkout-master-and-update
 	delete-old-branches = ! ~/bin/git/delete-old-branches
 	delete-remote = ! ~/bin/git/delete-remote
@@ -44,7 +43,6 @@
 	a = add-all
 	c = commit --verbose
 	ac = add-all-and-commit
-	co = checkout-and-pull
 	lg = log-tree
 	m = checkout-master-and-update
 	p = pull-everything
