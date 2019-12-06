@@ -41,15 +41,15 @@
 	switch-to = ! ~/bin/git/switch-to
 	update-master = ! ~/bin/git/update-master
 
-	a = ! git add-all
+	a = add-all
 	c = commit --verbose
-	ac = ! git add-all-and-commit
-	co = ! git checkout-and-pull
-	lg = ! git log-tree
-	m = ! git checkout-master-and-update
-	p = ! git pull-everything
-	pr = ! git pull-request
+	ac = add-all-and-commit
+	co = checkout-and-pull
+	lg = log-tree
+	m = checkout-master-and-update
+	p = pull-everything
+	pr = pull-request
 	s = status
-	up = ! git update-master
+	up = update-master
 	upm = ! git update-master && git merge $(git main-branch)
 	upr = ! git update-master && git rebase $(git main-branch)
