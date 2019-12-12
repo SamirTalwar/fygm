@@ -3,5 +3,5 @@
 set -e
 set -u
 
-git push origin ":$(git name)" "$@"
+git push --no-verify --delete origin $(git name) "$@"
 git branch --unset-upstream
