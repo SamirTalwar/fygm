@@ -16,6 +16,10 @@ export EDITOR='vim'
 export VISUAL='vim'
 export PAGER='less'
 
+if [[ "$(uname -s)" == 'Darwin' ]]; then
+  export NIX_IGNORE_SYMLINK_STORE=1
+fi
+
 if [[ -d ~/.nix-profile ]]; then
   source ~/.nix-profile/etc/profile.d/nix.sh
 fi

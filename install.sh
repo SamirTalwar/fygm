@@ -59,13 +59,9 @@ for dest src in $links; do
 done
 
 now 'Installing Nix'
-if [[ ! -e /nix ]]; then
-  echo 'Creating /nix...'
-  sudo mkdir /nix
-fi
 if [[ ! -e /nix/store ]]; then
-  echo "Changing ownership of /nix to ${USER}..."
-  sudo chown -R "${USER}:" /nix
+  echo "Changing ownership of $(readlink /nix) to ${USER}..."
+  sudo chown -R "${USER}:" $(readlink /nix)
   sh <(curl https://nixos.org/nix/install)
 fi
 
