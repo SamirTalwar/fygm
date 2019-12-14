@@ -59,6 +59,7 @@ with pkgs;
     go
     hugo
     llvm
+    lorri
     mercurial
     nixpkgs-fmt
     nodejs
