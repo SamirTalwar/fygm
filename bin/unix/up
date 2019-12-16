@@ -12,6 +12,7 @@ source ${0:A:h}/../../self-update.sh
 
 ALL_PACKAGE_MANAGERS=(
   nix
+  softwareupdate
   brew
   apt
   sdk
@@ -43,6 +44,12 @@ function update-nix {
     home-manager switch
   else
     nix-env --upgrade
+  fi
+}
+
+function update-softwareupdate {
+  if exists softwareupdate; then
+    softwareupdate --install --all
   fi
 }
 
