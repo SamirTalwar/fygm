@@ -28,6 +28,7 @@ links=(
   ~/.zlogout $dotfiles/zlogout
   ~/.zprofile $dotfiles/zprofile
   ~/.zshenv $dotfiles/zshenv
+  ~/.completions.zsh $dotfiles/completions.zsh
   ~/.zshrc.fygm $dotfiles/zshrc
 )
 
