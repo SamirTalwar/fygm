@@ -58,28 +58,16 @@ with pkgs;
     gnumake
     go
     hugo
-    llvm
     lorri
     mercurial
     nixpkgs-fmt
     nodejs
     nodePackages.prettier
-    pipenv
-    python
+    openjdk12
     python3
-    python3Packages.pip
     ruby
     shellcheck
-    sqlite
     yarn
-
-    # Java Development
-    openjdk12
-    scala
-    sbt
-
-    # Cloud Development
-    awscli
   ];
 
   programs.direnv = {
