@@ -78,7 +78,9 @@ This function should only modify configuration layer settings."
      python
      react
      ruby
-     rust
+     (rust :variables
+           rust-format-on-save t
+           )
      swift
      terraform
      typescript
