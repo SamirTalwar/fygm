@@ -9,7 +9,7 @@ if [[ -n "$(git status --porcelain)" ]]; then
   exit 1
 fi
 
-OLD_BRANCH="$(git symbolic-ref --short HEAD)"
+OLD_BRANCH="$(git name)"
 NEW_BRANCH="$1"
 
 git branch "$NEW_BRANCH"

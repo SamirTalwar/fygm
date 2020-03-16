@@ -4,10 +4,11 @@ set -e
 set -u
 set -o pipefail
 
+main_branch="$(git main-branch)"
 commits_to_search="${1:-10}"
 
 function remove-branches-in-use {
-  ( grep -E -v "^\*| $(git main-branch)$| master$" || : ) | sed 's/^ *//'
+  ( grep -E -v "^\*| ${main_branch}$| master$" || : ) | sed 's/^ *//'
 }
 
 # Remove merged branches.
@@ -17,7 +18,7 @@ git branch --merged \
 
 # Remove branches that have been squashed and merged.
 for branch in $(git branch | remove-branches-in-use); do
-  branch_diff="$(git diff "master...${branch}")"
+  branch_diff="$(git diff "${main_branch}...${branch}")"
   for commit in $(git log -n "$commits_to_search" --pretty='%H' "$(git main-branch)"); do
     if [[ "$branch_diff" == "$(git diff "${commit}^..${commit}")" ]]; then
       git branch -D "$branch"

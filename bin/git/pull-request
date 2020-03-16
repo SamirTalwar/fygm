@@ -14,10 +14,10 @@ hosts = [
   Host.new(
     'GitHub',
     %r{^(?:git@github.com:|https://github.com/)(.*)\.git$},
-    lambda { |upstream_repo, repo, branch|
+    lambda { |upstream_repo, repo, main_branch, branch|
       if upstream_repo
         owner = repo.split('/')[0]
-        "https://github.com/#{upstream_repo}/compare/master...#{owner}:#{branch}?expand=1"
+        "https://github.com/#{upstream_repo}/compare/#{main_branch}...#{owner}:#{branch}?expand=1"
       else
         "https://github.com/#{repo}/compare/#{branch}?expand=1"
       end
@@ -25,8 +25,8 @@ hosts = [
   Host.new(
     'BitBucket',
     %r{^git@bitbucket.org(.*)\.git$},
-    lambda { |upstream_repo, repo, branch|
-      "https://bitbucket.org/#{upstream_repo || repo}/pull-request/new?source=#{repo}%3A%3A#{branch}%3A%3Amaster"
+    lambda { |upstream_repo, repo, main_branch, branch|
+      "https://bitbucket.org/#{upstream_repo || repo}/pull-request/new?source=#{repo}%3A%3A#{branch}%3A%3A#{main_branch}"
     })
 ]
 
@@ -57,6 +57,6 @@ unless system 'git', 'first-push', *ARGV
 end
 
 repo = host.extract_repo url
-unless system 'open', host.pull_request_url.call(upstream_repo, repo, branch)
+unless system 'open', host.pull_request_url.call(upstream_repo, repo, main_branch, branch)
   exit $?.exitstatus
 end
