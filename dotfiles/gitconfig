@@ -23,7 +23,7 @@
 	amend = commit --amend --no-edit
 	exec = "! bash -c \"$*\" #"
 	log-tree = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-	main-branch = ! git config branch.main || echo 'master'
+	main-branch = ! git config branch.main || echo 'origin/master'
 	name = symbolic-ref --short HEAD
 	pick-axe = log -p -S
 	praise = blame
