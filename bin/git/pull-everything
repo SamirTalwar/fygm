@@ -9,6 +9,8 @@ if git symbolic-ref --quiet HEAD; then
   else
     echo "Not pulling: no upstream branch configured for $(git name)."
   fi
+else
+  git fetch --all
 fi
 
 git submodule sync --recursive
