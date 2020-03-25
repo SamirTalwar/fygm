@@ -12,7 +12,7 @@ function remove-branches-in-use {
 }
 
 # Remove merged branches.
-git branch --merged \
+git branch --merged "$main_branch" \
   | remove-branches-in-use \
   | xargs --no-run-if-empty git branch -d
 

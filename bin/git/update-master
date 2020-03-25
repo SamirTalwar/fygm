@@ -5,10 +5,23 @@ set -u
 
 current_branch="$(git name)"
 main_branch="$(git main-branch)"
+switched=false
 
-git checkout-master-and-update
+git fetch --all
 
-if [[ "$current_branch" != "$main_branch" ]] && git show-ref --quiet refs/heads/"$current_branch"; then
+if git show-ref --verify --quiet "refs/heads/$main_branch"; then
+  if [[ "$current_branch" != "$main_branch" ]]; then
+    git checkout "$main_branch"
+    switched=true
+  fi
+  git sync
+  git delete-old-branches
+fi
+
+if [[ "$current_branch" != "$main_branch" ]] && $switched && git show-ref --verify --quiet "refs/heads/$current_branch"; then
   git checkout "$current_branch"
+fi
+
+if git symbolic-ref --quiet HEAD >&/dev/null; then
   git pull-everything
 fi

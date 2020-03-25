@@ -40,6 +40,7 @@
 	pull-everything = ! ~/bin/git/pull-everything
 	pull-request = ! ~/bin/git/pull-request
 	switch-to = ! ~/bin/git/switch-to
+	sync = ! ~/bin/git/sync
 	update-master = ! ~/bin/git/update-master
 
 	a = add-all

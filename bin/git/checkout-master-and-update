@@ -5,17 +5,13 @@ set -u
 
 current_branch="$(git name)"
 main_branch="$(git main-branch)"
-upstream="$(git config --get remote.upstream.url || :)"
 
 git fetch --all
 
 [[ "$current_branch" == "$main_branch" ]] || git checkout "$main_branch"
 
-git pull-everything
-
-if git symbolic-ref --quiet HEAD && [[ -n "$upstream" ]]; then
-  git pull --ff-only upstream "$main_branch"
-  git push origin "$main_branch"
+if git symbolic-ref --quiet HEAD; then
+  git sync
 fi
 
 git delete-old-branches
