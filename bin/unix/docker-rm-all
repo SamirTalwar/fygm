@@ -2,4 +2,4 @@
 
 set -e
 
-docker ps -aq | xargs docker stop | xargs docker rm -v
+docker ps -aq | xargs --no-run-if-empty docker stop | xargs --no-run-if-empty docker rm -v
