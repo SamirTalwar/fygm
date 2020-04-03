@@ -50,7 +50,6 @@ with pkgs;
     aspell
     aspellDicts.en
     neovim
-    pandoc
 
     # Development
     cmake
