@@ -49,7 +49,7 @@ with pkgs;
     # Editors
     aspell
     aspellDicts.en
-    neovim
+    #neovim
 
     # Development
     cmake
