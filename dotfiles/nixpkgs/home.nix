@@ -17,6 +17,7 @@ with pkgs;
     gnupg
     gnused
     hello
+    htop
     httpie
     httping
     jq
