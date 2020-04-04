@@ -4,18 +4,22 @@
   min-height: 0 !important;
 }
 
-#TabsToolbar > .toolbar-items {
+#TabsToolbar .toolbar-items {
   visibility: collapse;
 }
 
-#TabsToolbar > .titlebar-buttonbox-container {
+#TabsToolbar .titlebar-buttonbox-container {
   position: absolute;
   display: block;
 }
 
-#TabsToolbar > .titlebar-secondary-buttonbox {
-  position: fixed;
+#TabsToolbar #titlebar-secondary-buttonbox {
+  position: fixed !important;
   display: block;
   bottom: 1em;
   left: 1em;
+}
+
+#TabsToolbar .private-browsing-indicator {
+  margin: 0;
 }
