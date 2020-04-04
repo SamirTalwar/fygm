@@ -27,6 +27,9 @@ with pkgs;
     tree
     wget
 
+    # Nix
+    cachix
+
     # Shell
     autojump
     bash
