@@ -11,6 +11,7 @@
 #TabsToolbar .titlebar-buttonbox-container {
   position: absolute;
   display: block;
+  margin: 4px 0;
 }
 
 #TabsToolbar #titlebar-secondary-buttonbox {
@@ -22,4 +23,8 @@
 
 #TabsToolbar .private-browsing-indicator {
   margin: 0;
+}
+
+#nav-bar {
+  padding-top: 2px;
 }
