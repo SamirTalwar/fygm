@@ -11,6 +11,7 @@ with pkgs;
     coreutils
     findutils
     moreutils
+    bash
     curl
     dos2unix
     gawk
