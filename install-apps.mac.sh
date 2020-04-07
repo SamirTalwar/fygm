@@ -9,6 +9,7 @@ if ! command -v brew >& /dev/null; then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 brew tap homebrew/cask-fonts
+brew tap railwaycat/emacsmacport
 
 brew update
 brew upgrade
@@ -25,7 +26,7 @@ brew cask install \
   dash \
   docker \
   dropbox \
-  emacs \
+  emacs-mac-spacemacs-icon \
   firefox \
   jetbrains-toolbox \
   google-chrome \
