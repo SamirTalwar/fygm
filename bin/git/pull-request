@@ -13,7 +13,7 @@ end
 hosts = [
   Host.new(
     'GitHub',
-    %r{^(?:git@github.com:|https://github.com/)(.*)\.git$},
+    %r{^(?:git@github.com:|https://github.com/)(.*?)(?:\.git)?$},
     lambda { |upstream_repo, repo, main_branch, branch|
       if upstream_repo
         owner = repo.split('/')[0]
@@ -24,7 +24,7 @@ hosts = [
     }),
   Host.new(
     'BitBucket',
-    %r{^git@bitbucket.org(.*)\.git$},
+    %r{^git@bitbucket.org(.*?)(?:\.git)?$},
     lambda { |upstream_repo, repo, main_branch, branch|
       "https://bitbucket.org/#{upstream_repo || repo}/pull-request/new?source=#{repo}%3A%3A#{branch}%3A%3A#{main_branch}"
     })
@@ -38,7 +38,7 @@ end
 
 host = hosts.find { |h| h.matches url }
 unless host
-  $stderr.puts "I don't know how to push #{url}."
+  $stderr.puts "I don't know how to open a pull request for #{url}."
   exit 1
 end
 
