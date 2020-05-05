@@ -477,6 +477,8 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
+  (setenv "PATH" (concat "~/.nix-profile/bin:" (getenv "PATH")))
+  (setq exec-path (append '("~/.nix-profile/bin") exec-path))
   )
 
 (defun dotspacemacs/user-load ()
