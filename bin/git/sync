@@ -9,4 +9,3 @@ git pull-everything
 if git config --get remote.upstream.url; then
   git pull --ff-only upstream "$main_branch"
 fi
-git push origin "$main_branch"
