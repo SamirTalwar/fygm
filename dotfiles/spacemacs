@@ -569,6 +569,9 @@ before packages are loaded."
                          ) do
             (add-hook hook 'prettier-js-mode)
             )
+
+  ; XML: Use XML mode, not Web mode.
+  (add-to-list 'auto-mode-alist '("\\.xml\\'" . xml-mode))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
