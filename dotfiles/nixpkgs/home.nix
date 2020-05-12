@@ -67,7 +67,7 @@ with pkgs;
     nixpkgs-fmt
     nodejs
     nodePackages.prettier
-    openjdk13
+    openjdk11
     python3
     ruby
     shellcheck
