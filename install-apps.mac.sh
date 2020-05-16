@@ -24,6 +24,7 @@ brew cask install \
 brew cask install \
   beaker-browser \
   dash \
+  discord \
   docker \
   dropbox \
   emacs-mac-spacemacs-icon \
