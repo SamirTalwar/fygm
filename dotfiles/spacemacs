@@ -496,7 +496,7 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
-  ; Set the indent width to 2.
+  ;; Set the indent width to 2.
   (cl-loop for variable in '(
                              c-basic-offset
                              coffee-tab-width
@@ -514,53 +514,53 @@ before packages are loaded."
                              )
            do (custom-set-variables (list variable 2)))
 
-  ; Insert a newline at the end of every file.
+  ;; Insert a newline at the end of every file.
   (custom-set-variables '(require-final-newline t))
 
-  ; macOS: Use the right Alt key for typing special characters.
+  ;; macOS: Use the right Alt key for typing special characters.
   (custom-set-variables '(ns-right-alternate-modifier (quote none)))
 
-  ; Scroll when the cursor is close to the window border.
+  ;; Scroll when the cursor is close to the window border.
   (custom-set-variables '(scroll-margin 5))
 
-  ; Disable confirmations.
+  ;; Disable confirmations.
   (custom-set-variables
    '(magit-no-confirm (quote (stage-all-changes unstage-all-changes)))
    '(neo-confirm-create-directory (quote off-p))
    '(neo-confirm-create-file (quote off-p)))
 
-  ; Auto-save when losing focus.
+  ;; Auto-save when losing focus.
   (use-package focus-autosave-mode
     :init
     (focus-autosave-mode t))
 
-  ; Source .envrc
+  ;; Source .envrc.
   (use-package direnv
     :config
     (direnv-mode))
 
-  ; Elm: Format on save.
+  ;; Elm: Format on save.
   (custom-set-variables '(elm-format-on-save t))
 
-  ; Haskell: Run HLint when checking Haskell files.
+  ;; Haskell: Run HLint when checking Haskell files.
   (use-package flycheck
     :init
     (with-eval-after-load 'intero
       (flycheck-add-next-checker 'intero '(warning . haskell-hlint))
       ))
 
-  ; Markdown: Render *.mdx files as Markdown.
+  ;; Markdown: Render *.mdx files as Markdown.
   (add-to-list 'auto-mode-alist '("\\.mdx\\'" . markdown-mode))
 
-  ; Nix Shell: Render files with a shebang of "nix-shell" as shell scripts.
-  ; This is obviously a pain when using nix-shell with a different interpreter,
-  ; but gets it right more often than not.
+  ;; Nix Shell: Render files with a shebang of "nix-shell" as shell scripts.
+  ;; This is obviously a pain when using nix-shell with a different interpreter,
+  ;; but gets it right more often than not.
   (add-to-list 'interpreter-mode-alist '("nix-shell" . shell-script-mode))
 
-  ; Terraform: Format on save.
+  ;; Terraform: Format on save.
   (add-hook 'terraform-mode-hook 'terraform-format-on-save-mode)
 
-  ; Web: Run Prettier on pretty much everything.
+  ;; Web: Run Prettier on pretty much everything.
   (cl-loop for hook in '(
                          css-mode-hook
                          js-mode-hook
@@ -575,7 +575,7 @@ before packages are loaded."
             (add-hook hook 'prettier-js-mode)
             )
 
-  ; XML: Use XML mode, not Web mode.
+  ;; XML: Use XML mode, not Web mode.
   (add-to-list 'auto-mode-alist '("\\.xml\\'" . xml-mode))
   )
 
