@@ -552,6 +552,11 @@ before packages are loaded."
   ; Markdown: Render *.mdx files as Markdown.
   (add-to-list 'auto-mode-alist '("\\.mdx\\'" . markdown-mode))
 
+  ; Nix Shell: Render files with a shebang of "nix-shell" as shell scripts.
+  ; This is obviously a pain when using nix-shell with a different interpreter,
+  ; but gets it right more often than not.
+  (add-to-list 'interpreter-mode-alist '("nix-shell" . shell-script-mode))
+
   ; Terraform: Format on save.
   (add-hook 'terraform-mode-hook 'terraform-format-on-save-mode)
 
