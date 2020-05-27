@@ -24,6 +24,8 @@ with pkgs;
     jq
     lastpass-cli
     ncdu
+    netcat-gnu
+    openssh
     socat
     tree
     wget
