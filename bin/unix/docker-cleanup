@@ -22,6 +22,9 @@ function run {
   silence $@
 }
 
+# Check that Docker is running; fail fast if not.
+docker version > /dev/null
+
 success=true
 
 echo 'Removing exited processes...'
