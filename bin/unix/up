@@ -6,7 +6,9 @@
   export SDKMAN_DIR="$HOME/.sdkman" && \
   source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-set -e
+set -o err_return
+set -o no_unset
+set -o pipefail
 
 source ${0:A:h}/../../self-update.sh
 
