@@ -14,6 +14,7 @@ with pkgs;
     bash
     curl
     dos2unix
+    fd
     gawk
     gnupg
     gnused
@@ -26,6 +27,8 @@ with pkgs;
     ncdu
     netcat-gnu
     openssh
+    ripgrep
+    sd
     socat
     tree
     wget
@@ -41,7 +44,6 @@ with pkgs;
     fswatch
     fzf
     mosh
-    silver-searcher
     terminal-notifier
     tmux
     urlview
