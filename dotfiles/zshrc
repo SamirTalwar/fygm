@@ -95,6 +95,11 @@ if [[ -s ~/.nix-profile/share/autojump/autojump.zsh ]]; then
   source ~/.nix-profile/share/autojump/autojump.zsh
 fi
 
+if [[ -s ~/.nix-profile/share/fzf/completion.zsh ]]; then
+  source ~/.nix-profile/share/fzf/completion.zsh
+  source ~/.nix-profile/share/fzf/key-bindings.zsh
+fi
+
 if [[ -e ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
