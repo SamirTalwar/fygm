@@ -562,7 +562,8 @@ before packages are loaded."
 
   ;; Auto-save when losing focus.
   (defun save-buffer-before-switching (&rest args)
-    (when buffer-file-name (save-buffer)))
+    (when (and buffer-file-name (file-exists-p buffer-file-name) (buffer-modified-p))
+      (save-buffer)))
   (advice-add 'switch-to-buffer :before #'save-buffer-before-switching)
   (advice-add 'select-window :before #'save-buffer-before-switching)
   (advice-add 'other-window :before #'save-buffer-before-switching)
