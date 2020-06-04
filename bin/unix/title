@@ -15,7 +15,7 @@ if [[ -z $title ]]; then
   fi
 fi
 
-if [[ -n $TMUX ]]; then
+if [[ -n ${TMUX:-} ]]; then
   tmux rename-window $title
 elif [[ $(uname -s) == 'Darwin' ]]; then
   echo -n -e "\033]0;$title\007"
