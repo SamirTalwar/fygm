@@ -561,18 +561,21 @@ before packages are loaded."
    '(neo-confirm-create-file (quote off-p)))
 
   ;; Auto-save when losing focus.
-  (defun save-buffer-before-switching (&rest args)
-    (when (and buffer-file-name (file-exists-p buffer-file-name) (buffer-modified-p))
+  (defun write-current-buffer (&rest args)
+    (when (and buffer-file-name
+               (file-exists-p buffer-file-name)
+               (buffer-modified-p))
       (save-buffer)))
-  (advice-add 'switch-to-buffer :before #'save-buffer-before-switching)
-  (advice-add 'select-window :before #'save-buffer-before-switching)
-  (advice-add 'other-window :before #'save-buffer-before-switching)
-  (add-hook 'focus-out-hook
-            (lambda ()
-              (mapc (lambda (buffer)
-                      (with-current-buffer buffer
-                        (save-buffer-before-switching)))
-                    (buffer-list))))
+
+  (defun write-all-buffers (&rest args)
+    (mapc (lambda (buffer)
+            (with-current-buffer buffer (write-current-buffer)))
+          (buffer-list)))
+
+  (advice-add 'switch-to-buffer :before #'write-current-buffer)
+  (advice-add 'select-window :before #'write-current-buffer)
+  (advice-add 'other-window :before #'write-current-buffer)
+  (add-hook 'focus-out-hook #'write-all-buffers)
 
   ;; Source .envrc.
   (use-package direnv
