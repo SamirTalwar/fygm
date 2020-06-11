@@ -6,6 +6,6 @@ set -u
 main_branch="$(git main-branch)"
 
 git pull-everything
-if git config --get remote.upstream.url; then
+if git config --get remote.upstream.url > /dev/null; then
   git pull --ff-only upstream "$main_branch"
 fi

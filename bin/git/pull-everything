@@ -3,8 +3,8 @@
 set -e
 set -u
 
-if git symbolic-ref --quiet HEAD >&/dev/null; then
-  if git rev-parse --abbrev-ref --symbolic-full-name '@{u}' &>/dev/null; then
+if git symbolic-ref --quiet HEAD >& /dev/null; then
+  if git rev-parse --abbrev-ref --symbolic-full-name '@{u}' >& /dev/null; then
     git pull --ff-only "$@"
   else
     echo "Not pulling: no upstream branch configured for $(git name)."

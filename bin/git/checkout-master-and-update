@@ -10,7 +10,7 @@ git fetch --all
 
 [[ "$current_branch" == "$main_branch" ]] || git checkout "$main_branch"
 
-if git symbolic-ref --quiet HEAD; then
+if git symbolic-ref --quiet HEAD > /dev/null; then
   git sync
 fi
 
