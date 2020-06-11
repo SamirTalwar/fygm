@@ -16,6 +16,7 @@ with pkgs;
     dos2unix
     fd
     gawk
+    gnugrep
     gnupg
     gnused
     hello
