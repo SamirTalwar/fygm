@@ -36,6 +36,7 @@ with pkgs;
 
     # Nix
     cachix
+    niv
 
     # Shell
     autojump
