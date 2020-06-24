@@ -528,6 +528,10 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
+  ;; macOS: Enable font ligatures.
+  (if (fboundp 'mac-auto-operator-composition-mode)
+      (mac-auto-operator-composition-mode))
+
   ;; Set the indent width to 2.
   (cl-loop for variable in '(
                              c-basic-offset
@@ -548,9 +552,6 @@ before packages are loaded."
 
   ;; Insert a newline at the end of every file.
   (custom-set-variables '(require-final-newline t))
-
-  ;; macOS: Use the right Alt key for typing special characters.
-  (custom-set-variables '(ns-right-alternate-modifier (quote none)))
 
   ;; Scroll when the cursor is close to the window border.
   (custom-set-variables '(scroll-margin 5))
