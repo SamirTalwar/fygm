@@ -574,7 +574,6 @@ before packages are loaded."
           (buffer-list)))
 
   (advice-add 'switch-to-buffer :before #'write-current-buffer)
-  (advice-add 'select-window :before #'write-current-buffer)
   (advice-add 'other-window :before #'write-current-buffer)
   (add-hook 'focus-out-hook #'write-all-buffers)
 
