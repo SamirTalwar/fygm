@@ -11,5 +11,8 @@
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
+  "git.allowForcePush": true,
+  "git.alwaysShowStagedChangesResourceGroup": true,
+  "git.inputValidationSubjectLength": null,
   "window.zoomLevel": 0
 }
