@@ -234,7 +234,7 @@ nnoremap <Leader>N :ALEPreviousWrap<CR>
 nnoremap <Leader>e :ALEDetail<CR>
 nnoremap <Leader>f :Neoformat<CR>:ALEFix<CR>
 let g:ale_linters = {
-  \   'haskell': ['stack-ghc-mod', 'stack-build', 'hdevtools', 'hlint'],
+  \   'haskell': ['ghc', 'hlint'],
   \}
 let g:ale_fixers = {
   \   'javascript': ['eslint'],
