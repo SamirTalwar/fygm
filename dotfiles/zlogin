@@ -1,9 +1,13 @@
-if [[ -d ~/.nix-profile/share/zsh/site-functions ]]; then
-  fpath=(~/.nix-profile/share/zsh/site-functions $fpath)
-fi
+if ! (( ${+ZLOGIN_LOADED} )); then
+  if [[ -d ~/.nix-profile/share/zsh/site-functions ]]; then
+    fpath=(~/.nix-profile/share/zsh/site-functions $fpath)
+  fi
 
-[[ -e ~/.ssh/*.pem ]] && ssh-add ~/.ssh/*.pem 2>/dev/null
+  [[ -e ~/.ssh/*.pem ]] && ssh-add ~/.ssh/*.pem 2>/dev/null
 
-if [[ -e ~/.zlogin.local ]]; then
-  source ~/.zlogin.local
+  if [[ -e ~/.zlogin.local ]]; then
+    source ~/.zlogin.local
+  fi
+
+  export ZLOGIN_LOADED=true
 fi
