@@ -8,7 +8,7 @@ KEYTIMEOUT=1
 HISTFILE=~/.zhistory
 HISTSIZE=10000
 SAVEHIST=10000
-setopt append_history inc_append_history share_history
+setopt histignorealldups share_history
 bindkey '^R' history-incremental-search-backward
 
 alias ll='ls -lh'
