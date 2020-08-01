@@ -21,7 +21,6 @@ ALL_PACKAGE_MANAGERS=(
   pip
   rvm
   nvm
-  npm
   yarn
   cabal
   opam
@@ -107,13 +106,6 @@ function update-nvm {
     cd "$NVM_DIR"
     git fetch --tags origin
     git checkout "$(git describe --abbrev=0 --tags --match "v[0-9]*" "$(git rev-list --tags --max-count=1)")"
-  fi
-}
-
-function update-npm {
-  if exists npm; then
-    npm update -g
-    npm upgrade -g
   fi
 }
 
