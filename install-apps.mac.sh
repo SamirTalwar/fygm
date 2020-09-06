@@ -31,18 +31,15 @@ fonts=(
 )
 
 applications=(
-  beaker-browser
   dash
   discord
   docker
-  dropbox
   emacs-mac-spacemacs-icon
   firefox
   jetbrains-toolbox
   google-chrome
   gpg-suite
   keybase
-  ngrok
   nordvpn
   scroll-reverser
   sync
