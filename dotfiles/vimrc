@@ -73,7 +73,6 @@ Plug 'guns/vim-sexp'
 Plug 'plasticboy/vim-markdown'
 Plug 'tpope/vim-cucumber'
 Plug 'fatih/vim-go'
-Plug 'eagletmt/ghcmod-vim'
 Plug 'rust-lang/rust.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
@@ -151,6 +150,7 @@ set completeopt-=preview
 
 " Auto-format on save.
 let g:neoformat_basic_format_trim = 1
+let g:neoformat_enabled_haskell = ['ormolu']
 let g:neoformat_enabled_html = []
 let g:neoformat_enabled_javascript = ['prettier']
 let g:clj_fmt_autosave = 1
@@ -234,11 +234,14 @@ nnoremap <Leader>N :ALEPreviousWrap<CR>
 nnoremap <Leader>e :ALEDetail<CR>
 nnoremap <Leader>f :Neoformat<CR>:ALEFix<CR>
 let g:ale_linters = {
-  \   'haskell': ['ghc', 'hlint'],
+  \   'haskell': ['stack-build', 'ghc', 'hlint'],
   \}
 let g:ale_fixers = {
   \   'javascript': ['eslint'],
   \   'javascript.jsx': ['eslint'],
+  \   'haskell': [
+  \     {-> {'command': ale#Escape('ormolu')}},
+  \   ],
   \   'nix': [
   \     {-> {'command': ale#Escape('nixpkgs-fmt')}},
   \   ],
