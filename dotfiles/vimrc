@@ -1,5 +1,6 @@
 set nocompatible " Disable vi support
 set nobackup " Disable the backup file (ends in '~')
+set nowritebackup
 
 let mapleader=',' " The <Leader> in map operations is the ','
 let maplocalleader=';' " The <LocalLeader> in map operations is the ';'
@@ -7,6 +8,7 @@ let maplocalleader=';' " The <LocalLeader> in map operations is the ';'
 set encoding=utf-8 " Assume UTF-8
 
 set colorcolumn=81,121 " Show the margin
+set signcolumn=yes " Always show the sign column
 set number " Show line numbers
 set showcmd " Show the command at the bottom
 set laststatus=2 " Always show the status bar at the bottom
@@ -70,6 +72,7 @@ Plug 'tpope/vim-commentary'
 Plug 'guns/vim-sexp'
 
 " Language support
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'plasticboy/vim-markdown'
 Plug 'tpope/vim-cucumber'
 Plug 'fatih/vim-go'
@@ -145,9 +148,6 @@ endfunction
 nnoremap <C-p> :GFiles<CR>
 nnoremap <C-o> :GFiles?<CR>
 
-" Don't show a preview window on auto-complete.
-set completeopt-=preview
-
 " Auto-format on save.
 let g:neoformat_basic_format_trim = 1
 let g:neoformat_enabled_haskell = ['ormolu']
@@ -218,15 +218,13 @@ let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
-" Auto-complete based on the language server
-let g:deoplete#enable_at_startup = 1
-inoremap <C-Space> <C-x><C-o>
-inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" let g:LanguageClient_serverCommands = {
-" \ 'javascript': ['flow-language-server', '--stdio'],
-" \ 'javascript.jsx': ['flow-language-server', '--stdio'],
-" \ }
-let g:LanguageClient_autoStart = 1
+" LSP configuration.
+inoremap <silent><expr> <c-space> coc#refresh()
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <leader>rn <Plug>(coc-rename)
 
 " Auto-lint and fix.
 nnoremap <Leader>n :ALENextWrap<CR>
