@@ -7,11 +7,18 @@ set -o pipefail
 APP=$0
 
 function usage {
-  echo >&2 "Usage: $APP [REGISTRY] NAME"
+  echo >&2 "Usage: $APP [--json] [REGISTRY] NAME"
   echo >&2
   echo >&2 "e.g.    $APP busybox"
   echo >&2 "  or    $APP gcr.io google_containers/pause-amd64"
 }
+
+if [[ $1 == '--json' ]]; then
+  json=true
+  shift
+else
+  json=false
+fi
 
 case $# in
   1) REGISTRY=index.docker.io
@@ -39,5 +46,33 @@ elif [[ $REGISTRY =~ '^gcr\.io$|\.gcr\.io$' ]]; then
   AUTH=(--auth "oauth2accesstoken:$(gcloud auth print-access-token)")
 fi
 
-http --check-status $AUTH "https://${REGISTRY}/v2/${NAME}/tags/list" $HEADERS \
-  | jq -r 'if has("manifest") then (.manifest | to_entries | map(.value) | sort_by(.timeCreatedMs) | reverse | map(.tag) | flatten(1) | .[]) else (.tags | .[]) end'
+TAG_JSON=$(http --check-status $AUTH "https://${REGISTRY}/v2/${NAME}/tags/list" $HEADERS)
+if $json; then
+  <<< $TAG_JSON jq .
+elif $(<<< $TAG_JSON jq 'has("manifest")'); then
+  (
+    echo 'TAG ID CREATED UPLOADED'
+    <<< $TAG_JSON jq -r '
+      .manifest
+        | to_entries
+        | map(.value + {"id": .key[7:14]})
+        | sort_by([.timeCreatedMs, .timeUploadedMs, .tag[0]])
+        | reverse
+        | map(
+            . as $image
+              | .tag
+              | map(
+                  .
+                  + " " + $image.id
+                  + " " + ($image.timeCreatedMs | tonumber | . / 1000 | todate)
+                  + " " + ($image.timeUploadedMs | tonumber | . / 1000 | todate)
+                )
+          )
+        | flatten(1)
+        | .[]
+    '
+  ) | column -t
+else
+  echo 'TAG'
+  <<< $TAG_JSON jq -r '.tags | .[]'
+fi
