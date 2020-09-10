@@ -1,62 +1,139 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env nix-shell
+#!nix-shell -i runhaskell -p git ghc.withPackages(ps:\ with\ ps;\ [attoparsec\ process\ text])
 
-Host = Struct.new(:name, :extraction, :pull_request_url) do
-  def matches url
-    url =~ extraction
-  end
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TupleSections #-}
 
-  def extract_repo url
-    url.match(extraction)[1]
-  end
-end
+import Control.Applicative (liftA2, (<|>))
+import Control.Monad (when)
+import Data.Attoparsec.Text hiding (parse)
+import qualified Data.Char as Char
+import Data.Functor (($>))
+import qualified Data.List as List
+import qualified Data.Maybe as Maybe
+import Data.Text (Text)
+import qualified Data.Text as Text
+import qualified Data.Text.IO as Text.IO
+import System.Environment (getArgs)
+import System.Exit (ExitCode (..), exitFailure)
+import System.IO (stderr)
+import System.Process (callProcess, proc, readCreateProcess, readCreateProcessWithExitCode)
 
-hosts = [
-  Host.new(
-    'GitHub',
-    %r{^(?:git@github.com:|https://github.com/)(.*?)(?:\.git)?$},
-    lambda { |upstream_repo, repo, main_branch, branch|
-      if upstream_repo
-        owner = repo.split('/')[0]
-        "https://github.com/#{upstream_repo}/compare/#{main_branch}...#{owner}:#{branch}?expand=1"
-      else
-        "https://github.com/#{repo}/compare/#{branch}?expand=1"
-      end
-    }),
-  Host.new(
-    'BitBucket',
-    %r{^git@bitbucket.org(.*?)(?:\.git)?$},
-    lambda { |upstream_repo, repo, main_branch, branch|
-      "https://bitbucket.org/#{upstream_repo || repo}/pull-request/new?source=#{repo}%3A%3A#{branch}%3A%3A#{main_branch}"
-    })
-]
+data Host = GitHub | BitBucket
+  deriving (Show, Enum)
 
-url = `git config --get remote.origin.url`.strip
-if url.empty?
-  $stderr.puts "There's nowhere to raise the pull request. Consider hosting this somewhere."
-  exit 1
-end
+newtype Repository = Repository {unRepository :: Text}
+  deriving (Show)
 
-host = hosts.find { |h| h.matches url }
-unless host
-  $stderr.puts "I don't know how to open a pull request for #{url}."
-  exit 1
-end
+newtype Branch = Branch {unBranch :: Text}
+  deriving (Eq, Show)
 
-upstream_url = `git config --get remote.upstream.url`.strip
-upstream_repo = upstream_url.empty? ? nil : host.extract_repo(upstream_url)
+hosts = [GitHub, BitBucket]
 
-branch = `git name`.strip
-main_branch = `git main-branch`.strip
-if branch == main_branch and upstream_repo.nil?
-  $stderr.puts "Do not work on the \"#{main_branch}\" branch."
-  exit 1
-end
+main = do
+  args <- getArgs
 
-unless system 'git', 'first-push', *ARGV
-  exit $?.exitstatus
-end
+  maybeUrl <- maybeCaptureGit "config" ["--get", "remote.origin.url"]
+  url <- case maybeUrl of
+    Just url -> return url
+    Nothing -> abort "There's nowhere to raise the pull request. Consider hosting this somewhere."
 
-repo = host.extract_repo url
-unless system 'open', host.pull_request_url.call(upstream_repo, repo, main_branch, branch)
-  exit $?.exitstatus
-end
+  (host, repository) <-
+    case Maybe.mapMaybe (\host -> (host,) <$> parseHost url host) hosts of
+      [(host, repository)] -> return (host, repository)
+      _ -> abort $ "I don't know how to open a pull request for " <> url <> "."
+
+  maybeUpstreamUrl <- maybeCaptureGit "config" ["--get", "remote.upstream.url"]
+  let maybeUpstreamRepository = maybeUpstreamUrl >>= flip parseHost host
+
+  branch <- Branch <$> captureGit "name" []
+  mainBranch <- Branch <$> captureGit "main-branch" []
+  when (branch == mainBranch && Maybe.isNothing maybeUpstreamRepository) $
+    abort $ "Do not work on the \"" <> unBranch mainBranch <> "\" branch."
+
+  git "first-push" args
+
+  let prUrl = pullRequestUrl host maybeUpstreamRepository repository mainBranch branch
+  callProcess "open" [Text.unpack prUrl]
+
+abort :: Text -> IO a
+abort message = do
+  Text.IO.hPutStrLn stderr message
+  exitFailure
+
+git :: String -> [String] -> IO ()
+git subcommand args =
+  callProcess "git" (subcommand : args)
+
+captureGit :: String -> [String] -> IO Text
+captureGit subcommand args = do
+  Text.strip . Text.pack <$> readCreateProcess (proc "git" (subcommand : args)) ""
+
+maybeCaptureGit :: String -> [String] -> IO (Maybe Text)
+maybeCaptureGit subcommand args =
+  (Just <$> captureGit subcommand args) <|> pure Nothing
+
+pullRequestUrl :: Host -> Maybe Repository -> Repository -> Branch -> Branch -> Text
+pullRequestUrl GitHub maybeUpstreamRepository (Repository repository) (Branch mainBranch) (Branch branch) =
+  case maybeUpstreamRepository of
+    Nothing ->
+      "https://github.com/" <> repository <> "/compare/" <> branch <> "?expand=1"
+    Just (Repository upstreamRepository) ->
+      let owner = head $ Text.split (== '/') repository
+       in "https://github.com/" <> upstreamRepository <> "/compare/" <> mainBranch <> "..." <> owner <> ":" <> branch <> "?expand=1"
+pullRequestUrl BitBucket maybeUpstreamRepository repository (Branch mainBranch) (Branch branch) =
+  "https://bitbucket.org/" <> unRepository (Maybe.fromMaybe repository maybeUpstreamRepository) <> "/pull-request/new?source=" <> unRepository repository <> "%3A%3A" <> branch <> "%3A%3A" <> mainBranch
+
+-- Parsing
+
+parse :: Text -> Parser a -> Maybe a
+parse text parser = eitherToMaybe $ parseOnly parser text
+
+parseHost :: Text -> Host -> Maybe Repository
+parseHost url GitHub = parse url $ do
+  sshHost "github.com" <|> httpsHost "github.com"
+  repository <* endOfInput
+parseHost url BitBucket = parse url $ do
+  sshHost "bitbucket.org" <|> httpsHost "bitbucket.org"
+  repository <* endOfInput
+
+sshHost :: Text -> Parser ()
+sshHost host = do
+  identifier
+  char '@'
+  string host
+  char ':'
+  return ()
+
+httpsHost :: Text -> Parser ()
+httpsHost host = do
+  string "https://"
+  optionally (identifier *> char '@')
+  string host
+  char '/'
+  return ()
+
+repository :: Parser Repository
+repository = do
+  owner <- identifier
+  slash
+  name <- identifier
+  optionally (string ".git")
+  return $ Repository $ owner <> "/" <> name
+
+identifier :: Parser Text
+identifier = takeWhile1 $ Char.isAlphaNum <||> (== '_') <||> (== '-')
+
+slash :: Parser ()
+slash = char '/' $> ()
+
+optionally :: Parser a -> Parser ()
+optionally p = option () (p $> ())
+
+-- Helpers
+
+eitherToMaybe :: Either l r -> Maybe r
+eitherToMaybe (Right r) = Just r
+eitherToMaybe (Left _) = Nothing
+
+(<||>) = liftA2 (||)
