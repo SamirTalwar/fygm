@@ -31,12 +31,11 @@ function self-update {
 
   if [[ -n $output ]]; then
     echo "$output"
-  else
-    return 1
   fi
 }
 
 if self-update; then
   echo "Updated $root. Restarting..."
+  echo
   exec $ZSH_ARGZERO $argv
 fi
