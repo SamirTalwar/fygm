@@ -37,6 +37,7 @@ with pkgs;
     # Nix
     cachix
     niv
+    nix-direnv
 
     # Shell
     autojump
@@ -82,6 +83,7 @@ with pkgs;
 
   programs.direnv = {
     enable = true;
+    enableNixDirenvIntegration = true;
   };
 
   programs.fzf = {
