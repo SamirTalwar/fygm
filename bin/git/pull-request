@@ -5,7 +5,7 @@
 {-# LANGUAGE TupleSections #-}
 
 import Control.Applicative (liftA2, (<|>))
-import Control.Monad (when)
+import Control.Monad (unless, when)
 import Data.Attoparsec.Text hiding (parse)
 import qualified Data.Char as Char
 import Data.Functor (($>))
@@ -91,25 +91,25 @@ parse text parser = eitherToMaybe $ parseOnly parser text
 
 parseHost :: Text -> Host -> Maybe Repository
 parseHost url GitHub = parse url $ do
-  sshHost "github.com" <|> httpsHost "github.com"
+  sshHost "github" <|> httpsHost "github"
   repository <* endOfInput
 parseHost url BitBucket = parse url $ do
-  sshHost "bitbucket.org" <|> httpsHost "bitbucket.org"
+  sshHost "bitbucket" <|> httpsHost "bitbucket"
   repository <* endOfInput
 
 sshHost :: Text -> Parser ()
-sshHost host = do
+sshHost segment = do
   identifier
   char '@'
-  string host
+  verifyHostnameContains segment
   char ':'
   return ()
 
 httpsHost :: Text -> Parser ()
-httpsHost host = do
+httpsHost segment = do
   string "https://"
   optionally (identifier *> char '@')
-  string host
+  verifyHostnameContains segment
   char '/'
   return ()
 
@@ -123,6 +123,14 @@ repository = do
 
 identifier :: Parser Text
 identifier = takeWhile1 $ Char.isAlphaNum <||> (== '_') <||> (== '-')
+
+hostname :: Parser [Text]
+hostname = identifier `sepBy1` (char '.')
+
+verifyHostnameContains :: Text -> Parser ()
+verifyHostnameContains segment =
+  hostname >>= \h -> unless (segment `elem` h) $
+    fail $ Text.unpack $ "Hostname does not contain \"" <> segment <> "\"."
 
 slash :: Parser ()
 slash = char '/' $> ()
