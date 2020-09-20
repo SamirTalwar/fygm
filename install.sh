@@ -26,11 +26,7 @@ links=(
   ~/.spacemacs $dotfiles/spacemacs
   ~/.tmux.conf $dotfiles/tmux.conf
   ~/.vimrc $dotfiles/vimrc
-  ~/.zlogin $dotfiles/zlogin
-  ~/.zlogout $dotfiles/zlogout
-  ~/.zprofile $dotfiles/zprofile
   ~/.zshenv $dotfiles/zshenv
-  ~/.completions.zsh $dotfiles/completions.zsh
   ~/.zshrc.fygm $dotfiles/zshrc
 )
 
