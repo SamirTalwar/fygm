@@ -1,3 +1,6 @@
 [submodule "dotfiles/emacs.d"]
 	path = dotfiles/emacs.d
 	url = https://github.com/syl20bnr/spacemacs
+[submodule "dotfiles/powerlevel10k"]
+	path = dotfiles/powerlevel10k
+	url = https://github.com/romkatv/powerlevel10k.git

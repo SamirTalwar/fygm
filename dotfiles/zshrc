@@ -1,7 +1,17 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
+
+source ~/.powerlevel10k/powerlevel10k.zsh-theme
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 setopt clobber
 unsetopt correct
-setopt interactivecomments
-setopt prompt_subst
 
 KEYTIMEOUT=1
 
@@ -9,15 +19,9 @@ HISTFILE=~/.zhistory
 HISTSIZE=10000
 SAVEHIST=10000
 setopt histignorealldups share_history
-bindkey '^R' history-incremental-search-backward
 
 alias ll='ls -lh'
 alias la='ls -alh'
-if [[ "$OSTYPE" == darwin* ]]; then
-  alias ls='ls -G'
-else
-  alias ls='ls --color'
-fi
 
 # Fuzzy completion.
 zstyle ':completion:*' matcher-list \
@@ -26,9 +30,10 @@ zstyle ':completion:*' matcher-list \
   'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
   'r:|?=** m:{a-z\-}={A-Z\_}'
 
-# Switch to vi mode and show it with the cursor style.
+# Switch to vi mode.
 bindkey -v
 
+# Use a beam cursor when in insert mode, and a block in normal mode.
 function zle-keymap-select {
   if [[ $KEYMAP == 'vicmd' ]]; then
     printf '\e[2 q'
@@ -37,59 +42,16 @@ function zle-keymap-select {
   fi
 }
 function zle-line-init {
-  zle -K viins
-  printf '\e[6 q'
+  zle-keymap-select
 }
 function zle-line-deinit {
-  PROMPT="${PROMPT_DIR} %F{green}[%D{%H:%M}]%f ${PROMPT_ARROW} "
-  zle reset-prompt
-  PROMPT="${PROMPT_DIR} ${PROMPT_ARROW} "
   zle accept-line
-  printf '\e[2 q'
+  zle-keymap-select
 }
 zle -N zle-keymap-select
 zle -N zle-line-init
 zle -N zle-line-deinit
 for key in $(bindkey | fgrep accept-line | sed 's/^"\([^"]*\)".*/\1/'); do bindkey $key zle-line-deinit; done
-
-# Show the directory path on the left-hand side.
-PROMPT_DIR="%F{blue}%(4~|…/%3~|%~)%f"
-PROMPT_ARROW="%B\$([[ \$? -eq 0 ]] && echo '>' || echo '%F{red}>%f')%b"
-PROMPT="${PROMPT_DIR} ${PROMPT_ARROW} "
-
-# Show Nix and Git information on the right-hand side.
-SHELL_INFO="\$((( \${+IN_NIX_SHELL} )) && echo '%F{green}nix%f ' || echo '')"
-
-autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' stagedstr ' ★'
-zstyle ':vcs_info:*' unstagedstr ' ☆'
-zstyle ':vcs_info:*' formats "%F{yellow}%b%F{gray}%m%c%u%f"
-zstyle ':vcs_info:git*+set-message:*' hooks git-extras
-function +vi-git-extras {
-  if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]]; then
-    if [[ $(git rev-list --count @{u}.. 2> /dev/null) -ne 0 ]]; then
-      hook_com[misc]+=' ↑'
-    fi
-    if [[ $(git rev-list --count ..@{u} 2> /dev/null) -ne 0 ]]; then
-      hook_com[misc]+=' ↓'
-    fi
-    if [[ $(git stash list | wc -l) -gt 0 ]]; then
-      hook_com[misc]+=' ※'
-    fi
-    if git status --porcelain | grep -E '^(\?\?| D) ' &> /dev/null && [[ -z ${hook_com[unstaged]} ]]; then
-      hook_com[unstaged]+=' ☆'
-    fi
-  fi
-}
-function precmd {
-  vcs_info
-}
-RPROMPT="${SHELL_INFO}"'${vcs_info_msg_0_}'
-
-# Use a faint grey for autosuggestions.
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=236'
 
 if [[ -s ~/.nix-profile/share/autojump/autojump.zsh ]]; then
   source ~/.nix-profile/share/autojump/autojump.zsh

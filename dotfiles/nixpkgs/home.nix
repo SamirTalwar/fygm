@@ -92,7 +92,6 @@ with pkgs;
 
   programs.zsh = {
     enable = true;
-    initExtraBeforeCompInit = "source ~/.completions.zsh";
     initExtra = "source ~/.zshrc.fygm";
     plugins = [
       {

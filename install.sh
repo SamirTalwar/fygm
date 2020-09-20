@@ -21,6 +21,8 @@ links=(
   ~/.config/nixpkgs/home.nix $dotfiles/nixpkgs/home.nix
   ~/.config/nvim/coc-settings.json $dotfiles/coc-settings.json
   ~/.config/nvim/init.vim $dotfiles/vimrc
+  ~/.p10k.zsh $dotfiles/p10k.zsh
+  ~/.powerlevel10k $dotfiles/powerlevel10k
   ~/.racketrc $dotfiles/racketrc
   ~/.stack/config.yaml $dotfiles/stack/config.yaml
   ~/.spacemacs $dotfiles/spacemacs
