@@ -1,38 +1,34 @@
-if ! (( ${+ZSHENV_LOADED} )); then
-  setopt no_global_rcs
+setopt no_global_rcs
 
-  path=(
-    /usr/local/bin
-    /usr/local/sbin
-    /usr/sbin
-    /sbin
-    $path
-  )
+path=(
+  /usr/local/bin
+  /usr/local/sbin
+  /usr/sbin
+  /sbin
+  $path
+)
 
-  if [[ "$OSTYPE" == darwin* ]]; then
-    export BROWSER='open'
-  fi
+if [[ "$OSTYPE" == darwin* ]]; then
+  export BROWSER='open'
+fi
 
-  export EDITOR='vim'
-  export VISUAL='vim'
-  export PAGER='less'
+export EDITOR='vim'
+export VISUAL='vim'
+export PAGER='less'
 
-  if [[ "$(uname -s)" == 'Darwin' ]]; then
-    export NIX_IGNORE_SYMLINK_STORE=1
-  fi
+if [[ "$(uname -s)" == 'Darwin' ]]; then
+  export NIX_IGNORE_SYMLINK_STORE=1
+fi
 
-  if [[ -d ~/.nix-profile ]]; then
-    source ~/.nix-profile/etc/profile.d/nix.sh
-  fi
+if [[ -d ~/.nix-profile ]]; then
+  source ~/.nix-profile/etc/profile.d/nix.sh
+fi
 
-  path=(~/bin/unix $path)
-  if [[ "$OSTYPE" == darwin* ]]; then
-    path=(~/bin/mac $path)
-  fi
+path=(~/bin/unix $path)
+if [[ "$OSTYPE" == darwin* ]]; then
+  path=(~/bin/mac $path)
+fi
 
-  if [[ -e ~/.zshenv.local ]]; then
-    source ~/.zshenv.local
-  fi
-
-  export ZSHENV_LOADED=true
+if [[ -e ~/.zshenv.local ]]; then
+  source ~/.zshenv.local
 fi
