@@ -31,6 +31,7 @@ fonts=(
 )
 
 applications=(
+  alacritty
   dash
   discord
   docker
