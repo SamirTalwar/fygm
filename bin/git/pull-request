@@ -19,7 +19,7 @@ import System.Exit (ExitCode (..), exitFailure)
 import System.IO (stderr)
 import System.Process (callProcess, proc, readCreateProcess, readCreateProcessWithExitCode)
 
-data Service = GitHub | BitBucket
+data Service = GitHub | BitBucket | GitLab
   deriving (Show, Enum)
 
 newtype Hostname = Hostname {unHostname :: Text}
@@ -31,7 +31,7 @@ newtype Repository = Repository {unRepository :: Text}
 newtype Branch = Branch {unBranch :: Text}
   deriving (Eq, Show)
 
-hosts = [GitHub, BitBucket]
+hosts = [GitHub, BitBucket, GitLab]
 
 main = do
   args <- getArgs
@@ -86,6 +86,14 @@ pullRequestUrl GitHub (Hostname hostname) maybeUpstreamRepository (Repository re
        in "https://" <> hostname <> "/" <> upstreamRepository <> "/compare/" <> mainBranch <> "..." <> owner <> ":" <> branch <> "?expand=1"
 pullRequestUrl BitBucket (Hostname hostname) maybeUpstreamRepository repository (Branch mainBranch) (Branch branch) =
   "https://" <> hostname <> "/" <> unRepository (Maybe.fromMaybe repository maybeUpstreamRepository) <> "/pull-request/new?source=" <> unRepository repository <> "%3A%3A" <> branch <> "%3A%3A" <> mainBranch
+pullRequestUrl GitLab (Hostname hostname) Nothing (Repository repository) mainBranch (Branch branch) =
+  "https://" <> hostname <> "/" <> repository <> "/merge_requests/new?utf8=✓&merge_request[source_branch]=" <> branch <> "&merge_request[target_branch]=" <> (unBranch (stripOrigin mainBranch))
+pullRequestUrl GitLab _ (Just _) _ _ _ =
+  error "I don't know how to open a GitLab merge request against a different upstream repository."
+
+stripOrigin :: Branch -> Branch
+stripOrigin b@(Branch branch) =
+  Maybe.fromMaybe b (Branch <$> Text.stripPrefix "origin/" branch)
 
 -- Parsing
 
@@ -93,16 +101,17 @@ parse :: Text -> Parser a -> Maybe a
 parse text parser = eitherToMaybe $ parseOnly parser text
 
 parseUrl :: Text -> Service -> Maybe (Hostname, Repository)
-parseUrl url GitHub = parse url $ do
-  h <- sshHost "github" <|> httpsHost "github"
+parseUrl url service = parse url $ do
+  h <- sshHost serviceName <|> httpsHost serviceName
   r <- repository
   endOfInput
   return (h, r)
-parseUrl url BitBucket = parse url $ do
-  h <- sshHost "bitbucket" <|> httpsHost "bitbucket"
-  r <- repository
-  endOfInput
-  return (h, r)
+  where
+    serviceName =
+      case service of
+        GitHub -> "github"
+        BitBucket -> "bitbucket"
+        GitLab -> "gitlab"
 
 sshHost :: Text -> Parser Hostname
 sshHost segment = do
