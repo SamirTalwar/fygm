@@ -19,8 +19,11 @@ import System.Exit (ExitCode (..), exitFailure)
 import System.IO (stderr)
 import System.Process (callProcess, proc, readCreateProcess, readCreateProcessWithExitCode)
 
-data Host = GitHub | BitBucket
+data Service = GitHub | BitBucket
   deriving (Show, Enum)
+
+newtype Hostname = Hostname {unHostname :: Text}
+  deriving (Show)
 
 newtype Repository = Repository {unRepository :: Text}
   deriving (Show)
@@ -38,13 +41,13 @@ main = do
     Just url -> return url
     Nothing -> abort "There's nowhere to raise the pull request. Consider hosting this somewhere."
 
-  (host, repository) <-
-    case Maybe.mapMaybe (\host -> (host,) <$> parseHost url host) hosts of
-      [(host, repository)] -> return (host, repository)
+  (service, hostname, repository) <-
+    case Maybe.mapMaybe (\service -> (service,) <$> parseUrl url service) hosts of
+      [(service, (hostname, repository))] -> return (service, hostname, repository)
       _ -> abort $ "I don't know how to open a pull request for " <> url <> "."
 
   maybeUpstreamUrl <- maybeCaptureGit "config" ["--get", "remote.upstream.url"]
-  let maybeUpstreamRepository = maybeUpstreamUrl >>= flip parseHost host
+  let maybeUpstreamRepository = fmap snd . flip parseUrl service =<< maybeUpstreamUrl
 
   branch <- Branch <$> captureGit "name" []
   mainBranch <- Branch <$> captureGit "main-branch" []
@@ -53,7 +56,7 @@ main = do
 
   git "first-push" args
 
-  let prUrl = pullRequestUrl host maybeUpstreamRepository repository mainBranch branch
+  let prUrl = pullRequestUrl service hostname maybeUpstreamRepository repository mainBranch branch
   callProcess "open" [Text.unpack prUrl]
 
 abort :: Text -> IO a
@@ -73,45 +76,45 @@ maybeCaptureGit :: String -> [String] -> IO (Maybe Text)
 maybeCaptureGit subcommand args =
   (Just <$> captureGit subcommand args) <|> pure Nothing
 
-pullRequestUrl :: Host -> Maybe Repository -> Repository -> Branch -> Branch -> Text
-pullRequestUrl GitHub maybeUpstreamRepository (Repository repository) (Branch mainBranch) (Branch branch) =
+pullRequestUrl :: Service -> Hostname -> Maybe Repository -> Repository -> Branch -> Branch -> Text
+pullRequestUrl GitHub (Hostname hostname) maybeUpstreamRepository (Repository repository) (Branch mainBranch) (Branch branch) =
   case maybeUpstreamRepository of
     Nothing ->
-      "https://github.com/" <> repository <> "/compare/" <> branch <> "?expand=1"
+      "https://" <> hostname <> "/" <> repository <> "/compare/" <> branch <> "?expand=1"
     Just (Repository upstreamRepository) ->
       let owner = head $ Text.split (== '/') repository
-       in "https://github.com/" <> upstreamRepository <> "/compare/" <> mainBranch <> "..." <> owner <> ":" <> branch <> "?expand=1"
-pullRequestUrl BitBucket maybeUpstreamRepository repository (Branch mainBranch) (Branch branch) =
-  "https://bitbucket.org/" <> unRepository (Maybe.fromMaybe repository maybeUpstreamRepository) <> "/pull-request/new?source=" <> unRepository repository <> "%3A%3A" <> branch <> "%3A%3A" <> mainBranch
+       in "https://" <> hostname <> "/" <> upstreamRepository <> "/compare/" <> mainBranch <> "..." <> owner <> ":" <> branch <> "?expand=1"
+pullRequestUrl BitBucket (Hostname hostname) maybeUpstreamRepository repository (Branch mainBranch) (Branch branch) =
+  "https://" <> hostname <> "/" <> unRepository (Maybe.fromMaybe repository maybeUpstreamRepository) <> "/pull-request/new?source=" <> unRepository repository <> "%3A%3A" <> branch <> "%3A%3A" <> mainBranch
 
 -- Parsing
 
 parse :: Text -> Parser a -> Maybe a
 parse text parser = eitherToMaybe $ parseOnly parser text
 
-parseHost :: Text -> Host -> Maybe Repository
-parseHost url GitHub = parse url $ do
-  sshHost "github" <|> httpsHost "github"
-  repository <* endOfInput
-parseHost url BitBucket = parse url $ do
-  sshHost "bitbucket" <|> httpsHost "bitbucket"
-  repository <* endOfInput
+parseUrl :: Text -> Service -> Maybe (Hostname, Repository)
+parseUrl url GitHub = parse url $ do
+  h <- sshHost "github" <|> httpsHost "github"
+  r <- repository
+  endOfInput
+  return (h, r)
+parseUrl url BitBucket = parse url $ do
+  h <- sshHost "bitbucket" <|> httpsHost "bitbucket"
+  r <- repository
+  endOfInput
+  return (h, r)
 
-sshHost :: Text -> Parser ()
+sshHost :: Text -> Parser Hostname
 sshHost segment = do
   identifier
   char '@'
-  verifyHostnameContains segment
-  char ':'
-  return ()
+  verifyHostnameContains segment <* char ':'
 
-httpsHost :: Text -> Parser ()
+httpsHost :: Text -> Parser Hostname
 httpsHost segment = do
   string "https://"
   optionally (identifier *> char '@')
-  verifyHostnameContains segment
-  char '/'
-  return ()
+  verifyHostnameContains segment <* char '/'
 
 repository :: Parser Repository
 repository = do
@@ -124,13 +127,12 @@ repository = do
 identifier :: Parser Text
 identifier = takeWhile1 $ Char.isAlphaNum <||> (== '_') <||> (== '-')
 
-hostname :: Parser [Text]
-hostname = identifier `sepBy1` (char '.')
-
-verifyHostnameContains :: Text -> Parser ()
-verifyHostnameContains segment =
-  hostname >>= \h -> unless (segment `elem` h) $
+verifyHostnameContains :: Text -> Parser Hostname
+verifyHostnameContains segment = do
+  segments <- identifier `sepBy1` char '.'
+  unless (segment `elem` segments) $
     fail $ Text.unpack $ "Hostname does not contain \"" <> segment <> "\"."
+  return (Hostname (Text.intercalate "." segments))
 
 slash :: Parser ()
 slash = char '/' $> ()
