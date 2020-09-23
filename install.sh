@@ -18,6 +18,7 @@ links=(
   ~/.i3 $dotfiles/i3
   ~/.ideavimrc $dotfiles/ideavimrc
   ~/.config/alacritty/alacritty.yml $dotfiles/alacritty.yml
+  ~/.config/nix/nix.conf $dotfiles/nix.conf
   ~/.config/nixpkgs/home.nix $dotfiles/nixpkgs/home.nix
   ~/.config/nvim/coc-settings.json $dotfiles/coc-settings.json
   ~/.config/nvim/init.vim $dotfiles/vimrc
