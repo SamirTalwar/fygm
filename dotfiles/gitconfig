@@ -9,6 +9,8 @@
 	ui = true
 [commit]
 	gpgsign = true
+[init]
+	defaultBranch = main
 [fetch]
 	prune = true
 [push]
