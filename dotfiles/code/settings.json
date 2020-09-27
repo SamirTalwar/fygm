@@ -13,6 +13,7 @@
   "files.trimTrailingWhitespace": true,
   "git.allowForcePush": true,
   "git.alwaysShowStagedChangesResourceGroup": true,
+  "git.autofetch": true,
   "git.inputValidationSubjectLength": null,
   "window.zoomLevel": 0
 }
