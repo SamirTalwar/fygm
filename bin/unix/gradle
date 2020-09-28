@@ -1,0 +1,26 @@
+#!/usr/bin/env zsh
+
+# This finds the closest Gradle wrapper by checking the current directory, then
+# iterating upwards until it finds one. It will stop at the root directory or
+# the device root.
+
+set -e
+set -u
+
+device_no=$(stat --format='%d' .)
+dir=$PWD
+
+while true; do
+  if [[ -f "${dir}/gradlew" ]]; then
+    exec "${dir}/gradlew" --parallel "$@"
+  else
+    next_dir=$(cd "${dir}/.." && pwd)
+    if [[ $dir == $next_dir || $(stat --format='%d' .) != $device_no ]]; then
+      break
+    fi
+    dir=$next_dir
+  fi
+done
+
+echo >&2 'This project does not have a Gradle wrapper.'
+exit 1
