@@ -12,7 +12,7 @@ dir=$PWD
 
 while true; do
   if [[ -f "${dir}/gradlew" ]]; then
-    exec "${dir}/gradlew" --parallel "$@"
+    exec "${dir}/gradlew" --parallel --warning-mode=all "$@"
   else
     next_dir=$(cd "${dir}/.." && pwd)
     if [[ $dir == $next_dir || $(stat --format='%d' .) != $device_no ]]; then
