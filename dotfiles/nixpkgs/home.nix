@@ -5,6 +5,8 @@ with pkgs;
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  news.display = "silent";
+
   home.packages = [
     # Core
     stdenv
@@ -47,7 +49,6 @@ with pkgs;
     fswatch
     fzf
     mosh
-    terminal-notifier
     tmux
     urlview
     watch
@@ -79,7 +80,15 @@ with pkgs;
     ruby
     shellcheck
     yarn
-  ];
+  ] ++ (
+    if stdenv.isDarwin
+    then [
+      terminal-notifier
+    ]
+    else [
+      xclip
+    ]
+  );
 
   programs.direnv = {
     enable = true;
