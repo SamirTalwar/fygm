@@ -17,13 +17,18 @@ apt_fonts=(
 )
 
 apt_programs=(
-  arandr
-  i3
-)
-
-apt_applications=(
+  # applications
   firefox
   google-chrome-stable
+
+  # window management
+  arandr
+  i3
+
+  # docker
+  containerd.io
+  docker-ce
+  docker-ce-cli
 )
 
 snap_applications=(
@@ -33,17 +38,21 @@ snap_classic_applications=(
 )
 
 now 'Setting up third-party Apt repositories...'
-wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-if [[ ! -f /etc/apt/sources.list.d/google.list && ! -f /etc/apt/sources.list.d/google-chrome.list ]]; then
-  echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list
-fi
+# Docker
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+add-apt-repository --no-update "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+
+# Google Chrome
+curl -fsSL https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+add-apt-repository --no-update "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main"
 
 now 'Upgrading packages...'
 apt-get update
 apt-get dist-upgrade --yes
 apt-get autoremove --purge --yes
+
 now 'Installing fonts and programs with Apt...'
-apt-get install --yes $apt_fonts $apt_programs $apt_applications
+apt-get install --yes $apt_fonts $apt_programs
 
 # now 'Installing applications with Snap...'
 # snap install $snap_applications
