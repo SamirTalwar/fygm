@@ -8,6 +8,9 @@ dir=${0:A:h}
 dotfiles=${dir}/dotfiles
 macos_application_support="${HOME}/Library/Application Support"
 
+source ${dir}/common.sh
+source ${dir}/self-update.sh
+
 set -A links
 links=(
   ~/bin $dir/bin
@@ -38,13 +41,6 @@ if [[ $(uname -s) == 'Darwin' ]]; then
     $macos_application_support/Code/User/settings.json $dotfiles/code/settings.json
   )
 fi
-
-function now {
-  echo >&2
-  echo >&2 '===' $@ '==='
-}
-
-source ${dir}/self-update.sh
 
 now 'Symlinking files'
 for dest src in $links; do
@@ -79,17 +75,26 @@ nix-env --upgrade
 nix-shell '<home-manager>' -A install
 home-manager switch
 
-if [[ $(uname -s) == 'Darwin' ]]; then
+if [[ $(uname -s) == 'Linux' && $(uname -v) =~ Ubuntu ]]; then
+  now 'Installing Ubuntu-only software'
+  ./install-apps.ubuntu.sh
+elif [[ $(uname -s) == 'Darwin' ]]; then
   now 'Installing macOS-only software'
   ./install-apps.mac.sh
+fi
 
+NEW_SHELL="${HOME}/.nix-profile/bin/zsh"
+if [[ $(uname -s) == 'Linux' ]]; then
   now 'Configuring the user shell'
-  CURRENT_SHELL=$(
-    dscl . -read /Users/${USER} UserShell \
-      | cut -d ' ' -f 2
-  )
-  if [[ $CURRENT_SHELL != ${HOME}/.nix-profile/bin/zsh ]]; then
-    sudo chsh -s ${HOME}/.nix-profile/bin/zsh $USER
+  CURRENT_SHELL=$( awk -F: -v user=$USER '$1 == user { print $NF }' /etc/passwd)
+  if [[ $CURRENT_SHELL != $NEW_SHELL ]]; then
+    sudo chsh -s $NEW_SHELL $USER
+  fi
+elif [[ $(uname -s) == 'Darwin' ]]; then
+  now 'Configuring the user shell'
+  CURRENT_SHELL=$( dscl . -read /Users/${USER} UserShell | cut -d ' ' -f 2)
+  if [[ $CURRENT_SHELL != $NEW_SHELL ]]; then
+    sudo chsh -s $NEW_SHELL $USER
   fi
 fi
 

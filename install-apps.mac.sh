@@ -4,10 +4,7 @@ set -e
 set -u
 set -o pipefail
 
-function now {
-  echo >&2
-  echo >&2 '===' $@ '==='
-}
+source ${0:A:h}/common.sh
 
 if ! command -v brew >& /dev/null; then
   now 'Installing Homebrew'
