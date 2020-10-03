@@ -57,7 +57,7 @@ function update-softwareupdate {
 function update-brew {
   if exists brew; then
     brew update
-    brew upgrade
+    brew upgrade --greedy
     brew cleanup
   fi
 }
