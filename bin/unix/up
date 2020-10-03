@@ -36,45 +36,55 @@ function exists {
   (( $+commands[$1] )) || command -v $1 >/dev/null
 }
 
+function log {
+  echo >&2 '+' $@
+}
+
+function run {
+  log $@
+  $@
+}
+
 function update-nix {
   if exists nix; then
-    nix upgrade-nix
-    nix-channel --update
+    run nix upgrade-nix
+    run nix-channel --update
     if exists home-manager; then
-      home-manager switch
+      run home-manager switch
     else
-      nix-env --upgrade
+      run nix-env --upgrade
     fi
   fi
 }
 
 function update-softwareupdate {
   if exists softwareupdate; then
-    softwareupdate --install --all
+    run softwareupdate --install --all
   fi
 }
 
 function update-brew {
   if exists brew; then
-    brew update
-    brew upgrade --greedy
-    brew cleanup
+    run brew update
+    run brew upgrade --greedy
+    run brew cleanup
   fi
 }
 
 function update-apt {
   if exists apt-get; then
-    sudo apt-get update
-    sudo apt-get dist-upgrade --yes
-    sudo apt-get autoremove --purge --yes
+    run sudo apt-get update
+    run sudo apt-get dist-upgrade --yes
+    run sudo apt-get autoremove --purge --yes
   fi
 }
 
 function update-sdk {
   if exists sdk; then
-    sdk selfupdate
+    run sdk selfupdate
     source "$HOME/.sdkman/bin/sdkman-init.sh"
-    sdk broadcast # to prevent it from popping up during `sdk outdated`
+    run sdk broadcast # to prevent it from popping up during `sdk outdated`
+    log sdk install
     sdk outdated | tail +2 | awk '{ print $1 }' | while read candidate; do
       yes | sdk install $candidate
     done
@@ -86,6 +96,7 @@ function update-pip {
   if exists pip; then
     packages=($(pip list --user --outdated --format=json | jq -r '.[] | .name'))
     if [[ ${#packages} -gt 0 ]]; then
+      log pip install --user --upgrade
       pip install --user --upgrade ${packages[@]}
     fi
   fi
@@ -93,9 +104,9 @@ function update-pip {
 
 function update-rvm {
   if exists rvm; then
-    rvm get head
-    rvm cleanup all
-    rvm reload
+    run rvm get head
+    run rvm cleanup all
+    run rvm reload
   fi
 }
 
@@ -103,45 +114,45 @@ function update-nvm {
   local NVM_DIR="$HOME/.nvm"
   if [[ -d "$NVM_DIR" ]]; then
     cd "$NVM_DIR"
-    git fetch --tags origin
-    git checkout "$(git describe --abbrev=0 --tags --match "v[0-9]*" "$(git rev-list --tags --max-count=1)")"
+    run git fetch --tags origin
+    run git checkout "$(git describe --abbrev=0 --tags --match "v[0-9]*" "$(git rev-list --tags --max-count=1)")"
   fi
 }
 
 function update-yarn {
   if exists yarn; then
-    yarn global upgrade
+    run yarn global upgrade
   fi
 }
 
 function update-cabal {
   if exists cabal; then
-    cabal update
+    run cabal update
   fi
 }
 
 function update-opam {
   if exists opam && [[ -d ~/.opam ]]; then
-    opam update --yes
-    opam upgrade --yes
+    run opam update --yes
+    run opam upgrade --yes
   fi
 }
 
 function update-raco {
   if exists raco; then
-    raco pkg update --all --auto
+    run raco pkg update --all --auto
   fi
 }
 
 function update-rustup {
   if exists rustup; then
-    rustup update
+    run rustup update
   fi
 }
 
 function update-gcloud {
   if exists gcloud; then
-    yes | gcloud components update
+    yes | run gcloud components update
   fi
 }
 
@@ -156,23 +167,23 @@ function update-tpm {
 
 function update-vim-plug {
   if [[ -e "$HOME/.vim/autoload/plug.vim" ]]; then
-    \vim +PlugUpgrade +qall
-    \vim +PlugInstall +PlugUpdate +PlugClean! +qall
+    run vim +PlugUpgrade +qall
+    run vim +PlugInstall +PlugUpdate +PlugClean! +qall
   fi
 }
 
 function update-nvim-plug {
   if exists nvim && [[ -e "$HOME/.config/nvim/autoload/plug.vim" ]]; then
-    nvim +PlugUpgrade +qall
-    nvim +PlugInstall +PlugUpdate +PlugClean! +qall
-    nvim +UpdateRemotePlugins +qall
+    run nvim +PlugUpgrade +qall
+    run nvim +PlugInstall +PlugUpdate +PlugClean! +qall
+    run nvim +UpdateRemotePlugins +qall
   fi
 }
 
 function update-docker {
   local image filter
   if exists docker; then
-    docker-cleanup
+    run docker-cleanup
     if [[ -e ~/.up-docker-filter ]]; then
       filter=$(cat ~/.up-docker-filter)
     fi
@@ -180,10 +191,10 @@ function update-docker {
       if [[ -n $filter && $image =~ $filter ]]; then
         echo "Skipping $image."
       else
-        docker pull $image || :
+        run docker pull $image || :
       fi
     done
-    docker-cleanup
+    run docker-cleanup
   fi
 }
 
