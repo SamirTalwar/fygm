@@ -102,18 +102,23 @@ with pkgs;
     initExtra = "source ~/.zshrc.fygm";
     plugins = [
       {
+        name = "autojump";
+        src = autojump;
+        file = "share/autojump/autojump.zsh";
+      }
+      {
         name = "zsh-autosuggestions";
-        src = pkgs.zsh-autosuggestions;
+        src = zsh-autosuggestions;
         file = "share/zsh-autosuggestions/zsh-autosuggestions.zsh";
       }
       {
         name = "zsh-powerlevel10k";
-        src = pkgs.zsh-powerlevel10k;
+        src = zsh-powerlevel10k;
         file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
       }
       {
         name = "zsh-syntax-highlighting";
-        src = pkgs.zsh-syntax-highlighting;
+        src = zsh-syntax-highlighting;
         file = "share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
       }
     ];

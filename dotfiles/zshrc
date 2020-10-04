@@ -43,10 +43,6 @@ zle -N zle-line-init
 zle -N zle-line-deinit
 for key in $(bindkey | fgrep accept-line | sed 's/^"\([^"]*\)".*/\1/'); do bindkey $key zle-line-deinit; done
 
-if [[ -s ~/.nix-profile/share/autojump/autojump.zsh ]]; then
-  source ~/.nix-profile/share/autojump/autojump.zsh
-fi
-
 if [[ -e ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
