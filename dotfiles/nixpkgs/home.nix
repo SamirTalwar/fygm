@@ -69,9 +69,6 @@ with pkgs;
     git
     gnumake
     go
-    hugo
-    lorri
-    mercurial
     nixpkgs-fmt
     nodejs
     nodePackages.prettier
