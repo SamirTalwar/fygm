@@ -99,7 +99,13 @@ with pkgs;
 
   programs.zsh = {
     enable = true;
-    initExtra = "source ~/.zshrc.fygm";
+    initExtra =
+      ''source ~/.p10k.zsh
+        source ~/.zshrc.fygm
+        if [[ -e ~/.zshenv.local ]]; then
+          source ~/.zshenv.local
+        fi
+      '';
     plugins = [
       {
         name = "autojump";

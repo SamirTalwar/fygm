@@ -8,6 +8,11 @@ path=(
   $path
 )
 
+path=(~/bin/unix $path)
+if [[ "$OSTYPE" == darwin* ]]; then
+  path=(~/bin/mac $path)
+fi
+
 if [[ "$OSTYPE" == darwin* ]]; then
   export BROWSER='open'
 fi
@@ -16,17 +21,8 @@ export EDITOR='vim'
 export VISUAL='vim'
 export PAGER='less'
 
-if [[ "$(uname -s)" == 'Darwin' ]]; then
-  export NIX_IGNORE_SYMLINK_STORE=1
-fi
-
 if [[ -d ~/.nix-profile ]]; then
   source ~/.nix-profile/etc/profile.d/nix.sh
-fi
-
-path=(~/bin/unix $path)
-if [[ "$OSTYPE" == darwin* ]]; then
-  path=(~/bin/mac $path)
 fi
 
 if [[ -e ~/.zshenv.local ]]; then
