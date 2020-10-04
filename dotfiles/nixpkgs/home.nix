@@ -94,6 +94,7 @@ with pkgs;
 
   programs.fzf = {
     enable = true;
+    enableZshIntegration = true;
   };
 
   programs.zsh = {
@@ -102,21 +103,18 @@ with pkgs;
     plugins = [
       {
         name = "zsh-autosuggestions";
-        src = pkgs.fetchFromGitHub {
-          owner = "zsh-users";
-          repo = "zsh-autosuggestions";
-          rev = "v0.6.4";
-          sha256 = "0h52p2waggzfshvy1wvhj4hf06fmzd44bv6j18k3l9rcx6aixzn6";
-        };
+        src = pkgs.zsh-autosuggestions;
+        file = "share/zsh-autosuggestions/zsh-autosuggestions.zsh";
+      }
+      {
+        name = "zsh-powerlevel10k";
+        src = pkgs.zsh-powerlevel10k;
+        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
       }
       {
         name = "zsh-syntax-highlighting";
-        src = fetchFromGitHub {
-          owner = "zsh-users";
-          repo = "zsh-syntax-highlighting";
-          rev = "0.7.1";
-          sha256 = "03r6hpb5fy4yaakqm3lbf4xcvd408r44jgpv4lnzl9asp4sb9qc0";
-        };
+        src = pkgs.zsh-syntax-highlighting;
+        file = "share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
       }
     ];
   };
