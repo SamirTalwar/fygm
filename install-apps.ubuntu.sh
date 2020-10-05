@@ -32,6 +32,7 @@ apt_programs=(
 )
 
 snap_applications=(
+  vlc
 )
 
 snap_classic_applications=(
@@ -54,6 +55,6 @@ apt-get autoremove --purge --yes
 now 'Installing fonts and programs with Apt...'
 apt-get install --yes $apt_fonts $apt_programs
 
-# now 'Installing applications with Snap...'
-# snap install $snap_applications
+now 'Installing applications with Snap...'
+snap install $snap_applications
 # snap install --classic $snap_classic_applications
