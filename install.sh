@@ -16,6 +16,7 @@ links=(
   ~/bin $dir/bin
   ~/.config/alacritty/alacritty.yml $dotfiles/alacritty.yml
   ~/.config/i3 $dotfiles/i3
+  ~/.config/i3status $dotfiles/i3status
   ~/.config/nix/nix.conf $dotfiles/nix.conf
   ~/.config/nixpkgs/home.nix $dotfiles/nixpkgs/home.nix
   ~/.config/nvim/coc-settings.json $dotfiles/coc-settings.json
