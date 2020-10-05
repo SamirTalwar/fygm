@@ -14,22 +14,21 @@ source ${dir}/self-update.sh
 set -A links
 links=(
   ~/bin $dir/bin
-  ~/.emacs.d $dotfiles/emacs.d
-  ~/.ghc/ghci.conf $dotfiles/ghc/ghci.conf
-  ~/.gitconfig $dotfiles/gitconfig
-  ~/.gitignore $dotfiles/gitignore
-  ~/.i3 $dotfiles/i3
-  ~/.ideavimrc $dotfiles/ideavimrc
   ~/.config/alacritty/alacritty.yml $dotfiles/alacritty.yml
+  ~/.config/i3 $dotfiles/i3
   ~/.config/nix/nix.conf $dotfiles/nix.conf
   ~/.config/nixpkgs/home.nix $dotfiles/nixpkgs/home.nix
   ~/.config/nvim/coc-settings.json $dotfiles/coc-settings.json
   ~/.config/nvim/init.vim $dotfiles/vimrc
+  ~/.emacs.d $dotfiles/emacs.d
+  ~/.ghc/ghci.conf $dotfiles/ghc/ghci.conf
+  ~/.gitconfig $dotfiles/gitconfig
+  ~/.gitignore $dotfiles/gitignore
+  ~/.ideavimrc $dotfiles/ideavimrc
   ~/.p10k.zsh $dotfiles/p10k.zsh
-  ~/.powerlevel10k $dotfiles/powerlevel10k
   ~/.racketrc $dotfiles/racketrc
-  ~/.stack/config.yaml $dotfiles/stack/config.yaml
   ~/.spacemacs $dotfiles/spacemacs
+  ~/.stack/config.yaml $dotfiles/stack/config.yaml
   ~/.tmux.conf $dotfiles/tmux.conf
   ~/.vimrc $dotfiles/vimrc
   ~/.zshenv $dotfiles/zshenv
