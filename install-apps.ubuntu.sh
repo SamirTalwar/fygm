@@ -25,6 +25,7 @@ apt_programs=(
   # window management
   arandr
   i3
+  scrot
 
   # docker
   containerd.io
