@@ -14,8 +14,6 @@ set -A links
 links=(
   ~/bin $dir/bin
   ~/.config/alacritty/alacritty.yml $dotfiles/alacritty.yml
-  ~/.config/i3 $dotfiles/i3
-  ~/.config/i3status $dotfiles/i3status
   ~/.config/nix/nix.conf $dotfiles/nix.conf
   ~/.config/nixpkgs/home.nix $dotfiles/nixpkgs/home.nix
   ~/.config/nvim/coc-settings.json $dotfiles/coc-settings.json
@@ -34,6 +32,13 @@ links=(
   ~/.zshenv $dotfiles/zshenv
   ~/.zshrc.fygm $dotfiles/zshrc
 )
+
+if [[ $(uname -s) == 'Linux' ]]; then
+  links+=(
+    ~/.config/i3 $dotfiles/i3
+    ~/.config/i3status $dotfiles/i3status
+  )
+fi
 
 if [[ $(uname -s) == 'Darwin' ]]; then
   links+=(
