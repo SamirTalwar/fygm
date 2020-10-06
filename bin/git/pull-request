@@ -1,5 +1,5 @@
 #!/usr/bin/env nix-shell
-#!nix-shell -i runhaskell -p git ghc.withPackages(ps:\ with\ ps;\ [attoparsec\ process\ text])
+#!nix-shell -i runhaskell -p git ghc.withPackages(ps:\ with\ ps;\ [attoparsec\ directory\ process\ text])
 
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TupleSections #-}
@@ -14,6 +14,7 @@ import qualified Data.Maybe as Maybe
 import Data.Text (Text)
 import qualified Data.Text as Text
 import qualified Data.Text.IO as Text.IO
+import System.Directory (findExecutable)
 import System.Environment (getArgs)
 import System.Exit (ExitCode (..), exitFailure)
 import System.IO (stderr)
@@ -33,8 +34,12 @@ newtype Branch = Branch {unBranch :: Text}
 
 hosts = [GitHub, BitBucket, GitLab]
 
+openUrlExecutables :: [String]
+openUrlExecutables = ["xdg-open", "open"]
+
 main = do
   args <- getArgs
+  openUrl <- findOpenUrlExecutable
 
   maybeUrl <- maybeCaptureGit "config" ["--get", "remote.origin.url"]
   url <- case maybeUrl of
@@ -57,12 +62,18 @@ main = do
   git "first-push" args
 
   let prUrl = pullRequestUrl service hostname maybeUpstreamRepository repository mainBranch branch
-  callProcess "open" [Text.unpack prUrl]
+  Text.IO.putStrLn $ "Opening " <> prUrl <> " ..."
+  callProcess openUrl [Text.unpack prUrl]
 
 abort :: Text -> IO a
 abort message = do
   Text.IO.hPutStrLn stderr message
   exitFailure
+
+findOpenUrlExecutable :: IO FilePath
+findOpenUrlExecutable =
+  foldr1 (<|>) <$> mapM findExecutable openUrlExecutables >>=
+    maybe (abort "Could not find a way to open a URL.") return
 
 git :: String -> [String] -> IO ()
 git subcommand args =
