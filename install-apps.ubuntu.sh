@@ -20,6 +20,7 @@ apt_programs=(
   # applications
   firefox
   google-chrome-stable
+  zeal
 
   # window management
   arandr
