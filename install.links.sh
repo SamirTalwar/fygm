@@ -37,6 +37,7 @@ if [[ $(uname -s) == 'Linux' ]]; then
   links+=(
     ~/.config/i3 $dotfiles/i3
     ~/.config/i3status $dotfiles/i3status
+    ~/.Xmodmap $dotfiles/Xmodmap
   )
 fi
 

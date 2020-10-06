@@ -1,0 +1,2 @@
+! Use Caps Lock button for compose key
+keysym Caps_Lock = Multi_key Caps_Lock
