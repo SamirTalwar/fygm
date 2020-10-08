@@ -1,5 +1,5 @@
 #!/usr/bin/env nix-shell
-#!nix-shell -i runhaskell -p git ghc.withPackages(ps:\ with\ ps;\ [attoparsec\ directory\ process\ text])
+#!nix-shell -i runhaskell -p git ghc.withPackages(ps:\ with\ ps;\ [attoparsec\ directory\ http-types\ process\ text])
 
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TupleSections #-}
@@ -7,13 +7,18 @@
 import Control.Applicative (liftA2, (<|>))
 import Control.Monad (unless, when)
 import Data.Attoparsec.Text hiding (parse)
+import qualified Data.Binary.Builder
 import qualified Data.Char as Char
 import Data.Functor (($>))
 import qualified Data.List as List
 import qualified Data.Maybe as Maybe
 import Data.Text (Text)
 import qualified Data.Text as Text
+import qualified Data.Text.Encoding
 import qualified Data.Text.IO as Text.IO
+import qualified Data.Text.Lazy
+import qualified Data.Text.Lazy.Encoding
+import qualified Network.HTTP.Types.URI as URI
 import System.Directory (findExecutable)
 import System.Environment (getArgs)
 import System.Exit (ExitCode (..), exitFailure)
@@ -26,8 +31,11 @@ data Service = GitHub | BitBucket | GitLab
 newtype Hostname = Hostname {unHostname :: Text}
   deriving (Show)
 
-newtype Repository = Repository {unRepository :: Text}
+newtype Repository = Repository {repositorySegments :: [Text]}
   deriving (Show)
+
+unRepository :: Repository -> Text
+unRepository = Text.intercalate "/" . repositorySegments
 
 newtype Branch = Branch {unBranch :: Text}
   deriving (Eq, Show)
@@ -72,8 +80,8 @@ abort message = do
 
 findOpenUrlExecutable :: IO FilePath
 findOpenUrlExecutable =
-  foldr1 (<|>) <$> mapM findExecutable openUrlExecutables >>=
-    maybe (abort "Could not find a way to open a URL.") return
+  mapM findExecutable openUrlExecutables
+    >>= maybe (abort "Could not find a way to open a URL.") return . foldr1 (<|>)
 
 git :: String -> [String] -> IO ()
 git subcommand args =
@@ -91,20 +99,39 @@ pullRequestUrl :: Service -> Hostname -> Maybe Repository -> Repository -> Branc
 pullRequestUrl GitHub (Hostname hostname) maybeUpstreamRepository (Repository repository) (Branch mainBranch) (Branch branch) =
   case maybeUpstreamRepository of
     Nothing ->
-      "https://" <> hostname <> "/" <> repository <> "/compare/" <> branch <> "?expand=1"
+      "https://" <> hostname <> encodePath (repository ++ ["compare", branch]) [("expand", "1")]
     Just (Repository upstreamRepository) ->
-      let owner = head $ Text.split (== '/') repository
-       in "https://" <> hostname <> "/" <> upstreamRepository <> "/compare/" <> mainBranch <> "..." <> owner <> ":" <> branch <> "?expand=1"
+      let owner = head repository
+       in "https://" <> hostname
+            <> encodePath
+              (upstreamRepository ++ ["compare", mainBranch <> "..." <> owner <> ":" <> branch])
+              [("expand", "1")]
 pullRequestUrl BitBucket (Hostname hostname) maybeUpstreamRepository repository (Branch mainBranch) (Branch branch) =
-  "https://" <> hostname <> "/" <> unRepository (Maybe.fromMaybe repository maybeUpstreamRepository) <> "/pull-request/new?source=" <> unRepository repository <> "%3A%3A" <> branch <> "%3A%3A" <> mainBranch
+  "https://" <> hostname
+    <> encodePath
+      (repositorySegments (Maybe.fromMaybe repository maybeUpstreamRepository) ++ ["pull-request", "new"])
+      [("source", unRepository repository <> "::" <> branch <> "::" <> mainBranch)]
 pullRequestUrl GitLab (Hostname hostname) Nothing (Repository repository) mainBranch (Branch branch) =
-  "https://" <> hostname <> "/" <> repository <> "/merge_requests/new?utf8=✓&merge_request[source_branch]=" <> branch <> "&merge_request[target_branch]=" <> (unBranch (stripOrigin mainBranch))
+  "https://" <> hostname
+    <> encodePath
+      (repository ++ ["merge_requests", "new"])
+      [("merge_request[source_branch]", branch), ("merge_request[target_branch]", unBranch (stripOrigin mainBranch))]
 pullRequestUrl GitLab _ (Just _) _ _ _ =
   error "I don't know how to open a GitLab merge request against a different upstream repository."
 
+encodePath :: [Text] -> [(Text, Text)] -> Text
+encodePath path query =
+  Data.Text.Lazy.toStrict
+    . Data.Text.Lazy.Encoding.decodeUtf8
+    . Data.Binary.Builder.toLazyByteString
+    $ URI.encodePath path (encodeQuery query)
+  where
+    encodeQuery = map (uncurry encodeQueryParam)
+    encodeQueryParam name value = (Data.Text.Encoding.encodeUtf8 name, Just (Data.Text.Encoding.encodeUtf8 value))
+
 stripOrigin :: Branch -> Branch
 stripOrigin b@(Branch branch) =
-  Maybe.fromMaybe b (Branch <$> Text.stripPrefix "origin/" branch)
+  maybe b Branch (Text.stripPrefix "origin/" branch)
 
 -- Parsing
 
@@ -142,7 +169,7 @@ repository = do
   slash
   name <- identifier
   optionally (string ".git")
-  return $ Repository $ owner <> "/" <> name
+  return $ Repository [owner, name]
 
 identifier :: Parser Text
 identifier = takeWhile1 $ Char.isAlphaNum <||> (== '_') <||> (== '-')
