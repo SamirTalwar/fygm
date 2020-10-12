@@ -12,6 +12,8 @@ with pkgs;
     cachix
     niv
     nix-direnv
+    nix-prefetch-github
+    nix-prefetch-scripts
 
     # Core
     stdenv
