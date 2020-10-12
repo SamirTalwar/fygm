@@ -8,13 +8,16 @@ with pkgs;
   news.display = "silent";
 
   home.packages = [
+    # Nix
+    cachix
+    niv
+    nix-direnv
+
     # Core
     stdenv
     coreutils
     findutils
     moreutils
-    bash
-    curl
     dos2unix
     fd
     gawk
@@ -23,23 +26,11 @@ with pkgs;
     gnused
     hello
     htop
-    httpie
-    httping
     jq
-    lastpass-cli
     ncdu
-    netcat-gnu
-    openssh
     ripgrep
     sd
-    socat
     tree
-    wget
-
-    # Nix
-    cachix
-    niv
-    nix-direnv
 
     # Shell
     autojump
@@ -53,6 +44,18 @@ with pkgs;
     urlview
     watch
     zsh
+
+    # Networking
+    curl
+    httpie
+    httping
+    netcat-gnu
+    openssh
+    socat
+    wget
+
+    # Security
+    lastpass-cli
 
     # Image Manipulation
     imagemagick
