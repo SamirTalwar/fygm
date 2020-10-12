@@ -52,6 +52,7 @@ with pkgs;
     netcat-gnu
     openssh
     socat
+    traceroute
     wget
 
     # Security
