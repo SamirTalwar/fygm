@@ -54,7 +54,6 @@ with pkgs;
     netcat-gnu
     openssh
     socat
-    traceroute
     wget
 
     # Security
@@ -89,6 +88,7 @@ with pkgs;
       terminal-notifier
     ]
     else [
+      traceroute
       xclip
     ]
   );
