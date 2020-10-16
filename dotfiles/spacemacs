@@ -49,6 +49,7 @@ This function should only modify configuration layer settings."
      multiple-cursors
      emoji
      ;; languages
+     agda
      csv
      docker
      (elm :variables

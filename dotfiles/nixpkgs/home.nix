@@ -69,6 +69,7 @@ with pkgs;
     neovim
 
     # Development
+    agda
     cmake
     gcc
     git
