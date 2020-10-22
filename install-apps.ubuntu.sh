@@ -38,6 +38,7 @@ snap_applications=(
 )
 
 snap_classic_applications=(
+  code
 )
 
 now 'Setting up third-party Apt repositories...'
@@ -59,4 +60,6 @@ apt-get install --yes $apt_fonts $apt_programs
 
 now 'Installing applications with Snap...'
 snap install $snap_applications
-# snap install --classic $snap_classic_applications
+for app in $snap_classic_applications; do
+  snap install --classic $app
+done
