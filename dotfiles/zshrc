@@ -11,6 +11,13 @@ setopt histignorealldups share_history
 alias ll='ls -lh'
 alias la='ls -alh'
 
+# Call `title` after autojumping.
+functions[original_j]=$functions[j]
+function j {
+  original_j $@
+  title
+}
+
 # Fuzzy completion.
 zstyle ':completion:*' matcher-list \
   '' \
