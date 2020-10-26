@@ -104,6 +104,7 @@ with pkgs;
     ]
     else [
       alacritty
+      glibcLocales
       traceroute
       xclip
     ]

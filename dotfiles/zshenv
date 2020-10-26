@@ -23,6 +23,10 @@ export PAGER='less'
 
 if [[ -d ~/.nix-profile ]]; then
   source ~/.nix-profile/etc/profile.d/nix.sh
+
+  if [[ -e ~/.nix-profile/lib/locale ]]; then
+    export LOCALE_ARCHIVE="$(readlink ~/.nix-profile/lib/locale)/locale-archive"
+  fi
 fi
 
 if [[ -e ~/.zshenv.local ]]; then
