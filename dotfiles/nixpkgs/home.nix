@@ -52,6 +52,7 @@ with pkgs;
     httpie
     httping
     netcat-gnu
+    nettools
     openssh
     socat
     wget
