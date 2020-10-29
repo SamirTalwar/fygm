@@ -103,6 +103,7 @@ with pkgs;
     ]
     else [
       alacritty
+      emacs
       glibcLocales
       traceroute
       xclip
