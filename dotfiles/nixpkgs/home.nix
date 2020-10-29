@@ -84,7 +84,6 @@ with pkgs;
 
     # Development
     agda
-    cmake
     gcc
     git
     gnumake
