@@ -11,6 +11,10 @@ setopt histignorealldups share_history
 alias ll='ls -lh'
 alias la='ls -alh'
 
+# Make zsh-autosuggestions show up in a color that's actually visible.
+# (Useful for the Solarized theme.)
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=10
+
 # Call `title` after autojumping.
 functions[original_j]=$functions[j]
 function j {
