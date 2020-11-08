@@ -65,7 +65,6 @@ with pkgs;
     httpie
     httping
     netcat-gnu
-    nettools
     openssh
     socat
     wget
@@ -105,6 +104,7 @@ with pkgs;
       alacritty
       emacs
       glibcLocales
+      nettools
       traceroute
       xclip
     ]
