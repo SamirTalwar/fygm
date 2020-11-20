@@ -87,6 +87,7 @@ with pkgs;
     git
     gnumake
     go
+    metals
     nixpkgs-fmt
     nodejs
     nodePackages.prettier
