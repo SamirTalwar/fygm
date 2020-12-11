@@ -35,13 +35,13 @@
 	amend = commit --amend --no-edit
 	exec = "! bash -c \"$*\" #"
 	log-tree = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-	main-branch = ! git config branch.main || echo 'origin/main'
+	main = ! git config branch.main || echo 'origin/main'
 	name = ! git symbolic-ref --short HEAD 2> /dev/null || git rev-parse --short HEAD
 	pick-axe = log -p -S
 	praise = blame
 
 	add-all-and-commit = ! ~/bin/git/add-all-and-commit
-	checkout-master-and-update = ! ~/bin/git/checkout-master-and-update
+	checkout-main-and-update = ! ~/bin/git/checkout-main-and-update
 	delete-old-branches = ! ~/bin/git/delete-old-branches
 	delete-remote = ! ~/bin/git/delete-remote
 	dirs = ! ~/bin/git/dirs
@@ -51,16 +51,16 @@
 	pull-request = ! ~/bin/git/pull-request
 	switch-to = ! ~/bin/git/switch-to
 	sync = ! ~/bin/git/sync
-	update-master = ! ~/bin/git/update-master
+	update-main = ! ~/bin/git/update-main
 
 	a = add-all
 	c = commit --verbose
 	ac = add-all-and-commit
 	lg = log-tree
-	m = checkout-master-and-update
+	m = checkout-main-and-update
 	p = pull-everything
 	pr = pull-request
 	s = status
-	up = update-master
-	upm = ! git update-master && git merge $(git main-branch)
-	upr = ! git update-master && git rebase $(git main-branch)
+	up = update-main
+	upm = ! git update-main && git merge $(git main)
+	upr = ! git update-main && git rebase $(git main)

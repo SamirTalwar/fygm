@@ -63,7 +63,7 @@ main = do
   let maybeUpstreamRepository = fmap snd . flip parseUrl service =<< maybeUpstreamUrl
 
   branch <- Branch <$> captureGit "name" []
-  mainBranch <- Branch <$> captureGit "main-branch" []
+  mainBranch <- Branch <$> captureGit "main" []
   when (branch == mainBranch && Maybe.isNothing maybeUpstreamRepository) $
     abort $ "Do not work on the \"" <> unBranch mainBranch <> "\" branch."
 

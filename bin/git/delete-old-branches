@@ -4,10 +4,11 @@ set -e
 set -u
 set -o pipefail
 
-main_branch="$(git main-branch)"
+main_branch="$(git main)"
+unprefixed_main_branch="${main_branch//origin\//}"
 
 function remove-branches-in-use {
-  ( grep -E -v "^\*| ${main_branch}$| master$" || : ) | sed 's/^ *//'
+  ( grep -E -v "^\*| ${main_branch}$| ${unprefixed_main_branch}$" || : ) | sed 's/^ *//'
 }
 
 # Remove merged branches.
