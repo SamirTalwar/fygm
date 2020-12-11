@@ -62,5 +62,5 @@
 	pr = pull-request
 	s = status
 	up = update-main
-	upm = ! git update-main && git merge $(git main)
-	upr = ! git update-main && git rebase $(git main)
+	upm = update-main --merge
+	upr = update-main --rebase

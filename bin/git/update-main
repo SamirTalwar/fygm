@@ -3,6 +3,18 @@
 set -e
 set -u
 
+behavior='pull'
+case "${1:-}" in
+  '--merge')
+    behavior='merge'
+    shift
+    ;;
+  '--rebase')
+    behavior='rebase'
+    shift
+    ;;
+esac
+
 current_branch="$(git name)"
 main_branch="$(git main)"
 switched=false
@@ -22,6 +34,20 @@ if [[ "$current_branch" != "$main_branch" ]] && $switched && git show-ref --veri
   git checkout "$current_branch"
 fi
 
-if git symbolic-ref --quiet HEAD >&/dev/null; then
-  git pull-everything
-fi
+case "$behavior" in
+  pull)
+    if git symbolic-ref --quiet HEAD >&/dev/null; then
+      git pull-everything "$@"
+    fi
+    ;;
+  merge)
+    git merge "$main_branch" "$@"
+    ;;
+  rebase)
+    git rebase "$main_branch" "$@"
+    ;;
+  *)
+    echo >&2 "Error: invalid behavior \"${behavior}\"."
+    exit 1
+    ;;
+esac
