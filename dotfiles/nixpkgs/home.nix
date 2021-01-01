@@ -22,7 +22,6 @@ with pkgs;
 
   home.packages = [
     # Nix
-    cachix
     niv
     nix-direnv
     nix-prefetch-github
