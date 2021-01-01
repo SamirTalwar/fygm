@@ -32,16 +32,13 @@ applications=(
   dash
   discord
   docker
+  dropbox
   emacs-mac-spacemacs-icon
   firefox
-  jetbrains-toolbox
   google-chrome
   gpg-suite
-  keybase
   nordvpn
-  scroll-reverser
   sync
-  transmission
   visual-studio-code
   vlc
 )
