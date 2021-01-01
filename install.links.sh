@@ -4,6 +4,13 @@ set -e
 set -u
 set -o pipefail
 
+force=false
+symlink=(ln -s)
+if [[ ${1:-} == '--force' ]]; then
+  force=true
+  symlink+=(-f)
+fi
+
 dir=${0:A:h}
 dotfiles=${dir}/dotfiles
 macos_application_support="${HOME}/Library/Application Support"
@@ -50,13 +57,18 @@ fi
 now 'Symlinking files'
 for dest src in $links; do
   if [[ -e $dest ]]; then
-    if [[ $(readlink $dest) != $src ]]; then
+    if $force; then
+      echo >&2 "\"$dest\" already exists. Overwriting it."
+      echo >&2 $dest '->' $src
+      mkdir -p ${dest:h}
+      $symlink $src $dest
+    elif [[ $(readlink $dest) != $src ]]; then
       echo >&2 "\"$dest\" already exists."
       exit 1
     fi
   else
-    echo $dest '->' $src
+    echo >&2 $dest '->' $src
     mkdir -p ${dest:h}
-    ln -s $src $dest
+    $symlink $src $dest
   fi
 done
