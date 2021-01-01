@@ -37,6 +37,7 @@ applications=(
   google-chrome
   gpg-suite
   nordvpn
+  simplenote
   sync
   visual-studio-code
   vlc
