@@ -18,9 +18,8 @@ brew tap railwaycat/emacsmacport
 now 'Upgrading Homebrew packages'
 brew update
 brew upgrade
-brew cask upgrade
 
-installed_casks=($(brew cask list))
+installed_casks=($(brew list --cask))
 
 fonts=(
   font-fira-code
@@ -51,7 +50,7 @@ function cask_install {
     fi
   done
   if [[ ${#to_install} -gt 0 ]]; then
-    brew cask install $to_install
+    brew install $to_install
   fi
 }
 
