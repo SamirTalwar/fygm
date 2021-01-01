@@ -15,8 +15,8 @@ now 'Installing Nix'
 NIX_DIR="$(readlink /nix || echo /nix)"
 if [[ ! -e /nix/store ]]; then
   echo "Changing ownership of ${NIX_DIR} to ${USER}..."
-  sudo chown -R "${USER}:" $NIX_DIR
-  sh <(curl https://nixos.org/nix/install)
+  sudo chown "${USER}:" $NIX_DIR
+  sh <(curl -L https://nixos.org/nix/install)
 fi
 
 source ${HOME}/.nix-profile/etc/profile.d/nix.sh
