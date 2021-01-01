@@ -603,6 +603,9 @@ before packages are loaded."
   (use-package ponylang-mode
     :ensure t)
 
+  ;; Prolog: Use Prolog mode, not Perl mode.
+  (add-to-list 'auto-mode-alist '("\\.pl\\'" . prolog-mode))
+
   ;; Terraform: Format on save.
   (add-hook 'terraform-mode-hook 'terraform-format-on-save-mode)
 
