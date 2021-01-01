@@ -47,7 +47,7 @@ function cask_install {
   to_install=()
   for app in $@; do
     if [[ ${installed_casks[(ie)$app]} -gt ${#installed_casks} ]]; then
-      to_install+=($app)
+      to_install+=(homebrew/cask/$app)
     fi
   done
   if [[ ${#to_install} -gt 0 ]]; then
