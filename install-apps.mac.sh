@@ -35,7 +35,6 @@ applications=(
   emacs-mac-spacemacs-icon
   firefox
   google-chrome
-  gpg-suite
   nordvpn
   simplenote
   sync
