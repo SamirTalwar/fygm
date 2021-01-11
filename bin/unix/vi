@@ -3,4 +3,4 @@
 set -e
 set -u
 
-$(dirname $0)/vim $@
+exec $(dirname $0)/vim $@
