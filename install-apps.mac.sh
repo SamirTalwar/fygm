@@ -36,7 +36,7 @@ applications=(
   firefox
   google-chrome
   nordvpn
-  simplenote
+  signal
   sync
   visual-studio-code
   vlc
