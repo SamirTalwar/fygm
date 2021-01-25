@@ -41,9 +41,13 @@ if [[ $REGISTRY == 'index.docker.io' ]]; then
   fi
 
   TOKEN=$(http --check-status https://auth.docker.io/token 'service==registry.docker.io' "scope==repository:${NAME}:pull" | jq -r .token)
-  HEADERS+=("Authorization:Bearer ${TOKEN}")
+  HEADERS+=("Authorization: Bearer ${TOKEN}")
 elif [[ $REGISTRY =~ '^gcr\.io$|\.gcr\.io$' ]]; then
-  AUTH=(--auth "oauth2accesstoken:$(gcloud auth print-access-token)")
+  AUTH=(--auth "oauth2accesstoken: $(gcloud auth print-access-token)")
+elif [[ $REGISTRY =~ 'artifactory'  && -e ~/.docker/config.json ]]; then
+  if TOKEN=$(jq -r --arg registry $REGISTRY '.auths | .[$registry] | .auth' ~/.docker/config.json); then
+    HEADERS+=("Authorization: token ${TOKEN}")
+  fi
 fi
 
 TAG_JSON=$(http --check-status $AUTH "https://${REGISTRY}/v2/${NAME}/tags/list" $HEADERS)
