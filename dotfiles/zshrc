@@ -11,6 +11,11 @@ setopt histignorealldups share_history
 alias ll='ls -lh'
 alias la='ls -alh'
 
+if [[ "$OSTYPE" == linux* ]]; then
+  alias pbcopy='xclip -selection clipboard -i'
+  alias pbpaste='xclip -selection clipboard -o'
+fi
+
 # Make zsh-autosuggestions show up in a color that's actually visible.
 # (Useful for the Solarized theme.)
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=10
