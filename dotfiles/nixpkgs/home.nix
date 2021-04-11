@@ -97,12 +97,18 @@ with pkgs;
       terminal-notifier
     ]
     else [
-      alacritty
-      emacs
       glibcLocales
+
+      # On macOS, we use `pbcopy` and `pbpaste`.
+      xclip
+
+      # Network tools. On macOS, we use the built-in tools.
       nettools
       traceroute
-      xclip
+
+      # Installed by Homebrew on macOS.
+      alacritty
+      emacs
     ]
   );
 
