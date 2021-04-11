@@ -85,16 +85,12 @@ with pkgs;
     gcc
     git
     gnumake
-    go
-    metals
     nixpkgs-fmt
     nodejs
     nodePackages.prettier
-    openjdk11
     python3
     ruby
     shellcheck
-    yarn
   ] ++ (
     if stdenv.isDarwin
     then [
