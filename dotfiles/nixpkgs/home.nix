@@ -32,6 +32,7 @@ with pkgs;
     coreutils
     findutils
     moreutils
+    bat
     dos2unix
     fd
     gawk
