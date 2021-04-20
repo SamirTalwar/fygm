@@ -8,6 +8,7 @@ HISTSIZE=10000
 SAVEHIST=10000
 setopt histignorealldups share_history
 
+alias ls='\ls --color=auto'
 alias ll='ls -lh'
 alias la='ls -alh'
 
