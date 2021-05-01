@@ -1,16 +1,20 @@
+shell:
+  program: /Users/samir/.nix-profile/bin/tmux
+
 window:
   dimensions:
     columns: 120
     lines: 40
+
+  padding:
+    x: 1
+    y: 1
 
 font:
   normal:
     family: Dank Mono
 
   size: 14.0
-
-shell:
-  program: /Users/samir/.nix-profile/bin/tmux
 
 # Colors (Solarized Dark)
 colors:
