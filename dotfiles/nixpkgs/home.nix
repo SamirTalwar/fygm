@@ -92,6 +92,7 @@ with pkgs;
     python3
     ruby
     shellcheck
+    subversion
   ] ++ (
     if stdenv.isDarwin
     then [
