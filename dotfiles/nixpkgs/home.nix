@@ -111,6 +111,9 @@ with pkgs;
       # Installed by Homebrew on macOS.
       alacritty
       emacs
+
+      # Fonts.
+      iosevka
     ]
   );
 
