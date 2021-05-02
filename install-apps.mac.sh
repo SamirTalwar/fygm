@@ -5,9 +5,7 @@ set -u
 set -o pipefail
 
 fonts=(
-  font-fira-code
   font-iosevka
-  font-source-code-pro
 )
 
 brew_cli_programs=(
