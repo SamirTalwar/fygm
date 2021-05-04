@@ -2,15 +2,16 @@
 #!nix-shell -i zsh -p docker google-cloud-sdk httpie jq
 
 set -e
+set -u
 set -o pipefail
 
 APP=$0
 
 function usage {
-  echo >&2 "Usage: $APP [--json] [REGISTRY] NAME"
+  echo >&2 "Usage: $APP [--json] [REGISTRY]/NAME"
   echo >&2
   echo >&2 "e.g.    $APP busybox"
-  echo >&2 "  or    $APP gcr.io google_containers/pause-amd64"
+  echo >&2 "  or    $APP gcr.io/google_containers/pause-amd64"
 }
 
 if [[ $1 == '--json' ]]; then
@@ -20,26 +21,22 @@ else
   json=false
 fi
 
-case $# in
-  1) REGISTRY=index.docker.io
-     NAME=$1
-     ;;
-  2) REGISTRY=$1
-     NAME=$2
-     ;;
-  *) usage
-     exit 2
-     ;;
-esac
+IMAGE=$1
+if [[ $IMAGE != */* ]]; then
+  IMAGE="library/${IMAGE}"
+fi
+if [[ "${IMAGE%%/*}" != *.* ]]; then
+  REGISTRY=index.docker.io
+  NAME=$IMAGE
+else
+  REGISTRY="${IMAGE%%/*}"
+  NAME="${IMAGE#*/}"
+fi
 
 AUTH=()
 HEADERS=()
 
 if [[ $REGISTRY == 'index.docker.io' ]]; then
-  if [[ ! ($NAME =~ '/') ]]; then
-    NAME="library/${NAME}"
-  fi
-
   TOKEN=$(http --check-status https://auth.docker.io/token 'service==registry.docker.io' "scope==repository:${NAME}:pull" | jq -r .token)
   HEADERS+=("Authorization: Bearer ${TOKEN}")
 elif [[ $REGISTRY =~ '^gcr\.io$|\.gcr\.io$' ]]; then
