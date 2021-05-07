@@ -4,8 +4,9 @@ let
     (pkgs.fetchFromGitHub {
       owner = "guibou";
       repo = "nixGL";
-      rev = "fad15ba09de65fc58052df84b9f68fbc088e5e7c";
-      sha256 = "1wc5gfj5ymgm4gxx5pz4lkqp5vxqdk2njlbnrc1kmailgzj6f75h";
+      rev = "3ab1aae698dc45d11cc2699dd4e36de9cdc5aa4c";
+      sha256 = "192k02fd2s3mfpkdwjghiggcn0ighwvmw0fqrzf0vax52v6l9nch";
+      fetchSubmodules = true;
     })
     { }).nixGLDefault;
   alacritty = pkgs.writeScriptBin "alacritty" ''
