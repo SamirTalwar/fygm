@@ -13,10 +13,10 @@ set -o pipefail
 source ${0:A:h}/../../self-update.sh
 
 ALL_PACKAGE_MANAGERS=(
-  nix
   softwareupdate
   brew
   apt
+  nix
   sdk
   pip
   rvm
@@ -45,18 +45,6 @@ function run {
   $@
 }
 
-function update-nix {
-  if exists nix; then
-    run nix upgrade-nix
-    run nix-channel --update
-    if exists home-manager; then
-      run home-manager switch
-    else
-      run nix-env --upgrade
-    fi
-  fi
-}
-
 function update-softwareupdate {
   if exists softwareupdate; then
     run softwareupdate --install --all
@@ -76,6 +64,18 @@ function update-apt {
     run sudo apt-get update
     run sudo apt-get dist-upgrade --yes
     run sudo apt-get autoremove --purge --yes
+  fi
+}
+
+function update-nix {
+  if exists nix; then
+    run nix upgrade-nix
+    run nix-channel --update
+    if exists home-manager; then
+      run home-manager switch
+    else
+      run nix-env --upgrade
+    fi
   fi
 }
 
