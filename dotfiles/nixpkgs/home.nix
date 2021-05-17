@@ -133,9 +133,6 @@ with pkgs;
     initExtra =
       ''source ~/.p10k.zsh
         source ~/.zshrc.fygm
-        if [[ -e ~/.zshenv.local ]]; then
-          source ~/.zshenv.local
-        fi
       '';
     plugins = [
       {
