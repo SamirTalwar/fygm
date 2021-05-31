@@ -35,7 +35,7 @@
 	amend = commit --amend --no-edit
 	exec = "! bash -c \"$*\" #"
 	log-tree = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-	main = ! git config branch.main || echo 'origin/main'
+	main = config --get --default=origin/main branch.main
 	name = ! git symbolic-ref --short HEAD 2> /dev/null || git rev-parse --short HEAD
 	pick-axe = log -p -S
 	praise = blame
