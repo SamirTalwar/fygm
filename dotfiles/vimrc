@@ -39,7 +39,7 @@ nnoremap k gk
 set pastetoggle=<F2> " F2 toggles paste mode
 
 " Set up plugins
-call plug#begin()
+call plug#begin(stdpath('data') . '/plugged')
 
 " Asynchronous execution (required by ghcmod-vim)
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}

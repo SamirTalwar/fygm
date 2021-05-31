@@ -55,8 +55,7 @@ fi
 
 now 'Installing vim plugins'
 nvim_autoload=~/.config/nvim/autoload
-mkdir -p $nvim_autoload
-curl -fsSL -o $nvim_autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+curl -fLo $nvim_autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 nvim +PlugInstall +PlugUpdate +PlugClean! +qall
 
 now 'Installing tmux plugins'
