@@ -23,8 +23,8 @@ links=(
   ~/.config/alacritty/alacritty.yml $dotfiles/alacritty.yml
   ~/.config/nix/nix.conf $dotfiles/nix.conf
   ~/.config/nixpkgs/home.nix $dotfiles/nixpkgs/home.nix
-  ~/.config/nvim/coc-settings.json $dotfiles/coc-settings.json
-  ~/.config/nvim/init.vim $dotfiles/vimrc
+  ~/.config/nvim/coc-settings.json $dotfiles/nvim/coc-settings.json
+  ~/.config/nvim/init.vim $dotfiles/nvim/init.vim
   ~/.emacs.d $dotfiles/emacs.d
   ~/.ghc/ghci.conf $dotfiles/ghc/ghci.conf
   ~/.gitconfig $dotfiles/gitconfig
@@ -35,7 +35,6 @@ links=(
   ~/.spacemacs $dotfiles/spacemacs
   ~/.stack/config.yaml $dotfiles/stack/config.yaml
   ~/.tmux.conf $dotfiles/tmux.conf
-  ~/.vimrc $dotfiles/vimrc
   ~/.zshenv $dotfiles/zshenv
   ~/.zshrc.fygm $dotfiles/zshrc
 )
