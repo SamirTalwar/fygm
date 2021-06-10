@@ -12,6 +12,3 @@ if git symbolic-ref --quiet HEAD >& /dev/null; then
 else
   git fetch --all
 fi
-
-git submodule sync --recursive
-git submodule update --init --recursive

@@ -12,9 +12,6 @@ git fetch --all
 
 if git symbolic-ref --quiet HEAD > /dev/null; then
   git sync
-else
-  git submodule sync --recursive
-  git submodule update --init --recursive
 fi
 
 git delete-old-branches

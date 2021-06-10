@@ -14,23 +14,10 @@ function self-update {
     exit $exit_code
   fi
 
-  if ! [[ $output =~ '^Already up[ -]to[ -]date.$' ]]; then
+  if ! [[ $(<<< $output tail -1) =~ '^Already up[ -]to[ -]date.$' ]]; then
     echo "$output"
   else
     return 1
-  fi
-
-  output=$(cd $root && git submodule update --init --recursive 2>&1)
-  exit_code=$?
-  if [[ $exit_code -ne 0 ]]; then
-    echo '$ git submodule update --init --recursive'
-    echo "$output"
-    echo "Updating $root failed with status code $exit_code."
-    exit $exit_code
-  fi
-
-  if [[ -n $output ]]; then
-    echo "$output"
   fi
 }
 

@@ -5,6 +5,8 @@
 	excludesfile = ~/.gitignore
 	autocrlf = input
 	ignorecase = false
+[advice]
+	detachedHead = false
 [color]
 	ui = true
 [commit]
@@ -17,10 +19,10 @@
 	default = simple
 [pull]
 	ff = only
+[submodule]
+	recurse = true
 [transfer]
 	fsckObjects = true
-[advice]
-	detachedHead = false
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
