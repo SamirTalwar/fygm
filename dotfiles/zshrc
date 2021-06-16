@@ -17,6 +17,17 @@ if [[ "$OSTYPE" == linux* ]]; then
   alias pbpaste='xclip -selection clipboard -o'
 fi
 
+# Disable `git checkout` so I can get used to the new commands.
+ZSHRC_GIT=$(command -v git)
+function git {
+  local GIT_COMMAND
+  if [[ ${1:-} == 'checkout' ]]; then
+    echo >&2 'Do not use `git checkout`. Use `git restore` or `git switch` instead.'
+    return 2
+  fi
+  $ZSHRC_GIT $@
+}
+
 # Make zsh-autosuggestions show up in a color that's actually visible.
 # (Useful for the Solarized theme.)
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=10
