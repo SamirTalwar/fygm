@@ -42,9 +42,13 @@ case "$behavior" in
     ;;
   merge)
     git merge "$main_branch" "$@"
+    git submodule sync --recursive
+    git submodule update --init --recursive
     ;;
   rebase)
     git rebase "$main_branch" "$@"
+    git submodule sync --recursive
+    git submodule update --init --recursive
     ;;
   *)
     echo >&2 "Error: invalid behavior \"${behavior}\"."
