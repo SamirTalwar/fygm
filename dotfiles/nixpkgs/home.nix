@@ -86,6 +86,7 @@ with pkgs;
     agda
     gcc
     git
+    git-lfs
     gnumake
     nixpkgs-fmt
     nodejs
