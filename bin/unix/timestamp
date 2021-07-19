@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+set -e
+set -u
+
+while IFS=$'\n' read line; do
+  echo "[$(date --iso-8601=seconds)] $line"
+done
