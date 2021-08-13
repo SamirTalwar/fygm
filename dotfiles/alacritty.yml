@@ -1,6 +1,9 @@
 shell:
   program: /Users/samir/.nix-profile/bin/tmux
 
+env:
+  LD_LIBRARY_PATH: ""
+
 window:
   dimensions:
     columns: 120
