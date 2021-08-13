@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+
+set -e
+set -u
+
+if [[ $# -eq 0 ]]; then
+  echo >&2 'No command specified.'
+  exit 2
+fi
+
+log_file=$(mktemp -t $1.XXXXXXXXXX)
+nohup $@ >& $log_file &
+echo >&2 "Output is logged to: ${log_file}"
