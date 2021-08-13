@@ -18,9 +18,6 @@ fi
 
 if [[ -n ${TMUX:-} ]]; then
   tmux rename-window $title
-elif [[ $(uname -s) == 'Darwin' ]]; then
-  echo -n -e "\033]0;$title\007"
 else
-  echo >&2 'I have no idea how to rename this window.'
-  exit 1
+  echo -n -e "\033]0;$title\007"
 fi
