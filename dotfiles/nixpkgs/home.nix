@@ -84,6 +84,7 @@ with pkgs;
 
     # Development
     agda
+    delta
     gcc
     git
     git-lfs
