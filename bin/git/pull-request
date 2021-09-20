@@ -5,7 +5,7 @@
 {-# LANGUAGE TupleSections #-}
 
 import Control.Applicative (liftA2, (<|>))
-import Control.Monad (unless, when)
+import Control.Monad (mfilter, unless, when)
 import Data.Attoparsec.Text hiding (parse)
 import qualified Data.Binary.Builder
 import qualified Data.Char as Char
@@ -66,6 +66,11 @@ main = do
   mainBranch <- Branch <$> captureGit "main" []
   when (branch == mainBranch && Maybe.isNothing maybeUpstreamRepository) $
     abort $ "Do not work on the \"" <> unBranch mainBranch <> "\" branch."
+
+  username <- mfilter (not . Text.null) . Just <$> captureGit "config" ["--get", "--default", "", "branch.username"]
+  let expectedBranchPrefix = maybe "" (<> "/") username
+  unless (expectedBranchPrefix `isPrefixOfBranch` branch) $
+    abort $ "The branch name must start with \"" <> expectedBranchPrefix <> "\"."
 
   git "first-push" args
 
@@ -132,6 +137,9 @@ encodePath path query =
 stripOrigin :: Branch -> Branch
 stripOrigin b@(Branch branch) =
   maybe b Branch (Text.stripPrefix "origin/" branch)
+
+isPrefixOfBranch :: Text -> Branch -> Bool
+isPrefixOfBranch prefix (Branch branch) = prefix `Text.isPrefixOf` branch
 
 -- Parsing
 
