@@ -1,5 +1,14 @@
 #!/usr/bin/env zsh
 
 set -e
+set -u
+set -o pipefail
 
-docker ps -aq | xargs --no-run-if-empty docker stop | xargs --no-run-if-empty docker rm -v
+zparseopts -A opts t:
+
+stop_args=()
+if (( ${+opts[-t]} )); then
+  stop_args+=(-t ${opts[-t]})
+fi
+
+docker ps -aq | xargs --no-run-if-empty docker stop $stop_args | xargs --no-run-if-empty docker rm -v
