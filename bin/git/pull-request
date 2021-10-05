@@ -4,7 +4,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TupleSections #-}
 
-import Control.Applicative (liftA2, (<|>))
+import Control.Applicative (liftA2, optional, (<|>))
 import Control.Monad (mfilter, unless, when)
 import Data.Attoparsec.Text hiding (parse)
 import qualified Data.Binary.Builder
@@ -97,20 +97,16 @@ captureGit subcommand args = do
   Text.strip . Text.pack <$> readCreateProcess (proc "git" (subcommand : args)) ""
 
 maybeCaptureGit :: String -> [String] -> IO (Maybe Text)
-maybeCaptureGit subcommand args =
-  (Just <$> captureGit subcommand args) <|> pure Nothing
+maybeCaptureGit subcommand args = optional (captureGit subcommand args)
 
 pullRequestUrl :: Service -> Hostname -> Maybe Repository -> Repository -> Branch -> Branch -> Text
-pullRequestUrl GitHub (Hostname hostname) maybeUpstreamRepository (Repository repository) (Branch mainBranch) (Branch branch) =
-  case maybeUpstreamRepository of
-    Nothing ->
-      "https://" <> hostname <> encodePath (repository ++ ["compare", branch]) [("expand", "1")]
-    Just (Repository upstreamRepository) ->
-      let owner = head repository
-       in "https://" <> hostname
-            <> encodePath
-              (upstreamRepository ++ ["compare", mainBranch <> "..." <> owner <> ":" <> branch])
-              [("expand", "1")]
+pullRequestUrl GitHub (Hostname hostname) Nothing (Repository repository) (Branch mainBranch) (Branch branch) =
+  "https://" <> hostname <> encodePath (repository ++ ["compare", branch]) [("expand", "1")]
+pullRequestUrl GitHub (Hostname hostname) (Just (Repository upstreamRepository)) (Repository repository) mainBranch (Branch branch) =
+  let owner = head repository
+      path = ["compare", unBranch (stripOrigin mainBranch) <> "..." <> owner <> ":" <> branch]
+      query = [("expand", "1")]
+   in "https://" <> hostname <> encodePath (upstreamRepository ++ path) query
 pullRequestUrl BitBucket (Hostname hostname) maybeUpstreamRepository repository (Branch mainBranch) (Branch branch) =
   "https://" <> hostname
     <> encodePath
