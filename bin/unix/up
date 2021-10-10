@@ -183,6 +183,10 @@ function update-nvim-plug {
 function update-docker {
   local image filter
   if exists docker; then
+    # Fail fast if the Docker daemon isn't running.
+    if ! docker version >/dev/null; then
+      return 1
+    fi
     run docker-cleanup
     if [[ -e ~/.up-docker-filter ]]; then
       filter=$(cat ~/.up-docker-filter)
