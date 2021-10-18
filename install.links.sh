@@ -44,7 +44,6 @@ if [[ $(uname -s) == 'Linux' ]]; then
     ~/.config/fontconfig/fonts.conf $dotfiles/fonts.conf
     ~/.config/i3 $dotfiles/i3
     ~/.config/i3status $dotfiles/i3status
-    ~/.Xmodmap $dotfiles/Xmodmap
   )
 fi
 

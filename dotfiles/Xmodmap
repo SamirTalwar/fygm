@@ -1,3 +1,0 @@
-! Map the Caps Lock key to the Compose key.
-remove lock = Caps_Lock
-keycode 66 = Multi_key
