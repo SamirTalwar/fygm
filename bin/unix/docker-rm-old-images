@@ -1,7 +1,19 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env nix-shell
+#!nix-shell -i zsh -p coreutils docker findutils gawk
 
 set -e
 set -u
 set -o pipefail
 
-docker image ls | awk --assign=IMAGE=$1 '$1 == IMAGE { print $1 ":" $2 }' | tail +2 | xargs docker image rm
+if [[ $# -eq 0 ]]; then
+  echo >&2 "Usage: $0 IMAGE..."
+  exit 2
+fi
+
+for image in $@; do
+  echo >&2 "Removing old versions of ${image}..."
+  docker image ls \
+    | awk --assign=IMAGE=$image '$1 == IMAGE { print $1 ":" $2 }' \
+    | tail +2 \
+    | xargs --no-run-if-empty docker image rm
+done
