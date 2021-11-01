@@ -19,6 +19,7 @@ fi
 while true; do
   if [[ -f "${dir}/gradlew" ]]; then
     exec "${dir}/gradlew" \
+      -Dorg.gradle.workers.max="$(($(nproc) / 2))" \
       --parallel \
       --warning-mode=all \
       --console="$console" \
