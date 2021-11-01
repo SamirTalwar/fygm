@@ -10,9 +10,19 @@ set -u
 device_no=$(stat --format='%d' .)
 dir=$PWD
 
+if [[ -t 1 ]]; then
+  console='rich'
+else
+  console='auto'
+fi
+
 while true; do
   if [[ -f "${dir}/gradlew" ]]; then
-    exec "${dir}/gradlew" --parallel --warning-mode=all "$@"
+    exec "${dir}/gradlew" \
+      --parallel \
+      --warning-mode=all \
+      --console="$console" \
+      "$@"
   else
     next_dir=$(cd "${dir}/.." && pwd)
     if [[ $dir == $next_dir || $(stat --format='%d' .) != $device_no ]]; then
