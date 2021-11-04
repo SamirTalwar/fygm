@@ -23,6 +23,7 @@ brew_mac_applications=(
   firefox
   google-chrome
   nordvpn
+  notion
   signal
   sync
   visual-studio-code
