@@ -14,9 +14,16 @@ window:
     y: 1
 
 font:
+  size: 16
   normal:
-    family: Iosevka
-  size: 14.0
+    family: Iosevka Fixed
+    style: Light
+  bold:
+    style: Medium
+  italic:
+    style: Light Italic
+  bold_italic:
+    style: Medium Italic
 
 # Colors (Solarized Dark)
 colors:
