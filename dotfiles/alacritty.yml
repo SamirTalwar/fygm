@@ -16,7 +16,7 @@ window:
 font:
   size: 16
   normal:
-    family: Iosevka Fixed
+    family: Iosevka
     style: Light
   bold:
     style: Medium
