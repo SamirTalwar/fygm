@@ -69,7 +69,7 @@ function update-apt {
 
 function update-nix {
   if exists nix; then
-    run nix upgrade-nix
+    # run nix upgrade-nix
     run nix-channel --update
     if exists home-manager; then
       run home-manager switch
