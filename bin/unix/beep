@@ -6,30 +6,47 @@ set -u
 name='beep'
 
 function usage {
-  echo >&2 "Usage: ${name} [${name} ...]"
-  echo >&2 "   or: ${name} COUNT"
+  echo >&2 "Usage: ${name} [${name} ...] [--after COMMAND]"
+  echo >&2 "   or: ${name} COUNT [--after COMMAND]"
   echo >&2
   echo >&2 'The following examples beep 5 times:'
   echo >&2
   echo >&2 '    $ beep beep beep beep beep'
   echo >&2 '    $ beep 5'
+  echo >&2
+  echo >&2 'The following beeps 3 times after running a command:'
+  echo >&2
+  echo >&2 '    $ beep beep beep --after echo x y z'
   exit 2
 }
+
+command=(true)
 
 if [[ $# -eq 1 && $1 =~ '^[0-9]+$' ]]; then
   count=$1
 else
-  for arg in $@; do
-    if [[ $arg != $name ]]; then
+  while (( $# )); do
+    if [[ $1 == '--after' ]]; then
+      shift
+      command=($@)
+      set --
+    elif [[ $1 != $name ]]; then
       echo >&2 "I don't know how to \"${arg}\"."
       echo >&2
       usage
+    else
+      shift
     fi
   done
   count=$(( $# + 1 ))
 fi
 
+exit_status=0
+$command || exit_status=$?
+
 for arg in {1..$count}; do
   print -n '\a'
   sleep 0.5
 done
+
+exit $exit_status
