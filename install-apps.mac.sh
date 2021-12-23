@@ -22,7 +22,6 @@ brew_mac_applications=(
   emacs-mac-spacemacs-icon
   firefox
   google-chrome
-  nordvpn
   notion
   signal
   sync
