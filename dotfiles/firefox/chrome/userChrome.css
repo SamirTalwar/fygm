@@ -27,15 +27,11 @@
 
 /* Show the private browsing indicator in the bottom-left of the screen,
  * hovering over the sidebar or the webpage. */
-#TabsToolbar #titlebar-secondary-buttonbox {
+#TabsToolbar .private-browsing-indicator {
   position: fixed !important;
   display: block;
   bottom: 1em;
   left: 1em;
-}
-
-#TabsToolbar .private-browsing-indicator {
-  margin: 0;
 }
 
 /* Add padding to the toolbar. */
