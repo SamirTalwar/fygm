@@ -25,6 +25,7 @@ links=(
   ~/.config/nixpkgs/home.nix $dotfiles/nixpkgs/home.nix
   ~/.config/nvim/coc-settings.json $dotfiles/nvim/coc-settings.json
   ~/.config/nvim/init.vim $dotfiles/nvim/init.vim
+  ~/.config/sway/config $dotfiles/sway/config
   ~/.emacs.d $dotfiles/emacs.d
   ~/.ghc/ghci.conf $dotfiles/ghc/ghci.conf
   ~/.gitconfig $dotfiles/gitconfig
