@@ -22,7 +22,7 @@ export EDITOR='vim'
 export VISUAL='vim'
 export PAGER='less'
 
-if [[ -d ~/.nix-profile ]]; then
+if [[ -e ~/.nix-profile/etc/profile.d/nix.sh ]]; then
   source ~/.nix-profile/etc/profile.d/nix.sh
 
   if [[ -e ~/.nix-profile/lib/locale ]]; then

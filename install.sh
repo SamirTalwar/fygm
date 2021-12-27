@@ -19,13 +19,23 @@ if [[ ! -e /nix/store ]]; then
   sh <(curl -L https://nixos.org/nix/install)
 fi
 
-source ${HOME}/.nix-profile/etc/profile.d/nix.sh
-nix upgrade-nix
-nix-channel --add https://nixos.org/channels/nixpkgs-unstable
-nix-channel --add https://github.com/rycee/home-manager/archive/master.tar.gz home-manager
-nix-channel --update
+if [[ -e ${HOME}/.nix-profile/etc/profile.d/nix.sh ]]; then
+  source ${HOME}/.nix-profile/etc/profile.d/nix.sh
+fi
+if [[ $(uname -s) == 'Linux' && $(uname -v) =~ NixOS ]]; then
+  NIXOS_VERSION=$(nixos-version | sed -E 's/^([0-9]+\.[0-9]+).*/\1/')
+  nix-channel --add "https://nixos.org/channels/nixos-${NIXOS_VERSION}" nixpkgs
+  nix-channel --add "https://github.com/rycee/home-manager/archive/release-${NIXOS_VERSION}.tar.gz" home-manager
+  nix-channel --update
+else
+  nix upgrade-nix
+  nix-channel --add 'https://nixos.org/channels/nixpkgs-unstable' nixpkgs
+  nix-channel --add 'https://github.com/rycee/home-manager/archive/master.tar.gz' home-manager
+  nix-channel --update
+fi
 
 now 'Installing software with Nix'
+export NIX_PATH="${HOME}/.nix-defexpr/channels${NIX_PATH:+:}${NIX_PATH}"
 nix-env --upgrade
 nix-shell '<home-manager>' -A install
 home-manager switch
@@ -39,7 +49,7 @@ elif [[ $(uname -s) == 'Darwin' ]]; then
 fi
 
 NEW_SHELL="${HOME}/.nix-profile/bin/zsh"
-if [[ $(uname -s) == 'Linux' ]]; then
+if [[ $(uname -s) == 'Linux' && ! ( $(uname -v) =~ NixOS ) ]]; then
   now 'Configuring the user shell'
   CURRENT_SHELL=$( awk -F: -v user=$USER '$1 == user { print $NF }' /etc/passwd)
   if [[ $CURRENT_SHELL != $NEW_SHELL ]]; then
