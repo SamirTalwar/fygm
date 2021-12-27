@@ -117,9 +117,11 @@ with pkgs;
       emacs
 
       # Fonts.
+      font-awesome
       iosevka
 
       # UI tools.
+      waybar
       wofi
     ]
   );
