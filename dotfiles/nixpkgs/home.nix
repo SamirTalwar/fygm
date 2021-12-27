@@ -105,6 +105,8 @@ with pkgs;
       glibcLocales
 
       # On macOS, we use `pbcopy` and `pbpaste`.
+      # On Linux, we alias those commands to one of the below.
+      wl-clipboard
       xclip
 
       # Network tools. On macOS, we use the built-in tools.

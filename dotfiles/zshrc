@@ -12,10 +12,17 @@ alias ls='\ls --color=auto'
 alias ll='ls -lh'
 alias la='ls -alh'
 
-if [[ "$OSTYPE" == linux* ]]; then
-  alias pbcopy='xclip -selection clipboard -i'
-  alias pbpaste='xclip -selection clipboard -o'
-fi
+# On macOS, we use the built-in `pbcopy` and `pbpaste`.
+case ${XDG_SESSION_TYPE:-} in
+  wayland)
+    alias pbcopy=wl-copy
+    alias pbpaste=wl-paste
+    ;;
+  x11)
+    alias pbcopy='xclip -selection clipboard -i'
+    alias pbpaste='xclip -selection clipboard -o'
+    ;;
+esac
 
 # Disable `git checkout` so I can get used to the new commands.
 ZSHRC_GIT=$(command -v git)
