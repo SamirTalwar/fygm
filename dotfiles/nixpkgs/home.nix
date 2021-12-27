@@ -113,6 +113,7 @@ with pkgs;
 
       # Installed by Homebrew on macOS.
       alacritty
+      firefox
       emacs
 
       # Fonts.
