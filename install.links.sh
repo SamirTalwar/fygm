@@ -26,6 +26,7 @@ links=(
   ~/.config/nvim/coc-settings.json $dotfiles/nvim/coc-settings.json
   ~/.config/nvim/init.vim $dotfiles/nvim/init.vim
   ~/.config/sway/config $dotfiles/sway/config
+  ~/.config/wofi $dotfiles/wofi
   ~/.emacs.d $dotfiles/emacs.d
   ~/.ghc/ghci.conf $dotfiles/ghc/ghci.conf
   ~/.gitconfig $dotfiles/gitconfig

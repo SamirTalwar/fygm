@@ -117,6 +117,9 @@ with pkgs;
 
       # Fonts.
       iosevka
+
+      # UI tools.
+      wofi
     ]
   );
 

@@ -1,0 +1,37 @@
+window {
+  margin: 5px;
+  border: 2px solid white;
+  background-color: rgba(0x07, 0x36, 0x42, 0.8);
+}
+
+#input {
+  margin: 5px;
+  background: transparent;
+  color: white;
+}
+
+#inner-box {
+  margin: 5px;
+}
+
+#outer-box {
+  margin: 5px;
+  border: 2px transparent;
+}
+
+#scroll {
+  margin: 5px;
+}
+
+#text {
+  margin: 5px;
+  color: #93a1a1;
+}
+
+#entry:selected {
+  background-color: #586e75;
+}
+
+#text:selected {
+  color: #eee8d5;
+}
