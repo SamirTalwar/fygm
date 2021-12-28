@@ -108,11 +108,6 @@ with pkgs;
       nettools
       traceroute
 
-      # Installed by Homebrew on macOS.
-      alacritty
-      firefox
-      emacs
-
       # Fonts.
       font-awesome
       iosevka
@@ -120,6 +115,12 @@ with pkgs;
       # UI tools.
       waybar
       wofi
+
+      # Programs.
+      alacritty
+      emacs
+      firefox
+      gnome.nautilus
     ]
   );
 
