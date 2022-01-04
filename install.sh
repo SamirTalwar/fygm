@@ -28,7 +28,8 @@ if [[ $(uname -s) == 'Linux' && $(uname -v) =~ NixOS ]]; then
   nix-channel --add "https://github.com/rycee/home-manager/archive/release-${NIXOS_VERSION}.tar.gz" home-manager
   nix-channel --update
 else
-  nix upgrade-nix
+  # Nix 2.4 is not supported by Home Manager.
+  # nix upgrade-nix
   nix-channel --add 'https://nixos.org/channels/nixpkgs-unstable' nixpkgs
   nix-channel --add 'https://github.com/rycee/home-manager/archive/master.tar.gz' home-manager
   nix-channel --update
@@ -36,7 +37,6 @@ fi
 
 now 'Installing software with Nix'
 export NIX_PATH="${HOME}/.nix-defexpr/channels${NIX_PATH:+:}${NIX_PATH}"
-nix-env --upgrade
 nix-shell '<home-manager>' -A install
 home-manager switch
 
