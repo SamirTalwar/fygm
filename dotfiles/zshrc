@@ -12,6 +12,14 @@ alias ls='\ls --color=auto'
 alias ll='ls -lh'
 alias la='ls -alh'
 
+if [[ -d ~/.nix-profile/share/zsh/site-functions ]]; then
+  fpath=(
+    ~/.nix-profile/share/zsh/site-functions
+    $fpath
+  )
+  autoload -U compinit && compinit
+fi
+
 # On macOS, we use the built-in `pbcopy` and `pbpaste`.
 case ${XDG_SESSION_TYPE:-} in
   wayland)

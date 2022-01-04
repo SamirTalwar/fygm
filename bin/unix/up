@@ -69,8 +69,7 @@ function update-apt {
 
 function update-nix {
   if exists nix; then
-    # Nix 2.4 is not supported by Home Manager.
-    # run nix upgrade-nix
+    run nix upgrade-nix
     run nix-channel --update
     if exists home-manager; then
       NIX_PATH="${HOME}/.nix-defexpr/channels${NIX_PATH:+:}${NIX_PATH}" run home-manager switch

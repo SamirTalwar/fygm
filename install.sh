@@ -29,8 +29,7 @@ if [[ $(uname -s) == 'Linux' && $(uname -v) =~ NixOS ]]; then
   nix-channel --add 'https://github.com/guibou/nixGL/archive/main.tar.gz' nixgl
   nix-channel --update
 else
-  # Nix 2.4 is not supported by Home Manager.
-  # nix upgrade-nix
+  nix upgrade-nix
   nix-channel --add 'https://nixos.org/channels/nixpkgs-unstable' nixpkgs
   nix-channel --add 'https://github.com/rycee/home-manager/archive/master.tar.gz' home-manager
   nix-channel --add 'https://github.com/guibou/nixGL/archive/main.tar.gz' nixgl

@@ -137,6 +137,7 @@ with pkgs;
 
   programs.zsh = {
     enable = true;
+    enableCompletion = false;
     initExtra =
       ''source ~/.p10k.zsh
         source ~/.zshrc.fygm
