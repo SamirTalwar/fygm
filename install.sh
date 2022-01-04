@@ -26,12 +26,14 @@ if [[ $(uname -s) == 'Linux' && $(uname -v) =~ NixOS ]]; then
   NIXOS_VERSION=$(nixos-version | sed -E 's/^([0-9]+\.[0-9]+).*/\1/')
   nix-channel --add "https://nixos.org/channels/nixos-${NIXOS_VERSION}" nixpkgs
   nix-channel --add "https://github.com/rycee/home-manager/archive/release-${NIXOS_VERSION}.tar.gz" home-manager
+  nix-channel --add 'https://github.com/guibou/nixGL/archive/main.tar.gz' nixgl
   nix-channel --update
 else
   # Nix 2.4 is not supported by Home Manager.
   # nix upgrade-nix
   nix-channel --add 'https://nixos.org/channels/nixpkgs-unstable' nixpkgs
   nix-channel --add 'https://github.com/rycee/home-manager/archive/master.tar.gz' home-manager
+  nix-channel --add 'https://github.com/guibou/nixGL/archive/main.tar.gz' nixgl
   nix-channel --update
 fi
 

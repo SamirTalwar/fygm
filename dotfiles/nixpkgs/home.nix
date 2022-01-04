@@ -1,17 +1,12 @@
-{ config, pkgs, ... }:
+{ config
+, pkgs
+, ...
+}:
 let
-  nixGL = (import
-    (pkgs.fetchFromGitHub {
-      owner = "guibou";
-      repo = "nixGL";
-      rev = "3ab1aae698dc45d11cc2699dd4e36de9cdc5aa4c";
-      sha256 = "192k02fd2s3mfpkdwjghiggcn0ighwvmw0fqrzf0vax52v6l9nch";
-      fetchSubmodules = true;
-    })
-    { }).nixGLDefault;
+  nixgl = import <nixgl> { };
   alacritty = pkgs.writeScriptBin "alacritty" ''
     #!${pkgs.stdenv.shell}
-    exec ${nixGL}/bin/nixGL ${pkgs.alacritty}/bin/alacritty
+    exec ${nixgl.auto.nixGLDefault}/bin/nixGL ${pkgs.alacritty}/bin/alacritty
   '';
 in
 with pkgs;
