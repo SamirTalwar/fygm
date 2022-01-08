@@ -121,7 +121,7 @@ with pkgs;
 
       # Programs.
       alacritty
-      emacs
+      emacsPgtk
       firefox
       gnome.nautilus
     ]
