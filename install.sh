@@ -37,6 +37,11 @@ else
 fi
 
 now 'Installing software with Nix'
+if exists nixos-rebuild; then
+  sudo nixos-rebuild switch
+else
+  nix upgrade-nix
+fi
 export NIX_PATH="${HOME}/.nix-defexpr/channels${NIX_PATH:+:}${NIX_PATH}"
 nix-shell '<home-manager>' -A install
 home-manager switch
