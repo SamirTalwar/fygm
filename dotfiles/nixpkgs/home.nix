@@ -6,7 +6,7 @@ let
   nixgl = import <nixgl> { };
   alacritty = pkgs.writeScriptBin "alacritty" ''
     #!${pkgs.stdenv.shell}
-    exec ${nixgl.auto.nixGLDefault}/bin/nixGL ${pkgs.alacritty}/bin/alacritty
+    exec ${nixgl.auto.nixGLDefault}/bin/nixGL ${pkgs.alacritty}/bin/alacritty "$@"
   '';
 in
 with pkgs;
