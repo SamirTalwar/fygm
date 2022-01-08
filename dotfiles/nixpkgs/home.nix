@@ -112,7 +112,10 @@ with pkgs;
       font-awesome
       iosevka
 
-      # UI tools.
+      # Sway tools.
+      swaybg
+      swayidle
+      swaylock
       waybar
       wofi
 
