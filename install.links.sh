@@ -22,7 +22,7 @@ links=(
   ~/bin $dir/bin
   ~/.config/alacritty/alacritty.yml $dotfiles/alacritty.yml
   ~/.config/nix/nix.conf $dotfiles/nix.conf
-  ~/.config/nixpkgs/home.nix $dotfiles/nixpkgs/home.nix
+  ~/.config/nixpkgs $dotfiles/nixpkgs
   ~/.config/nvim/coc-settings.json $dotfiles/nvim/coc-settings.json
   ~/.config/nvim/init.vim $dotfiles/nvim/init.vim
   ~/.config/sway $dotfiles/sway
