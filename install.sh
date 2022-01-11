@@ -37,7 +37,7 @@ else
 fi
 
 now 'Installing software with Nix'
-if exists nixos-rebuild; then
+if command -v nixos-rebuild >/dev/null; then
   sudo nixos-rebuild switch
 else
   nix upgrade-nix
