@@ -42,7 +42,7 @@ if exists nixos-rebuild; then
 else
   nix upgrade-nix
 fi
-export NIX_PATH="${HOME}/.nix-defexpr/channels${NIX_PATH:+:}${NIX_PATH}"
+export NIX_PATH="${HOME}/.nix-defexpr/channels${NIX_PATH:+:}${NIX_PATH:-}"
 nix-shell '<home-manager>' -A install
 home-manager switch
 
