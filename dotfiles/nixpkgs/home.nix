@@ -78,7 +78,6 @@ with pkgs;
     neovim
 
     # Development
-    agda
     delta
     gcc
     git
