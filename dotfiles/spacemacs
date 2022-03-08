@@ -43,23 +43,17 @@ This function should only modify configuration layer settings."
      git
      github
      treemacs
-     spell-checking
      auto-completion
+     spell-checking
      syntax-checking
-     multiple-cursors
      emoji
      ;; languages
-     agda
      csv
      docker
-     (elm :variables
-          elm-sort-imports-on-save t
-          )
      emacs-lisp
      (go :variables
          go-tab-width 2
          )
-     graphviz
      (haskell :variables haskell-completion-backend 'lsp)
      html
      javascript
@@ -69,23 +63,15 @@ This function should only modify configuration layer settings."
                markdown-live-preview-engine 'vmd
                word-wrap t
                )
-     nginx
      nixos
      (node :variables
            node-add-modules-path t
            )
      prettier
-     protobuf
      python
-     react
-     ruby
      (rust :variables
            rust-format-on-save t
            )
-     (scala :variables
-            scala-backend 'scala-metals
-            )
-     swift
      terraform
      typescript
      yaml
@@ -102,9 +88,6 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages
    '(
      direnv
-     flycheck-swift
-     graphql-mode
-     ponylang-mode
      )
 
    ;; A list of packages that cannot be updated.
@@ -601,11 +584,9 @@ before packages are loaded."
   ;; Set the indent width to 2.
   (cl-loop for variable in '(
                              c-basic-offset
-                             coffee-tab-width
                              css-indent-offset
                              javascript-indent-level
                              js-indent-level
-                             ruby-indent-level
                              sh-basic-offset
                              standard-indent
                              tab-width
@@ -648,26 +629,16 @@ before packages are loaded."
     :config
     (direnv-mode))
 
-  ;; Elm: Format on save.
-  (custom-set-variables '(elm-format-on-save t))
-
   ;; Haskell: Use haskell-language-server.
   (use-package lsp-haskell
     :ensure t
     :config
     (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper"))
 
-  ;; Markdown: Render *.mdx files as Markdown.
-  (add-to-list 'auto-mode-alist '("\\.mdx\\'" . markdown-mode))
-
   ;; Nix Shell: Render files with a shebang of "nix-shell" as shell scripts.
   ;; This is obviously a pain when using nix-shell with a different interpreter,
   ;; but gets it right more often than not.
   (add-to-list 'interpreter-mode-alist '("nix-shell" . shell-script-mode))
-
-  ;; Pony: Use ponylang-mode.
-  (use-package ponylang-mode
-    :ensure t)
 
   ;; Prolog: Use Prolog mode, not Perl mode.
   (add-to-list 'auto-mode-alist '("\\.pl\\'" . prolog-mode))
