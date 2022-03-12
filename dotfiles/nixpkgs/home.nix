@@ -141,6 +141,9 @@ with pkgs;
   programs.zsh = {
     enable = true;
     enableCompletion = false;
+    envExtra =
+      ''source ~/.zshenv.fygm
+      '';
     initExtra =
       ''source ~/.p10k.zsh
         source ~/.zshrc.fygm

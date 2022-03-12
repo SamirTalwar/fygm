@@ -37,7 +37,7 @@ links=(
   ~/.spacemacs $dotfiles/spacemacs
   ~/.stack/config.yaml $dotfiles/stack/config.yaml
   ~/.tmux.conf $dotfiles/tmux.conf
-  ~/.zshenv $dotfiles/zshenv
+  ~/.zshenv.fygm $dotfiles/zshenv
   ~/.zshrc.fygm $dotfiles/zshrc
 )
 
