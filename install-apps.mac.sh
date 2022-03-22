@@ -20,7 +20,7 @@ brew_mac_applications=(
   docker
   dropbox
   emacs-mac-spacemacs-icon
-  firefox
+  firefox-developer-edition
   google-chrome
   notion
   signal
@@ -45,6 +45,7 @@ fi
 
 now 'Tapping'
 brew tap homebrew/cask-fonts
+brew tap homebrew/cask-versions
 brew tap railwaycat/emacsmacport
 
 now 'Upgrading Homebrew packages'
@@ -57,11 +58,11 @@ function brew_cask_install {
   to_install=()
   for app in $@; do
     if [[ ${installed_casks[(ie)$app]} -gt ${#installed_casks} ]]; then
-      to_install+=(homebrew/cask/$app)
+      to_install+=($app)
     fi
   done
   if [[ ${#to_install} -gt 0 ]]; then
-    brew install $to_install
+    brew install --cask $to_install
   fi
 }
 
