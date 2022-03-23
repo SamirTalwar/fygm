@@ -121,7 +121,7 @@ with pkgs;
       # Programs.
       alacritty
       emacsPgtk
-      firefox
+      firefox-devedition-bin
       gnome.nautilus
     ]
   );
