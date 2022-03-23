@@ -5,8 +5,5 @@ templates:
     copyright: Samir Talwar
     github-username: SamirTalwar
 
-ghc-options:
-  $everything: -pgma clang -pgmc clang
-
 nix:
   enable: true
