@@ -4,10 +4,22 @@
 }:
 let
   nixgl = import <nixgl> { };
-  alacritty = pkgs.writeScriptBin "alacritty" ''
-    #!${pkgs.stdenv.shell}
-    exec ${nixgl.auto.nixGLDefault}/bin/nixGL ${pkgs.alacritty}/bin/alacritty "$@"
-  '';
+  alacritty = pkgs.stdenv.mkDerivation {
+    name = pkgs.alacritty.name;
+    version = pkgs.alacritty.version;
+    src = pkgs.alacritty.src;
+    buildInputs = [ pkgs.alacritty ];
+    buildPhase = "true";
+    installPhase = ''
+      cp -R --no-preserve=mode ${pkgs.alacritty} $out
+      rm $out/bin/alacritty
+      (
+        echo '#!${pkgs.stdenv.shell}'
+        echo 'exec ${nixgl.auto.nixGLDefault}/bin/nixGL ${pkgs.alacritty}/bin/alacritty "$@"'
+      ) > $out/bin/alacritty
+      chmod +x $out/bin/alacritty
+    '';
+  };
 in
 with pkgs;
 {
