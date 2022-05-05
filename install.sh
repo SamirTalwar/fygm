@@ -14,8 +14,6 @@ ${dir}/install.links.sh
 now 'Installing Nix'
 NIX_DIR="$(readlink /nix || echo /nix)"
 if [[ ! -e /nix/store ]]; then
-  echo "Changing ownership of ${NIX_DIR} to ${USER}..."
-  sudo chown "${USER}:" $NIX_DIR
   sh <(curl -L https://nixos.org/nix/install)
 fi
 
