@@ -134,9 +134,12 @@ with pkgs;
       alacritty
       emacsPgtk
       firefox-devedition-bin
-      gnome.nautilus
     ]
   );
+
+  programs.bash = {
+    enable = true;
+  };
 
   programs.direnv = {
     enable = true;
@@ -183,4 +186,9 @@ with pkgs;
       }
     ];
   };
+
+  targets.genericLinux.enable = true;
+
+  xdg.enable = true;
+  xdg.mime.enable = true;
 }
