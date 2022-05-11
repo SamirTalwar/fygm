@@ -19,13 +19,15 @@ apt_fonts=(
 apt_programs=(
   # applications
   firefox
-  google-chrome-stable
   zeal
 
   # window management
-  arandr
-  i3
-  scrot
+  sway
+  swaybg
+  swayidle
+  swaylock
+  waybar
+  wofi
 
   # docker
   containerd.io
