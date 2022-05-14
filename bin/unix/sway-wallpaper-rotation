@@ -1,0 +1,27 @@
+#!/usr/bin/env zsh
+
+set -e
+set -u
+set -o pipefail
+
+if ! (( ${+WALLPAPERS_DIR} )); then
+  echo >&2 'No wallpapers directory set.'
+  exit 2
+fi
+
+ROTATION_WINDOW=$((30 * 60)) # 30 minutes
+
+ps -o pid,args -C zsh | awk "\$1 != $$ && \$0 ~ \"zsh $0\" { print \$1 }" | xargs --no-run-if-empty kill
+
+done=false
+sleep_pid=0
+trap 'done=true; if (( $sleep_pid )); then kill $sleep_pid; fi' EXIT INT TERM
+
+while ! $done; do
+  wallpaper="${WALLPAPERS_DIR}/$(ls --quoting-style=shell-escape ${WALLPAPERS_DIR} | shuf -n1)"
+  echo >&2 $wallpaper
+  swaymsg "output * bg $wallpaper fill"
+  sleep_amount=$((ROTATION_WINDOW - ($(date '+%s') % ROTATION_WINDOW)))
+  sleep $sleep_amount & sleep_pid=$!
+  wait $sleep_pid
+done

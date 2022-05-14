@@ -23,11 +23,10 @@ set $term $bin/alacritty
 set $menu '. ~/.nix-profile/etc/profile.d/hm-session-vars.sh; $bin/wofi --show=drun --width=640 --lines=10 --prompt=""'
 
 include /etc/sway/config-vars.d/*
+include ~/.config/sway/vars
 
 ### Output configuration
 #
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 #
 # Example configuration:
 #
@@ -203,6 +202,9 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
+
+# Set the wallpaper and rotate it regularly.
+exec_always WALLPAPERS_DIR=$wallpapers_dir ~/bin/unix/sway-wallpaper-rotation
 
 #
 # Status Bar:
