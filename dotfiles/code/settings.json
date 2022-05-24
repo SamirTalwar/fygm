@@ -1,6 +1,6 @@
 {
   "editor.acceptSuggestionOnCommitCharacter": false,
-  "editor.fontFamily": "'Fira Code', Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontFamily": "Iosevka, 'Fira Code', Menlo, Monaco, 'Courier New', monospace",
   "editor.fontLigatures": true,
   "editor.fontSize": 14,
   "editor.formatOnSave": true,
