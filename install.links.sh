@@ -43,6 +43,7 @@ links=(
 
 if [[ $(uname -s) == 'Linux' ]]; then
   links+=(
+    ~/.config/Code/User/settings.json $dotfiles/code/settings.json
     ~/.config/fontconfig/fonts.conf $dotfiles/fonts.conf
     ~/.config/i3 $dotfiles/i3
     ~/.config/i3status $dotfiles/i3status
