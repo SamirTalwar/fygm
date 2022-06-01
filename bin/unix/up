@@ -72,8 +72,6 @@ function update-nix {
     run nix-channel --update
     if exists nixos-rebuild; then
       run sudo nixos-rebuild switch
-    else
-      run nix upgrade-nix
     fi
     if exists home-manager; then
       NIX_PATH="${HOME}/.nix-defexpr/channels${NIX_PATH:+:}${NIX_PATH:-}" run home-manager switch

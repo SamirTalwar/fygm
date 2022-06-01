@@ -14,7 +14,7 @@ ${dir}/install.links.sh
 now 'Installing Nix'
 NIX_DIR="$(readlink /nix || echo /nix)"
 if [[ ! -e /nix/store ]]; then
-  sh <(curl -L https://nixos.org/nix/install)
+  sh <(curl -L https://nixos.org/nix/install) --daemon
 fi
 
 if [[ -e ${HOME}/.nix-profile/etc/profile.d/nix.sh ]]; then
@@ -27,7 +27,6 @@ if [[ $(uname -s) == 'Linux' && $(uname -v) =~ NixOS ]]; then
   nix-channel --add 'https://github.com/guibou/nixGL/archive/main.tar.gz' nixgl
   nix-channel --update
 else
-  nix upgrade-nix
   nix-channel --add 'https://nixos.org/channels/nixpkgs-unstable' nixpkgs
   nix-channel --add 'https://github.com/rycee/home-manager/archive/master.tar.gz' home-manager
   nix-channel --add 'https://github.com/guibou/nixGL/archive/main.tar.gz' nixgl
@@ -37,8 +36,6 @@ fi
 now 'Installing software with Nix'
 if command -v nixos-rebuild >/dev/null; then
   sudo nixos-rebuild switch
-else
-  nix upgrade-nix
 fi
 export NIX_PATH="${HOME}/.nix-defexpr/channels${NIX_PATH:+:}${NIX_PATH:-}"
 nix-shell '<home-manager>' -A install
