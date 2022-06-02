@@ -21,12 +21,12 @@ apt_programs=(
   zeal
 
   # window management
+  slurp
   sway
   swaybg
   swayidle
   swaylock
-  waybar
-  wofi
+  xdg-desktop-portal-wlr
 
   # docker
   containerd.io

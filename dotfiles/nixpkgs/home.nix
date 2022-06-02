@@ -125,9 +125,6 @@ with pkgs;
       iosevka
 
       # Sway tools.
-      swaybg
-      swayidle
-      swaylock
       waybar
       wofi
 
