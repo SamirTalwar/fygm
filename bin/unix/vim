@@ -10,23 +10,15 @@ fi
 
 found=false
 if (( ${+commands[nvim]} )); then
-  nvim=${commands[nvim]}
-  cmd+=($nvim)
-  path=(${nvim:h} $path)
+  vim=${commands[nvim]}
+  cmd+=($vim)
+  path=(${vim:h} $path)
   found=true
 else
-  for dir in $path; do
-    if [[ -x "$dir/vim" && "$dir/vim" != $0 ]]; then
-      cmd+=("$dir/vim")
-      found=true
-      break
-    fi
-  done
-fi
-
-if ! $found; then
-  echo 'Could not find "vim".'
-  exit 1
+  if vim=$(find-prog vim $0); then
+    cmd+=($vim)
+    found=true
+  fi
 fi
 
 exec ${cmd[@]} $@

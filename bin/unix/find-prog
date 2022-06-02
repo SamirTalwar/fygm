@@ -1,0 +1,22 @@
+#!/usr/bin/env zsh
+
+set -e
+set -u
+
+search=$1
+ignore=${2:-}
+
+for dir in $path; do
+  attempt="$dir/$search"
+  if [[ -x $attempt && $attempt != $ignore ]]; then
+    result=$attempt
+    break
+  fi
+done
+
+if ! (( ${+result} )); then
+  echo >&2 "Could not find \"$search\"."
+  exit 1
+fi
+
+echo $result
