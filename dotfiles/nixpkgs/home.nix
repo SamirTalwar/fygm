@@ -31,6 +31,7 @@ with pkgs;
   home.packages = [
     # Nix
     niv
+    nix
     nix-direnv
     nix-prefetch-github
     nix-prefetch-scripts
