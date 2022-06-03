@@ -32,6 +32,7 @@ apt_programs=(
   containerd.io
   docker-ce
   docker-ce-cli
+  docker-compose-plugin
 )
 
 snap_applications=(
@@ -42,10 +43,15 @@ snap_classic_applications=(
   code
 )
 
-now 'Setting up third-party Apt repositories...'
-# Docker
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-add-apt-repository --no-update "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+now 'Setting up the Docker repository...'
+mkdir -p /etc/apt/keyrings /etc/apt/sources.list.d
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
+  | sudo gpg --batch --yes --dearmor -o /etc/apt/keyrings/docker.gpg
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
+  | sudo tee /etc/apt/sources.list.d/docker.list \
+  > /dev/null
+groupadd docker || :
 
 now 'Upgrading packages...'
 apt-get update
