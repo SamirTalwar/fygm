@@ -68,3 +68,8 @@ done
 for app in $snap_classic_applications; do
   snap install --classic $app
 done
+
+now 'Setting up Sway + fixes...'
+cp -fv ubuntu/sway/sway-plus-fixes /usr/local/bin/
+chmod +x /usr/local/bin/sway-plus-fixes
+cp -fv ubuntu/sway/sway-plus-fixes.desktop /usr/share/wayland-sessions/

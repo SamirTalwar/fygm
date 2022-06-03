@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -e
+set -u
+
+export MOZ_ENABLE_WAYLAND=1
+
+# shellcheck disable=SC2046
+export $(gnome-keyring-daemon --start)
+
+exec sway
