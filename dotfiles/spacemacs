@@ -41,7 +41,6 @@ This function should only modify configuration layer settings."
      helm
      version-control
      git
-     github
      treemacs
      auto-completion
      spell-checking
