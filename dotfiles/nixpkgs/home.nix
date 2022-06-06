@@ -185,8 +185,8 @@ with pkgs;
     ];
   };
 
-  targets.genericLinux.enable = true;
+  targets.genericLinux.enable = !stdenv.isDarwin;
 
-  xdg.enable = true;
-  xdg.mime.enable = true;
+  xdg.enable = !stdenv.isDarwin;
+  xdg.mime.enable = !stdenv.isDarwin;
 }
