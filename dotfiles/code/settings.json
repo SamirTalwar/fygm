@@ -14,6 +14,10 @@
   "git.allowForcePush": true,
   "git.alwaysShowStagedChangesResourceGroup": true,
   "git.autofetch": true,
+  "git.enableCommitSigning": true,
+  "git.fetchOnPull": true,
+  "git.inputValidation": "always",
   "git.inputValidationSubjectLength": null,
-  "window.zoomLevel": 0
+  "haskell.manageHLS": "PATH",
+  "window.zoomLevel": 1
 }
