@@ -53,10 +53,14 @@ This function should only modify configuration layer settings."
      (go :variables
          go-tab-width 2
          )
-     (haskell :variables haskell-completion-backend 'lsp)
+     (haskell :variables
+              haskell-completion-backend 'lsp
+              )
      html
      javascript
-     lsp
+     (lsp :variables
+          lsp-file-watch-threshold' 5000
+          )
      (markdown :variables
                markdown-command "pandoc --from=markdown"
                markdown-live-preview-engine 'vmd
