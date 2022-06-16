@@ -710,7 +710,6 @@ This function is called at the very end of Spacemacs initialization."
      (javascript-backend . lsp)
      (go-backend . go-mode)
      (go-backend . lsp)))
- '(scroll-margin 5)
  '(sh-basic-offset 2)
  '(standard-indent 2)
  '(tab-width 2)
@@ -724,5 +723,6 @@ This function is called at the very end of Spacemacs initialization."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((((class color) (min-colors 89)) (:foreground "#839496" :background "#002b36"))))
+ '(highlight-parentheses-highlight ((nil (:weight ultra-bold))) t)
  '(markdown-code-face ((t (:inherit nil :foreground "#586e75")))))
 )
