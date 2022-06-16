@@ -33,6 +33,7 @@
 	diffFilter = delta --color-only --features=interactive
 [delta]
 	features = decorations
+	wrap-max-lines = unlimited
 [delta "decorations"]
 	side-by-side = true
 
