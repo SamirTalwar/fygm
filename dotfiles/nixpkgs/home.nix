@@ -23,10 +23,9 @@ let
 in
 with pkgs;
 {
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
-
   news.display = "silent";
+
+  home.stateVersion = "18.09";
 
   home.packages = [
     # Nix
@@ -135,6 +134,9 @@ with pkgs;
     ]
   );
 
+  # Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
+
   programs.bash = {
     enable = true;
   };
@@ -185,8 +187,8 @@ with pkgs;
     ];
   };
 
-  targets.genericLinux.enable = !stdenv.isDarwin;
+  targets.genericLinux.enable = stdenv.isLinux;
 
-  xdg.enable = !stdenv.isDarwin;
-  xdg.mime.enable = !stdenv.isDarwin;
+  xdg.enable = stdenv.isLinux;
+  xdg.mime.enable = stdenv.isLinux;
 }
