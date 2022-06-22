@@ -3,5 +3,17 @@
 set -e
 set -u
 
+branch="$(git name)"
+
+git fetch origin
+
+remote_commit="$(git show --format='%H' --no-patch "origin/${branch}")"
+local_commit="$(git show --format='%H' --no-patch)"
+
+if [[ "$remote_commit" != "$local_commit" ]]; then
+  echo >&2 'Local branch is not up-to-date with the remote branch; aborting.'
+  exit 1
+fi
+
 git push --no-verify --delete origin "$(git name)" "$@"
 git branch --unset-upstream
