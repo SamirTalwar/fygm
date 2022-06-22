@@ -124,6 +124,7 @@ with pkgs;
       iosevka
 
       # Sway tools.
+      swaynotificationcenter
       waybar
       wofi
 
