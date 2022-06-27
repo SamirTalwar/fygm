@@ -210,6 +210,9 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+bindsym $mod+Shift+z resize set width 33ppt
+bindsym $mod+Shift+x resize set width 40ppt
+
 bindsym $mod+Ctrl+Alt+Shift+Equal exec systemctl suspend
 
 # Set the wallpaper and rotate it regularly.
