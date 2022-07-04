@@ -70,6 +70,7 @@ function update-apt {
 function update-nix {
   if exists nix; then
     run nix-channel --update
+    run nix registry pin nixpkgs
     if exists nixos-rebuild; then
       run sudo nixos-rebuild switch
     fi
