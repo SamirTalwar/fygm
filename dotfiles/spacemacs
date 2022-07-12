@@ -43,7 +43,8 @@ This function should only modify configuration layer settings."
      git
      treemacs
      auto-completion
-     spell-checking
+     (spell-checking :variables
+                     spell-checking-enable-by-default nil)
      syntax-checking
      emoji
      ;; languages
