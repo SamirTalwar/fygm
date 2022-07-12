@@ -90,7 +90,7 @@ with pkgs;
     neovim
 
     # Development
-    delta
+    difftastic # git diffs
     gcc
     git
     git-lfs

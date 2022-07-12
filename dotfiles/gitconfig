@@ -11,6 +11,8 @@
 	ui = true
 [commit]
 	gpgsign = true
+[diff]
+	external = difft
 [init]
 	defaultBranch = main
 [fetch]
@@ -23,19 +25,6 @@
 	recurse = true
 [transfer]
 	fsckObjects = true
-
-[pager]
-	diff = delta
-	log = delta
-	reflog = delta
-	show = delta
-[interactive]
-	diffFilter = delta --color-only --features=interactive
-[delta]
-	features = decorations
-	wrap-max-lines = unlimited
-[delta "decorations"]
-	side-by-side = true
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f

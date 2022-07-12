@@ -33,14 +33,27 @@ case ${XDG_SESSION_TYPE:-} in
 esac
 
 # Disable `git checkout` so I can get used to the new commands.
+# Always pass `--ext-diff` to the commands that accept it.
 ZSHRC_GIT=$(command -v git)
 function git {
-  local GIT_COMMAND
-  if [[ ${1:-} == 'checkout' ]]; then
-    echo >&2 'Do not use `git checkout`. Use `git restore` or `git switch` instead.'
-    return 2
+  local git_subcommand git_args
+  if [[ $# -eq 0 ]]; then
+    $ZSHRC_GIT
+    return $?
   fi
-  $ZSHRC_GIT $@
+  git_subcommand=$1
+  shift
+  git_args=($@)
+  case $git_subcommand in
+    checkout)
+      echo >&2 'Do not use `git checkout`. Use `git restore` or `git switch` instead.'
+      return 2
+      ;;
+    log|show)
+      git_args=(--ext-diff ${git_args[@]})
+      ;;
+  esac
+  $ZSHRC_GIT $git_subcommand ${git_args[@]}
 }
 
 # Make zsh-autosuggestions show up in a color that's actually visible.
