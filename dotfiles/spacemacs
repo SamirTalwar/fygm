@@ -608,12 +608,6 @@ before packages are loaded."
   ;; Scroll when the cursor is close to the window border.
   (custom-set-variables '(scroll-margin 5))
 
-  ;; Disable confirmations.
-  (custom-set-variables
-   '(magit-no-confirm (quote (stage-all-changes unstage-all-changes)))
-   '(neo-confirm-create-directory (quote off-p))
-   '(neo-confirm-create-file (quote off-p)))
-
   ;; Auto-save when losing focus.
   (defun write-current-buffer (&rest args)
     (when (and buffer-file-name
@@ -697,6 +691,7 @@ This function is called at the very end of Spacemacs initialization."
  '(lsp-rust-analyzer-proc-macro-enable t)
  '(lsp-ui-doc-enable nil)
  '(magit-no-confirm '(stage-all-changes unstage-all-changes))
+ '(magit-save-repository-buffers 'dontask)
  '(neo-confirm-create-directory 'off-p)
  '(neo-confirm-create-file 'off-p)
  '(ns-right-alternate-modifier 'none)
