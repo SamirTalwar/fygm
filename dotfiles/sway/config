@@ -210,8 +210,12 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-bindsym $mod+Shift+z resize set width 33ppt
-bindsym $mod+Shift+x resize set width 40ppt
+# Resize columns to specific widths.
+bindsym $mod+Shift+a resize set width 33ppt
+bindsym $mod+Shift+s resize set width 40ppt
+bindsym $mod+Shift+d resize set width 50ppt
+bindsym $mod+Shift+f resize set width 60ppt
+bindsym $mod+Shift+g resize set width 67ppt
 
 bindsym $mod+Ctrl+Alt+Shift+Equal exec systemctl suspend
 
