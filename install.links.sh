@@ -25,6 +25,7 @@ links=(
   ~/.config/nixpkgs $dotfiles/nixpkgs
   ~/.config/nvim/coc-settings.json $dotfiles/nvim/coc-settings.json
   ~/.config/nvim/init.vim $dotfiles/nvim/init.vim
+  ~/.config/starship.toml $dotfiles/starship.toml
   ~/.config/swaync $dotfiles/swaync
   ~/.config/sway/config $dotfiles/sway/config
   ~/.config/wofi $dotfiles/wofi
