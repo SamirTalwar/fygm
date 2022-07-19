@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+set -e
+set -u
+
+ref="${1:-HEAD}"
+
+exec git diff "$(git merge-base "$(git main)" "$ref")" "$ref"
