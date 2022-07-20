@@ -6,6 +6,9 @@
   "editor.formatOnSave": true,
   "editor.renderWhitespace": "boundary",
   "editor.tabSize": 2,
+  "files.associations": {
+    "CODEOWNERS": "plaintext"
+  },
   "files.autoSave": "onFocusChange",
   "files.enableTrash": false,
   "files.insertFinalNewline": true,
