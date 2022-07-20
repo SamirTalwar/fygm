@@ -9,6 +9,9 @@ flycheck_*
 *.swp
 *.swo
 
+# Visual Studio Code
+/.vscode
+
 # C
 /tags
 
