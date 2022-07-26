@@ -633,11 +633,17 @@ before packages are loaded."
     :config
     (direnv-mode))
 
+  ;; LSP: Format on save.
+  (add-hook 'lsp-after-open-hook
+    (add-hook 'write-contents-functions 'lsp-format-buffer))
+
   ;; Haskell: Use haskell-language-server.
   (use-package lsp-haskell
     :ensure t
     :config
-    (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper"))
+    (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper")
+    (add-hook 'haskell-mode-hook #'lsp)
+    (add-hook 'haskell-literate-mode-hook #'lsp))
 
   ;; Nix Shell: Render files with a shebang of "nix-shell" as shell scripts.
   ;; This is obviously a pain when using nix-shell with a different interpreter,
