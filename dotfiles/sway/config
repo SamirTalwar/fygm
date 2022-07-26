@@ -85,6 +85,9 @@ exec $bin/swaync
     # Start your launcher
     bindsym $mod+space exec $menu
 
+    # Enter an emoji
+    bindsym $mod+period exec PATH="$bin:\$PATH" bemoji -t
+
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
     # Despite the name, also works for non-floating windows.

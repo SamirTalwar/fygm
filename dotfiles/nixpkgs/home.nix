@@ -20,6 +20,19 @@ let
       chmod +x $out/bin/alacritty
     '';
   };
+  bemoji = pkgs.stdenv.mkDerivation {
+    name = "bemoji";
+    src = pkgs.fetchFromGitHub {
+      owner = "marty-oehme";
+      repo = "bemoji";
+      "rev" = "7cec73e2dbdc7702d67116cc729f48f9248ceba0";
+      "sha256" = "9gpz38OA2i6yuIxOEaeEcT9PNwA6f9QVqPUDzL9pt4Q=";
+    };
+    installPhase = ''
+      mkdir -p $out/bin
+      cp ./bemoji $out/bin/
+    '';
+  };
 in
 with pkgs;
 {
@@ -123,8 +136,10 @@ with pkgs;
       iosevka
 
       # Sway tools.
+      bemoji
       swaynotificationcenter
       waybar
+      wtype
       wofi
 
       # Programs.
