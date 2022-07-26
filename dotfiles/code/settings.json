@@ -1,10 +1,12 @@
 {
+  "diffEditor.ignoreTrimWhitespace": false,
   "editor.acceptSuggestionOnCommitCharacter": false,
   "editor.fontFamily": "Iosevka, 'Fira Code', Menlo, Monaco, 'Courier New', monospace",
   "editor.fontLigatures": true,
   "editor.fontSize": 16,
   "editor.formatOnSave": true,
   "editor.renderWhitespace": "boundary",
+  "editor.scrollBeyondLastLine": false,
   "editor.tabSize": 2,
   "files.associations": {
     "CODEOWNERS": "plaintext"
@@ -75,4 +77,6 @@
     }
   ],
   "window.zoomLevel": 1,
+  "workbench.editor.wrapTabs": true,
+  "workbench.list.horizontalScrolling": true,
 }
