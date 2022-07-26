@@ -25,8 +25,14 @@
   "vim.easymotion": true,
   "vim.useSystemClipboard": true,
   "vim.normalModeKeyBindingsNonRecursive": [
-    {
-      "before": [
+    // Use VSCode's undo stack
+    { "before": ["u"], "commands": ["undo"] },
+    { "before": ["U"], "commands": ["redo"] },
+    { "before": ["<C-r>"], "commands": ["redo"] },
+    { "before": ["<C-y>"], "commands": ["redo"] },
+
+    // VSpaceCode
+    { "before": [
         "<space>"
       ],
       "commands": [
