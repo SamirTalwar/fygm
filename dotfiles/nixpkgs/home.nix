@@ -33,6 +33,9 @@ let
       cp ./bemoji $out/bin/
     '';
   };
+  zsh-completions = pkgs.writeTextDir "share/zsh-completions/zsh-completions.zsh" ''
+    fpath=(${pkgs.zsh-completions}/share/zsh/site-functions $fpath)
+  '';
 in
 with pkgs;
 {
@@ -188,6 +191,11 @@ with pkgs;
         name = "zsh-autosuggestions";
         src = zsh-autosuggestions;
         file = "share/zsh-autosuggestions/zsh-autosuggestions.zsh";
+      }
+      {
+        name = "zsh-completions";
+        src = zsh-completions;
+        file = "share/zsh-completions/zsh-completions.zsh";
       }
       {
         name = "zsh-syntax-highlighting";
