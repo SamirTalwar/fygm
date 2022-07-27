@@ -4,5 +4,6 @@ set -e
 set -u
 
 ref="${1:-HEAD}"
+shift
 
-exec git diff "$(git merge-base "$(git main)" "$ref")" "$ref"
+exec git diff "$(git merge-base "$(git main)" "$ref")" "$ref" "$@"
