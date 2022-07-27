@@ -3,6 +3,11 @@
 set -e
 set -u
 
+export DESKTOP_SESSION=sway
+export GDMSESSION=sway
+export XDG_CURRENT_DESKTOP=sway
+export XDG_SESSION_DESKTOP=sway
+
 export MOZ_ENABLE_WAYLAND=1
 
 # shellcheck disable=SC2046
