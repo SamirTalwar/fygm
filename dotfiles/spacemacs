@@ -701,6 +701,8 @@ This function is called at the very end of Spacemacs initialization."
  '(js-indent-level 2)
  '(lsp-rust-analyzer-proc-macro-enable t)
  '(lsp-ui-doc-enable nil t)
+ '(magit-bury-buffer-function 'magit-mode-quit-window)
+ '(magit-ediff-quit-hook '(magit-ediff-cleanup-auxiliary-buffers))
  '(magit-no-confirm '(stage-all-changes unstage-all-changes))
  '(magit-save-repository-buffers 'dontask)
  '(neo-confirm-create-directory 'off-p)
