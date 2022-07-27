@@ -79,4 +79,7 @@
   "window.zoomLevel": 1,
   "workbench.editor.wrapTabs": true,
   "workbench.list.horizontalScrolling": true,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
 }
