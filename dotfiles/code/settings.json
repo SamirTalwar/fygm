@@ -27,6 +27,9 @@
   "vim.easymotion": true,
   "vim.useSystemClipboard": true,
   "vim.normalModeKeyBindingsNonRecursive": [
+    // Use VSCode's find
+    { "before": ["<C-f>"], "commands": ["actions.find"] },
+
     // Use VSCode's undo stack
     { "before": ["u"], "commands": ["undo"] },
     { "before": ["U"], "commands": ["redo"] },
