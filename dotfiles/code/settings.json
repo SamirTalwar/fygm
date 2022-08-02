@@ -8,6 +8,7 @@
   "editor.renderWhitespace": "boundary",
   "editor.scrollBeyondLastLine": false,
   "editor.tabSize": 2,
+  "explorer.confirmDragAndDrop": false,
   "files.associations": {
     "CODEOWNERS": "plaintext"
   },
@@ -79,6 +80,7 @@
       ]
     }
   ],
+  "window.openFoldersInNewWindow": "on",
   "window.zoomLevel": 1,
   "workbench.editor.wrapTabs": true,
   "workbench.list.horizontalScrolling": true,
