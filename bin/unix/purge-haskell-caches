@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+
+directories=(
+  ~/.cabal/logs
+  ~/.cabal/store
+  ~/.cache/ghcide
+  ~/.cache/hie-bios
+)
+
+for directory in $directories; do
+  if [[ -d $directory ]]; then
+    echo >&2 "Deleting ${directory}..."
+    rm -rf $directory
+  fi
+done
