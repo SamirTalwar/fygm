@@ -24,6 +24,8 @@
   "git.fetchOnPull": true,
   "git.inputValidation": "always",
   "git.inputValidationSubjectLength": null,
+  "gitlens.plusFeatures.enabled": false,
+  "gitlens.codeLens.authors.enabled": false,
   "haskell.manageHLS": "PATH",
   "vim.easymotion": true,
   "vim.useSystemClipboard": true,
