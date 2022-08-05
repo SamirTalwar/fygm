@@ -16,6 +16,7 @@ ALL_PACKAGE_MANAGERS=(
   softwareupdate
   brew
   apt
+  snap
   nix
   sdk
   pip
@@ -64,6 +65,17 @@ function update-apt {
     run sudo apt-get update
     run sudo apt-get dist-upgrade --yes
     run sudo apt-get autoremove --purge --yes
+  fi
+}
+
+function update-snap {
+  if exists snap; then
+    run sudo snap refresh
+    snap list --all \
+      | awk '$6 ~ /disabled/ { print $1, $3 }' \
+      | while read name revision; do
+          run sudo snap remove "$name" --revision="$revision"
+        done
   fi
 }
 
