@@ -64,6 +64,10 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=10
 functions[original_j]=$functions[j]
 function j {
   original_j $@
+  # Skip re-titling if in a sub-pane.
+  if [[ -n ${TMUX:-} && "$(tmux display -p '#{pane_index}')" -gt 0 ]]; then
+    return
+  fi
   title
 }
 
