@@ -99,4 +99,7 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[haskell]": {
+    "editor.defaultFormatter": "haskell.haskell"
+  },
 }
