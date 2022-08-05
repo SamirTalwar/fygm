@@ -40,8 +40,10 @@ source ${0:A:h}/common.sh
 
 if ! command -v brew >& /dev/null; then
   now 'Installing Homebrew'
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 now 'Tapping'
 brew tap homebrew/cask-fonts
