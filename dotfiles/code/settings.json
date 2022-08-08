@@ -34,6 +34,7 @@
   "gitlens.plusFeatures.enabled": false,
   "gitlens.showWelcomeOnInstall": false,
   "haskell.manageHLS": "PATH",
+  "terminal.integrated.fontSize": 16,
   "vim.easymotion": true,
   "vim.useSystemClipboard": true,
   "vim.normalModeKeyBindingsNonRecursive": [
@@ -47,17 +48,9 @@
     { "before": ["<C-y>"], "commands": ["redo"] },
 
     // VSpaceCode
-    { "before": [
-        "<space>"
-      ],
-      "commands": [
-        "vspacecode.space"
-      ]
-    },
+    { "before": ["<space>"], "commands": ["vspacecode.space"] },
     {
-      "before": [
-        ","
-      ],
+      "before": [","],
       "commands": [
         "vspacecode.space",
         {
@@ -69,17 +62,11 @@
   ],
   "vim.visualModeKeyBindingsNonRecursive": [
     {
-      "before": [
-        "<space>"
-      ],
-      "commands": [
-        "vspacecode.space"
-      ]
+      "before": ["<space>"],
+      "commands": ["vspacecode.space"]
     },
     {
-      "before": [
-        ","
-      ],
+      "before": [","],
       "commands": [
         "vspacecode.space",
         {
@@ -99,7 +86,10 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "[haskell]": {
     "editor.defaultFormatter": "haskell.haskell"
-  },
+  }
 }
