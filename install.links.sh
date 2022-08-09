@@ -34,7 +34,6 @@ links=(
   ~/.gitconfig $dotfiles/gitconfig
   ~/.gitignore $dotfiles/gitignore
   ~/.ideavimrc $dotfiles/ideavimrc
-  ~/.p10k.zsh $dotfiles/p10k.zsh
   ~/.racketrc $dotfiles/racketrc
   ~/.spacemacs $dotfiles/spacemacs
   ~/.stack/config.yaml $dotfiles/stack/config.yaml

@@ -178,8 +178,7 @@ with pkgs;
       ''source ~/.zshenv.fygm
       '';
     initExtra =
-      ''source ~/.p10k.zsh
-        source ~/.zshrc.fygm
+      ''source ~/.zshrc.fygm
       '';
     plugins = [
       {
