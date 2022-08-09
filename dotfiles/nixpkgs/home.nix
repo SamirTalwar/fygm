@@ -147,7 +147,6 @@ with pkgs;
 
       # Programs.
       alacritty
-      emacsPgtk
       firefox-devedition-bin
     ]
   );

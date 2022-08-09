@@ -29,13 +29,11 @@ links=(
   ~/.config/swaync $dotfiles/swaync
   ~/.config/sway/config $dotfiles/sway/config
   ~/.config/wofi $dotfiles/wofi
-  ~/.emacs.d $dotfiles/emacs.d
   ~/.ghc/ghci.conf $dotfiles/ghc/ghci.conf
   ~/.gitconfig $dotfiles/gitconfig
   ~/.gitignore $dotfiles/gitignore
   ~/.ideavimrc $dotfiles/ideavimrc
   ~/.racketrc $dotfiles/racketrc
-  ~/.spacemacs $dotfiles/spacemacs
   ~/.stack/config.yaml $dotfiles/stack/config.yaml
   ~/.tmux.conf $dotfiles/tmux.conf
   ~/.zshenv.fygm $dotfiles/zshenv

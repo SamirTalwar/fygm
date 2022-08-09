@@ -19,7 +19,6 @@ brew_mac_applications=(
   discord
   docker
   dropbox
-  emacs-mac-spacemacs-icon
   firefox-developer-edition
   google-chrome
   notion
@@ -48,7 +47,6 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 now 'Tapping'
 brew tap homebrew/cask-fonts
 brew tap homebrew/cask-versions
-brew tap railwaycat/emacsmacport
 
 now 'Upgrading Homebrew packages'
 brew update
