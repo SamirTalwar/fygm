@@ -22,6 +22,7 @@
   "git.alwaysShowStagedChangesResourceGroup": true,
   "git.alwaysSignOff": true,
   "git.autofetch": true,
+  "git.autofetchPeriod": 600,
   "git.confirmSync": false,
   "git.enableCommitSigning": true,
   "git.fetchOnPull": true,
