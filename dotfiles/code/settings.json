@@ -95,5 +95,8 @@
   },
   "[haskell]": {
     "editor.defaultFormatter": "haskell.haskell"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }
