@@ -50,6 +50,7 @@ with pkgs;
     nix-direnv
     nix-prefetch-github
     nix-prefetch-scripts
+    nix-tree
 
     # Core
     stdenv
