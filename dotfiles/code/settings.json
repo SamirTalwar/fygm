@@ -84,6 +84,9 @@
   "window.zoomLevel": 1,
   "workbench.editor.wrapTabs": true,
   "workbench.list.horizontalScrolling": true,
+  "[agda]": {
+    "editor.unicodeHighlight.ambiguousCharacters": false
+  },
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
