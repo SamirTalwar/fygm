@@ -87,6 +87,9 @@
   "[agda]": {
     "editor.unicodeHighlight.ambiguousCharacters": false
   },
+  "[dockercompose]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+  },
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
