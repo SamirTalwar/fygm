@@ -46,7 +46,7 @@ openUrlExecutables :: [String]
 openUrlExecutables = ["xdg-open", "open"]
 
 main = do
-  args <- getArgs
+  args <- map Text.pack <$> getArgs
   openUrl <- findOpenUrlExecutable
 
   maybeUrl <- maybeCaptureGit "config" ["--get", "remote.origin.url"]
@@ -67,8 +67,9 @@ main = do
   when (branch == mainBranch && Maybe.isNothing maybeUpstreamRepository) $
     abort $ "Do not work on the \"" <> unBranch mainBranch <> "\" branch."
 
-  username <- mfilter (not . Text.null) . Just <$> captureGit "config" ["--get", "--default", "", "branch.username"]
-  let expectedBranchPrefix = maybe "" (<> "/") username
+  customPrefix <- maybeCaptureGit "config" ["--get", "branch." <> unBranch branch <> ".prefix"]
+  prefix <- maybeCaptureGit "config" ["--get", "branch.prefix"]
+  let expectedBranchPrefix = Maybe.fromMaybe "" (customPrefix <|> prefix)
   unless (expectedBranchPrefix `isPrefixOfBranch` branch) $
     abort $ "The branch name must start with \"" <> expectedBranchPrefix <> "\"."
 
@@ -88,15 +89,15 @@ findOpenUrlExecutable =
   mapM findExecutable openUrlExecutables
     >>= maybe (abort "Could not find a way to open a URL.") return . foldr1 (<|>)
 
-git :: String -> [String] -> IO ()
+git :: Text -> [Text] -> IO ()
 git subcommand args =
-  callProcess "git" (subcommand : args)
+  callProcess "git" (Text.unpack subcommand : map Text.unpack args)
 
-captureGit :: String -> [String] -> IO Text
+captureGit :: Text -> [Text] -> IO Text
 captureGit subcommand args = do
-  Text.strip . Text.pack <$> readCreateProcess (proc "git" (subcommand : args)) ""
+  Text.strip . Text.pack <$> readCreateProcess (proc "git" (Text.unpack subcommand : map Text.unpack args)) ""
 
-maybeCaptureGit :: String -> [String] -> IO (Maybe Text)
+maybeCaptureGit :: Text -> [Text] -> IO (Maybe Text)
 maybeCaptureGit subcommand args = optional (captureGit subcommand args)
 
 pullRequestUrl :: Service -> Hostname -> Maybe Repository -> Repository -> Branch -> Branch -> Text
