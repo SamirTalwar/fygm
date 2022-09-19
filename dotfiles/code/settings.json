@@ -102,6 +102,9 @@
   "[haskell]": {
     "editor.defaultFormatter": "haskell.haskell"
   },
+  "[python]": {
+    "editor.tabSize": 4
+  },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
