@@ -34,6 +34,7 @@
   "gitlens.codeLens.enabled": false,
   "gitlens.plusFeatures.enabled": false,
   "gitlens.showWelcomeOnInstall": false,
+  "go.toolsManagement.autoUpdate": true,
   "haskell.manageHLS": "PATH",
   "python.analysis.inlayHints.functionReturnTypes": true,
   "python.analysis.inlayHints.variableTypes": true,
