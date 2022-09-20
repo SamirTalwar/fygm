@@ -141,7 +141,7 @@ with pkgs;
 
       # Sway tools.
       bemoji
-      swaynotificationcenter
+      mako
       waybar
       wtype
       wofi
