@@ -21,6 +21,7 @@ set -A links
 links=(
   ~/bin $dir/bin
   ~/.config/alacritty/alacritty.yml $dotfiles/alacritty.yml
+  ~/.config/mako $dotfiles/mako
   ~/.config/nix/nix.conf $dotfiles/nix.conf
   ~/.config/nixpkgs $dotfiles/nixpkgs
   ~/.config/nvim/coc-settings.json $dotfiles/nvim/coc-settings.json

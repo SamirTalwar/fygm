@@ -1,0 +1,12 @@
+layer=overlay
+
+width=400
+height=150
+padding=10
+
+font=Ubuntu 14
+
+format=<b>%s</b>\n\n%b
+
+[grouped]
+format=(%g) <b>%s</b>\n\n%b
