@@ -45,7 +45,7 @@ with pkgs;
 
   home.packages = [
     # Nix
-    niv
+    cachix
     nix
     nix-direnv
     nix-prefetch-github
