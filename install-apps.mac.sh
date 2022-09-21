@@ -32,6 +32,7 @@ mac_app_store_applications=(
   485812721 # TweetDeck
   585829637 # Todoist
   692867256 # Simplenote
+  803453959 # Slack
   926036361 # LastPass
 )
 
