@@ -1,3 +1,5 @@
+default-timeout=900000
+
 layer=overlay
 
 width=400
