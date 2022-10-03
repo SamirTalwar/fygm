@@ -91,6 +91,7 @@
   "window.zoomLevel": 1,
   "workbench.editor.wrapTabs": true,
   "workbench.list.horizontalScrolling": true,
+  "workbench.startupEditor": "none",
   "[agda]": {
     "editor.unicodeHighlight.ambiguousCharacters": false
   },
