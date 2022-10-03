@@ -45,6 +45,7 @@
   "python.analysis.inlayHints.functionReturnTypes": true,
   "python.analysis.inlayHints.variableTypes": true,
   "python.analysis.typeCheckingMode": "basic",
+  "shellcheck.customArgs": ["-x"],
   "terminal.integrated.fontSize": 16,
   "vim.easymotion": true,
   "vim.useSystemClipboard": true,
