@@ -14,6 +14,12 @@
   },
   "files.autoSave": "onFocusChange",
   "files.enableTrash": false,
+  "files.exclude": {
+    "**/.git": false,
+    "**/.hg": false,
+    "**/.svn": false,
+    "**/CVS": false
+  },
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
