@@ -96,6 +96,9 @@
   "[agda]": {
     "editor.unicodeHighlight.ambiguousCharacters": false
   },
+  "[diff]": {
+    "files.trimTrailingWhitespace": false
+  },
   "[dockercompose]": {
     "editor.defaultFormatter": "ms-azuretools.vscode-docker"
   },
