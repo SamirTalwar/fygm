@@ -43,6 +43,9 @@ snap_classic_applications=(
   code
 )
 
+now 'Setting up sysctl...'
+cp -fv ubuntu/sysctl.d/local.conf /etc/sysctl.d/local.conf
+
 now 'Setting up the Docker repository...'
 mkdir -p /etc/apt/keyrings /etc/apt/sources.list.d
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
