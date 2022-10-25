@@ -10,6 +10,7 @@ fonts=(
 
 brew_cli_programs=(
   mas
+  pinentry-mac
   reattach-to-user-namespace
 )
 
