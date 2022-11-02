@@ -17,6 +17,9 @@ apt_fonts=(
 )
 
 apt_programs=(
+  # services
+  syncthing
+
   # applications
   zeal
 
@@ -49,12 +52,16 @@ cp -fv ubuntu/sysctl.d/local.conf /etc/sysctl.d/local.conf
 now 'Setting up the Docker repository...'
 mkdir -p /etc/apt/keyrings /etc/apt/sources.list.d
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
-  | sudo gpg --batch --yes --dearmor -o /etc/apt/keyrings/docker.gpg
+  | gpg --batch --yes --dearmor -o /etc/apt/keyrings/docker.gpg
 echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
-  | sudo tee /etc/apt/sources.list.d/docker.list \
+  | tee /etc/apt/sources.list.d/docker.list \
   > /dev/null
 groupadd docker || :
+
+now 'Setting up the Syncthing repository...'
+curl -o /usr/share/keyrings/syncthing-archive-keyring.gpg https://syncthing.net/release-key.gpg
+echo "deb [signed-by=/usr/share/keyrings/syncthing-archive-keyring.gpg] https://apt.syncthing.net/ syncthing stable" | tee /etc/apt/sources.list.d/syncthing.list
 
 now 'Upgrading packages...'
 apt-get update
