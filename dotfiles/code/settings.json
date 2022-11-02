@@ -42,6 +42,7 @@
   "gitlens.showWelcomeOnInstall": false,
   "go.toolsManagement.autoUpdate": true,
   "haskell.manageHLS": "PATH",
+  "haskell.plugin.rename.config.crossModule": true,
   "python.analysis.inlayHints.functionReturnTypes": true,
   "python.analysis.inlayHints.variableTypes": true,
   "python.analysis.typeCheckingMode": "basic",
