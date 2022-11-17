@@ -71,6 +71,7 @@ with pkgs;
     ripgrep
     sd
     tree
+    yq
 
     # Shell
     autojump
