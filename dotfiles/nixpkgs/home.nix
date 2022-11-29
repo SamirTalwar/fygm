@@ -143,6 +143,7 @@ with pkgs;
       # Sway tools.
       bemoji
       mako
+      shotman
       waybar
       wtype
       wofi
