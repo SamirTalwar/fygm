@@ -1,6 +1,6 @@
 [user]
 	name = Samir Talwar
-	email = samir@noodlesandwich.com
+	email = samir@functional.computer
 [core]
 	excludesfile = ~/.gitignore
 	autocrlf = input
