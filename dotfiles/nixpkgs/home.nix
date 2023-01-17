@@ -41,7 +41,11 @@ with pkgs;
 {
   news.display = "silent";
 
-  home.stateVersion = "18.09";
+  home.stateVersion = "22.11";
+
+  # I don't want to hard-code these; this should work across machines.
+  home.homeDirectory = builtins.getEnv "HOME";
+  home.username = builtins.getEnv "USER";
 
   home.packages = [
     # Nix
