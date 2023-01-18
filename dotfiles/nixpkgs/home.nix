@@ -154,7 +154,6 @@ with pkgs;
 
       # Programs.
       alacritty
-      firefox-devedition-bin
     ]
   );
 
