@@ -220,9 +220,9 @@ bindsym $mod+Shift+d resize set width 50ppt
 bindsym $mod+Shift+f resize set width 60ppt
 bindsym $mod+Shift+g resize set width 67ppt
 
-bindsym Print exec XDG_SCREENSHOTS_DIR=$HOME/Screenshots $bin/shotman output
-bindsym Alt+Print exec XDG_SCREENSHOTS_DIR=$HOME/Screenshots $bin/shotman window
-bindsym Ctrl+Print exec XDG_SCREENSHOTS_DIR=$HOME/Screenshots $bin/shotman region
+bindsym Print exec XDG_SCREENSHOTS_DIR=$HOME/Screenshots $bin/shotman --capture output
+bindsym Alt+Print exec XDG_SCREENSHOTS_DIR=$HOME/Screenshots $bin/shotman --capture window
+bindsym Ctrl+Print exec XDG_SCREENSHOTS_DIR=$HOME/Screenshots $bin/shotman --capture region
 
 bindsym $mod+Ctrl+Alt+Shift+Equal exec systemctl suspend
 
