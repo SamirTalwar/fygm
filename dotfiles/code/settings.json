@@ -93,7 +93,8 @@
     "editor.defaultFormatter": "haskell.haskell"
   },
   "[python]": {
-    "editor.tabSize": 4
+    "editor.tabSize": 4,
+    "editor.formatOnType": true
   },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
