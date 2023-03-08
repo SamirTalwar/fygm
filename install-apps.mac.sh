@@ -20,7 +20,7 @@ brew_mac_applications=(
   discord
   docker
   dropbox
-  firefox-developer-edition
+  firefox
   google-chrome
   notion
   signal
