@@ -24,6 +24,7 @@ links=(
   ~/.config/mako $dotfiles/mako
   ~/.config/nix/nix.conf $dotfiles/nix.conf
   ~/.config/nixpkgs $dotfiles/nixpkgs
+  ~/.config/nvim/init.lua $dotfiles/nvim/init.lua
   ~/.config/starship.toml $dotfiles/starship.toml
   ~/.config/sway/config $dotfiles/sway/config
   ~/.config/wofi $dotfiles/wofi
