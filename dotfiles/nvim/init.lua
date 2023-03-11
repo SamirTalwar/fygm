@@ -16,6 +16,10 @@ vim.opt.smartcase = true -- stop ignoring case when uppercase is used
 -- Leader
 vim.g.mapleader = " " -- set the leader key to <Space>
 
+-- Disable netrw in favor of nvim-tree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- Set up lazy.nvim, the plugin manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -46,11 +50,20 @@ local plugins = {
       "nvim-lua/plenary.nvim",
     },
   },
+  { "nvim-tree/nvim-tree.lua", -- file browsing
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    tag = "nightly",
+  },
 }
 require("lazy").setup(plugins)
 
 vim.cmd("colorscheme tokyonight-night") -- seems to work best with my Alacritty theme
 
+require("nvim-tree").setup()
+
+local nvimTreeApi = require("nvim-tree.api")
 local telescopeBuiltin = require("telescope.builtin")
 local wk = require("which-key")
 wk.register({
@@ -62,6 +75,7 @@ wk.register({
     name = "files",
     f = { telescopeBuiltin.find_files, "all" },
     r = { telescopeBuiltin.oldfiles, "recent" },
+    t = { function() nvimTreeApi.tree.open({find_file = true}) end, "tree" },
   },
   g = {
     name = "git",
