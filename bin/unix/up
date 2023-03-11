@@ -18,15 +18,6 @@ ALL_PACKAGE_MANAGERS=(
   apt
   snap
   nix
-  sdk
-  pip
-  rvm
-  nvm
-  yarn
-  cabal
-  opam
-  raco
-  rustup
   tpm
   vim-plug
   nvim-plug
@@ -91,83 +82,6 @@ function update-nix {
     else
       run nix-env --upgrade
     fi
-  fi
-}
-
-function update-sdk {
-  if exists sdk; then
-    run sdk selfupdate
-    source "$HOME/.sdkman/bin/sdkman-init.sh"
-    run sdk broadcast # to prevent it from popping up during `sdk outdated`
-    log sdk install
-    sdk outdated | tail +2 | awk '{ print $1 }' | while read candidate; do
-      yes | sdk install $candidate
-    done
-  fi
-}
-
-function update-pip {
-  local packages
-  if exists pip; then
-    packages=($(pip list --user --outdated --format=json | jq -r '.[] | .name'))
-    if [[ ${#packages} -gt 0 ]]; then
-      log pip install --user --upgrade
-      pip install --user --upgrade ${packages[@]}
-    fi
-  fi
-}
-
-function update-rvm {
-  if exists rvm; then
-    run rvm get head
-    run rvm cleanup all
-    run rvm reload
-  fi
-}
-
-function update-nvm {
-  local NVM_DIR="$HOME/.nvm"
-  if [[ -d "$NVM_DIR" ]]; then
-    cd "$NVM_DIR"
-    run git fetch --tags origin
-    run git checkout "$(git describe --abbrev=0 --tags --match "v[0-9]*" "$(git rev-list --tags --max-count=1)")"
-  fi
-}
-
-function update-yarn {
-  if exists yarn; then
-    run yarn global upgrade
-  fi
-}
-
-function update-cabal {
-  if exists cabal; then
-    run cabal update
-  fi
-}
-
-function update-opam {
-  if exists opam && [[ -d ~/.opam ]]; then
-    run opam update --yes
-    run opam upgrade --yes
-  fi
-}
-
-function update-raco {
-  if exists raco; then
-    run raco pkg update --all --auto
-  fi
-}
-
-function update-rustup {
-  if exists rustup; then
-    run rustup update
-  fi
-}
-
-function update-gcloud {
-  if exists gcloud; then
-    yes | run gcloud components update
   fi
 }
 
