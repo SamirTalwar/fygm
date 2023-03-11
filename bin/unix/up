@@ -19,8 +19,6 @@ ALL_PACKAGE_MANAGERS=(
   snap
   nix
   tpm
-  vim-plug
-  nvim-plug
   docker
 )
 
@@ -91,21 +89,6 @@ function update-tpm {
     "$HOME/.tmux/plugins/tpm/bin/install_plugins"
     "$HOME/.tmux/plugins/tpm/bin/update_plugins" all
     "$HOME/.tmux/plugins/tpm/bin/clean_plugins"
-  fi
-}
-
-function update-vim-plug {
-  if [[ -e "$HOME/.vim/autoload/plug.vim" ]]; then
-    run vim +PlugUpgrade +qall
-    run vim +PlugInstall +PlugUpdate +PlugClean! +qall
-  fi
-}
-
-function update-nvim-plug {
-  if exists nvim && [[ -e "$HOME/.config/nvim/autoload/plug.vim" ]]; then
-    run nvim +PlugUpgrade +qall
-    run nvim +PlugInstall +PlugUpdate +PlugClean! +qall
-    run nvim +UpdateRemotePlugins +qall
   fi
 }
 

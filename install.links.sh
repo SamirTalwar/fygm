@@ -24,8 +24,6 @@ links=(
   ~/.config/mako $dotfiles/mako
   ~/.config/nix/nix.conf $dotfiles/nix.conf
   ~/.config/nixpkgs $dotfiles/nixpkgs
-  ~/.config/nvim/coc-settings.json $dotfiles/nvim/coc-settings.json
-  ~/.config/nvim/init.vim $dotfiles/nvim/init.vim
   ~/.config/starship.toml $dotfiles/starship.toml
   ~/.config/sway/config $dotfiles/sway/config
   ~/.config/wofi $dotfiles/wofi
@@ -33,7 +31,6 @@ links=(
   ~/.gitconfig $dotfiles/gitconfig
   ~/.gitignore $dotfiles/gitignore
   ~/.gnupg/gpg-agent.conf $dotfiles/gpg-agent.conf
-  ~/.ideavimrc $dotfiles/ideavimrc
   ~/.racketrc $dotfiles/racketrc
   ~/.stack/config.yaml $dotfiles/stack/config.yaml
   ~/.tmux.conf $dotfiles/tmux.conf
