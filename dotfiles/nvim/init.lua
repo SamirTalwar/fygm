@@ -1,6 +1,7 @@
 -- Visuals
 vim.opt.number = true -- show line numbers
 vim.opt.cursorline = true -- highlight the line with the cursor
+vim.opt.termguicolors = true -- enable 24-bit colors
 
 -- Indentation
 vim.opt.expandtab = true -- use spaces, not tabs, by default
@@ -31,12 +32,45 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Initialize plugins
 local plugins = {
-  { "folke/which-key.nvim" }, -- show keybinding help as you type
-  { "itchyny/lightline.vim", lazy = false }, -- a useful status bar
+  { "folke/tokyonight.nvim", lazy = false }, -- pretty colors
 
   { "tpope/vim-repeat" }, -- better repeat (`.`) semantics
   { "tpope/vim-surround" }, -- add, remove, and modify surrounding characters
 
   { "christoomey/vim-tmux-navigator" }, -- navigate tmux easily
+  { "folke/which-key.nvim" }, -- show keybinding help as you type
+
+  { "itchyny/lightline.vim", lazy = false }, -- a useful status bar
+  { "nvim-telescope/telescope.nvim", -- fuzzy search
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+  },
 }
 require("lazy").setup(plugins)
+
+vim.cmd("colorscheme tokyonight-night") -- seems to work best with my Alacritty theme
+
+local telescopeBuiltin = require("telescope.builtin")
+local wk = require("which-key")
+wk.register({
+  b = {
+    name = "buffers",
+    b = { telescopeBuiltin.buffers, "all" },
+  },
+  f = {
+    name = "files",
+    f = { telescopeBuiltin.find_files, "all" },
+    r = { telescopeBuiltin.oldfiles, "recent" },
+  },
+  g = {
+    name = "git",
+    s = { telescopeBuiltin.git_status, "status" },
+  },
+  s = {
+    name = "search",
+    r = { telescopeBuiltin.resume, "resume" },
+    s = { telescopeBuiltin.live_grep, "text" },
+    w = { telescopeBuiltin.grep_string, "current word" },
+  },
+}, { prefix = "<leader>" })
