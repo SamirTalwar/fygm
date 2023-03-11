@@ -13,6 +13,20 @@ vim.opt.softtabstop = 2 -- insert 2 spaces when typing <Tab>
 vim.opt.ignorecase = true -- ignore case when searching
 vim.opt.smartcase = true -- stop ignoring case when uppercase is used
 
+-- Save and load
+---- reload the file when re-entering the buffer
+vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
+  pattern = "*",
+  command = "checktime",
+})
+---- save the file when leaving the buffer
+vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
+  pattern = "*",
+  command = "update",
+})
+---- save when moving around using tmux navigator
+vim.g.tmux_navigator_save_on_switch = 1
+
 -- Leader
 vim.g.mapleader = " " -- set the leader key to <Space>
 
@@ -59,10 +73,13 @@ local plugins = {
 }
 require("lazy").setup(plugins)
 
+-- Set the color scheme
 vim.cmd("colorscheme tokyonight-night") -- seems to work best with my Alacritty theme
 
+-- Initialize plugins that need it
 require("nvim-tree").setup()
 
+-- Set up key bindings
 local nvimTreeApi = require("nvim-tree.api")
 local telescopeBuiltin = require("telescope.builtin")
 local wk = require("which-key")
