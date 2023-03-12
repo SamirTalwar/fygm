@@ -22,7 +22,12 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 ---- save the file when leaving the buffer
 vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
   pattern = "*",
-  command = "update",
+  callback = function(args)
+    -- only for normal buffers
+    if not vim.bo[args.buf].buftype then
+      vim.cmd("update")
+    end
+  end,
 })
 ---- save when moving around using tmux navigator
 vim.g.tmux_navigator_save_on_switch = 1
