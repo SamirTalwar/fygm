@@ -65,8 +65,9 @@ elif [[ $(uname -s) == 'Darwin' ]]; then
 fi
 
 now 'Installing tmux plugins'
-if [[ ! -e ~/.tmux/plugins/tpm ]]; then
-  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+if [[ ! -e "${HOME}/.tmux/plugins/tpm" ]]; then
+  git clone https://github.com/tmux-plugins/tpm "${HOME}/.tmux/plugins/tpm"
+  "${HOME}/.tmux/plugins/tpm/bin/install_plugins"
 fi
 
 now 'Done!'
