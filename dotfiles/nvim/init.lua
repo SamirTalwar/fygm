@@ -75,6 +75,10 @@ local plugins = {
     },
     tag = "nightly",
   },
+
+  { "nvim-treesitter/nvim-treesitter", -- syntax highlighting
+    build = ":TSUpdate",
+  }
 }
 require("lazy").setup(plugins)
 
@@ -83,6 +87,33 @@ vim.cmd("colorscheme tokyonight-night") -- seems to work best with my Alacritty 
 
 -- Initialize plugins that need it
 require("nvim-tree").setup()
+
+-- Set up syntax highlighting
+require("nvim-treesitter.configs").setup {
+  ensure_installed = {
+    -- always required
+    "vim",
+    "help",
+    "query",
+    "c",
+    "lua",
+  },
+
+  auto_install = true,
+
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  },
+
+  indent = {
+    enable = true,
+  },
+}
+
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldenable = false
 
 -- Set up key bindings
 local nvimTreeApi = require("nvim-tree.api")
