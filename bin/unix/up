@@ -70,11 +70,12 @@ function update-snap {
 
 function update-nix {
   if exists nix; then
-    run nix-channel --update
-    run nix registry pin nixpkgs
     if exists nixos-rebuild; then
+      run sudo nix-channel --update
       run sudo nixos-rebuild switch
     fi
+    run nix-channel --update
+    run nix registry pin nixpkgs
     if exists home-manager; then
       NIX_PATH="${HOME}/.nix-defexpr/channels${NIX_PATH:+:}${NIX_PATH:-}" run home-manager switch
     else

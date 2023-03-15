@@ -21,9 +21,9 @@ if [[ -e ${HOME}/.nix-profile/etc/profile.d/nix.sh ]]; then
   source ${HOME}/.nix-profile/etc/profile.d/nix.sh
 fi
 if [[ $(uname -s) == 'Linux' && $(uname -v) =~ NixOS ]]; then
-  NIXOS_VERSION=$(nixos-version | sed -E 's/^([0-9]+\.[0-9]+).*/\1/')
-  nix-channel --add "https://nixos.org/channels/nixos-${NIXOS_VERSION}" nixpkgs
-  nix-channel --add "https://github.com/rycee/home-manager/archive/release-${NIXOS_VERSION}.tar.gz" home-manager
+  sudo nix-channel --add 'https://nixos.org/channels/nixos-unstable' nixos
+  nix-channel --add 'https://nixos.org/channels/nixos-unstable' nixpkgs
+  nix-channel --add 'https://github.com/rycee/home-manager/archive/master.tar.gz' home-manager
   nix-channel --add 'https://github.com/guibou/nixGL/archive/main.tar.gz' nixgl
   nix-channel --update
 else
@@ -35,6 +35,7 @@ fi
 
 now 'Installing software with Nix'
 if command -v nixos-rebuild >/dev/null; then
+  sudo nix-channel --update
   sudo nixos-rebuild switch
 fi
 export NIX_PATH="${HOME}/.nix-defexpr/channels${NIX_PATH:+:}${NIX_PATH:-}"

@@ -21,9 +21,9 @@ set -A links
 links=(
   ~/bin $dir/bin
   ~/.config/alacritty/alacritty.yml $dotfiles/alacritty.yml
+  ~/.config/home-manager/home.nix $dotfiles/home.nix
   ~/.config/mako $dotfiles/mako
   ~/.config/nix/nix.conf $dotfiles/nix.conf
-  ~/.config/nixpkgs $dotfiles/nixpkgs
   ~/.config/nvim/init.lua $dotfiles/nvim/init.lua
   ~/.config/starship.toml $dotfiles/starship.toml
   ~/.config/sway/config $dotfiles/sway/config
