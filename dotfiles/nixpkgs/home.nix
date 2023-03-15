@@ -151,6 +151,7 @@ with pkgs;
 
       # Programs.
       alacritty
+      firefox
     ]
   );
 
