@@ -136,6 +136,7 @@ wk.register({
   },
   s = {
     name = "search",
+    c = { "<cmd>nohlsearch<cr>", "clear highlight" },
     r = { telescopeBuiltin.resume, "resume" },
     s = { telescopeBuiltin.live_grep, "text" },
     w = { telescopeBuiltin.grep_string, "current word" },
