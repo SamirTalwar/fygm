@@ -99,9 +99,6 @@ with pkgs;
     socat
     wget
 
-    # Security
-    lastpass-cli
-
     # Image Manipulation
     imagemagick
     pngcrush
