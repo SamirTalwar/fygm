@@ -63,7 +63,11 @@ local plugins = {
   { "christoomey/vim-tmux-navigator" }, -- navigate tmux easily
   { "folke/which-key.nvim" }, -- show keybinding help as you type
 
-  { "itchyny/lightline.vim", lazy = false }, -- a useful status bar
+  { "nvim-lualine/lualine.nvim", -- a useful status bar
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+  },
   { "nvim-telescope/telescope.nvim", -- fuzzy search
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -86,6 +90,7 @@ require("lazy").setup(plugins)
 vim.cmd("colorscheme tokyonight-night") -- seems to work best with my Alacritty theme
 
 -- Initialize plugins that need it
+require('lualine').setup()
 require("nvim-tree").setup()
 
 -- Set up syntax highlighting
