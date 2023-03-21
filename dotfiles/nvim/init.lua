@@ -93,6 +93,15 @@ vim.cmd("colorscheme tokyonight-night") -- seems to work best with my Alacritty 
 require('lualine').setup()
 require("nvim-tree").setup()
 
+-- Set up file search
+require('telescope').setup {
+  defaults = {
+    file_ignore_patterns = {
+      "^%.git/", -- explicitly filter out any files in the .git directory
+    },
+  },
+}
+
 -- Set up syntax highlighting
 require("nvim-treesitter.configs").setup {
   ensure_installed = {
@@ -131,9 +140,9 @@ wk.register({
   },
   f = {
     name = "files",
-    f = { telescopeBuiltin.find_files, "all" },
+    f = { function() telescopeBuiltin.find_files({ hidden = true }) end, "all" },
     r = { telescopeBuiltin.oldfiles, "recent" },
-    t = { function() nvimTreeApi.tree.open({find_file = true}) end, "tree" },
+    t = { function() nvimTreeApi.tree.open({ find_file = true }) end, "tree" },
   },
   g = {
     name = "git",
