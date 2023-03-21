@@ -82,7 +82,9 @@ local plugins = {
 
   { "nvim-treesitter/nvim-treesitter", -- syntax highlighting
     build = ":TSUpdate",
-  }
+  },
+
+  { "neovim/nvim-lspconfig" }, -- LSP helpers
 }
 require("lazy").setup(plugins)
 
@@ -128,6 +130,22 @@ require("nvim-treesitter.configs").setup {
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldenable = false
+
+-- Configure LSP servers
+local lspconfig = require("lspconfig")
+---- a little hack to get the environment from direnv before running
+---- to do:
+----   - add a command for "allow"
+----   - add a command for "deny"
+----   - handle errors nicely
+----   - factor into a plugin
+lspconfig.util.on_setup = lspconfig.util.add_hook_before(lspconfig.util.on_setup, function(config)
+  config.cmd = { "direnv", "exec", ".", unpack(config.cmd) }
+end)
+lspconfig.hls.setup {
+  filetypes = { "haskell", "lhaskell", "cabal" }, -- configure HLS to run on Cabal files too
+}
+lspconfig.pyright.setup {}
 
 -- Set up key bindings
 local nvimTreeApi = require("nvim-tree.api")
