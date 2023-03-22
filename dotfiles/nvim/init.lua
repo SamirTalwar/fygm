@@ -73,6 +73,7 @@ local plugins = {
       "nvim-lua/plenary.nvim",
     },
   },
+  { "nvim-telescope/telescope-ui-select.nvim" }, -- override the selection UI with Telescope
   { "nvim-tree/nvim-tree.lua", -- file browsing
     dependencies = {
       "nvim-tree/nvim-web-devicons",
@@ -95,7 +96,7 @@ vim.cmd("colorscheme tokyonight-night") -- seems to work best with my Alacritty 
 require('lualine').setup()
 require("nvim-tree").setup()
 
--- Set up file search
+-- Set up fuzzy search and the fancy selection UI
 require('telescope').setup {
   defaults = {
     layout_strategy = 'vertical', -- better for thinner windows
@@ -103,7 +104,13 @@ require('telescope').setup {
       "^%.git/", -- explicitly filter out any files in the .git directory
     },
   },
+  extensions = {
+    ["ui-select"] = {
+      require("telescope.themes").get_dropdown(),
+    },
+  },
 }
+require("telescope").load_extension("ui-select")
 
 -- Set up syntax highlighting
 require("nvim-treesitter.configs").setup {
