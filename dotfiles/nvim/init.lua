@@ -154,9 +154,16 @@ local nvimTreeApi = require("nvim-tree.api")
 local telescopeBuiltin = require("telescope.builtin")
 local wk = require("which-key")
 wk.register({
+  a = { vim.lsp.buf.code_action, "action" },
   b = {
     name = "buffers",
     b = { telescopeBuiltin.buffers, "all" },
+  },
+  d = {
+    name = "diagnostics",
+    d = { telescopeBuiltin.diagnostics, "show" },
+    n = { vim.diagnostic.goto_next, "go to next" },
+    p = { vim.diagnostic.goto_prev, "go to previous" },
   },
   f = {
     name = "files",
@@ -167,6 +174,19 @@ wk.register({
   g = {
     name = "git",
     s = { telescopeBuiltin.git_status, "status" },
+  },
+  j = {
+    name = "jump to",
+    D = { vim.lsp.buf.declaration, "declaration" },
+    d = { telescopeBuiltin.lsp_definitions, "definition" },
+    i = { telescopeBuiltin.lsp_implementations, "implementation" },
+    r = { telescopeBuiltin.lsp_references, "references" },
+    t = { telescopeBuiltin.lsp_type_definitions, "type definition" },
+  },
+  r = {
+    name = "refactor",
+    f = { vim.lsp.buf.format, "format" },
+    r = { vim.lsp.buf.rename, "rename" },
   },
   s = {
     name = "search",
