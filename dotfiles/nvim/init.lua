@@ -98,6 +98,7 @@ require("nvim-tree").setup()
 -- Set up file search
 require('telescope').setup {
   defaults = {
+    layout_strategy = 'vertical', -- better for thinner windows
     file_ignore_patterns = {
       "^%.git/", -- explicitly filter out any files in the .git directory
     },
