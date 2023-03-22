@@ -147,6 +147,7 @@ lspconfig.hls.setup {
   filetypes = { "haskell", "lhaskell", "cabal" }, -- configure HLS to run on Cabal files too
 }
 lspconfig.pyright.setup {}
+lspconfig.tsserver.setup {}
 
 -- Set up key bindings
 local nvimTreeApi = require("nvim-tree.api")
