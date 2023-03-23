@@ -224,7 +224,7 @@ bindsym Print exec XDG_SCREENSHOTS_DIR=$HOME/Screenshots $bin/shotman --capture 
 bindsym Alt+Print exec XDG_SCREENSHOTS_DIR=$HOME/Screenshots $bin/shotman --capture window
 bindsym Ctrl+Print exec XDG_SCREENSHOTS_DIR=$HOME/Screenshots $bin/shotman --capture region
 
-bindsym $mod+Ctrl+Alt+Shift+Equal exec systemctl suspend
+bindsym $mod+Ctrl+Alt+Shift+Equal exec systemctl suspend -i
 
 # Set the wallpaper and rotate it regularly.
 exec_always WALLPAPERS_DIR=$wallpapers_dir ~/bin/unix/sway-wallpaper-rotation
