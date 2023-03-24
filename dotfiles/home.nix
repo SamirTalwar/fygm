@@ -146,7 +146,7 @@ with pkgs;
       mako
       shotman
       waybar
-      wtype
+      wlogout
       wofi
 
       # Programs.

@@ -49,7 +49,7 @@ include ~/.config/sway/vars
 
 exec swayidle -w \
          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock -f -c 000000'
+         before-sleep 'swaylock --daemonize'
 
 ### Input configuration
 #
@@ -99,7 +99,7 @@ exec_always exec $bin/mako
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+    bindsym $mod+Shift+e exec wlogout --protocol=layer-shell
 #
 # Moving around:
 #
@@ -223,8 +223,6 @@ bindsym $mod+Shift+g resize set width 67ppt
 bindsym Print exec XDG_SCREENSHOTS_DIR=$HOME/Screenshots $bin/shotman --capture output
 bindsym Alt+Print exec XDG_SCREENSHOTS_DIR=$HOME/Screenshots $bin/shotman --capture window
 bindsym Ctrl+Print exec XDG_SCREENSHOTS_DIR=$HOME/Screenshots $bin/shotman --capture region
-
-bindsym $mod+Ctrl+Alt+Shift+Equal exec systemctl suspend -i
 
 # Set the wallpaper and rotate it regularly.
 exec_always WALLPAPERS_DIR=$wallpapers_dir ~/bin/unix/sway-wallpaper-rotation
