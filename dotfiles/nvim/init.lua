@@ -22,9 +22,9 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
 ---- save the file when leaving the buffer
 vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
   pattern = "*",
-  callback = function(args)
+  callback = function(event)
     -- only for normal buffers
-    if not vim.bo[args.buf].buftype then
+    if not vim.bo[event.buf].buftype then
       vim.cmd("update")
     end
   end,
@@ -155,6 +155,21 @@ lspconfig.hls.setup {
 }
 lspconfig.pyright.setup {}
 lspconfig.tsserver.setup {}
+
+-- Reformat code on write, if LSP is initialized.
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(lsp_event)
+    vim.api.nvim_create_autocmd("BufWrite", {
+      buffer = lsp_event.buf,
+      callback = function(event)
+        vim.lsp.buf.format({
+          async = false,
+          bufnr = event.buf,
+        })
+      end,
+    })
+  end
+})
 
 -- Set up key bindings
 local nvimTreeApi = require("nvim-tree.api")
