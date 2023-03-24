@@ -27,6 +27,7 @@ links=(
   ~/.config/nvim/init.lua $dotfiles/nvim/init.lua
   ~/.config/starship.toml $dotfiles/starship.toml
   ~/.config/sway/config $dotfiles/sway/config
+  ~/.config/swaylock/config $dotfiles/swaylock/config
   ~/.config/wofi $dotfiles/wofi
   ~/.ghc/ghci.conf $dotfiles/ghc/ghci.conf
   ~/.gitconfig $dotfiles/gitconfig
