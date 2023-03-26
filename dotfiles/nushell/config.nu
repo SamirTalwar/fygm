@@ -526,3 +526,7 @@ let-env config = {
     }
   ]
 }
+
+# Initialize and source shell improvements (installed with `up):
+source ~/.cache/nushell/starship.nu
+source ~/.cache/nushell/zoxide.nu

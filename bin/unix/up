@@ -18,6 +18,7 @@ ALL_PACKAGE_MANAGERS=(
   apt
   snap
   nix
+  nushell-plugins
   tpm
   docker
 )
@@ -82,6 +83,14 @@ function update-nix {
       run nix-env --upgrade
     fi
   fi
+}
+
+function update-nushell-plugins {
+  mkdir -p "${HOME}/.cache/nushell"
+  starship init nu > "${HOME}/.cache/nushell/starship.nu"
+  echo 'Updated starship.'
+  zoxide init nushell > "${HOME}/.cache/nushell/zoxide.nu"
+  echo 'Updated zoxide.'
 }
 
 function update-tpm {

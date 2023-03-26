@@ -84,13 +84,14 @@ with pkgs;
     entr
     fswatch
     fzf
-    starship
     tmux
     urlview
     watch
     zsh
 
     nushell
+    starship
+    zoxide
 
     # Networking
     curl
