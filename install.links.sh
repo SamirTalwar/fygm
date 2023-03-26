@@ -25,6 +25,8 @@ links=(
   ~/.config/mako $dotfiles/mako
   ~/.config/nix/nix.conf $dotfiles/nix.conf
   ~/.config/nvim/init.lua $dotfiles/nvim/init.lua
+  ~/.config/nushell/config.nu $dotfiles/nushell/config.nu
+  ~/.config/nushell/env.nu $dotfiles/nushell/env.nu
   ~/.config/starship.toml $dotfiles/starship.toml
   ~/.config/sway/config $dotfiles/sway/config
   ~/.config/swaylock/config $dotfiles/swaylock/config

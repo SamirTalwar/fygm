@@ -90,6 +90,8 @@ with pkgs;
     watch
     zsh
 
+    nushell
+
     # Networking
     curl
     httpie
