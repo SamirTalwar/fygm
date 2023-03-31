@@ -25,8 +25,6 @@ links=(
   ~/.config/mako $dotfiles/mako
   ~/.config/nix/nix.conf $dotfiles/nix.conf
   ~/.config/nvim/init.lua $dotfiles/nvim/init.lua
-  ~/.config/nushell/config.nu $dotfiles/nushell/config.nu
-  ~/.config/nushell/env.nu $dotfiles/nushell/env.nu
   ~/.config/starship.toml $dotfiles/starship.toml
   ~/.config/sway/config $dotfiles/sway/config
   ~/.config/swaylock/config $dotfiles/swaylock/config
@@ -48,12 +46,16 @@ if [[ $(uname -s) == 'Linux' ]]; then
     ~/.config/fontconfig/fonts.conf $dotfiles/fonts.conf
     ~/.config/i3 $dotfiles/i3
     ~/.config/i3status $dotfiles/i3status
+    ~/.config/nushell/config.nu $dotfiles/nushell/config.nu
+    ~/.config/nushell/env.nu $dotfiles/nushell/env.nu
   )
 fi
 
 if [[ $(uname -s) == 'Darwin' ]]; then
   links+=(
     $macos_application_support/Code/User/settings.json $dotfiles/code/settings.json
+    $macos_application_support/nushell/config.nu $dotfiles/nushell/config.nu
+    $macos_application_support/nushell/env.nu $dotfiles/nushell/env.nu
   )
 fi
 
