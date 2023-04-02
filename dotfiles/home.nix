@@ -113,7 +113,6 @@ with pkgs;
 
     # Development
     difftastic # git diffs
-    gcc
     git
     git-lfs
     gnumake
