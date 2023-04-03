@@ -141,7 +141,11 @@ with pkgs;
       traceroute
 
       # Fonts.
+      font-awesome
       iosevka
+      (nerdfonts.override {
+        fonts = [ "NerdFontsSymbolsOnly" ];
+      })
 
       # Sway tools.
       bemoji
@@ -208,6 +212,8 @@ with pkgs;
       }
     ];
   };
+
+  fonts.fontconfig.enable = stdenv.isLinux;
 
   targets.genericLinux.enable = stdenv.isLinux;
 
