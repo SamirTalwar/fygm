@@ -290,7 +290,10 @@ let-env config = {
 
   hooks: {
     pre_prompt: [{ ||
-      null  # replace with source code to run before the prompt is shown
+      # Set up direnv
+      let direnv = (direnv export json | from json)
+      let direnv = if ($direnv | length) == 1 { $direnv } else { {} }
+      $direnv | load-env
     }]
     pre_execution: [{ ||
       null  # replace with source code to run before the repl input is run
