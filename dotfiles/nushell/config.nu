@@ -527,6 +527,18 @@ let-env config = {
   ]
 }
 
+# Set the PATH:
+let-env PATH = do {
+  let mac_path = if $nu.os-info.name == "macos" { [~/bin/mac] } else { [] }
+  let unix_path = [
+    ~/bin/unix
+    ~/.local/bin
+    ~/.cargo/bin
+    ~/go/bin
+  ]
+  $mac_path ++ $unix_path ++ $env.PATH
+}
+
 # Initialize and source shell improvements (installed with `up):
 source ~/.cache/nushell/starship.nu
 source ~/.cache/nushell/zoxide.nu
