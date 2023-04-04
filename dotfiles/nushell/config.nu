@@ -542,6 +542,9 @@ let-env PATH = do {
   $mac_path ++ $unix_path ++ $env.PATH
 }
 
+# Prepend the user's channels to the NIX_PATH:
+let-env NIX_PATH = [$"($nu.home-path)/.nix-defexpr/channels"] ++ ($env | get -i NIX_PATH) | filter { |x| $x | is-empty | not $in } | str join (char esep)
+
 # Initialize and source shell improvements (installed with `up):
 source ~/.cache/nushell/starship.nu
 source ~/.cache/nushell/zoxide.nu
