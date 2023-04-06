@@ -129,6 +129,8 @@ with pkgs;
       terminal-notifier
     ]
     else [
+      # Basics.
+      gcc
       glibcLocales
 
       # On macOS, we use `pbcopy` and `pbpaste`.
