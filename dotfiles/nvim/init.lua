@@ -53,6 +53,29 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+---- Update plugins weekly
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    local lazy_update_timestamp_path = vim.env.HOME .. "/.cache/nvim/update.timestamp"
+    local lazy_update_timestamp_file = io.open(lazy_update_timestamp_path, "r")
+    if lazy_update_timestamp_file then
+      lazy_update_timestamp = tonumber(lazy_update_timestamp_file:read("a"))
+      print(lazy_update_timestamp)
+      lazy_update_timestamp_file:close()
+    else
+      lazy_update_timestamp = 0
+    end
+
+    current_timestamp = os.time()
+    if current_timestamp > lazy_update_timestamp + (60 * 60 * 24 * 7) then -- update weekly
+      require("lazy").update()
+      lazy_update_timestamp_file = assert(io.open(lazy_update_timestamp_path, "w"))
+      lazy_update_timestamp_file:write(tostring(current_timestamp))
+      lazy_update_timestamp_file:close()
+    end
+  end
+})
+
 -- Initialize plugins
 local plugins = {
   { "folke/tokyonight.nvim", lazy = false }, -- pretty colors
