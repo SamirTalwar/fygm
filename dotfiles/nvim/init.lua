@@ -216,7 +216,8 @@ wk.register({
   },
   d = {
     name = "diagnostics",
-    d = { telescopeBuiltin.diagnostics, "show" },
+    d = { telescopeBuiltin.diagnostics, "all" },
+    f = { vim.diagnostic.open_float, "show" },
     n = { vim.diagnostic.goto_next, "go to next" },
     p = { vim.diagnostic.goto_prev, "go to previous" },
   },
