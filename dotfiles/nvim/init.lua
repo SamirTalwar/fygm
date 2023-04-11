@@ -1,6 +1,7 @@
 -- Visuals
 vim.opt.number = true -- show line numbers
 vim.opt.cursorline = true -- highlight the line with the cursor
+vim.opt.colorcolumn = "81,121" -- mark 80 and 120 columns
 vim.opt.termguicolors = true -- enable 24-bit colors
 
 -- Indentation
