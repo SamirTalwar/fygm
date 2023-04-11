@@ -224,6 +224,7 @@ wk.register({
     name = "files",
     f = { function() telescopeBuiltin.find_files({ hidden = true }) end, "all" },
     r = { telescopeBuiltin.oldfiles, "recent" },
+    s = { "<cmd>write<cr>", "save" },
     t = { function() nvimTreeApi.tree.open({ find_file = true }) end, "tree" },
   },
   g = {
