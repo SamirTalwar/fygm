@@ -178,7 +178,15 @@ lspconfig.hls.setup {
   filetypes = { "haskell", "lhaskell", "cabal" }, -- configure HLS to run on Cabal files too
 }
 lspconfig.pyright.setup {}
-lspconfig.rust_analyzer.setup {}
+lspconfig.rust_analyzer.setup {
+  settings = {
+    ["rust-analyzer"] = {
+      check = {
+        command = "clippy",
+      },
+    },
+  },
+}
 lspconfig.tsserver.setup {}
 
 -- Reformat code on write, if LSP is initialized.
