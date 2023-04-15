@@ -208,6 +208,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
 local nvimTreeApi = require("nvim-tree.api")
 local telescopeBuiltin = require("telescope.builtin")
 local wk = require("which-key")
+
+---- bind my foot pedal to insert mode
+----   on press, sends <F12>
+----   on release, sends <F11>
+vim.keymap.set("n", "<F12>", "i", { noremap = true })
+vim.keymap.set({"i", "v"}, "<F12>", "", { noremap = true }) -- do nothing when already there
+vim.keymap.set({"i", "v"}, "<F11>", "<Esc>", { noremap = true })
+
+---- most keybindings are behind the Leader key
 wk.register({
   a = { vim.lsp.buf.code_action, "action" },
   b = {
