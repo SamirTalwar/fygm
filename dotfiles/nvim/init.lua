@@ -262,3 +262,8 @@ wk.register({
     w = { telescopeBuiltin.grep_string, "current word" },
   },
 }, { prefix = "<leader>" })
+
+---- but not everything
+wk.register({
+  K = { vim.lsp.buf.hover, "hover" },
+})
