@@ -32,7 +32,6 @@ links=(
   ~/.ghc/ghci.conf $dotfiles/ghc/ghci.conf
   ~/.gitconfig $dotfiles/gitconfig
   ~/.gitignore $dotfiles/gitignore
-  ~/.gnupg/gpg-agent.conf $dotfiles/gpg-agent.conf
   ~/.racketrc $dotfiles/racketrc
   ~/.stack/config.yaml $dotfiles/stack/config.yaml
   ~/.tmux.conf $dotfiles/tmux.conf
@@ -48,6 +47,7 @@ if [[ $(uname -s) == 'Linux' ]]; then
     ~/.config/i3status $dotfiles/i3status
     ~/.config/nushell/config.nu $dotfiles/nushell/config.nu
     ~/.config/nushell/env.nu $dotfiles/nushell/env.nu
+    ~/.gnupg/gpg-agent.conf $dotfiles/macos/gpg-agent.conf
   )
 fi
 
