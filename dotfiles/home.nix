@@ -2,8 +2,10 @@
 , pkgs
 , ...
 }:
+with pkgs;
 let
   nixgl = import <nixgl> { };
+  # Wrap Alacritty in nixGL.
   alacritty = pkgs.stdenv.mkDerivation {
     name = pkgs.alacritty.name;
     version = pkgs.alacritty.version;
@@ -20,6 +22,7 @@ let
       chmod +x $out/bin/alacritty
     '';
   };
+  # Bemoji isn't in nixpkgs yet.
   bemoji = pkgs.stdenv.mkDerivation {
     name = "bemoji";
     src = pkgs.fetchFromGitHub {
@@ -33,11 +36,18 @@ let
       cp ./bemoji $out/bin/
     '';
   };
+  # Fix screen-sharing in Slack on Wayland.
+  slack = pkgs.slack.overrideAttrs (oldAttrs: {
+    # Add the '--enable-features=WebRTCPipeWireCapturer' flag.
+    postInstall = (oldAttrs.postInstallPhase or "") + ''
+      sed -i -E 's/^(Exec=[^ ]+)/\1 --enable-features=WebRTCPipeWireCapturer/' $out/share/applications/slack.desktop
+    '';
+  });
+  # Install completions from zsh-completions.
   zsh-completions = pkgs.writeTextDir "share/zsh-completions/zsh-completions.zsh" ''
     fpath=(${pkgs.zsh-completions}/share/zsh/site-functions $fpath)
   '';
 in
-with pkgs;
 {
   news.display = "silent";
 
@@ -159,7 +169,9 @@ with pkgs;
 
       # Programs.
       alacritty
+      discord
       firefox
+      slack
     ]
   );
 
