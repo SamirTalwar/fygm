@@ -9,6 +9,21 @@ vim.opt.expandtab = true -- use spaces, not tabs, by default
 vim.opt.smartindent = true -- automatically indent and dedent
 vim.opt.shiftwidth = 2 -- shift left and right by 2
 vim.opt.softtabstop = 2 -- insert 2 spaces when typing <Tab>
+vim.opt.tabstop = 2 -- render tabs as 2 spaces
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+  pattern = "*.go",
+  callback = function()
+    vim.opt_local.expandtab = false
+  end,
+})
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+  pattern = "*.rs",
+  callback = function()
+    vim.opt_local.shiftwidth = 4
+    vim.opt_local.softtabstop = 4
+    vim.opt_local.tabstop = 4
+  end,
+})
 
 -- Search
 vim.opt.ignorecase = true -- ignore case when searching
