@@ -39,25 +39,26 @@ links=(
   ~/.zshrc.fygm $dotfiles/zshrc
 )
 
-if [[ $(uname -s) == 'Linux' ]]; then
-  links+=(
-    ~/.config/Code/User/settings.json $dotfiles/code/settings.json
-    ~/.config/fontconfig/fonts.conf $dotfiles/fonts.conf
-    ~/.config/i3 $dotfiles/i3
-    ~/.config/i3status $dotfiles/i3status
-    ~/.config/nushell/config.nu $dotfiles/nushell/config.nu
-    ~/.config/nushell/env.nu $dotfiles/nushell/env.nu
-  )
-fi
-
-if [[ $(uname -s) == 'Darwin' ]]; then
-  links+=(
-    $macos_application_support/Code/User/settings.json $dotfiles/code/settings.json
-    $macos_application_support/nushell/config.nu $dotfiles/nushell/config.nu
-    $macos_application_support/nushell/env.nu $dotfiles/nushell/env.nu
-    ~/.gnupg/gpg-agent.conf $dotfiles/macos/gpg-agent.conf
-  )
-fi
+case $(uname -s) in
+  'Linux')
+    links+=(
+      ~/.config/Code/User/settings.json $dotfiles/code/settings.json
+      ~/.config/fontconfig/fonts.conf $dotfiles/fonts.conf
+      ~/.config/i3 $dotfiles/i3
+      ~/.config/i3status $dotfiles/i3status
+      ~/.config/nushell/config.nu $dotfiles/nushell/config.nu
+      ~/.config/nushell/env.nu $dotfiles/nushell/env.nu
+    )
+    ;;
+  'Darwin')
+    links+=(
+      $macos_application_support/Code/User/settings.json $dotfiles/code/settings.json
+      $macos_application_support/nushell/config.nu $dotfiles/nushell/config.nu
+      $macos_application_support/nushell/env.nu $dotfiles/nushell/env.nu
+      ~/.gnupg/gpg-agent.conf $dotfiles/macos/gpg-agent.conf
+    )
+    ;;
+esac
 
 now 'Symlinking files'
 for dest src in $links; do
