@@ -43,6 +43,13 @@ let
       sed -i -E 's/^(Exec=[^ ]+)/\1 --enable-features=WebRTCPipeWireCapturer/' $out/share/applications/slack.desktop
     '';
   });
+  # A pretty color theme.
+  tokyo-night = pkgs.fetchFromGitHub {
+    owner = "folke";
+    repo = "tokyonight.nvim";
+    rev = "ab0ac67f4f32f44c3480f4b81ed90e11cb4f3763";
+    sha256 = "37kgD+UAcW2L0uw83Ms8DW6/lwoRTMc7SwBW5IhaTtg=";
+  };
   # Install completions from zsh-completions.
   zsh-completions = pkgs.writeTextDir "share/zsh-completions/zsh-completions.zsh" ''
     fpath=(${pkgs.zsh-completions}/share/zsh/site-functions $fpath)
@@ -177,6 +184,17 @@ in
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  programs.alacritty = {
+    enable = true;
+    package = alacritty;
+    settings = {
+      import = [
+        "${tokyo-night}/extras/alacritty/tokyonight_night.yml"
+        "~/.config/alacritty/custom.yml"
+      ];
+    };
+  };
 
   programs.bash = {
     enable = true;
