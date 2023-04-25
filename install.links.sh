@@ -47,7 +47,6 @@ if [[ $(uname -s) == 'Linux' ]]; then
     ~/.config/i3status $dotfiles/i3status
     ~/.config/nushell/config.nu $dotfiles/nushell/config.nu
     ~/.config/nushell/env.nu $dotfiles/nushell/env.nu
-    ~/.gnupg/gpg-agent.conf $dotfiles/macos/gpg-agent.conf
   )
 fi
 
@@ -56,6 +55,7 @@ if [[ $(uname -s) == 'Darwin' ]]; then
     $macos_application_support/Code/User/settings.json $dotfiles/code/settings.json
     $macos_application_support/nushell/config.nu $dotfiles/nushell/config.nu
     $macos_application_support/nushell/env.nu $dotfiles/nushell/env.nu
+    ~/.gnupg/gpg-agent.conf $dotfiles/macos/gpg-agent.conf
   )
 fi
 
