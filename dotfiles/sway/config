@@ -78,6 +78,7 @@ exec_always exec $bin/mako
 #
     # Start a terminal
     bindsym $mod+Return exec $term
+    bindsym $mod+Shift+Return exec $term -e $SHELL
 
     # Kill focused window
     bindsym $mod+Shift+q kill
