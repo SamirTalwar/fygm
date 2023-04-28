@@ -102,6 +102,7 @@ local plugins = {
   { "christoomey/vim-tmux-navigator" }, -- navigate tmux easily
   { "folke/which-key.nvim" }, -- show keybinding help as you type
 
+  { "akinsho/bufferline.nvim" }, -- buffers as tabs
   { "nvim-lualine/lualine.nvim", -- a useful status bar
     dependencies = {
       "nvim-tree/nvim-web-devicons",
@@ -132,13 +133,14 @@ require("lazy").setup(plugins)
 vim.cmd("colorscheme tokyonight-night") -- seems to work best with my Alacritty theme
 
 -- Initialize plugins that need it
-require('lualine').setup()
+require("bufferline").setup()
+require("lualine").setup()
 require("nvim-tree").setup()
 
 -- Set up fuzzy search and the fancy selection UI
-require('telescope').setup {
+require("telescope").setup {
   defaults = {
-    layout_strategy = 'vertical', -- better for thinner windows
+    layout_strategy = "vertical", -- better for thinner windows
     file_ignore_patterns = {
       "^%.git/", -- explicitly filter out any files in the .git directory
     },
@@ -237,6 +239,11 @@ wk.register({
   b = {
     name = "buffers",
     b = { telescopeBuiltin.buffers, "all" },
+    d = { "<cmd>bdelete<cr>", "delete" },
+    n = { "<cmd>BufferLineCycleNext<cr>", "next" },
+    p = { "<cmd>BufferLineCyclePrev<cr>", "previous" },
+    N = { "<cmd>BufferLineMoveNext<cr>", "move next" },
+    P = { "<cmd>BufferLineMovePrev<cr>", "move previous" },
   },
   d = {
     name = "diagnostics",
@@ -281,4 +288,8 @@ wk.register({
 ---- but not everything
 wk.register({
   K = { vim.lsp.buf.hover, "hover" },
+  ["<C-Left>"] = { "<cmd>BufferLineCyclePrev<cr>", "previous buffer" },
+  ["<C-Right>"] = { "<cmd>BufferLineCycleNext<cr>", "next buffer" },
+  ["<C-S-Left>"] = { "<cmd>BufferLineMovePrev<cr>", "move buffer to previous" },
+  ["<C-S-Right>"] = { "<cmd>BufferLineMoveNext<cr>", "move buffer to next" },
 })
