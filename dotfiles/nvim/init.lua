@@ -213,8 +213,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
       buffer = lsp_event.buf,
       callback = function(event)
         vim.lsp.buf.format({
-          async = false,
           bufnr = event.buf,
+          async = false,
+          timeout_ms = 250,
         })
       end,
     })
