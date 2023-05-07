@@ -6,6 +6,7 @@ set -o pipefail
 
 fonts=(
   font-iosevka
+  font-symbols-only-nerd-font
 )
 
 brew_cli_programs=(
