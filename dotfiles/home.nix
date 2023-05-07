@@ -54,6 +54,12 @@ let
   zsh-completions = pkgs.writeTextDir "share/zsh-completions/zsh-completions.zsh" ''
     fpath=(${pkgs.zsh-completions}/share/zsh/site-functions $fpath)
   '';
+  # empty package, for shenanigans
+  empty = builtins.derivation {
+    name = "empty";
+    system = builtins.currentSystem;
+    builder = pkgs.writeShellScript "null.sh" "${pkgs.coreutils}/bin/mkdir $out";
+  };
 in
 {
   news.display = "silent";
@@ -187,7 +193,7 @@ in
 
   programs.alacritty = {
     enable = true;
-    package = alacritty;
+    package = if stdenv.isDarwin then empty else alacritty;
     settings = {
       import = [
         "${tokyo-night}/extras/alacritty/tokyonight_night.yml"
