@@ -4,6 +4,9 @@ vim.opt.cursorline = true -- highlight the line with the cursor
 vim.opt.colorcolumn = "81,121" -- mark 80 and 120 columns
 vim.opt.termguicolors = true -- enable 24-bit colors
 
+-- Editing
+vim.opt.commentstring = '# %s' -- default to '#' as a comment character
+
 -- Indentation
 vim.opt.expandtab = true -- use spaces, not tabs, by default
 vim.opt.smartindent = true -- automatically indent and dedent
@@ -98,6 +101,7 @@ local plugins = {
 
   { "tpope/vim-repeat" }, -- better repeat (`.`) semantics
   { "tpope/vim-surround" }, -- add, remove, and modify surrounding characters
+  { "tpope/vim-commentary" }, -- comment and uncomment lines
 
   { "christoomey/vim-tmux-navigator" }, -- navigate tmux easily
   { "folke/which-key.nvim" }, -- show keybinding help as you type
