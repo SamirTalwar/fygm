@@ -14,7 +14,7 @@ window:
     y: 1
 
 font:
-  size: 16
+  size: 14
   normal:
     family: Iosevka
     style: Light
