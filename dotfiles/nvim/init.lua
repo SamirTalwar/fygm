@@ -39,6 +39,8 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
   command = "checktime",
 })
 ---- save the file when leaving the buffer
+vim.opt.autowrite = true
+vim.opt.autowriteall = true
 vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
   pattern = "*",
   callback = function(event)
@@ -106,7 +108,11 @@ local plugins = {
   { "christoomey/vim-tmux-navigator" }, -- navigate tmux easily
   { "folke/which-key.nvim" }, -- show keybinding help as you type
 
-  { "akinsho/bufferline.nvim" }, -- buffers as tabs
+  { "akinsho/bufferline.nvim", -- buffers as tabs
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+  },
   { "nvim-lualine/lualine.nvim", -- a useful status bar
     dependencies = {
       "nvim-tree/nvim-web-devicons",
