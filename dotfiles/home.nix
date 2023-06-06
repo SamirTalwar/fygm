@@ -104,12 +104,11 @@ in
     autojump
     bash
     direnv
-    entr
-    fswatch
     fzf
     tmux
     urlview
     watch
+    watchexec
     zsh
 
     nushell
