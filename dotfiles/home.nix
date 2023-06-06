@@ -85,16 +85,12 @@ in
     findutils
     moreutils
     bat
-    dos2unix
-    fd
+    bottom
     gawk
     gnugrep
     gnupg
     gnused
-    hello
-    htop
     jq
-    ncdu
     ripgrep
     sd
     tree
@@ -118,15 +114,10 @@ in
     # Networking
     curl
     httpie
-    httping
     netcat-gnu
     openssh
     socat
     wget
-
-    # Image Manipulation
-    imagemagick
-    pngcrush
 
     # Editors
     aspell
@@ -136,15 +127,11 @@ in
     # Development
     difftastic # git diffs
     git
-    git-lfs
     gnumake
     nixpkgs-fmt
-    nodejs
     nodePackages.prettier
     python3
-    ruby
     shellcheck
-    subversion
   ] ++ (
     if stdenv.isDarwin
     then [
