@@ -154,6 +154,16 @@ require("telescope").setup {
     file_ignore_patterns = {
       "^%.git/", -- explicitly filter out any files in the .git directory
     },
+    vimgrep_arguments = {
+      "rg",
+      "--color=never",
+      "--no-heading",
+      "--with-filename",
+      "--line-number",
+      "--column",
+      "--smart-case",
+      "--hidden",
+    },
   },
   extensions = {
     ["ui-select"] = {
