@@ -1,6 +1,0 @@
-#!/usr/bin/env zsh
-
-set -e
-set -u
-
-exec $(dirname $0)/vim $@
