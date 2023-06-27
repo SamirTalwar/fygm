@@ -24,12 +24,10 @@ if [[ $(uname -s) == 'Linux' && $(uname -v) =~ NixOS ]]; then
   sudo nix-channel --add 'https://nixos.org/channels/nixos-unstable' nixos
   nix-channel --add 'https://nixos.org/channels/nixos-unstable' nixpkgs
   nix-channel --add 'https://github.com/rycee/home-manager/archive/master.tar.gz' home-manager
-  nix-channel --add 'https://github.com/guibou/nixGL/archive/main.tar.gz' nixgl
   nix-channel --update
 else
   nix-channel --add 'https://nixos.org/channels/nixpkgs-unstable' nixpkgs
   nix-channel --add 'https://github.com/rycee/home-manager/archive/master.tar.gz' home-manager
-  nix-channel --add 'https://github.com/guibou/nixGL/archive/main.tar.gz' nixgl
   nix-channel --update
 fi
 

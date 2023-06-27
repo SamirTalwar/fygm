@@ -4,24 +4,6 @@
 }:
 with pkgs;
 let
-  nixgl = import <nixgl> { };
-  # Wrap Alacritty in nixGL.
-  alacritty = pkgs.stdenv.mkDerivation {
-    name = pkgs.alacritty.name;
-    version = pkgs.alacritty.version;
-    src = pkgs.alacritty.src;
-    buildInputs = [ pkgs.alacritty ];
-    buildPhase = "true";
-    installPhase = ''
-      cp -R --no-preserve=mode ${pkgs.alacritty} $out
-      rm $out/bin/alacritty
-      (
-        echo '#!${pkgs.stdenv.shell}'
-        echo 'exec ${nixgl.auto.nixGLDefault}/bin/nixGL ${pkgs.alacritty}/bin/alacritty "$@"'
-      ) > $out/bin/alacritty
-      chmod +x $out/bin/alacritty
-    '';
-  };
   # Bemoji isn't in nixpkgs yet.
   bemoji = pkgs.stdenv.mkDerivation {
     name = "bemoji";
