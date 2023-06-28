@@ -36,12 +36,8 @@ if not ($current_branch | str starts-with $branch_prefix) {
 
 let hostname = ($origin_url | sed -r 's#^(\w+://)?([0-9A-Za-z_-]+@)?([^:/]+).*$#\3#')
 let repository = ($origin_url | sed -r 's#^(\w+://)?([0-9A-Za-z_-]+@)?[^:/]+[:/]([0-9A-Za-z_-]+/[0-9A-Za-z_-]+)(\.git)?$#\3#')
-let repository_owner = ($repository | sed -r 's#^(.*)/.*$#\1#')
-let repository_name = ($repository | sed -r 's#^.*/(.*)$#\1#')
 std log debug $'hostname: ($hostname)'
 std log debug $'repository: ($repository)'
-std log debug $'repository owner: ($repository_owner)'
-std log debug $'repository name: ($repository_name)'
 
 let pull_request_url_record = (do {
   if $hostname =~ 'github' {
@@ -49,19 +45,18 @@ let pull_request_url_record = (do {
       {
         scheme: 'https'
         host: $hostname
-        path: ([$repository_owner $repository_name 'compare' $current_branch] | url build-path)
+        path: $'($repository)/compare/($current_branch | url encode -a)'
         query: ({expand: 1} | url build-query)
       }
     } else {
+      let repository_owner = ($repository | sed -r 's#^(.*)/.*$#\1#')
       let upstream_repository = ($upstream_url | sed -r 's#^(\w+://)?([0-9A-Za-z_-]+@)?[^:/]+[:/]([0-9A-Za-z_-]+/[0-9A-Za-z_-]+)(\.git)?$#\3#')
-      let upstream_repository_owner = ($upstream_repository | sed -r 's#^(.*)/.*$#\1#')
-      let upstream_repository_name = ($upstream_repository | sed -r 's#^.*/(.*)$#\1#')
       let stripped_branch = ($main_branch | sed -r 's#^origin/(.*)$#\1#')
       let target = $'($stripped_branch)...($repository_owner):($current_branch)'
       {
         scheme: 'https'
         host: $hostname
-        path: ([$upstream_repository_owner $upstream_repository_name 'compare' $target] | url build-path)
+        path: $'($upstream_repository)/compare/($target | url encode -a)'
         query: ({expand: 1} | url build-query)
       }
     }
@@ -70,7 +65,7 @@ let pull_request_url_record = (do {
     {
       scheme: 'https'
       host: $hostname
-      path: ([$repository_owner $repository_name 'merge_requests' 'new'] | url build-path)
+      path: $'($repository)/merge_requests/new'
       query: ({
         'merge_request[source_branch]': $current_branch
         'merge_request[target_branch]': $stripped_branch
@@ -85,10 +80,6 @@ std log debug $'pull request URL: ($pull_request_url)'
 
 git push -u origin $current_branch
 start $pull_request_url
-
-def "url build-path" [] {
-  $in | each { |x| $x | url encode } | str join '/'
-}
 
 def successful [] {
   $in | complete | $in.exit_code == 0
