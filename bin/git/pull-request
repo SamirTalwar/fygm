@@ -1,201 +1,100 @@
-#!/usr/bin/env nix-shell
-#!nix-shell -i runhaskell -p git ghc.withPackages(ps:\ with\ ps;\ [attoparsec\ directory\ http-types\ process\ text])
+#!/usr/bin/env nu
 
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TupleSections #-}
+use std
 
-import Control.Applicative (liftA2, optional, (<|>))
-import Control.Monad (mfilter, unless, when)
-import Data.Attoparsec.Text hiding (parse)
-import qualified Data.Binary.Builder
-import qualified Data.Char as Char
-import Data.Functor (($>))
-import qualified Data.List as List
-import qualified Data.Maybe as Maybe
-import Data.Text (Text)
-import qualified Data.Text as Text
-import qualified Data.Text.Encoding
-import qualified Data.Text.IO as Text.IO
-import qualified Data.Text.Lazy
-import qualified Data.Text.Lazy.Encoding
-import qualified Network.HTTP.Types.URI as URI
-import System.Directory (findExecutable)
-import System.Environment (getArgs)
-import System.Exit (ExitCode (..), exitFailure)
-import System.IO (stderr)
-import System.Process (callProcess, proc, readCreateProcess, readCreateProcessWithExitCode)
+let origin_url = (git config --get remote.origin.url)
+std log debug $'remote origin: ($origin_url)'
+if ($origin_url | is-empty) {
+  abort 'There is nowhere to raise the pull request. Consider hosting this somewhere.'
+}
 
-data Service = GitHub | BitBucket | GitLab
-  deriving (Show, Enum)
+let upstream_url = (git config --get remote.upstream.url)
+std log debug $'remote upstream: ($upstream_url)'
 
-newtype Hostname = Hostname {unHostname :: Text}
-  deriving (Show)
+let main_branch = (git config --get --default=origin/main branch.main)
+std log debug $'main branch: ($main_branch)'
 
-newtype Repository = Repository {repositorySegments :: [Text]}
-  deriving (Show)
+let current_branch = (git symbolic-ref --short HEAD)
+std log debug $'current branch: ($current_branch)'
 
-unRepository :: Repository -> Text
-unRepository = Text.intercalate "/" . repositorySegments
+let custom_branch_prefix = (git config --get $'branch.($current_branch).prefix')
+let default_branch_prefix = (git config --get branch.prefix)
+let branch_prefix = if ($custom_branch_prefix | is-empty) { $default_branch_prefix } else { $custom_branch_prefix }
+std log debug $'branch prefix: ($branch_prefix)'
 
-newtype Branch = Branch {unBranch :: Text}
-  deriving (Eq, Show)
+if ($current_branch | is-empty) {
+  abort 'You are not on a branch.'
+}
 
-hosts = [GitHub, BitBucket, GitLab]
+if $current_branch == $main_branch and ($upstream_url | is-empty) {
+  abort $'Do not work on the "($main_branch)" branch.'
+}
 
-openUrlExecutables :: [String]
-openUrlExecutables = ["xdg-open", "open"]
+if not ($current_branch | str starts-with $branch_prefix) {
+  abort $'The branch name must start with "($branch_prefix)".'
+}
 
-main = do
-  args <- map Text.pack <$> getArgs
-  openUrl <- findOpenUrlExecutable
+let hostname = ($origin_url | sed -r 's#^(\w+://)?([0-9A-Za-z_-]+@)?([^:/]+).*$#\3#')
+let repository = ($origin_url | sed -r 's#^(\w+://)?([0-9A-Za-z_-]+@)?[^:/]+[:/]([0-9A-Za-z_-]+/[0-9A-Za-z_-]+)(\.git)?$#\3#')
+let repository_owner = ($repository | sed -r 's#^(.*)/.*$#\1#')
+let repository_name = ($repository | sed -r 's#^.*/(.*)$#\1#')
+std log debug $'hostname: ($hostname)'
+std log debug $'repository: ($repository)'
+std log debug $'repository owner: ($repository_owner)'
+std log debug $'repository name: ($repository_name)'
 
-  maybeUrl <- maybeCaptureGit "config" ["--get", "remote.origin.url"]
-  url <- case maybeUrl of
-    Just url -> return url
-    Nothing -> abort "There's nowhere to raise the pull request. Consider hosting this somewhere."
+let pull_request_url_record = (do {
+  if $hostname =~ 'github' {
+    if ($upstream_url | is-empty) {
+      {
+        scheme: 'https'
+        host: $hostname
+        path: ([$repository_owner $repository_name 'compare' $current_branch] | url build-path)
+        query: ({expand: 1} | url build-query)
+      }
+    } else {
+      let upstream_repository = ($upstream_url | sed -r 's#^(\w+://)?([0-9A-Za-z_-]+@)?[^:/]+[:/]([0-9A-Za-z_-]+/[0-9A-Za-z_-]+)(\.git)?$#\3#')
+      let upstream_repository_owner = ($upstream_repository | sed -r 's#^(.*)/.*$#\1#')
+      let upstream_repository_name = ($upstream_repository | sed -r 's#^.*/(.*)$#\1#')
+      let stripped_branch = ($main_branch | sed -r 's#^origin/(.*)$#\1#')
+      let target = $'($stripped_branch)...($repository_owner):($current_branch)'
+      {
+        scheme: 'https'
+        host: $hostname
+        path: ([$upstream_repository_owner $upstream_repository_name 'compare' $target] | url build-path)
+        query: ({expand: 1} | url build-query)
+      }
+    }
+  } else if $hostname =~ 'gitlab' {
+    let stripped_branch = ($main_branch | sed -r 's#^origin/(.*)$#\1#')
+    {
+      scheme: 'https'
+      host: $hostname
+      path: ([$repository_owner $repository_name 'merge_requests' 'new'] | url build-path)
+      query: ({
+        'merge_request[source_branch]': $current_branch
+        'merge_request[target_branch]': $stripped_branch
+      } | url build-query)
+    }
+  } else {
+    abort $'I do not know how make a pull request to "($hostname)".'
+  }
+})
+let pull_request_url = ($pull_request_url_record | url join)
+std log debug $'pull request URL: ($pull_request_url)'
 
-  (service, hostname, repository) <-
-    case Maybe.mapMaybe (\service -> (service,) <$> parseUrl url service) hosts of
-      [(service, (hostname, repository))] -> return (service, hostname, repository)
-      _ -> abort $ "I don't know how to open a pull request for " <> url <> "."
+git push -u origin $current_branch
+start $pull_request_url
 
-  maybeUpstreamUrl <- maybeCaptureGit "config" ["--get", "remote.upstream.url"]
-  let maybeUpstreamRepository = fmap snd . flip parseUrl service =<< maybeUpstreamUrl
+def "url build-path" [] {
+  $in | each { |x| $x | url encode } | str join '/'
+}
 
-  branch <- Branch <$> captureGit "name" []
-  mainBranch <- Branch <$> captureGit "main" []
-  when (branch == mainBranch && Maybe.isNothing maybeUpstreamRepository) $
-    abort $ "Do not work on the \"" <> unBranch mainBranch <> "\" branch."
+def successful [] {
+  $in | complete | $in.exit_code == 0
+}
 
-  customPrefix <- maybeCaptureGit "config" ["--get", "branch." <> unBranch branch <> ".prefix"]
-  prefix <- maybeCaptureGit "config" ["--get", "branch.prefix"]
-  let expectedBranchPrefix = Maybe.fromMaybe "" (customPrefix <|> prefix)
-  unless (expectedBranchPrefix `isPrefixOfBranch` branch) $
-    abort $ "The branch name must start with \"" <> expectedBranchPrefix <> "\"."
-
-  git "first-push" args
-
-  let prUrl = pullRequestUrl service hostname maybeUpstreamRepository repository mainBranch branch
-  Text.IO.putStrLn $ "Opening " <> prUrl <> " ..."
-  callProcess openUrl [Text.unpack prUrl]
-
-abort :: Text -> IO a
-abort message = do
-  Text.IO.hPutStrLn stderr message
-  exitFailure
-
-findOpenUrlExecutable :: IO FilePath
-findOpenUrlExecutable =
-  mapM findExecutable openUrlExecutables
-    >>= maybe (abort "Could not find a way to open a URL.") return . foldr1 (<|>)
-
-git :: Text -> [Text] -> IO ()
-git subcommand args =
-  callProcess "git" (Text.unpack subcommand : map Text.unpack args)
-
-captureGit :: Text -> [Text] -> IO Text
-captureGit subcommand args = do
-  Text.strip . Text.pack <$> readCreateProcess (proc "git" (Text.unpack subcommand : map Text.unpack args)) ""
-
-maybeCaptureGit :: Text -> [Text] -> IO (Maybe Text)
-maybeCaptureGit subcommand args = optional (captureGit subcommand args)
-
-pullRequestUrl :: Service -> Hostname -> Maybe Repository -> Repository -> Branch -> Branch -> Text
-pullRequestUrl GitHub (Hostname hostname) Nothing (Repository repository) (Branch mainBranch) (Branch branch) =
-  "https://" <> hostname <> encodePath (repository ++ ["compare", branch]) [("expand", "1")]
-pullRequestUrl GitHub (Hostname hostname) (Just (Repository upstreamRepository)) (Repository repository) mainBranch (Branch branch) =
-  let owner = head repository
-      path = ["compare", unBranch (stripOrigin mainBranch) <> "..." <> owner <> ":" <> branch]
-      query = [("expand", "1")]
-   in "https://" <> hostname <> encodePath (upstreamRepository ++ path) query
-pullRequestUrl BitBucket (Hostname hostname) maybeUpstreamRepository repository (Branch mainBranch) (Branch branch) =
-  "https://" <> hostname
-    <> encodePath
-      (repositorySegments (Maybe.fromMaybe repository maybeUpstreamRepository) ++ ["pull-request", "new"])
-      [("source", unRepository repository <> "::" <> branch <> "::" <> mainBranch)]
-pullRequestUrl GitLab (Hostname hostname) Nothing (Repository repository) mainBranch (Branch branch) =
-  "https://" <> hostname
-    <> encodePath
-      (repository ++ ["merge_requests", "new"])
-      [("merge_request[source_branch]", branch), ("merge_request[target_branch]", unBranch (stripOrigin mainBranch))]
-pullRequestUrl GitLab _ (Just _) _ _ _ =
-  error "I don't know how to open a GitLab merge request against a different upstream repository."
-
-encodePath :: [Text] -> [(Text, Text)] -> Text
-encodePath path query =
-  Data.Text.Lazy.toStrict
-    . Data.Text.Lazy.Encoding.decodeUtf8
-    . Data.Binary.Builder.toLazyByteString
-    $ URI.encodePath path (encodeQuery query)
-  where
-    encodeQuery = map (uncurry encodeQueryParam)
-    encodeQueryParam name value = (Data.Text.Encoding.encodeUtf8 name, Just (Data.Text.Encoding.encodeUtf8 value))
-
-stripOrigin :: Branch -> Branch
-stripOrigin b@(Branch branch) =
-  maybe b Branch (Text.stripPrefix "origin/" branch)
-
-isPrefixOfBranch :: Text -> Branch -> Bool
-isPrefixOfBranch prefix (Branch branch) = prefix `Text.isPrefixOf` branch
-
--- Parsing
-
-parse :: Text -> Parser a -> Maybe a
-parse text parser = eitherToMaybe $ parseOnly parser text
-
-parseUrl :: Text -> Service -> Maybe (Hostname, Repository)
-parseUrl url service = parse url $ do
-  h <- sshHost serviceName <|> httpsHost serviceName
-  r <- repository
-  endOfInput
-  return (h, r)
-  where
-    serviceName =
-      case service of
-        GitHub -> "github"
-        BitBucket -> "bitbucket"
-        GitLab -> "gitlab"
-
-sshHost :: Text -> Parser Hostname
-sshHost segment = do
-  identifier
-  char '@'
-  verifyHostnameContains segment <* char ':'
-
-httpsHost :: Text -> Parser Hostname
-httpsHost segment = do
-  string "https://"
-  optionally (identifier *> char '@')
-  verifyHostnameContains segment <* char '/'
-
-repository :: Parser Repository
-repository = do
-  owner <- identifier
-  slash
-  name <- identifier
-  optionally (string ".git")
-  return $ Repository [owner, name]
-
-identifier :: Parser Text
-identifier = takeWhile1 $ Char.isAlphaNum <||> (== '_') <||> (== '-')
-
-verifyHostnameContains :: Text -> Parser Hostname
-verifyHostnameContains segment = do
-  segments <- identifier `sepBy1` char '.'
-  unless (segment `elem` segments) $
-    fail $ Text.unpack $ "Hostname does not contain \"" <> segment <> "\"."
-  return (Hostname (Text.intercalate "." segments))
-
-slash :: Parser ()
-slash = char '/' $> ()
-
-optionally :: Parser a -> Parser ()
-optionally p = option () (p $> ())
-
--- Helpers
-
-eitherToMaybe :: Either l r -> Maybe r
-eitherToMaybe (Right r) = Just r
-eitherToMaybe (Left _) = Nothing
-
-(<||>) = liftA2 (||)
+def abort [message] {
+  std log critical $message
+  exit 1
+}
