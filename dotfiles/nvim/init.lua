@@ -260,7 +260,13 @@ wk.register({
   b = {
     name = "buffers",
     b = { telescopeBuiltin.buffers, "all" },
-    d = { "<cmd>bdelete<cr>", "delete" },
+    d = {
+      name = "close",
+      d = { "<cmd>bdelete<cr>", "this" },
+      o = { "<cmd>BufferLineCloseOthers<cr>", "others" },
+      h = { "<cmd>BufferLineCloseLeft<cr>", "to the left" },
+      l = { "<cmd>BufferLineCloseRight<cr>", "to the right" },
+    },
     n = { "<cmd>BufferLineCycleNext<cr>", "next" },
     p = { "<cmd>BufferLineCyclePrev<cr>", "previous" },
     N = { "<cmd>BufferLineMoveNext<cr>", "move next" },
