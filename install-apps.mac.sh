@@ -25,7 +25,7 @@ brew_mac_applications=(
   google-chrome
   notion
   signal
-  sync
+  syncthing
   visual-studio-code
   vlc
 )
