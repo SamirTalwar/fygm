@@ -131,10 +131,9 @@ local plugins = {
     tag = "nightly",
   },
 
-  { "nvim-treesitter/nvim-treesitter", -- syntax highlighting
-  },
-
+  { "nvim-treesitter/nvim-treesitter" }, -- syntax highlighting
   { "neovim/nvim-lspconfig" }, -- LSP helpers
+  { "https://git.sr.ht/~whynothugo/lsp_lines.nvim" }, -- multiple LSP diagnostics per line
 }
 require("lazy").setup(plugins)
 
@@ -215,6 +214,12 @@ lspconfig.rust_analyzer.setup {
 }
 lspconfig.tsserver.setup {}
 
+-- Use lsp_lines for diagnostics
+require("lsp_lines").setup()
+vim.diagnostic.config({
+  virtual_text = false,
+})
+
 -- Reformat code on write, if LSP is initialized.
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(lsp_event)
@@ -264,7 +269,6 @@ wk.register({
   d = {
     name = "diagnostics",
     d = { telescopeBuiltin.diagnostics, "all" },
-    f = { vim.diagnostic.open_float, "show" },
     n = { vim.diagnostic.goto_next, "go to next" },
     p = { vim.diagnostic.goto_prev, "go to previous" },
   },
