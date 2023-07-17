@@ -68,6 +68,7 @@ in
     moreutils
     bat
     bottom
+    fd
     gawk
     gnugrep
     gnupg
