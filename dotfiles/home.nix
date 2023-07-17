@@ -229,6 +229,11 @@ in
     ];
   };
 
+  services.syncthing = {
+    enable = stdenv.isLinux;
+    tray.enable = true;
+  };
+
   fonts.fontconfig.enable = stdenv.isLinux;
 
   targets.genericLinux.enable = stdenv.isLinux;
