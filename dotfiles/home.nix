@@ -104,7 +104,6 @@ in
     # Editors
     aspell
     aspellDicts.en
-    neovim
 
     # Development
     difftastic # git diffs
@@ -186,15 +185,26 @@ in
     enableZshIntegration = true;
   };
 
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    extraLuaConfig = ''
+      require "init_fygm"
+    '';
+    plugins = [
+      pkgs.vimPlugins.nvim-treesitter.withAllGrammars
+    ];
+  };
+
   programs.zsh = {
     enable = true;
     enableCompletion = false;
-    envExtra =
-      ''source ~/.zshenv.fygm
-      '';
-    initExtra =
-      ''source ~/.zshrc.fygm
-      '';
+    envExtra = ''
+      source ~/.zshenv.fygm
+    '';
+    initExtra = ''
+      source ~/.zshrc.fygm
+    '';
     plugins = [
       {
         name = "autojump";

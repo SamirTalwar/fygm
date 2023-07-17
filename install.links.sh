@@ -24,7 +24,7 @@ links=(
   ~/.config/home-manager/home.nix $dotfiles/home.nix
   ~/.config/mako $dotfiles/mako
   ~/.config/nix/nix.conf $dotfiles/nix.conf
-  ~/.config/nvim/init.lua $dotfiles/nvim/init.lua
+  ~/.config/nvim/lua/init_fygm.lua $dotfiles/nvim/init.lua
   ~/.config/starship.toml $dotfiles/starship.toml
   ~/.config/sway/config $dotfiles/sway/config
   ~/.config/swaylock/config $dotfiles/swaylock/config

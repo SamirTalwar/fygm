@@ -132,7 +132,6 @@ local plugins = {
   },
 
   { "nvim-treesitter/nvim-treesitter", -- syntax highlighting
-    build = ":TSUpdate",
   },
 
   { "neovim/nvim-lspconfig" }, -- LSP helpers
@@ -174,18 +173,8 @@ require("telescope").setup {
 require("telescope").load_extension("ui-select")
 
 -- Set up syntax highlighting
+---- grammars are managed by home-manager
 require("nvim-treesitter.configs").setup {
-  ensure_installed = {
-    -- always required
-    "vim",
-    "help",
-    "query",
-    "c",
-    "lua",
-  },
-
-  auto_install = true,
-
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,
