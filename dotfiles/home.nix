@@ -152,6 +152,7 @@ in
       alacritty
       discord
       firefox
+      obsidian
       slack
     ]
   );
