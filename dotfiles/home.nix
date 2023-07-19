@@ -10,7 +10,7 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "marty-oehme";
       repo = "bemoji";
-      "rev" = "7cec73e2dbdc7702d67116cc729f48f9248ceba0";
+      "rev" = "v0.3.0";
       "sha256" = "9gpz38OA2i6yuIxOEaeEcT9PNwA6f9QVqPUDzL9pt4Q=";
     };
     installPhase = ''
@@ -125,9 +125,8 @@ in
       glibcLocales
 
       # On macOS, we use `pbcopy` and `pbpaste`.
-      # On Linux, we alias those commands to one of the below.
       wl-clipboard
-      xclip
+      wtype
 
       # Network tools. On macOS, we use the built-in tools.
       nettools
