@@ -232,7 +232,7 @@ in
 
   services.syncthing = {
     enable = stdenv.isLinux;
-    tray.enable = true;
+    tray.enable = stdenv.isLinux;
   };
 
   fonts.fontconfig.enable = stdenv.isLinux;
