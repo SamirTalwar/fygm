@@ -46,6 +46,12 @@ in
 {
   news.display = "silent";
 
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "discord"
+    "obsidian"
+    "slack"
+  ];
+
   home.stateVersion = "22.11";
 
   # I don't want to hard-code these; this should work across machines.

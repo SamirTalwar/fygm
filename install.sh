@@ -37,7 +37,6 @@ if command -v nixos-rebuild >/dev/null; then
   sudo nixos-rebuild switch
 fi
 export NIX_PATH="${HOME}/.nix-defexpr/channels${NIX_PATH:+:}${NIX_PATH:-}"
-export NIXPKGS_ALLOW_UNFREE=1
 nix-shell '<home-manager>' -A install
 home-manager switch
 

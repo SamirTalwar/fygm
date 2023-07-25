@@ -72,7 +72,7 @@ function update-nix {
     run nix-channel --update
     run nix registry pin nixpkgs
     if exists home-manager; then
-      NIX_PATH="${HOME}/.nix-defexpr/channels${NIX_PATH:+:}${NIX_PATH:-}" NIXPKGS_ALLOW_UNFREE=1 \
+      NIX_PATH="${HOME}/.nix-defexpr/channels${NIX_PATH:+:}${NIX_PATH:-}" \
         run home-manager switch
     else
       run nix-env --upgrade
