@@ -206,8 +206,16 @@ lspconfig.pyright.setup {}
 lspconfig.rust_analyzer.setup {
   settings = {
     ["rust-analyzer"] = {
+      cargo = {
+        buildScripts = {
+          enable = true,
+        },
+      },
       check = {
         command = "clippy",
+      },
+      procMacro = {
+        enable = true,
       },
     },
   },
