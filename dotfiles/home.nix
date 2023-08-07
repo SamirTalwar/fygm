@@ -18,6 +18,7 @@ let
       cp ./bemoji $out/bin/
     '';
   };
+
   # Fix screen-sharing in Slack on Wayland.
   slack = pkgs.slack.overrideAttrs (oldAttrs: {
     # Add the '--enable-features=WebRTCPipeWireCapturer' flag.
@@ -25,6 +26,18 @@ let
       sed -i -E 's/^(Exec=[^ ]+)/\1 --enable-features=WebRTCPipeWireCapturer/' $out/share/applications/slack.desktop
     '';
   });
+
+  # fall back to a supported TERM on macOS.
+  tmux =
+    if stdenv.isDarwin
+    then
+      pkgs.tmux.overrideAttrs
+        (oldAttrs: {
+          configureFlags = oldAttrs.configureFlags ++ [ "--with-TERM=screen-256color" ];
+        })
+    else
+      pkgs.tmux;
+
   # A pretty color theme.
   tokyo-night = pkgs.fetchFromGitHub {
     owner = "folke";
@@ -32,10 +45,12 @@ let
     rev = "ab0ac67f4f32f44c3480f4b81ed90e11cb4f3763";
     sha256 = "37kgD+UAcW2L0uw83Ms8DW6/lwoRTMc7SwBW5IhaTtg=";
   };
+
   # Install completions from zsh-completions.
   zsh-completions = pkgs.writeTextDir "share/zsh-completions/zsh-completions.zsh" ''
     fpath=(${pkgs.zsh-completions}/share/zsh/site-functions $fpath)
   '';
+
   # empty package, for shenanigans
   empty = builtins.derivation {
     name = "empty";
