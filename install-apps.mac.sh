@@ -20,11 +20,11 @@ brew_mac_applications=(
   dash
   discord
   docker
-  dropbox
   firefox
   google-chrome
   notion
   signal
+  scroll-reverser
   syncthing
   visual-studio-code
   vlc
