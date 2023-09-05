@@ -10,8 +10,8 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "marty-oehme";
       repo = "bemoji";
-      "rev" = "v0.3.0";
-      "sha256" = "9gpz38OA2i6yuIxOEaeEcT9PNwA6f9QVqPUDzL9pt4Q=";
+      rev = "6c037a5771373d35549c3b80d19792bf72627f6a";
+      hash = "sha256-AzxbtjtZ84D4zVzxHWZt6YWvBVg97CQUnOD6ZjAgonw=";
     };
     installPhase = ''
       mkdir -p $out/bin
