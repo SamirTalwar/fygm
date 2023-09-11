@@ -131,7 +131,9 @@ local plugins = {
     tag = "nightly",
   },
 
-  { "nvim-treesitter/nvim-treesitter" }, -- syntax highlighting
+  { "nvim-treesitter/nvim-treesitter", -- syntax highlighting
+    build = ":TSUninstall all",
+  },
   { "neovim/nvim-lspconfig" }, -- LSP helpers
   { "https://git.sr.ht/~whynothugo/lsp_lines.nvim" }, -- multiple LSP diagnostics per line
 }
@@ -172,8 +174,9 @@ require("telescope").setup {
 require("telescope").load_extension("ui-select")
 
 -- Set up syntax highlighting
----- grammars are managed by home-manager
 require("nvim-treesitter.configs").setup {
+  auto_install = true,
+
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,

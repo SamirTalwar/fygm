@@ -210,12 +210,6 @@ in
   programs.neovim = {
     enable = true;
     defaultEditor = true;
-    extraLuaConfig = ''
-      require "init_fygm"
-    '';
-    plugins = [
-      pkgs.vimPlugins.nvim-treesitter.withAllGrammars
-    ];
   };
 
   programs.zsh = {
