@@ -132,7 +132,7 @@ local plugins = {
   },
 
   { "nvim-treesitter/nvim-treesitter", -- syntax highlighting
-    build = ":TSUninstall all",
+    build = ":TSUpdate",
   },
   { "neovim/nvim-lspconfig" }, -- LSP helpers
   { "https://git.sr.ht/~whynothugo/lsp_lines.nvim" }, -- multiple LSP diagnostics per line
