@@ -247,10 +247,21 @@ $env.config = {
 
     hooks: {
         pre_prompt: [{ || # run before the prompt is shown
-          # Set up direnv
-          let direnv = (direnv export json | from json)
-          let direnv = if ($direnv | length) == 1 { $direnv } else { {} }
-          $direnv | load-env
+          let direnv = (direnv export json | from json | default {})
+          if ($direnv | is-empty) {
+              return
+          }
+          $direnv
+          | items {|key, value|
+             {
+                key: $key
+                value: (if $key in $env.ENV_CONVERSIONS {
+                  do ($env.ENV_CONVERSIONS | get $key | get from_string) $value
+                } else {
+                    $value
+                })
+              }
+          } | transpose -ird | load-env
         }]
         pre_execution: [{ null }] # run before the repl input is run
         env_change: {
