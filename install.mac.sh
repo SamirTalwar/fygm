@@ -15,3 +15,6 @@ eval "$(~/.homebrew/bin/brew shellenv)"
 
 now 'Installing local Homebrew packages'
 brew bundle install --no-lock --cleanup --file=./macos/local.Brewfile
+
+now 'Setting up pinentry'
+echo "pinentry-program ${HOME}/.homebrew/bin/pinentry-mac" > ~/.gnupg/gpg-agent.conf
