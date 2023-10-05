@@ -2,8 +2,9 @@
 	name = Samir Talwar
 	email = samir@functional.computer
 [core]
-	excludesfile = ~/.gitignore
 	autocrlf = input
+	editor = nvim
+	excludesfile = ~/.gitignore
 	ignorecase = false
 [advice]
 	detachedHead = false
