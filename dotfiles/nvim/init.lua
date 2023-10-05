@@ -145,7 +145,16 @@ vim.cmd("colorscheme tokyonight-night") -- seems to work best with my Alacritty 
 -- Initialize plugins that need it
 require("bufferline").setup()
 require("lualine").setup()
-require("nvim-tree").setup()
+
+-- Set up the file tree, showing hidden and ignored files
+require("nvim-tree").setup({
+  filters = {
+    dotfiles = false,
+  },
+  git = {
+    ignore = false,
+  },
+})
 
 -- Set up fuzzy search and the fancy selection UI
 require("telescope").setup {
