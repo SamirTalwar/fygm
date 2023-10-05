@@ -101,8 +101,8 @@ zle -N zle-line-init
 zle -N zle-line-deinit
 for key in $(bindkey | fgrep accept-line | sed 's/^"\([^"]*\)".*/\1/'); do bindkey $key zle-line-deinit; done
 
-if [[ -e /opt/homebrew ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
+if [[ -e ~/.homebrew ]]; then
+  eval "$(~/.homebrew/bin/brew shellenv)"
 fi
 
 eval "$(starship init zsh)"

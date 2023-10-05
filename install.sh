@@ -16,6 +16,10 @@ NIX_DIR="$(readlink /nix || echo /nix)"
 if [[ ! -e /nix/store ]]; then
   sh <(curl -L https://nixos.org/nix/install) --daemon
 fi
+if [[ ! -e ${HOME}/.nix-profile ]]; then
+  echo >&2 'Cannot find a nix profile. Please install one.'
+  exit 1
+fi
 
 if [[ -e ${HOME}/.nix-profile/etc/profile.d/nix.sh ]]; then
   source ${HOME}/.nix-profile/etc/profile.d/nix.sh
@@ -45,7 +49,8 @@ if [[ $(uname -s) == 'Linux' && $(uname -v) =~ Ubuntu ]]; then
   ${dir}/install-apps.ubuntu.sh
 elif [[ $(uname -s) == 'Darwin' ]]; then
   now 'Installing macOS-only software'
-  ${dir}/install-apps.mac.sh
+  ${dir}/install.mac.sh
+  echo 'You may also want to run ./install-apps.mac.sh.'
 fi
 
 NEW_SHELL="${HOME}/.nix-profile/bin/zsh"
