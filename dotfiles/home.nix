@@ -19,14 +19,6 @@ let
     '';
   };
 
-  # Fix screen-sharing in Slack on Wayland.
-  slack = pkgs.slack.overrideAttrs (oldAttrs: {
-    # Add the '--enable-features=WebRTCPipeWireCapturer' flag.
-    postInstall = (oldAttrs.postInstallPhase or "") + ''
-      sed -i -E 's/^(Exec=[^ ]+)/\1 --enable-features=WebRTCPipeWireCapturer/' $out/share/applications/slack.desktop
-    '';
-  });
-
   # fall back to a supported TERM on macOS.
   tmux =
     if stdenv.isDarwin
