@@ -18,6 +18,8 @@
 	defaultBranch = main
 [fetch]
 	prune = true
+[merge]
+	conflictStyle = diff3
 [push]
 	default = simple
 [pull]
