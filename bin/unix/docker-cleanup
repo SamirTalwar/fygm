@@ -1,16 +1,17 @@
 #!/usr/bin/env zsh
 
-set -e
-set -u
+set -o err_return
+set -o no_unset
 set -o pipefail
 
-output_file=${TMPDIR:-/tmp}/docker-cleanup.out
+output_file="$(mktemp -t 'docker-cleanup.XXXXXX.out')"
+trap 'rm -f "$output_file"' EXIT
 
 function silence {
-  set +e
+  set -o no_err_return
   $@ >& $output_file
   local exit_status=$?
-  set -e
+  set -o err_return
   if [[ $exit_status -ne 0 ]]; then
     cat $output_file
   fi
