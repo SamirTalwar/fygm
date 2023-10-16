@@ -115,6 +115,10 @@ in
     socat
     wget
 
+    # Containers
+    docker-compose
+    docker-credential-gcr
+
     # Editors
     aspell
     aspellDicts.en
