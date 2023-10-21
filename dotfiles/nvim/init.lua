@@ -131,6 +131,16 @@ local plugins = {
     tag = "nightly",
   },
 
+  { "NeogitOrg/neogit", -- Git
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+      "sindrets/diffview.nvim",
+      "ibhagwan/fzf-lua",
+    },
+    config = true,
+  },
+
   { "nvim-treesitter/nvim-treesitter", -- syntax highlighting
     build = ":TSUpdate",
   },
@@ -155,6 +165,10 @@ require("nvim-tree").setup({
     ignore = false,
   },
 })
+
+-- Set up Git management
+local neogit = require("neogit")
+neogit.setup()
 
 -- Set up fuzzy search and the fancy selection UI
 require("telescope").setup {
@@ -299,10 +313,7 @@ wk.register({
     s = { "<cmd>write<cr>", "save" },
     t = { function() nvimTreeApi.tree.open({ find_file = true }) end, "tree" },
   },
-  g = {
-    name = "git",
-    s = { telescopeBuiltin.git_status, "status" },
-  },
+  g = { function() neogit.open({ kind = "split" }) end, "git" },
   j = {
     name = "jump to",
     D = { vim.lsp.buf.declaration, "declaration" },
