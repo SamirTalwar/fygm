@@ -168,6 +168,7 @@ in
       alacritty
       discord
       firefox
+      gnome.nautilus
       obsidian
       slack
     ]
