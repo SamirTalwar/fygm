@@ -1,5 +1,8 @@
 source ($nu.config-path | path dirname | path join 'default_config.nu')
 
+# disable the banner
+$env.config.show_banner = false
+
 # Use vi bindings at the prompt
 $env.config.edit_mode = vi
 $env.config.cursor_shape.vi_insert = line
