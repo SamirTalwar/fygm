@@ -32,6 +32,7 @@ $env.PATH = (do {
     ~/.local/bin
     ~/.cargo/bin
     ~/go/bin
+    ~/.nix-profile/bin
   ]
   $mac_path ++ $unix_path ++ $env.PATH
 })

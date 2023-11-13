@@ -53,16 +53,16 @@ elif [[ $(uname -s) == 'Darwin' ]]; then
   echo 'You may also want to run ./install-apps.mac.sh.'
 fi
 
-NEW_SHELL="${HOME}/.nix-profile/bin/zsh"
+NEW_SHELL="${HOME}/.nix-profile/bin/nu"
 if [[ $(uname -s) == 'Linux' && ! ( $(uname -v) =~ NixOS ) ]]; then
   now 'Configuring the user shell'
-  CURRENT_SHELL=$( awk -F: -v user=$USER '$1 == user { print $NF }' /etc/passwd)
+  CURRENT_SHELL=$(awk -F: -v user=$USER '$1 == user { print $NF }' /etc/passwd)
   if [[ $CURRENT_SHELL != $NEW_SHELL ]]; then
     sudo chsh -s $NEW_SHELL $USER
   fi
 elif [[ $(uname -s) == 'Darwin' ]]; then
   now 'Configuring the user shell'
-  CURRENT_SHELL=$( dscl . -read /Users/${USER} UserShell | cut -d ' ' -f 2)
+  CURRENT_SHELL=$(dscl . -read /Users/${USER} UserShell | cut -d ' ' -f 2)
   if [[ $CURRENT_SHELL != $NEW_SHELL ]]; then
     sudo chsh -s $NEW_SHELL $USER
   fi
