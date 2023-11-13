@@ -1,5 +1,7 @@
 source ($nu.config-path | path dirname | path join 'default_config.nu')
 
+use std
+
 # disable the banner
 $env.config.show_banner = false
 
