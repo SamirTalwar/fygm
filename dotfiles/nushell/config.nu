@@ -31,7 +31,16 @@ $env.config.hooks.pre_prompt = $env.config.hooks.pre_prompt ++ [{
 
 # Set the PATH:
 $env.PATH = (do {
-  let mac_path = if $nu.os-info.name == "macos" { [~/bin/mac] } else { [] }
+  let mac_path = (
+    if $nu.os-info.name == "macos" {
+      [
+        ~/bin/mac
+        ~/.homebrew/bin
+      ]
+    } else {
+      []
+    }
+  )
   let unix_path = [
     ~/bin/unix
     ~/.local/bin
