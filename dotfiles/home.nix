@@ -115,7 +115,6 @@ in
     direnv
     fzf
     tmux
-    urlview
     watch
     watchexec
     zsh
