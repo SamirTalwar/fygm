@@ -38,23 +38,6 @@ let
     sha256 = "37kgD+UAcW2L0uw83Ms8DW6/lwoRTMc7SwBW5IhaTtg=";
   };
 
-  # zoxide hasn't been released in a while, so let's get a later version.
-  # When a version greater than v0.9.2 has been released and is in nixpkgs,
-  # this can be discarded.
-  zoxide = pkgs.zoxide.overrideAttrs(oldAttrs: rec {
-    src = fetchFromGitHub {
-      owner = "ajeetdsouza";
-      repo = "zoxide";
-      rev = "3022cf3686b85288e6fbecb2bd23ad113fd83f3b";
-      sha256 = "sha256-ut+/F7cQ5Xamb7T45a78i0mjqnNG9/73jPNaDLxzAx8=";
-    };
-
-    cargoDeps = oldAttrs.cargoDeps.overrideAttrs(pkgs.lib.const {
-      inherit src;
-      outputHash = "sha256-uu7zi6prnfbi4EQ0+0QcTEo/t5CIwNEQgJkIgxSk5u4=";
-    });
-  });
-
   # Install completions from zsh-completions.
   zsh-completions = pkgs.writeTextDir "share/zsh-completions/zsh-completions.zsh" ''
     fpath=(${pkgs.zsh-completions}/share/zsh/site-functions $fpath)
