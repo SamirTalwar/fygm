@@ -1,0 +1,20 @@
+[shell]
+program = ".nix-profile/bin/tmux"
+
+[env]
+LD_LIBRARY_PATH = ""
+
+[window.dimensions]
+columns = 120
+lines = 40
+
+[window.padding]
+x = 1
+y = 1
+
+[font]
+size = 14
+normal = { family = "Iosevka Term", style = "Light" }
+bold = { style = "Medium" }
+bold_italic = { style = "Medium Italic" }
+italic = { style = "Light Italic" }

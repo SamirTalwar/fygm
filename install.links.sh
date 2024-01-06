@@ -20,7 +20,7 @@ source ${dir}/common.sh
 set -A links
 links=(
   ~/bin $dir/bin
-  ~/.config/alacritty/custom.yml $dotfiles/alacritty.yml
+  ~/.config/alacritty/custom.toml $dotfiles/alacritty.toml
   ~/.config/home-manager/home.nix $dotfiles/home.nix
   ~/.config/mako $dotfiles/mako
   ~/.config/nix/nix.conf $dotfiles/nix.conf

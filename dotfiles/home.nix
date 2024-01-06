@@ -34,8 +34,8 @@ let
   tokyo-night = pkgs.fetchFromGitHub {
     owner = "folke";
     repo = "tokyonight.nvim";
-    rev = "ab0ac67f4f32f44c3480f4b81ed90e11cb4f3763";
-    sha256 = "37kgD+UAcW2L0uw83Ms8DW6/lwoRTMc7SwBW5IhaTtg=";
+    rev = "7da3176ad7119be9e1abeea80296abd0db3216fc";
+    hash = "sha256-N0horUKT3HxoAlFMp05VLDYRcuvy7AEu9lGOHSQV7II=";
   };
 
   # Install completions from zsh-completions.
@@ -179,11 +179,21 @@ in
 
   programs.alacritty = {
     enable = true;
-    package = if stdenv.isDarwin then empty else alacritty;
+    package =
+      if stdenv.isDarwin
+      then
+        builtins.derivation
+          {
+            name = "alacritty";
+            version = "0.13"; # required to use a TOML configuration file
+            system = builtins.currentSystem;
+            builder = pkgs.writeShellScript "null.sh" "${pkgs.coreutils}/bin/mkdir $out";
+          }
+      else alacritty;
     settings = {
       import = [
-        "${tokyo-night}/extras/alacritty/tokyonight_night.yml"
-        "~/.config/alacritty/custom.yml"
+        "${tokyo-night}/extras/alacritty/tokyonight_night.toml"
+        "~/.config/alacritty/custom.toml"
       ];
     };
   };
