@@ -19,7 +19,7 @@
 [fetch]
 	prune = true
 [merge]
-	conflictStyle = diff3
+	conflictStyle = zdiff3
 [push]
 	default = simple
 [pull]
