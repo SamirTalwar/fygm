@@ -1,5 +1,0 @@
-[Desktop Entry]
-Name=Sway + Fixes
-Comment=An i3-compatible Wayland compositor, plus some improvements
-Exec=sway-plus-fixes
-Type=Application

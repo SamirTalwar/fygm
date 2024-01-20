@@ -44,10 +44,7 @@ export NIX_PATH="${HOME}/.nix-defexpr/channels${NIX_PATH:+:}${NIX_PATH:-}"
 nix-shell '<home-manager>' -A install
 home-manager switch
 
-if [[ $(uname -s) == 'Linux' && $(uname -v) =~ Ubuntu ]]; then
-  now 'Installing Ubuntu-only software'
-  ${dir}/install-apps.ubuntu.sh
-elif [[ $(uname -s) == 'Darwin' ]]; then
+if [[ $(uname -s) == 'Darwin' ]]; then
   now 'Installing macOS-only software'
   ${dir}/install.mac.sh
   echo 'You may also want to run ./install-apps.mac.sh.'
