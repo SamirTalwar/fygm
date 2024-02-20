@@ -59,6 +59,11 @@ in
     "slack"
   ];
 
+  nixpkgs.config.permittedInsecurePackages = [
+    # Sadly, this is required for Obsidian.
+    "electron-25.9.0"
+  ];
+
   home.stateVersion = "22.11";
 
   # I don't want to hard-code these; this should work across machines.
