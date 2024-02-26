@@ -146,6 +146,14 @@ local plugins = {
   },
   { "neovim/nvim-lspconfig" }, -- LSP helpers
   { "https://git.sr.ht/~whynothugo/lsp_lines.nvim" }, -- multiple LSP diagnostics per line
+
+  -- language-specific plugins
+  { "ShinKage/idris2-nvim", -- Idris
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "MunifTanjim/nui.nvim",
+    },
+  },
 }
 require("lazy").setup(plugins)
 
@@ -248,6 +256,8 @@ lspconfig.rust_analyzer.setup {
 }
 lspconfig.tsserver.setup {}
 
+require("idris2").setup {}
+
 -- Use lsp_lines for diagnostics
 require("lsp_lines").setup()
 vim.diagnostic.config({
@@ -256,17 +266,20 @@ vim.diagnostic.config({
 
 -- Reformat code on write, if LSP is initialized.
 vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(lsp_event)
-    vim.api.nvim_create_autocmd("BufWrite", {
-      buffer = lsp_event.buf,
-      callback = function(event)
-        vim.lsp.buf.format({
-          bufnr = event.buf,
-          async = false,
-          timeout_ms = 250,
-        })
-      end,
-    })
+  callback = function(event)
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
+    if client.server_capabilities.documentFormattingProvider then
+      vim.api.nvim_create_autocmd("BufWrite", {
+        buffer = event.buf,
+        callback = function(event)
+          vim.lsp.buf.format({
+            bufnr = event.buf,
+            async = false,
+            timeout_ms = 250,
+          })
+        end,
+      })
+    end
   end
 })
 
