@@ -9,11 +9,11 @@ flycheck_*
 *.swp
 *.swo
 
+# JetBrains editors
+/.idea
+
 # Visual Studio Code
 /.vscode
-
-# C
-/tags
 
 # Clojure
 .lein-repl-history
