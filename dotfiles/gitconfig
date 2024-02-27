@@ -12,18 +12,31 @@
 	ui = true
 [commit]
 	gpgsign = true
+	verbose = true
 [diff]
+	algorithm = histogram
 	external = difft
+[help]
+	autocorrect = 10
 [init]
 	defaultBranch = main
 [fetch]
+	fsckObjects = true
 	prune = true
+	prunetags = true
 [merge]
 	conflictStyle = zdiff3
 [push]
 	default = simple
 [pull]
 	ff = only
+[rebase]
+	autosquash = true
+	autostash = true
+[receive]
+	fsckObjects = true
+[rerere]
+	enabled = true
 [submodule]
 	recurse = true
 [transfer]
@@ -51,7 +64,7 @@
 	checkout-main-and-update = ! ~/bin/git/checkout-main-and-update
 	delete-old-branches = ! ~/bin/git/delete-old-branches
 	delete-remote = ! ~/bin/git/delete-remote
-  diff-main = ! ~/bin/git/diff-main
+	diff-main = ! ~/bin/git/diff-main
 	dirs = ! ~/bin/git/dirs
 	first-push = ! ~/bin/git/first-push
 	fuck-it = ! ~/bin/git/fuck-it
@@ -62,7 +75,7 @@
 	update-main = ! ~/bin/git/update-main
 
 	a = add-all
-	c = commit --verbose
+	c = commit
 	ac = add-all-and-commit
 	lg = log-tree
 	m = checkout-main-and-update
