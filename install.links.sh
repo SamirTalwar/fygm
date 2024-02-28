@@ -9,6 +9,7 @@ symlink=(ln -s)
 if [[ ${1:-} == '--force' ]]; then
   force=true
   symlink+=(-f)
+  shift
 fi
 
 dir=${0:A:h}
@@ -32,6 +33,7 @@ links=(
   ~/.ghc/ghci.conf $dotfiles/ghc/ghci.conf
   ~/.gitconfig $dotfiles/gitconfig
   ~/.gitignore $dotfiles/gitignore
+  ~/.ideavimrc $dotfiles/ideavimrc
   ~/.racketrc $dotfiles/racketrc
   ~/.stack/config.yaml $dotfiles/stack/config.yaml
   ~/.tmux.conf $dotfiles/tmux.conf
