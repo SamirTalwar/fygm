@@ -81,7 +81,6 @@ vim.api.nvim_create_autocmd("VimEnter", {
     local lazy_update_timestamp_file = io.open(lazy_update_timestamp_path, "r")
     if lazy_update_timestamp_file then
       lazy_update_timestamp = tonumber(lazy_update_timestamp_file:read("a"))
-      print(lazy_update_timestamp)
       lazy_update_timestamp_file:close()
     else
       lazy_update_timestamp = 0
@@ -99,7 +98,13 @@ vim.api.nvim_create_autocmd("VimEnter", {
 
 -- Initialize plugins
 local plugins = {
-  { "folke/tokyonight.nvim", lazy = false }, -- pretty colors
+  { "folke/tokyonight.nvim", -- pretty colors
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd("colorscheme tokyonight-night")
+    end
+  },
 
   { "tpope/vim-repeat" }, -- better repeat (`.`) semantics
   { "tpope/vim-surround" }, -- add, remove, and modify surrounding characters
@@ -128,7 +133,6 @@ local plugins = {
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },
-    tag = "nightly",
   },
 
   { "NeogitOrg/neogit", -- Git
@@ -155,10 +159,11 @@ local plugins = {
     },
   },
 }
-require("lazy").setup(plugins)
-
--- Set the color scheme
-vim.cmd("colorscheme tokyonight-night") -- seems to work best with my Alacritty theme
+require("lazy").setup(plugins, {
+  install = {
+    colorscheme = { "tokyonight-night" },
+  },
+})
 
 -- Initialize plugins that need it
 require("bufferline").setup()
