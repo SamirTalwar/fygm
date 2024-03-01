@@ -113,10 +113,12 @@ local plugins = {
   { "christoomey/vim-tmux-navigator" }, -- navigate tmux easily
   { "folke/which-key.nvim" }, -- show keybinding help as you type
 
-  { "akinsho/bufferline.nvim", -- buffers as tabs
+  { "romgrk/barbar.nvim", -- a pretty tagbb line
     dependencies = {
+      "lewis6991/gitsigns.nvim",
       "nvim-tree/nvim-web-devicons",
     },
+    init = function() vim.g.barbar_auto_setup = false end,
     config = true,
   },
   { "nvim-lualine/lualine.nvim", -- a useful status bar
@@ -298,15 +300,15 @@ wk.register({
     b = { telescopeBuiltin.buffers, "all" },
     d = {
       name = "close",
-      d = { "<cmd>bdelete<cr>", "this" },
-      o = { "<cmd>BufferLineCloseOthers<cr>", "others" },
-      h = { "<cmd>BufferLineCloseLeft<cr>", "to the left" },
-      l = { "<cmd>BufferLineCloseRight<cr>", "to the right" },
+      d = { "<cmd>BufferClose<cr>", "this" },
+      o = { "<cmd>BufferCloseAllButCurrent<cr>", "others" },
+      h = { "<cmd>BufferCloseBuffersLeft<cr>", "to the left" },
+      l = { "<cmd>BufferCloseBuffersRight<cr>", "to the right" },
     },
-    n = { "<cmd>BufferLineCycleNext<cr>", "next" },
-    p = { "<cmd>BufferLineCyclePrev<cr>", "previous" },
-    N = { "<cmd>BufferLineMoveNext<cr>", "move next" },
-    P = { "<cmd>BufferLineMovePrev<cr>", "move previous" },
+    n = { "<cmd>BufferNext<cr>", "next" },
+    p = { "<cmd>BufferPrevious<cr>", "previous" },
+    N = { "<cmd>BufferMoveNext<cr>", "move next" },
+    P = { "<cmd>BufferMovePrevious<cr>", "move previous" },
   },
   d = {
     name = "diagnostics",
@@ -347,8 +349,8 @@ wk.register({
 ---- but not everything
 wk.register({
   K = { vim.lsp.buf.hover, "hover" },
-  ["<C-Left>"] = { "<cmd>BufferLineCyclePrev<cr>", "previous buffer" },
-  ["<C-Right>"] = { "<cmd>BufferLineCycleNext<cr>", "next buffer" },
-  ["<C-S-Left>"] = { "<cmd>BufferLineMovePrev<cr>", "move buffer to previous" },
-  ["<C-S-Right>"] = { "<cmd>BufferLineMoveNext<cr>", "move buffer to next" },
+  ["<C-Left>"]  = { "<cmd>BufferPrevious<cr>", "previous buffer" },
+  ["<C-Right>"] = { "<cmd>BufferNext<cr>", "next buffer" },
+  ["<C-S-Left>"]  = { "<cmd>BufferMovePrevious<cr>", "move buffer to previous" },
+  ["<C-S-Right>"] = { "<cmd>BufferMoveNext<cr>", "move buffer to next" },
 })
