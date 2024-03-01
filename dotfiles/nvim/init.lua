@@ -117,21 +117,31 @@ local plugins = {
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },
+    config = true,
   },
   { "nvim-lualine/lualine.nvim", -- a useful status bar
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },
+    config = true,
   },
   { "nvim-telescope/telescope.nvim", -- fuzzy search
     dependencies = {
       "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope-ui-select.nvim", -- override the selection UI with Telescope
     },
   },
-  { "nvim-telescope/telescope-ui-select.nvim" }, -- override the selection UI with Telescope
   { "nvim-tree/nvim-tree.lua", -- file browsing
     dependencies = {
       "nvim-tree/nvim-web-devicons",
+    },
+    opts = {
+      filters = {
+        dotfiles = false,
+      },
+      git = {
+        ignore = false,
+      },
     },
   },
 
@@ -149,7 +159,9 @@ local plugins = {
     build = ":TSUpdate",
   },
   { "neovim/nvim-lspconfig" }, -- LSP helpers
-  { "https://git.sr.ht/~whynothugo/lsp_lines.nvim" }, -- multiple LSP diagnostics per line
+  { "https://git.sr.ht/~whynothugo/lsp_lines.nvim", -- multiple LSP diagnostics per line
+    config = true,
+  },
 
   -- language-specific plugins
   { "ShinKage/idris2-nvim", -- Idris
@@ -157,6 +169,7 @@ local plugins = {
       "neovim/nvim-lspconfig",
       "MunifTanjim/nui.nvim",
     },
+    config = true,
   },
 }
 require("lazy").setup(plugins, {
@@ -164,24 +177,6 @@ require("lazy").setup(plugins, {
     colorscheme = { "tokyonight-night" },
   },
 })
-
--- Initialize plugins that need it
-require("bufferline").setup()
-require("lualine").setup()
-
--- Set up the file tree, showing hidden and ignored files
-require("nvim-tree").setup({
-  filters = {
-    dotfiles = false,
-  },
-  git = {
-    ignore = false,
-  },
-})
-
--- Set up Git management
-local neogit = require("neogit")
-neogit.setup()
 
 -- Set up fuzzy search and the fancy selection UI
 require("telescope").setup {
@@ -259,10 +254,7 @@ lspconfig.rust_analyzer.setup {
 }
 lspconfig.tsserver.setup {}
 
-require("idris2").setup {}
-
--- Use lsp_lines for diagnostics
-require("lsp_lines").setup()
+-- Disable built-in diagnostics in favor of `lsp_lines`
 vim.diagnostic.config({
   virtual_text = false,
 })
