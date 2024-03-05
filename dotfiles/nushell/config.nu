@@ -60,7 +60,16 @@ $env.NIX_PATH = $"($nu.home-path)/.nix-defexpr/channels($env | get -i NIX_PATH |
 source ~/.cache/nushell/starship.nu
 source ~/.cache/nushell/zoxide.nu
 
-# def --env --wrapped __zoxide_z_title [...rest] {
-#   __zoxide_z $rest
-#   title
-# }
+# Wrap zoxide functions to also set the window title
+def --env __zoxide_z_title [...rest] {
+  __zoxide_z ...$rest
+  title
+}
+
+def --env __zoxide_zi_title [...rest:string] {
+  __zoxide_zi ...$rest
+  title
+}
+
+alias z = __zoxide_z_title
+alias zi = __zoxide_zi_title
