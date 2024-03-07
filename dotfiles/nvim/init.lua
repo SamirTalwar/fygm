@@ -323,7 +323,7 @@ wk.register({
     s = { "<cmd>write<cr>", "save" },
     t = { function() nvimTreeApi.tree.open({ find_file = true }) end, "tree" },
   },
-  g = { function() neogit.open({ kind = "split" }) end, "git" },
+  g = { function() require("neogit").open({ kind = "split" }) end, "git" },
   j = {
     name = "jump to",
     D = { vim.lsp.buf.declaration, "declaration" },
