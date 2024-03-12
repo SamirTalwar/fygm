@@ -105,6 +105,7 @@ in
     tmux
     watch
     watchexec
+    zellij
     zsh
 
     nushell

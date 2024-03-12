@@ -30,6 +30,7 @@ links=(
   ~/.config/sway/config $dotfiles/sway/config
   ~/.config/swaylock/config $dotfiles/swaylock/config
   ~/.config/wofi $dotfiles/wofi
+  ~/.config/zellij $dotfiles/zellij
   ~/.ghc/ghci.conf $dotfiles/ghc/ghci.conf
   ~/.gitconfig $dotfiles/gitconfig
   ~/.gitignore $dotfiles/gitignore
