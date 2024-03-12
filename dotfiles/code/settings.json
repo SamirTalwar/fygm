@@ -32,7 +32,7 @@
   "git.confirmSync": false,
   "git.enableCommitSigning": true,
   "git.fetchOnPull": true,
-  "git.inputValidation": "always",
+  "git.inputValidation": true,
   "git.inputValidationSubjectLength": null,
   "git.pruneOnFetch": true,
   "git.pullTags": false,
