@@ -16,7 +16,9 @@ if [[ -z $title ]]; then
   fi
 fi
 
-if [[ -n ${TMUX:-} ]]; then
+if [[ -n ${ZELLIJ:-} ]]; then
+  zellij action rename-tab $title
+elif [[ -n ${TMUX:-} ]]; then
   tmux rename-window $title
 else
   echo -n -e "\033]0;$title\007"
