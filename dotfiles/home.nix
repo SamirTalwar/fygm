@@ -157,7 +157,7 @@ in
       # Fonts.
       font-awesome
       iosevka-bin
-      (iosevka-bin.override { variant = "sgr-iosevka-term"; })
+      (iosevka-bin.override { variant = "SGr-IosevkaTerm"; })
       (nerdfonts.override {
         fonts = [ "NerdFontsSymbolsOnly" ];
       })
