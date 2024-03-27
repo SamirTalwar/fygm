@@ -92,6 +92,7 @@ in
     gnupg
     gnused
     jq
+    ncdu
     ripgrep
     sd
     tree
