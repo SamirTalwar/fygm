@@ -92,6 +92,7 @@ in
     gnupg
     gnused
     jq
+    killall
     ncdu
     ripgrep
     sd
