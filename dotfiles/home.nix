@@ -133,6 +133,7 @@ in
     # Development
     difftastic # git diffs
     git
+    git-lfs
     gnumake
     nixpkgs-fmt
     nodePackages.prettier
@@ -160,9 +161,7 @@ in
       font-awesome
       iosevka-bin
       (iosevka-bin.override { variant = "SGr-IosevkaTerm"; })
-      (nerdfonts.override {
-        fonts = [ "NerdFontsSymbolsOnly" ];
-      })
+      (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
 
       # Sway tools.
       bemoji
