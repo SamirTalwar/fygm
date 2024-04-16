@@ -1,11 +1,8 @@
 [shell]
-program = ".nix-profile/bin/zellij"
+program = ".nix-profile/bin/tmux"
 
 [env]
 LD_LIBRARY_PATH = ""
-
-[window]
-option_as_alt = "Both"
 
 [window.dimensions]
 columns = 120
