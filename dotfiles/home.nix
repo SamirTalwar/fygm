@@ -101,7 +101,6 @@ in
 
     # Shell
     autojump
-    bash
     direnv
     fzf
     tmux
