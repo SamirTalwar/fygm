@@ -123,6 +123,7 @@ in
     # Containers
     docker-compose
     docker-credential-gcr
+    lazydocker
 
     # Editors
     aspell
