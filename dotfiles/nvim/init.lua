@@ -141,6 +141,13 @@ local plugins = {
       filters = {
         dotfiles = false,
       },
+      filesystem_watchers = {
+        ignore_dirs = {
+          ".git",
+          "node_modules",
+          "target",
+        },
+      },
       git = {
         ignore = false,
       },
