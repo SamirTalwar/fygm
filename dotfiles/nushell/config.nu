@@ -54,7 +54,7 @@ $env.PATH = (do {
 })
 
 # Prepend the user's channels to the NIX_PATH:
-$env.NIX_PATH = $"($nu.home-path)/.nix-defexpr/channels($env | get -i NIX_PATH | if $in != null { $":($in)" } else { "" })"
+$env.NIX_PATH = [$"($nu.home-path)/.nix-defexpr/channels"] ++ ($env | get -i NIX_PATH | if $in != null { $in } else { [] })
 
 # Initialize and source shell improvements (installed with `up`):
 source ~/.cache/nushell/starship.nu
