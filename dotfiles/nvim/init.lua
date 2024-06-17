@@ -113,7 +113,7 @@ local plugins = {
   { "christoomey/vim-tmux-navigator" }, -- navigate tmux easily
   { "folke/which-key.nvim" }, -- show keybinding help as you type
 
-  { "romgrk/barbar.nvim", -- a pretty tagbb line
+  { "romgrk/barbar.nvim", -- a pretty tab line
     dependencies = {
       "lewis6991/gitsigns.nvim",
       "nvim-tree/nvim-web-devicons",
