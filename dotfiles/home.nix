@@ -84,8 +84,6 @@ in
     coreutils
     findutils
     moreutils
-    bat
-    bottom
     fd
     gawk
     gnugrep
@@ -93,11 +91,14 @@ in
     gnused
     jq
     killall
-    ncdu
     ripgrep
     sd
     tree
     yq
+
+    # System management
+    bottom
+    dua
 
     # Shell
     autojump
@@ -130,6 +131,7 @@ in
     aspellDicts.en
 
     # Development
+    bat
     difftastic # git diffs
     git
     git-lfs
