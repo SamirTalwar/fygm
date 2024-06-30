@@ -115,11 +115,11 @@ in
 
     # Networking
     curl
-    httpie
     netcat-gnu
     openssh
     socat
     wget
+    xh
 
     # Containers
     docker-compose
