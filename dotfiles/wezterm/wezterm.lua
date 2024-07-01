@@ -26,7 +26,7 @@ config.send_composed_key_when_left_alt_is_pressed = true
 -- helper for simpler keybindings which can have different combinations of mods
 -- (see below for examples)
 config.keys = {}
-function key(opts)
+function def_key(opts)
   local all_mods
   if type(opts.mods) == 'table' then
     all_mods = opts.mods
@@ -49,19 +49,28 @@ function key(opts)
 end
 
 -- open new tabs or windows in the home directory
-key {
+def_key {
   key = 't',
   mods = { 'SUPER', 'CTRL|SHIFT' },
   action = wezterm.action.SpawnCommandInNewTab {
     cwd = wezterm.home_dir,
   },
 }
-key {
+def_key {
   key = 'n',
   mods = { 'SUPER', 'CTRL|SHIFT' },
   action = wezterm.action.SpawnCommandInNewWindow {
     cwd = wezterm.home_dir,
   },
 }
+
+-- select pane with Ctrl+Alt+[hjkl]
+for key, direction in pairs { h = 'Left', j = 'Down', k = 'Up', l = 'Right' } do
+  def_key {
+    key = key,
+    mods = 'CTRL|ALT',
+    action = wezterm.action.ActivatePaneDirection(direction),
+  }
+end
 
 return config
