@@ -19,6 +19,8 @@ cask "visual-studio-code"
 cask "vlc"
 cask "wezterm"
 cask "zoom"
+mas "1Blocker - Ad Blocker", id: 1365531024
+mas "1Password for Safari", id: 1569813296
 mas "Ivory", id: 6444602274
 mas "Slack", id: 803453959
 mas "Todoist", id: 585829637
