@@ -12,6 +12,9 @@ config.default_gui_startup_args = { 'connect', 'unix' }
 config.color_scheme = 'tokyonight'
 
 ---- UI
+config.initial_cols = 120
+config.initial_rows = 40
+
 config.enable_scroll_bar = true
 config.scrollback_lines = 20000
 
