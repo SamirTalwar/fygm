@@ -17,6 +17,7 @@ cask "signal"
 cask "syncthing"
 cask "visual-studio-code"
 cask "vlc"
+cask "wezterm"
 cask "zoom"
 mas "Ivory", id: 6444602274
 mas "Slack", id: 803453959

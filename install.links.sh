@@ -29,6 +29,7 @@ links=(
   ~/.config/starship.toml $dotfiles/starship.toml
   ~/.config/sway/config $dotfiles/sway/config
   ~/.config/swaylock/config $dotfiles/swaylock/config
+  ~/.config/wezterm $dotfiles/wezterm
   ~/.config/wofi $dotfiles/wofi
   ~/.ghc/ghci.conf $dotfiles/ghc/ghci.conf
   ~/.gitconfig $dotfiles/gitconfig
