@@ -1,6 +1,7 @@
 brew "mas"
 cask "1password"
 cask "alacritty"
+cask "anki"
 cask "dash"
 cask "discord"
 cask "docker"
