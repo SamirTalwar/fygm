@@ -14,16 +14,18 @@ ${dir}/install.links.sh
 now 'Installing Nix'
 NIX_DIR="$(readlink /nix || echo /nix)"
 if [[ ! -e /nix/store ]]; then
-  sh <(curl -L https://nixos.org/nix/install) --daemon
-fi
-if [[ ! -e ${HOME}/.nix-profile ]]; then
-  echo >&2 'Cannot find a nix profile. Please install one.'
-  exit 1
+  curl -sSf -L https://install.lix.systems/lix | sh -s -- install
 fi
 
-if [[ -e ${HOME}/.nix-profile/etc/profile.d/nix.sh ]]; then
-  source ${HOME}/.nix-profile/etc/profile.d/nix.sh
+source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+if [[ ! -f /etc/nix/extra.conf ]] || ! diff /etc/nix/extra.conf ./nix/extra.conf; then
+  sudo cp ./nix/extra.conf /etc/nix/extra.conf
+  if ! grep '^include extra\.conf$' /etc/nix/nix.conf >/dev/null; then
+    echo 'include extra.conf' | sudo tee -a /etc/nix/nix.conf
+  fi
 fi
+
+now 'Updating Nix'
 if [[ $(uname -s) == 'Linux' && $(uname -v) =~ NixOS ]]; then
   sudo nix-channel --add 'https://nixos.org/channels/nixos-unstable' nixos
   nix-channel --add 'https://nixos.org/channels/nixos-unstable' nixpkgs

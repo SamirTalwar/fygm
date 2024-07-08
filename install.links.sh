@@ -24,7 +24,6 @@ links=(
   ~/.config/alacritty/custom.toml $dotfiles/alacritty.toml
   ~/.config/home-manager/home.nix $dotfiles/home.nix
   ~/.config/mako $dotfiles/mako
-  ~/.config/nix/nix.conf $dotfiles/nix.conf
   ~/.config/nvim/init.lua $dotfiles/nvim/init.lua
   ~/.config/starship.toml $dotfiles/starship.toml
   ~/.config/sway/config $dotfiles/sway/config
