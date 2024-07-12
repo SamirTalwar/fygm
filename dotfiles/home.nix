@@ -19,17 +19,6 @@ let
     '';
   };
 
-  # fall back to a supported TERM on macOS.
-  tmux =
-    if stdenv.isDarwin
-    then
-      pkgs.tmux.overrideAttrs
-        (oldAttrs: {
-          configureFlags = oldAttrs.configureFlags ++ [ "--with-TERM=screen-256color" ];
-        })
-    else
-      pkgs.tmux;
-
   # A pretty color theme.
   tokyo-night = pkgs.fetchFromGitHub {
     owner = "folke";
@@ -103,7 +92,6 @@ in
     autojump
     direnv
     fzf
-    tmux
     watch
     watchexec
     zsh

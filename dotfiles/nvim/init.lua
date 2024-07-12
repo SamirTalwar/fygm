@@ -50,8 +50,6 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
     end
   end,
 })
----- save when moving around using tmux navigator
-vim.g.tmux_navigator_save_on_switch = 1
 
 -- Leader
 vim.g.mapleader = " " -- set the leader key to <Space>
@@ -110,7 +108,6 @@ local plugins = {
   { "tpope/vim-surround" }, -- add, remove, and modify surrounding characters
   { "tpope/vim-commentary" }, -- comment and uncomment lines
 
-  { "christoomey/vim-tmux-navigator" }, -- navigate tmux easily
   { "folke/which-key.nvim", -- show keybinding help as you type
     event = "VeryLazy",
     dependencies = {

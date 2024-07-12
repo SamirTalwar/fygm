@@ -13,7 +13,6 @@ ALL_PACKAGE_MANAGERS=(
   snap
   nix
   nushell-plugins
-  tpm
   docker
 )
 
@@ -86,15 +85,6 @@ function update-nushell-plugins {
   echo 'Updated starship.'
   zoxide init nushell > "${HOME}/.cache/nushell/zoxide.nu"
   echo 'Updated zoxide.'
-}
-
-function update-tpm {
-  if [[ -e "${HOME}/.tmux/plugins/tpm" ]]; then
-    (cd "${HOME}/.tmux/plugins/tpm" && git pull --prune --ff-only)
-    "${HOME}/.tmux/plugins/tpm/bin/install_plugins"
-    "${HOME}/.tmux/plugins/tpm/bin/update_plugins" all
-    "${HOME}/.tmux/plugins/tpm/bin/clean_plugins"
-  fi
 }
 
 function update-docker {
