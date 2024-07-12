@@ -2,12 +2,6 @@ local wezterm = require 'wezterm'
 
 local config = wezterm.config_builder()
 
----- persistence
-config.unix_domains = {
-  { name = 'unix' },
-}
-config.default_gui_startup_args = { 'connect', 'unix' }
-
 ---- color scheme
 config.color_scheme = 'tokyonight'
 
