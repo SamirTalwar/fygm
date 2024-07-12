@@ -111,7 +111,13 @@ local plugins = {
   { "tpope/vim-commentary" }, -- comment and uncomment lines
 
   { "christoomey/vim-tmux-navigator" }, -- navigate tmux easily
-  { "folke/which-key.nvim" }, -- show keybinding help as you type
+  { "folke/which-key.nvim", -- show keybinding help as you type
+    event = "VeryLazy",
+    dependencies = {
+      "echasnovski/mini.icons",
+    },
+    opts = {},
+  },
 
   { "romgrk/barbar.nvim", -- a pretty tab line
     dependencies = {
