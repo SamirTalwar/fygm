@@ -178,6 +178,7 @@ in
       nautilus
       obsidian
       slack
+      wezterm
     ]
   );
 
