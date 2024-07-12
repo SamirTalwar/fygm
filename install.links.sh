@@ -46,8 +46,6 @@ case $(uname -s) in
     links+=(
       ~/.config/Code/User/settings.json $dotfiles/code/settings.json
       ~/.config/fontconfig/fonts.conf $dotfiles/fonts.conf
-      ~/.config/i3 $dotfiles/i3
-      ~/.config/i3status $dotfiles/i3status
       ~/.config/nushell/config.nu $dotfiles/nushell/config.nu
       ~/.config/nushell/env.nu $dotfiles/nushell/env.nu
     )
