@@ -73,7 +73,6 @@ in
   home.packages = [
     # Nix
     cachix
-    nix
     nix-direnv
     nix-prefetch-github
     nix-prefetch-scripts

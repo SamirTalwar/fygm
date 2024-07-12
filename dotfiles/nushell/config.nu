@@ -49,6 +49,7 @@ $env.PATH = (do {
     ~/.nix-profile/bin
     /opt/jetbrains/bin
     /usr/local/bin
+    /run/current-system/sw/bin
   ]
   $mac_path ++ $unix_path ++ $env.PATH
 })
