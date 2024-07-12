@@ -172,7 +172,6 @@ in
       wofi
 
       # Programs.
-      alacritty
       discord
       firefox
       nautilus
@@ -184,27 +183,6 @@ in
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-
-  programs.alacritty = {
-    enable = true;
-    package =
-      if stdenv.isDarwin
-      then
-        builtins.derivation
-          {
-            name = "alacritty";
-            version = "0.13"; # required to use a TOML configuration file
-            system = builtins.currentSystem;
-            builder = pkgs.writeShellScript "null.sh" "${pkgs.coreutils}/bin/mkdir $out";
-          }
-      else alacritty;
-    settings = {
-      import = [
-        "${tokyo-night}/extras/alacritty/tokyonight_night.toml"
-        "~/.config/alacritty/custom.toml"
-      ];
-    };
-  };
 
   programs.bash = {
     enable = true;

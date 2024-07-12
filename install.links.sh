@@ -21,7 +21,6 @@ source ${dir}/common.sh
 set -A links
 links=(
   ~/bin $dir/bin
-  ~/.config/alacritty/custom.toml $dotfiles/alacritty.toml
   ~/.config/home-manager/home.nix $dotfiles/home.nix
   ~/.config/mako $dotfiles/mako
   ~/.config/nvim/init.lua $dotfiles/nvim/init.lua
