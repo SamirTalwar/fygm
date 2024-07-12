@@ -176,7 +176,7 @@ in
       alacritty
       discord
       firefox
-      gnome.nautilus
+      nautilus
       obsidian
       slack
     ]
