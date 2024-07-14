@@ -11,8 +11,7 @@ source ${dir}/self-update.sh
 
 ${dir}/install.links.sh
 
-now 'Installing Nix'
-NIX_DIR="$(readlink /nix || echo /nix)"
+now 'Installing Lix'
 if [[ ! -e /nix/store ]]; then
   curl -sSf -L https://install.lix.systems/lix | sh -s -- install
 fi
