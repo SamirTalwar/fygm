@@ -31,12 +31,6 @@ function def_key(opts)
     all_mods = { opts.mods }
   end
   for _, mods in pairs(all_mods) do
-    local key = opts.key
-    for match in string.gmatch(opts.key, '%a+') do
-      if match == 'SHIFT' then
-        key = string.upper(key)
-      end
-    end
     table.insert(config.keys, {
       key = opts.key,
       mods = mods,
@@ -67,6 +61,14 @@ for key, direction in pairs { h = 'Left', j = 'Down', k = 'Up', l = 'Right' } do
     key = key,
     mods = 'CTRL|ALT',
     action = wezterm.action.ActivatePaneDirection(direction),
+  }
+end
+-- disable Ctrl+Shift+[Left|Down|Up|Right]
+for _, key in pairs { 'LeftArrow', 'DownArrow', 'UpArrow', 'RightArrow' } do
+  def_key {
+    key = key,
+    mods = 'CTRL|SHIFT',
+    action = wezterm.action.DisableDefaultAssignment,
   }
 end
 
