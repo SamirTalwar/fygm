@@ -116,6 +116,7 @@ in
     # Editors
     aspell
     aspellDicts.en
+    helix
 
     # Development
     bat
