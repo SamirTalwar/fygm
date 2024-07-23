@@ -59,6 +59,9 @@ $env.PATH = (do {
 # Prepend the user's channels to the NIX_PATH:
 $env.NIX_PATH = [$"($nu.home-path)/.nix-defexpr/channels"] ++ ($env | get -i NIX_PATH | if $in != null { $in } else { [] })
 
+# Handle typos well
+def --env --wrapped 'docker compsoe' [...args: string] { docker compose ...$args }
+
 # Initialize and source shell improvements (installed with `up`):
 source ~/.cache/nushell/starship.nu
 source ~/.cache/nushell/zoxide.nu
