@@ -1,0 +1,11 @@
+[[language]]
+name = "docker-compose"
+formatter = { command = "prettier", args = ["--parser=yaml"] }
+
+[[language]]
+name = "json"
+formatter = { command = "prettier", args = ["--parser=json"] }
+
+[[language]]
+name = "yaml"
+formatter = { command = "prettier", args = ["--parser=yaml"] }

@@ -1,1 +1,22 @@
 theme = "tokyonight"
+
+[editor]
+bufferline = "always"
+cursorline = true
+rulers = [81, 121]
+
+[editor.auto-save]
+focus-lost = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+
+[editor.whitespace.render]
+tab = "all"
+nbsp = "all"
+nnbsp = "all"
