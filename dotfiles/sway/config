@@ -69,6 +69,8 @@ input type:keyboard {
   xkb_options compose:menu
 }
 
+seat seat0 xcursor_theme Adwaita 32
+
 ### Notifications
 exec_always exec $bin/mako
 

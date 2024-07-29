@@ -20,6 +20,9 @@ config.font_size = 16
 -- on macOS, allow composing characters with Left Alt
 config.send_composed_key_when_left_alt_is_pressed = true
 
+---- mouse
+config.hide_mouse_cursor_when_typing = false
+
 -- helper for simpler keybindings which can have different combinations of mods
 -- (see below for examples)
 config.keys = {}
