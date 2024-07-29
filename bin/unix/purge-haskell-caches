@@ -3,6 +3,7 @@
 directories=(
   ~/.cabal/logs
   ~/.cabal/store
+  ~/.cache/cabal
   ~/.cache/ghcide
   ~/.cache/hie-bios
   ~/.local/state/cabal
