@@ -66,6 +66,7 @@ in
     nix-prefetch-github
     nix-prefetch-scripts
     nix-tree
+    npins
 
     # Core
     stdenv
