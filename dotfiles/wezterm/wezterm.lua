@@ -72,4 +72,24 @@ for _, key in pairs { 'LeftArrow', 'DownArrow', 'UpArrow', 'RightArrow' } do
   }
 end
 
+config.mouse_bindings = {
+  -- Change the default click behavior so that it only selects text and doesn't open hyperlinks
+  {
+    event = { Up = { streak = 1, button = 'Left' } },
+    mods = 'NONE',
+    action = wezterm.action.CompleteSelection 'ClipboardAndPrimarySelection',
+  },
+  -- use Super+Click to open links
+  {
+    event = { Up = { streak = 1, button = 'Left' } },
+    mods = 'SUPER',
+    action = wezterm.action.OpenLinkAtMouseCursor,
+  },
+  {
+    event = { Down = { streak = 1, button = 'Left' } },
+    mods = 'SUPER',
+    action = wezterm.action.Nop,
+  },
+}
+
 return config
