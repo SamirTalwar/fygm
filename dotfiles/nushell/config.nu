@@ -6,9 +6,9 @@ use std
 $env.config.show_banner = false
 
 # Use vi bindings at the prompt
-$env.config.edit_mode = vi
-$env.config.cursor_shape.vi_insert = line
-$env.config.cursor_shape.vi_normal = block
+$env.config.edit_mode = "vi"
+$env.config.cursor_shape.vi_insert = "line"
+$env.config.cursor_shape.vi_normal = "block"
 
 # Attach direnv to the prompt
 $env.config.hooks.pre_prompt = $env.config.hooks.pre_prompt ++ [{
