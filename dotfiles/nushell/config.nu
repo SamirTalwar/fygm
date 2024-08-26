@@ -1,5 +1,3 @@
-source ($nu.config-path | path dirname | path join 'default_config.nu')
-
 use std
 
 # disable the banner
@@ -9,25 +7,6 @@ $env.config.show_banner = false
 $env.config.edit_mode = "vi"
 $env.config.cursor_shape.vi_insert = "line"
 $env.config.cursor_shape.vi_normal = "block"
-
-# Attach direnv to the prompt
-$env.config.hooks.pre_prompt = $env.config.hooks.pre_prompt ++ [{
-  let direnv = (direnv export json | from json | default {})
-  if ($direnv | is-empty) {
-      return
-  }
-  $direnv
-  | items {|key, value|
-     {
-        key: $key
-        value: (if $key in $env.ENV_CONVERSIONS {
-          do ($env.ENV_CONVERSIONS | get $key | get from_string) $value
-        } else {
-            $value
-        })
-      }
-  } | transpose -ird | load-env
-}]
 
 # Set the PATH:
 $env.PATH = (do {

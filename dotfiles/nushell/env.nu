@@ -1,5 +1,3 @@
-source ($nu.config-path | path dirname | path join 'default_env.nu')
-
 # Convert `NIX_PATH` into a list.
 $env.ENV_CONVERSIONS."NIX_PATH" = {
     from_string: { split row (char esep) }
