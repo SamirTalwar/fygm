@@ -41,6 +41,15 @@ function update-brew {
     run brew upgrade
     run brew cleanup
   fi
+
+  if [[ -e /opt/homebrew ]]; then
+    (
+      eval "$(/opt/homebrew/bin/brew shellenv)"
+      run brew update
+      run brew upgrade
+      run brew cleanup
+    )
+  fi
 }
 
 function update-apt {
