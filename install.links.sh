@@ -20,6 +20,7 @@ source ${dir}/common.sh
 
 set -A links
 links=(
+  ~/fygm $dir
   ~/bin $dir/bin
   ~/.config/home-manager/home.nix $dotfiles/home.nix
   ~/.config/mako $dotfiles/mako
@@ -45,15 +46,11 @@ case $(uname -s) in
     links+=(
       ~/.config/Code/User/settings.json $dotfiles/code/settings.json
       ~/.config/fontconfig/fonts.conf $dotfiles/fonts.conf
-      ~/.config/nushell/config.nu $dotfiles/nushell/config.nu
-      ~/.config/nushell/env.nu $dotfiles/nushell/env.nu
     )
     ;;
   'Darwin')
     links+=(
       $macos_application_support/Code/User/settings.json $dotfiles/code/settings.json
-      $macos_application_support/nushell/config.nu $dotfiles/nushell/config.nu
-      $macos_application_support/nushell/env.nu $dotfiles/nushell/env.nu
     )
     ;;
 esac

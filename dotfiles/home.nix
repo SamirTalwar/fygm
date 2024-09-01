@@ -198,11 +198,11 @@ in
     enable = true;
     extraConfig = ''
       source ${nushell.src}/crates/nu-utils/src/sample_config/default_config.nu
-      source ~/src/SamirTalwar/fygm/dotfiles/nushell/config.nu
+      source ~/fygm/dotfiles/nushell/config.nu
     '';
     extraEnv = ''
       source ${nushell.src}/crates/nu-utils/src/sample_config/default_env.nu
-      source ~/src/SamirTalwar/fygm/dotfiles/nushell/env.nu
+      source ~/fygm/dotfiles/nushell/env.nu
     '';
   };
 
