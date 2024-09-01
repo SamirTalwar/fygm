@@ -27,11 +27,6 @@ let
     hash = "sha256-N0horUKT3HxoAlFMp05VLDYRcuvy7AEu9lGOHSQV7II=";
   };
 
-  # Install completions from zsh-completions.
-  zsh-completions = pkgs.writeTextDir "share/zsh-completions/zsh-completions.zsh" ''
-    fpath=(${pkgs.zsh-completions}/share/zsh/site-functions $fpath)
-  '';
-
   # empty package, for shenanigans
   empty = builtins.derivation {
     name = "empty";
@@ -186,7 +181,6 @@ in
 
   programs.fzf = {
     enable = true;
-    enableZshIntegration = true;
   };
 
   programs.neovim = {
@@ -204,39 +198,6 @@ in
       source ${nushell.src}/crates/nu-utils/src/sample_config/default_env.nu
       source ~/fygm/dotfiles/nushell/env.nu
     '';
-  };
-
-  programs.zsh = {
-    enable = true;
-    enableCompletion = false;
-    envExtra = ''
-      source ~/.zshenv.fygm
-    '';
-    initExtra = ''
-      source ~/.zshrc.fygm
-    '';
-    plugins = [
-      {
-        name = "autojump";
-        src = autojump;
-        file = "share/autojump/autojump.zsh";
-      }
-      {
-        name = "zsh-autosuggestions";
-        src = zsh-autosuggestions;
-        file = "share/zsh-autosuggestions/zsh-autosuggestions.zsh";
-      }
-      {
-        name = "zsh-completions";
-        src = zsh-completions;
-        file = "share/zsh-completions/zsh-completions.zsh";
-      }
-      {
-        name = "zsh-syntax-highlighting";
-        src = zsh-syntax-highlighting;
-        file = "share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
-      }
-    ];
   };
 
   services.syncthing = {

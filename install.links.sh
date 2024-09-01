@@ -37,8 +37,6 @@ links=(
   ~/.ideavimrc $dotfiles/ideavimrc
   ~/.racketrc $dotfiles/racketrc
   ~/.stack/config.yaml $dotfiles/stack/config.yaml
-  ~/.zshenv.fygm $dotfiles/zshenv
-  ~/.zshrc.fygm $dotfiles/zshrc
 )
 
 case $(uname -s) in
