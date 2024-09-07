@@ -96,11 +96,11 @@ vim.api.nvim_create_autocmd("VimEnter", {
 
 -- Initialize plugins
 local plugins = {
-  { "folke/tokyonight.nvim", -- pretty colors
-    lazy = false,
+  { "catppuccin/nvim", -- pretty colors
+    name = "catppuccin",
     priority = 1000,
     config = function()
-      vim.cmd("colorscheme tokyonight-night")
+      vim.cmd.colorscheme "catppuccin"
     end
   },
 
