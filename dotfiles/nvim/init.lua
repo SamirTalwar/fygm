@@ -295,6 +295,10 @@ local nvimTreeApi = require("nvim-tree.api")
 local telescopeBuiltin = require("telescope.builtin")
 local wk = require("which-key")
 
+---- navigate soft-wraps according to the screen, not the file
+vim.keymap.set("n", "j", "gj", { noremap = true })
+vim.keymap.set("n", "k", "gk", { noremap = true })
+
 ---- bind my foot pedal to insert mode
 ----   on press, sends <F12>
 ----   on release, sends <F11>
