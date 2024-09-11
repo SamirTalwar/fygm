@@ -264,7 +264,7 @@ lspconfig.rust_analyzer.setup {
     },
   },
 }
-lspconfig.tsserver.setup {}
+lspconfig.ts_ls.setup {}
 
 -- Disable built-in diagnostics in favor of `lsp_lines`
 vim.diagnostic.config({
