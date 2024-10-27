@@ -79,6 +79,7 @@ in
     sd
     tree
     yq
+    zsh
 
     # System management
     bottom
