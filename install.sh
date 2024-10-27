@@ -16,11 +16,14 @@ if [[ ! -e /nix/store ]]; then
   curl -sSf -L https://install.lix.systems/lix | sh -s -- install
 fi
 
-source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-if [[ ! -f /etc/nix/extra.conf ]] || ! diff /etc/nix/extra.conf ./nix/extra.conf; then
-  sudo cp ./nix/extra.conf /etc/nix/extra.conf
-  if ! grep '^include extra\.conf$' /etc/nix/nix.conf >/dev/null; then
-    echo 'include extra.conf' | sudo tee -a /etc/nix/nix.conf
+# Only install "extra" configuration on non-NixOS machines.
+if ! [[ $(uname -s) == 'Linux' && $(uname -v) =~ NixOS ]]; then
+  source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+  if [[ ! -f /etc/nix/extra.conf ]] || ! diff /etc/nix/extra.conf ./nix/extra.conf; then
+    sudo cp ./nix/extra.conf /etc/nix/extra.conf
+    if ! grep '^include extra\.conf$' /etc/nix/nix.conf >/dev/null; then
+      echo 'include extra.conf' | sudo tee -a /etc/nix/nix.conf
+    fi
   fi
 fi
 
